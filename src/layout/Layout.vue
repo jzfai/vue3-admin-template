@@ -1,7 +1,7 @@
 <template>
   <div :class="classObj"  class="layout-wrapper">
     <!--左侧-->
-    <Sidebar class="sidebar-container"/>
+    <Sidebar class="sidebar-container" v-if="settings.showLeftMenu"/>
     <!--右侧-->
     <div class="main-container">
       <Navbar/>
@@ -14,13 +14,15 @@
 <script setup>
   import {Sidebar,Navbar, AppMain} from './components'
   import {getCurrentInstance,computed} from 'vue'
+  import settings from '@/settings'
   let {proxy} = getCurrentInstance();
   let opened = computed(() => {
     return proxy.$store.state.app.sidebar.opened;
   });
   let classObj = computed(() => {
     return {
-      hideSidebar: !opened.value,
+      closeSidebar: !opened.value,
+      hideSidebar: !settings.showLeftMenu
     };
   });
   let testOpen=()=>{
@@ -48,19 +50,27 @@
     background-color: $menuBg;
     height: 100%;
     position: fixed;
-    font-size: 0px;
+    font-size: 0;
     top: 0;
     bottom: 0;
     left: 0;
     z-index: 1001;
     overflow: hidden;
   }
-  .hideSidebar{
+  .closeSidebar{
     .sidebar-container {
       width: 54px !important;
     }
     .main-container {
       margin-left: 54px;
+    }
+  }
+  .hideSidebar{
+    .sidebar-container {
+      width: 0 !important;
+    }
+    .main-container {
+      margin-left: 0;
     }
   }
 </style>

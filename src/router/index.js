@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import Layout from '@/layout'
 
 export const constantRoutes = [
   {
     path: '/login',
-    component: () => import('@/views/login/login.vue'),
+    component: () => import('@/views/login/Login.vue'),
     hidden: true
   },
   {
@@ -36,7 +36,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'demoTest',
-        component: () => import('@/views/demoTest/demoTest.vue'),
+        component: () => import('@/views/demoTest/DemoTest.vue'),
         name: 'demoTest',
         meta: { title: 'demoTest', icon: 'v_monitor' },
         code: 2,
@@ -46,7 +46,7 @@ export const asyncRoutes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   scrollBehavior: () => ({ top: 0 }),
   routes: constantRoutes,
 });

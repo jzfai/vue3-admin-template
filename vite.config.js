@@ -4,11 +4,14 @@ import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue'
 import legacy from '@vitejs/plugin-legacy'
 import styleImport from 'vite-plugin-style-import'
+import vueJsx from "@vitejs/plugin-vue-jsx";
 export default defineConfig({
+  base:"./",
   define: {              // 类型： Record<string, string> 定义全局变量替换方式。每项在开发时会被定义为全局变量，而在构建时则是静态替换。
     'process.platform': null,
     'process.version': null,
   },
+  clearScreen:false,
   server: {
     hmr: { overlay: false }, // 禁用或配置 HMR 连接 设置 server.hmr.overlay 为 false 可以禁用服务器错误遮罩层
     // 服务配置
@@ -33,18 +36,21 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    vueJsx(),
     styleImport({
-      libs: [{
-        libraryName: 'element-plus',
-        esModule: true,
-        ensureStyleFile: true,
-        resolveStyle: (name) => {
-          // eslint-disable-next-line no-param-reassign
-          name = name.slice(3)
-          return `element-plus/packages/theme-chalk/src/${name}.scss`;
+      libs: [
+        {
+          libraryName: "element-plus",
+          esModule: true,
+          ensureStyleFile: true,
+          resolveStyle: name => {
+            return `element-plus/lib/theme-chalk/${name}.css`;
+          },
+          resolveComponent: name => {
+            return `element-plus/lib/${name}`;
+          }
         },
-        resolveComponent: (name) => `element-plus/lib/${name}`,
-      }]
+      ]
     }),
     legacy({
       targets: ['ie >= 11'],
@@ -52,12 +58,21 @@ export default defineConfig({
     })
   ],
 
-  build:{
-    commonjsOptions:{
-      ignoreDynamicRequires:false, // Default: false
-      transformMixedEsModules:true,
-      sourceMap:false
-    },
+  build: {
     brotliSize: false,
-  }
+    // 消除打包大小超过500kb警告
+    chunkSizeWarningLimit: 2000,
+    terserOptions:{
+      compress:{
+        drop_console:true,
+        drop_debugger:true
+      }
+    }
+  },
+  optimizeDeps: {
+    include: [
+      'element-plus/lib/locale/lang/zh-cn',
+      'element-plus/lib/locale/lang/en'
+    ]
+  },
 })

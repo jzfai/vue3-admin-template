@@ -1,13 +1,15 @@
 <template>
   <div class="app-main">
-    <router-view :key="key" v-slot="{ Component }">
-      <transition name="fade-transform" mode="out-in">
-        <!--此处是vue3.0的变化-->
-        <div>
-          <component :is="Component" />
-        </div>
-      </transition>
+    <router-view  v-slot="{ Component }">
+      <keep-alive :include="cachedViews">
+        <component :is="Component"/>
+      </keep-alive>
     </router-view>
+    <!--<transition name="fade-transform" mode="out-in">-->
+    <!--<div>-->
+    <!---->
+    <!--</div>-->
+    <!--</transition>-->
   </div>
 
 </template>
@@ -33,7 +35,9 @@ let {proxy} = getCurrentInstance();
 const key = computed(() => {
   return proxy.$route.path
  });
-
+const cachedViews = computed(() => {
+  return proxy.$store.state.app.cachedViews
+});
 // const store = useStore()
 // const router = useRouter()
 // onMounted(()=>{

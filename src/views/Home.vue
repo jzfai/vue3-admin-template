@@ -8,7 +8,7 @@
                 :name="'jzfai'" />
     <el-button @click="getRefComponent">getRefComponent</el-button>
     <input type="text"
-           ref="refInput" />
+           ref="'refInput'" />
   </div>
 </template>
 
