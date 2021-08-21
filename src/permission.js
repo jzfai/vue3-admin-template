@@ -1,14 +1,13 @@
-import router from "./router";
-import { asyncRoutes } from "@/router";
+import router,{ asyncRoutes,constantRoutes } from "@/router";
 import store from "./store";
-
+import { getToken, setToken, removeToken } from '@/utils/auth'
 router.beforeEach(async (to, from, next) => {
   /*
    * 正常流程如下:主要有两大点token和role
    * 1.是否与token 没有去登录页 ,有 如果要去登录页则重定向到首页。没有, 重新定向到登录页
    * 2.判断是否权限筛选,是,直接放行。没有，筛选动态路由后，添加动态路由然后放行，
    * */
-  let token = await loginAfterToken();
+  let token = getToken();
   // console.log("token", token);
   if (token) {
     if (to.path === "/login") {
@@ -25,7 +24,6 @@ router.beforeEach(async (to, from, next) => {
           permissionCodeArr,
           asyncRoutes
         );
-        console.log("过滤后的权限", asyncRoutesAf);
         //保存过滤后的路由到vuex中供菜单使用
         store.commit("permission/M_routes", asyncRoutesAf);
         store.commit("permission/M_isSettingPermission", true);

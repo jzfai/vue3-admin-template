@@ -1,15 +1,15 @@
-module.exports = {
+const setting= {
   title: 'Vue3.0 Admin Template',
   /**
    * @type {boolean} true | false
    * @description Whether fix the header
    */
-  fixedHeader: false,
+  fixedHeader: true,
   /**
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar
    */
-  sidebarLogo: false,
+  sidebarLogo: true,
   /**
    * @type {boolean} true | false
    * @description Whether show the title in Navbar
@@ -19,10 +19,14 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
    */
-  showRightMenu: true,
+  showLeftMenu: true,
   /**
    * @type {boolean} true | false
    * @description Whether show the drop-down
    */
-  ShowLoginInfo:false
+  ShowDropDown:true,
+  showHamburger:true
 }
+
+
+export  default setting;

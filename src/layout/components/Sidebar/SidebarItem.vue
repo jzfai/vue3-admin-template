@@ -8,7 +8,7 @@
         </el-menu-item>
       </Link>
     </template>
-    <el-submenu v-else  ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
+    <el-submenu v-else  ref="'subMenu'" :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
         <i class="el-icon-location"></i>
         <span>{{item.meta.title}}</span>

@@ -1,7 +1,7 @@
 <template>
   <div id="Sidebar">
     <!--logo-->
-    <Logo :collapse="!isCollapse"/>
+    <Logo :collapse="!isCollapse" v-if="settings.sidebarLogo"/>
     <!--router nav-->
     <el-scrollbar wrap-class="scrollbar-wrapper reset-menu-style">
       <el-menu
@@ -24,6 +24,8 @@
   import {defineComponent, getCurrentInstance, computed} from 'vue'
   import Logo from './Logo'
   import SidebarItem from './SidebarItem'
+  //导入配置文件
+  import settings from '@/settings'
   import {useRouter} from 'vue-router'
   import {useStore} from 'vuex'
   let {proxy} = getCurrentInstance();
