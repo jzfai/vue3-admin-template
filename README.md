@@ -1,7 +1,8 @@
 ### 前言
 
-```js
-本架构使用的技术为：vue3.2.4+vite2.4.3+script（setup写法）+element-plus 的新一代的前端框架，框架使用类似vue-admin-template
+#### 本架构使用的技术为：vue3.2.4+vite2.4.3+script（setup写法）+element-plus 的新一代的前端框架，框架使用类似vue-admin-template
+
+```
 框架有js和ts版本
 js版本分支：master
 ts版本分支：master-ts(正在开发中)
@@ -9,11 +10,13 @@ ts版本分支：master-ts(正在开发中)
 vue2.0和vue3.0的区别，以及如何快速的把vue2.0迁移到3.0中的教程
 ```
 
+
+
 >开发和使用感受：两个字    真香！！！！！
 
 ### 效果
 
-![1629541566667](assets/1629541566667.png)
+![http://8.135.1.141/file/images/1629541566667.png](http://8.135.1.141/file/images/1629541566667.png)
 
 #### 线上体验地址：http://8.135.1.141/vue3.0-admin-template
 
