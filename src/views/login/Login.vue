@@ -10,13 +10,14 @@
       <el-form-item prop="username" :rules="formRulesMixin.isNotNull">
         <el-input
           v-model="formInline.username"
-          placeholder="用户名"/>
+          placeholder="用户名(admin)"/>
       </el-form-item>
-      <el-form-item prop="password" :rules="formRulesMixin.passwordValid">
+      <!--<el-form-item prop="password" :rules="formRulesMixin.passwordValid">-->
+      <el-form-item prop="password" :rules="formRulesMixin.isNotNull">
         <span class="svg-container">
           <!--<svg-icon icon-class="password"/>-->
         </span>
-        <el-input v-model="formInline.password" placeholder="密码" />
+        <el-input v-model="formInline.password" placeholder="密码(123456)" />
       </el-form-item>
       <div style="color: #e4393c;height: 30px; margin-top: -12px;font-size: 12px">{{ tipMessage }}</div>
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登 录</el-button>
@@ -40,8 +41,8 @@
 
   //form表单
   let  formInline=reactive({
-    username: '',
-    password: ''
+    username: 'admin',
+    password: '123456'
   })
   let onSubmit=()=> {
     console.log('submit!');
