@@ -12,7 +12,7 @@ const service = axios.create({
 // 请求拦截
 service.interceptors.request.use(
   request => {
-    console.log('request', request)
+    // console.log('request', request)
     // token配置
     request.headers['AUTHORIZE_TOKEN'] = getToken();
     /* 下载文件*/
@@ -64,9 +64,13 @@ service.interceptors.response.use(
     if (flag) {
       return res.data
     } else {
-      console.log("requestData", requestData);
       if(requestData.isAlertErrorMsg){
-        ElMessage.error(msg)
+        ElMessage({
+          message: msg,
+          type: 'error',
+          duration: 2 * 1000
+        })
+        return Promise.reject(msg)
       }else{
         return res.data
       }
@@ -87,14 +91,14 @@ service.interceptors.response.use(
         })
       } else {
         ElMessage({
-          ElMessage: err,
+          message: err,
           type: 'error',
           duration: 2 * 1000
         })
       }
     } else {
       ElMessage({
-        ElMessage: err,
+        message: err,
         type: 'error',
         duration: 2 * 1000
       })
