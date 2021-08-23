@@ -3,14 +3,14 @@
     <template v-if="showSidebarItem(item.children,item)">
       <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <i class="el-icon-menu"></i>
-          <template #title>{{ onlyOneChild.meta.title }}</template>
+          <item v-if="item.meta" :icon="item.meta && item.meta.icon"/>
+          <template #title>{{ onlyOneChild.meta?.title }}</template>
         </el-menu-item>
       </Link>
     </template>
     <el-submenu v-else  ref="'subMenu'" :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
-        <i class="el-icon-location"></i>
+        <item v-if="item.meta" :icon="item.meta && item.meta.icon"/>
         <span>{{item.meta.title}}</span>
       </template>
       <SidebarItem
@@ -28,6 +28,7 @@
   /*初始化参数比如引入组件，proxy,state等*/
   import {reactive,defineComponent, getCurrentInstance, toRef, onMounted, watch, toRefs, computed} from "vue";
   import Link from './Link'
+  import Item from './Item'
   import { isExternal } from '@/utils/validate'
   import path from 'path'
   let {proxy}=getCurrentInstance();
@@ -86,6 +87,13 @@
 
 <style lang="scss">
   @import "@/styles/variables.scss";
+
+  .nav-icon{
+    display: inline-block;
+    font-size: 18px; //修改
+    margin-right: 4px;
+  }
+
   // menu hover
  /* .submenu-title-noDropdown,
   .el-submenu__title {

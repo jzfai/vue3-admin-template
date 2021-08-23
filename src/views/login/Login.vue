@@ -67,10 +67,11 @@
   };
   watch(route, (route) => {
       console.log("监听到路由的变化", route);
-      const query = route.query.value;
+      const query = route.query;
+
       if (query) {
-        proxy.redirect = query.redirect;
-        proxy.otherQuery = getOtherQuery(query);
+        state.redirect = query.redirect;
+        state.otherQuery = getOtherQuery(query);
       }
     },
     { immediate: true }
@@ -93,7 +94,8 @@
       //需要将用户信息存储到本地
       if(resData.code===20000){
         setToken(resData.jwtToken)
-        proxy.$router.push({ path: proxy.redirect || "/", query: proxy.otherQuery });
+        console.log("state", state);
+        proxy.$router.push({ path: state.redirect || "/", query: state.otherQuery });
       }else{
         tipMessage.value = resData.msg
         proxy.sleepMixin(20).then(()=>{
@@ -133,7 +135,6 @@
       margin-bottom: 20vh;
       width: 320px;
     }
-
     .title-container{
       .title{
         font-size: 22px;

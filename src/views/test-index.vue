@@ -1,8 +1,11 @@
 <template>
   <!--<svg-icon icon-class="assign"-->
             <!--class="icon-class" />-->
-   这个是test页面1111
-  <el-button type="primary">element-btn1111111111111111111111111</el-button>
+  <div>
+    icon
+    <svg-icon icon-class="assign" style="color:red;"/>
+  </div>
+  <!--<el-button type="primary">element-btn1111111111111111111111111</el-button>-->
 </template>
 
 <script  setup>
