@@ -2,7 +2,7 @@
 <template>
   <div class="login-container columnCC">
     <!--注意此处ref中的refloginForm 必须加上单引号，不然会报错
-    应该是转换为h函数时有问题 -->
+    应该是转换为h函数时有问题,已经提了个问题到官方 -->
     <el-form ref="'refloginForm'" size="medium" class="login-form" :model="formInline" :rules="formRulesMixin">
       <div class="title-container">
         <h3 class="title text-center">{{settings.title}}</h3>

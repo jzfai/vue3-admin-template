@@ -1,6 +1,6 @@
 {
     "name": "vite-admin-construct",
-    "version": "0.0.1",
+    "version": "1.0.1",
     "author": "kuanghua(869653722@qq.com)",
     "scripts": {
         "dev": "vite --mode serve-dev",
@@ -42,7 +42,7 @@
         "scss": "^0.2.4",
         "svg-sprite-loader": "4.1.3",
         "typescript": "^4.3.2",
-        "vite": "^2.4.3",
+        "vite": "^2.5.0",
         "vite-plugin-style-import": "^1.1.1",
         "vite-plugin-svg-icons": "^1.0.4",
         "vue-tsc": "^0.2.2"

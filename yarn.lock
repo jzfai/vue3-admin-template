@@ -3116,9 +3116,9 @@ vite-plugin-svg-icons@^1.0.4:
     svg-baker "1.7.0"
     svgo "^2.3.1"
 
-vite@^2.4.3:
+vite@^2.5.0:
   version "2.5.0"
-  resolved "https://registry.nlark.com/vite/download/vite-2.5.0.tgz?cache=0&sync_timestamp=1629090810650&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvite%2Fdownload%2Fvite-2.5.0.tgz#111ba3679432d426e44566acf480005a7914cbd6"
+  resolved "https://registry.nlark.com/vite/download/vite-2.5.0.tgz#111ba3679432d426e44566acf480005a7914cbd6"
   integrity sha1-ERujZ5Qy1CbkRWas9IAAWnkUy9Y=
   dependencies:
     esbuild "^0.12.17"
