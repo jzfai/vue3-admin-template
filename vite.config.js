@@ -1,13 +1,16 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path';
+import path,{ resolve} from 'path';
 /*插件*/
 import vue from '@vitejs/plugin-vue'
 import legacy from '@vitejs/plugin-legacy'
 import styleImport from 'vite-plugin-style-import'
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import viteSvgIcons from 'vite-plugin-svg-icons';
+
+
 export default defineConfig({
   base:"./",
-  define: {              // 类型： Record<string, string> 定义全局变量替换方式。每项在开发时会被定义为全局变量，而在构建时则是静态替换。
+  define: {
     'process.platform': null,
     'process.version': null,
   },
@@ -26,13 +29,6 @@ export default defineConfig({
     //     rewrite: (path) => path.replace('/api', '')
     //   }
     // },
-  },
-  resolve: {
-    alias: {
-      '~': resolve(__dirname, './'),
-      '@': resolve(__dirname, 'src'),
-    },
-    extensions:['.js', '.ts', '.jsx', '.tsx', '.json','.vue','.mjs']
   },
   plugins: [
     vue(),
@@ -55,9 +51,17 @@ export default defineConfig({
     legacy({
       targets: ['ie >= 11'],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime']
-    })
+    }),
+    viteSvgIcons({
+      // 指定需要缓存的图标文件夹（可以配置多个）
+      iconDirs: [
+        path.resolve(process.cwd(), 'src/icons/common'),
+        path.resolve(process.cwd(), 'src/icons/navBar')
+      ],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]',
+    }),
   ],
-
   build: {
     brotliSize: false,
     // 消除打包大小超过500kb警告
@@ -68,6 +72,13 @@ export default defineConfig({
         drop_debugger:true
       }
     }
+  },
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, './'),
+      '@': resolve(__dirname, 'src'),
+    },
+    extensions:['.js', '.ts', '.jsx', '.tsx', '.json','.vue','.mjs']
   },
   optimizeDeps: {
     include: [

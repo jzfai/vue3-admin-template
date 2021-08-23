@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-  import {defineComponent, getCurrentInstance, computed} from 'vue'
+  import {getCurrentInstance, computed} from 'vue'
   import Logo from './Logo'
   import SidebarItem from './SidebarItem'
   //导入配置文件

@@ -11,14 +11,14 @@ export const constantRoutes = [
     path: "/",
     component: Layout,
     redirect: "/test-index",
-    meta: { title: "测试首页", icon: "daoru" },
+    meta: { title: "测试首页", icon: "assign" },
     alwaysShow: false,
     children: [
       {
         path: 'test-index',
         component: () => import('@/views/test-index.vue'),
         name: 'TestIndex',
-        meta: { title: 'TestIndex', icon: 'v_monitor' }
+        meta: { title: 'TestIndex', icon: 'assign' }
       }
     ]
   },
@@ -30,7 +30,7 @@ export const asyncRoutes = [
   {
     path: "/demoTest",
     component: Layout,
-    meta: { title: "demoTest", icon: "daoru" },
+    meta: { title: "demoTest", icon: "assign" },
     code: 1,
     alwaysShow:true,
     children: [
@@ -38,7 +38,7 @@ export const asyncRoutes = [
         path: 'demoTest',
         component: () => import('@/views/demoTest/DemoTest.vue'),
         name: 'demoTest',
-        meta: { title: 'demoTest', icon: 'v_monitor' },
+        meta: { title: 'demoTest', icon: "assign" },
         code: 2,
       }
     ]
