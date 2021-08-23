@@ -68,7 +68,6 @@
   watch(route, (route) => {
       console.log("监听到路由的变化", route);
       const query = route.query;
-
       if (query) {
         state.redirect = query.redirect;
         state.otherQuery = getOtherQuery(query);
