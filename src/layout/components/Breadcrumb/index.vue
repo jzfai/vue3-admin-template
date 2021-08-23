@@ -37,7 +37,6 @@
     return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
   }
   const pathCompile = (path) => {
-    // To solve proxy problem https://github.com/PanJiaChen/vue-element-admin/issues/561
     const {params} = proxy.$route
     const toPath = compile(path)
     return toPath(params)

@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <div :class="classObj"  class="layout-wrapper">
     <!--左侧-->
@@ -6,7 +7,6 @@
     <div class="main-container">
       <Navbar/>
       <AppMain/>
-      <!--<div @click="testOpen">testOpen</div>-->
     </div>
   </div>
 </template>
@@ -25,9 +25,6 @@
       hideSidebar: !settings.showLeftMenu
     };
   });
-  let testOpen=()=>{
-    proxy.$store.commit("app/M_sidebar_opened",!opened.value)
-  }
 </script>
 
 <style lang="scss" scoped>

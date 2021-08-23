@@ -90,8 +90,10 @@
 
   .nav-icon{
     display: inline-block;
-    font-size: 18px; //修改
-    margin-right: 4px;
+    width: 1em;
+    height: 1em;
+    margin-right: 10px;
+    position: relative;
   }
 
   // menu hover
