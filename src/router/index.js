@@ -33,6 +33,7 @@ export const asyncRoutes = [
     meta: { title: "demoTest", icon: "form" },
     code: 1,
     alwaysShow:true,
+    redirect: "/demoTest/demoTest",
     children: [
       {
         path: 'demoTest',

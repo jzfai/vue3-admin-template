@@ -473,52 +473,6 @@ const globolMixins = {
       this.$refs.refSettingFile.click()
     },
     /*
-    * 上传文件api
-    * uploadUrl:上传文件的url
-    * return Promise
-    * */
-    async submitUploadMixin(uploadUrl) {
-      return new Promise(async(resolve) => {
-        // this.$refs.uploadMutiple.submit()
-        const formData = new FormData()
-        console.log('this.fileListMixin', this.fileListMixin)
-        for (let i = 0; i < this.fileListMixin.length; i++) {
-          const item = this.fileListMixin[i]
-          console.log('item.raw', item.raw)
-          const validResult = await this.imageValidMixin(item.raw)
-          if (!validResult) return
-          formData.append('files', item.raw)
-        }
-        await this.$comentUtil.sleep()
-        this.$axiosReq({
-          url: uploadUrl,
-          data: formData, method: 'POST', bfLoading: true, isUploadFile: true
-        }).then(res => {
-          resolve(res.data)
-        })
-      })
-    },
-    /*
-    *  图片校验(图片类型和大小校验)
-    *  file:上传的文件对象
-    *  return Promise
-    * */
-    imageValidMixin(file) {
-      return new Promise((resolve) => {
-        const imageArrWhile = ['image/jpeg', 'image/png', 'image/gif']
-        const isJPG = imageArrWhile.includes(file.type)
-        const isLt2M = file.size / 1024 / 1024 < 2
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!')
-          resolve(false)
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!')
-          resolve(false)
-        }
-        resolve(true)
-      })
-    },
     /*
     * time:传入的时间ms
     * return Promise
