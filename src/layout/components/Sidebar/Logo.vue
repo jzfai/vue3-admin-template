@@ -7,7 +7,7 @@
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }} </h1>
+        <h1 class="sidebar-title">{{ settings.title }} </h1>
       </router-link>
     </transition>
   </div>
@@ -15,6 +15,7 @@
 
 <script setup>
   import {onMounted, getCurrentInstance, watch, ref, toRefs, reactive} from "vue";
+  import settings from '@/settings'
   //获取store和router
   // import {useRouter} from 'vue-router'
   // import {useStore} from 'vuex'
@@ -25,31 +26,11 @@
     }
   });
   const state = reactive({
-    title: 'Vue3.0 Admin Template',
     logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
   });
 
-  //const routes = computed(() => {
-  //    return proxy.$store.state.permission.routes;
-  //  });
-  // watch(() => props.name, (oldValue,newValue) => {
-  //
-  //   },
-  //   { immediate: true }
-  // );
-  // let {proxy} = getCurrentInstance();
-  // const store = useStore()
-  // const router = useRouter()
-  // onMounted(()=>{
-  //   console.log("页面挂载了")
-  // })
-  // let helloFunc = () => {
-  //   console.log("helloFunc");
-  // };
-  //导出给refs使用
-  // defineExpose({ helloFunc });
   //导出属性到页面中使用
-  let {title, logo} = toRefs(state);
+  let {logo} = toRefs(state);
 </script>
 
 
