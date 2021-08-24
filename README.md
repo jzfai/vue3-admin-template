@@ -14,7 +14,7 @@ github代码地址：https://github.com/jzfai/vue3.0-admin-template
 
 >开发和使用感受：两个字    真香！！！！！
 
-#### vue-admin-template的区别
+#### 和vue-admin-template的区别
 
 ##### 1.布局方式全部采用flex代替以前的float，float布局方式全部移除
 
@@ -26,7 +26,7 @@ github代码地址：https://github.com/jzfai/vue3.0-admin-template
 
 ### 效果
 
-#### 线上体验地址：http://8.135.1.141/vue3.0-admin-template
+### 线上体验地址：http://8.135.1.141/vue3.0-admin-template
 
 ![http://8.135.1.141/file/images/1629713090928.png](http://8.135.1.141/file/images/1629713090928.png)
 
