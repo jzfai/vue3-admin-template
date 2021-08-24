@@ -11,6 +11,16 @@
   </div>
 </template>
 
+<!--原理vue2.0-->
+<script>
+  import ResizeHandler from './mixin/ResizeHandler'
+  /*可以设置默认的名字*/
+  export default {
+    name: 'Layout',
+    mixins:[ResizeHandler]
+  }
+</script>
+
 <script setup>
   import {Sidebar,Navbar, AppMain} from './components'
   import {getCurrentInstance,computed} from 'vue'

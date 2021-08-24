@@ -87,11 +87,9 @@
 
 <style lang="scss">
   @import "@/styles/variables.scss";
-
-  .nav-icon{
+  .sub-el-icon,.nav-icon{
     display: inline-block;
-    width: 1em;
-    height: 1em;
+    font-size: 14px;
     margin-right: 10px;
     position: relative;
   }

@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
-    <!--注意此处ref中的refloginForm 必须加上单引号，不然会报错
+    <!--注意此处ref中的refloginForm 必须加上单引号，不然build后访问会报错
     应该是转换为h函数时有问题,已经提了个问题到官方 -->
     <el-form ref="'refloginForm'" size="medium" class="login-form" :model="formInline" :rules="formRulesMixin">
       <div class="title-container">
@@ -18,7 +18,6 @@
           <!--占位-->
           <div class="show-pwd"/>
         </div>
-
       </el-form-item>
       <!--<el-form-item prop="password" :rules="formRulesMixin.passwordValid">-->
       <el-form-item prop="password" :rules="formRulesMixin.isNotNull">
@@ -91,6 +90,7 @@
       return acc;
     }, {});
   };
+
   watch(route, (route) => {
       console.log("监听到路由的变化", route);
       const query = route.query;
@@ -151,7 +151,6 @@
     })
     // localStorage.setItem("jwtToken", "11111111");
   };
-
   /*
   * 密码的显示和隐藏
   * */
@@ -219,7 +218,6 @@
     width: 100%;
     margin-bottom: 30px;
   }
-
   .show-pwd {
     width: 50px;
     font-size: 16px;
@@ -230,21 +228,23 @@
 </style>
 
 <style lang="scss">
-  //css 样式重置
-  .login-container .el-input input {
-    background: transparent;
-    border: 0px;
-    -webkit-appearance: none;
-    border-radius: 0px;
-    padding: 10px 5px 10px 15px;
-    color: #fff;
-    height: 42px; //此处调整item的高度
-    caret-color: #fff;
-  }
-  .login-container .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
+  //css 样式重置 增加个前缀避免全局污染
+  .login-container{
+    .el-form-item {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      color: #454545;
+    }
+    .el-input input {
+      background: transparent;
+      border: 0px;
+      -webkit-appearance: none;
+      border-radius: 0px;
+      padding: 10px 5px 10px 15px;
+      color: #fff;
+      height: 42px; //此处调整item的高度
+      caret-color: #fff;
+    }
   }
 </style>

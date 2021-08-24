@@ -2,12 +2,14 @@ const state = {
   sidebar: {
     opened: true,
     //opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
-    // withoutAnimation: false
+    withoutAnimation: false
   },
+  device:'desktop',
   cachedViews:["DemoTest"]
 }
 
 const mutations = {
+  /**/
   M_sidebar_opened: (state,data) => {
     state.sidebar.opened=data
   },
@@ -15,7 +17,7 @@ const mutations = {
     state.sidebar.opened=!state.sidebar.opened
   },
 
-
+  /*keepAlive缓存*/
   M_ADD_CACHED_VIEW: (state, view) => {
     if (state.cachedViews.includes(view)) return
     state.cachedViews.push(view)
