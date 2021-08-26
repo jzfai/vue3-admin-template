@@ -1,14 +1,11 @@
-import { createStore } from "vuex";
-import permission from './modules/permission';
-import app from './modules/app';
-
+import { createStore } from 'vuex'
 //简单的方式
 const modulesFiles = import.meta.globEager('./modules/*.js')
 let modules = {}
 // console.log(modulesFiles);
 for (const path in modulesFiles) {
   const moduleName = path.replace(/(.*\/)*([^.]+).*/gi, '$2')
-  console.log("moduleName",moduleName);
+  console.log('moduleName', moduleName)
   modules[moduleName] = modulesFiles[path].default
 }
 
@@ -25,5 +22,4 @@ for (const path in modulesFiles) {
 // console.log(modules);
 export default createStore({
   modules
-});
-
+})

@@ -1,4 +1,4 @@
-const setting= {
+const setting = {
   title: 'Vue3.0 Admin Template',
   /**
    * @type {boolean} true | false
@@ -14,7 +14,7 @@ const setting= {
    * @type {boolean} true | false
    * @description Whether show the title in Navbar
    */
-  showTitle:false,
+  showTitle: false,
   /**
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
@@ -24,9 +24,8 @@ const setting= {
    * @type {boolean} true | false
    * @description Whether show the drop-down
    */
-  ShowDropDown:true,
-  showHamburger:true
+  ShowDropDown: true,
+  showHamburger: true
 }
 
-
-export  default setting;
+export default setting

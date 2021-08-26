@@ -19,7 +19,7 @@ export default {
   mounted() {
     const isMobile = this.$_isMobile()
     if (isMobile) {
-      store.commit("app/M_sidebar_opened",false)
+      store.commit('app/M_sidebar_opened', false)
       // store.dispatch('app/toggleDevice', 'mobile')
       // store.dispatch('app/closeSideBar', { withoutAnimation: true })
     }
@@ -41,7 +41,7 @@ export default {
           // store.dispatch('app/closeSideBar', { withoutAnimation: true })
 
           /*此处只做根据window尺寸关闭sideBar功能*/
-          store.commit("app/M_sidebar_opened",false)
+          store.commit('app/M_sidebar_opened', false)
         }
       }
     }

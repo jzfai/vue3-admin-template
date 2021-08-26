@@ -1,7 +1,7 @@
 import store from '@/store'
 import axios from 'axios'
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
-import { getToken,setToken } from '@/utils/auth'
+import { getToken, setToken } from '@/utils/auth'
 let requestData
 let loadingE
 
@@ -11,10 +11,10 @@ const service = axios.create({
 })
 // 请求拦截
 service.interceptors.request.use(
-  request => {
+  (request) => {
     // console.log('request', request)
     // token配置
-    request.headers['AUTHORIZE_TOKEN'] = getToken();
+    request.headers['AUTHORIZE_TOKEN'] = getToken()
     /* 下载文件*/
     if (request.isDownLoadFile) {
       request.responseType = 'blob'
@@ -33,21 +33,21 @@ service.interceptors.request.use(
       })
     }
     /*
-    *params会拼接到url上
-    * */
+     *params会拼接到url上
+     * */
     if (request.isParams) {
       request.params = request.data
       request.data = {}
     }
     return request
   },
-  err => {
+  (err) => {
     Promise.reject(err)
   }
 )
 // 响应拦截
 service.interceptors.response.use(
-  res => {
+  (res) => {
     console.log('res', res)
     if (requestData.afHLoading && loadingE) {
       loadingE.close()
@@ -56,27 +56,27 @@ service.interceptors.response.use(
     if (requestData.isDownLoadFile) {
       return res.data
     }
-    const {flag,msg,code,isNeedUpdateToken,updateToken}=res.data
+    const { flag, msg, code, isNeedUpdateToken, updateToken } = res.data
     //更新token保持登录状态
-    if(isNeedUpdateToken){
+    if (isNeedUpdateToken) {
       setToken(updateToken)
     }
     if (flag) {
       return res.data
     } else {
-      if(requestData.isAlertErrorMsg){
+      if (requestData.isAlertErrorMsg) {
         ElMessage({
           message: msg,
           type: 'error',
           duration: 2 * 1000
         })
         return Promise.reject(msg)
-      }else{
+      } else {
         return res.data
       }
     }
   },
-  err => {
+  (err) => {
     if (loadingE) loadingE.close()
     if (err && err.response && err.response.code) {
       if (err.response.code === 403) {
@@ -107,9 +107,19 @@ service.interceptors.response.use(
   }
 )
 
-export default function khReqMethod({ url, data, method, isParams,
-                                      bfLoading, afHLoading, isUploadFile, isDownLoadFile,
-                                      baseURL, timeout,isAlertErrorMsg=true }) {
+export default function khReqMethod({
+  url,
+  data,
+  method,
+  isParams,
+  bfLoading,
+  afHLoading,
+  isUploadFile,
+  isDownLoadFile,
+  baseURL,
+  timeout,
+  isAlertErrorMsg = true
+}) {
   return service({
     url: url,
     method: method ?? 'post',
@@ -119,7 +129,7 @@ export default function khReqMethod({ url, data, method, isParams,
     afHLoading: afHLoading ?? true,
     isUploadFile: isUploadFile ?? false,
     isDownLoadFile: isDownLoadFile ?? false,
-    isAlertErrorMsg:isAlertErrorMsg,
+    isAlertErrorMsg: isAlertErrorMsg,
     baseURL: baseURL ?? import.meta.env.VITE_APP_BASE_URL, // 设置基本基础url
     timeout: timeout ?? 15000 // 配置默认超时时间
   })
