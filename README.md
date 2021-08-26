@@ -1,5 +1,10 @@
 ### 前言
 
+## typescript版本已经开发完成如果需要的请查看master-ts分支
+master-ts：增加了
+1.eslint+prettier代码校验
+2.使用git-hooks钩子
+
 #### 本架构使用的技术为：vue3.2(setup-script)+vite2.4+element-plus 的新一代的前端框架，框架使用类似vue-admin-template
 
 ```
