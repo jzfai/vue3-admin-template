@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout'
 
 export const constantRoutes = [
@@ -8,10 +8,10 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: "/",
+    path: '/',
     component: Layout,
-    redirect: "/test-index",
-    meta: { title: "测试首页", icon: "dashboard" },
+    redirect: '/test-index',
+    meta: { title: '测试首页', icon: 'dashboard' },
     alwaysShow: false,
     children: [
       {
@@ -21,26 +21,25 @@ export const constantRoutes = [
         meta: { title: 'TestIndex', icon: 'dashboard' }
       }
     ]
-  },
+  }
 ]
-
 
 //此处将动态路由导出
 export const asyncRoutes = [
   {
-    path: "/demoTest",
+    path: '/demoTest',
     component: Layout,
-    meta: { title: "demoTest", icon: "form" },
+    meta: { title: 'demoTest', icon: 'form' },
     code: 1,
-    alwaysShow:true,
-    redirect: "/demoTest/demoTest",
+    alwaysShow: true,
+    redirect: '/demoTest/demoTest',
     children: [
       {
         path: 'demoTest',
         component: () => import('@/views/demoTest/DemoTest.vue'),
         name: 'demoTest',
-        meta: { title: 'demoTest', icon: "form" },
-        code: 2,
+        meta: { title: 'demoTest', icon: 'form' },
+        code: 2
       }
     ]
   }
@@ -49,7 +48,7 @@ export const asyncRoutes = [
 const router = createRouter({
   history: createWebHashHistory(),
   scrollBehavior: () => ({ top: 0 }),
-  routes: constantRoutes,
-});
+  routes: constantRoutes
+})
 
-export default router;
+export default router

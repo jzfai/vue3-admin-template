@@ -4,17 +4,17 @@ const state = {
     //opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
   },
-  device:'desktop',
-  cachedViews:["DemoTest"]
+  device: 'desktop',
+  cachedViews: ['DemoTest']
 }
 
 const mutations = {
   /**/
-  M_sidebar_opened: (state,data) => {
-    state.sidebar.opened=data
+  M_sidebar_opened: (state, data) => {
+    state.sidebar.opened = data
   },
   M_toggleSideBar: (state) => {
-    state.sidebar.opened=!state.sidebar.opened
+    state.sidebar.opened = !state.sidebar.opened
   },
 
   /*keepAlive缓存*/

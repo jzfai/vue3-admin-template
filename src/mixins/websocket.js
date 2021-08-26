@@ -1,4 +1,3 @@
-
 export default {
   data() {
     return {
@@ -59,8 +58,8 @@ export default {
     /* 使用方法*/
     socketConnectMixin() {
       // console.log("socketConnectMixin被执行了",this.socketReconnectNum);
-      return new Promise(resolve => {
-        if (typeof (WebSocket) === 'undefined') {
+      return new Promise((resolve) => {
+        if (typeof WebSocket === 'undefined') {
           console.log('遗憾：您的浏览器不支持WebSocket')
         } else {
           console.log(' new WebSocket', this.connectSocketUrl)
@@ -68,7 +67,7 @@ export default {
           // 连接打开事件
           this.webSocket.onopen = () => {
             this.heartStart()
-            resolve();
+            resolve()
           }
           // 收到消息事件
           this.webSocket.onmessage = (msg) => {

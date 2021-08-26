@@ -1,4 +1,3 @@
-import component from "./Layout.vue";
+import component from './Layout.vue'
 
-export  default component;
-
+export default component
