@@ -6,6 +6,7 @@
     "dev": "vite --mode serve-dev",
     "build": "vite build --mode build",
     "serve": "vite preview --mode build",
+    "preview:build": "npm run build && vite preview ",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src",
     "prepare": "husky install"
   },

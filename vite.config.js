@@ -8,7 +8,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteSvgIcons from 'vite-plugin-svg-icons'
 
 export default defineConfig({
-  base: './',
+  base: '/',
   define: {
     'process.platform': null,
     'process.version': null
