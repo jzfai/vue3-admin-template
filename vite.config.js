@@ -20,33 +20,19 @@ export default defineConfig({
     port: 5001, // 类型： number 指定服务器端口;
     open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
     cors: true // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
-    // proxy: {    // 类型： Record<string, string | ProxyOp 为开发服务器配置自定义代理规则
-    //   '/api': {
-    //     target: 'http://106.12.45.247:3000/',
+    // proxy: {
+    //   // 类型： Record<string, string | ProxyOp 为开发服务器配置自定义代理规则
+    //   '/scala-ms': {
+    //     target: 'http://shangchaifff.intranet.ruixiude.com:15980/',
     //     changeOrigin: true,
-    //     secure: false,
-    //     rewrite: (path) => path.replace('/api', '')
+    //     secure: false
+    //     // rewrite: (path) => path.replace('/scala-ms', '')
     //   }
-    // },
+    // }
   },
   plugins: [
     vue(),
     vueJsx(),
-    styleImport({
-      libs: [
-        {
-          libraryName: 'element-plus',
-          esModule: true,
-          ensureStyleFile: true,
-          resolveStyle: (name) => {
-            return `element-plus/lib/theme-chalk/${name}.css`
-          },
-          resolveComponent: (name) => {
-            return `element-plus/lib/${name}`
-          }
-        }
-      ]
-    }),
     legacy({
       targets: ['ie >= 11'],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime']

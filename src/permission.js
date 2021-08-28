@@ -1,5 +1,6 @@
 import router, { asyncRoutes } from '@/router'
 import store from './store'
+import settings from './settings'
 import { getToken } from '@/utils/auth'
 router.beforeEach(async (to, from, next) => {
   /*
@@ -7,7 +8,12 @@ router.beforeEach(async (to, from, next) => {
    * 1.是否与token 没有去登录页 ,有 如果要去登录页则重定向到首页。没有, 重新定向到登录页
    * 2.判断是否权限筛选,是,直接放行。没有，筛选动态路由后，添加动态路由然后放行，
    * */
-  let token = getToken()
+  let token = ''
+  if (settings.isNeedLogin) {
+    token = getToken()
+  } else {
+    token = 'temp_token'
+  }
   // console.log("token", token);
   if (token) {
     if (to.path === '/login') {

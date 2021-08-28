@@ -45,7 +45,7 @@ let classObj = computed(() => {
   justify-content: start;
 }
 .main-container {
-  flex-grow: 1;
+  width: calc(100% - #{$sideBarWidth});
   min-height: 100%;
   transition: margin-left 0.28s;
   margin-left: $sideBarWidth;
@@ -69,7 +69,8 @@ let classObj = computed(() => {
     width: 54px !important;
   }
   .main-container {
-    margin-left: 54px;
+    margin-left: 54px !important;
+    width: calc(100% - 54px) !important;
   }
 }
 .hideSidebar {

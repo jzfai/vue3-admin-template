@@ -27,19 +27,19 @@ export const constantRoutes = [
 //此处将动态路由导出
 export const asyncRoutes = [
   {
-    path: '/demoTest',
+    path: '/release',
     component: Layout,
-    meta: { title: 'demoTest', icon: 'form' },
-    code: 1,
+    meta: { title: '发布', icon: 'form' },
     alwaysShow: true,
-    redirect: '/demoTest/demoTest',
+    code: 1,
+    redirect: '/release/dbc-file',
     children: [
       {
-        path: 'demoTest',
-        component: () => import('@/views/demoTest/DemoTest.vue'),
-        name: 'demoTest',
-        meta: { title: 'demoTest', icon: 'form' },
-        code: 2
+        path: 'dbc-file',
+        component: () => import('@/views/release/DBCFile.vue'),
+        name: 'DBCFile',
+        code: 1,
+        meta: { title: 'DBC文件', icon: 'form' }
       }
     ]
   }

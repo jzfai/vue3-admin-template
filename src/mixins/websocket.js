@@ -24,7 +24,6 @@ export default {
     },
     heartStart() {
       this.timeoutObj && clearTimeout(this.timeoutObj)
-      // this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj)
       this.timeoutObj = setInterval(() => {
         // console.log('发送heartCheck',this.connectSocketName)
         if (this.webSocket.readyState !== 1) {
@@ -45,8 +44,6 @@ export default {
       } else {
         // console.log('socket重新连接了' + this.connectSocketName+"count"+this.socketReconnectNum)
         this.socketReconnectNum++
-        // await this.$comentUtil.sleep(6000)
-        // this.lockReconnect = true;
         this.socketConnectMixin()
       }
     },
