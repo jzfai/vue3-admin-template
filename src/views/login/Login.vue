@@ -38,7 +38,9 @@
         </div>
       </el-form-item>
       <div class="tip-message">{{ tipMessage }}</div>
-      <el-button :loading="loading" type="primary" class="login-btn" size="medium" @click.prevent="handleLogin">登 录 </el-button>
+      <el-button :loading="loading" type="primary" class="login-btn" size="medium" @click.prevent="handleLogin">
+        登 录
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -121,6 +123,7 @@ let loginReq = () => {
       url: '/ty-user/user/loginValid',
       data: formInline,
       method: 'post',
+      bfLoading: false,
       isParams: true,
       isAlertErrorMsg: false
     })

@@ -22,6 +22,8 @@ export default {
       store.commit('app/M_sidebar_opened', false)
       // store.dispatch('app/toggleDevice', 'mobile')
       // store.dispatch('app/closeSideBar', { withoutAnimation: true })
+    } else {
+      store.commit('app/M_sidebar_opened', true)
     }
   },
   methods: {
@@ -42,6 +44,8 @@ export default {
 
           /*此处只做根据window尺寸关闭sideBar功能*/
           store.commit('app/M_sidebar_opened', false)
+        } else {
+          store.commit('app/M_sidebar_opened', true)
         }
       }
     }

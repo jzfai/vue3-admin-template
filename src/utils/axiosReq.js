@@ -20,7 +20,6 @@ service.interceptors.request.use(
       request.responseType = 'blob'
     }
     if (request.isUploadFile) {
-      console.log('上传的是文件', request)
       request.headers['Content-Type'] = 'multipart/form-data'
     }
     requestData = request
@@ -28,7 +27,7 @@ service.interceptors.request.use(
       loadingE = ElLoading.service({
         lock: true,
         text: '数据载入中',
-        spinner: 'el-icon-ElLoading',
+        spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.1)'
       })
     }
@@ -61,7 +60,7 @@ service.interceptors.response.use(
     if (isNeedUpdateToken) {
       setToken(updateToken)
     }
-    if (flag) {
+    if (flag || code === 0) {
       return res.data
     } else {
       if (requestData.isAlertErrorMsg) {
@@ -118,18 +117,18 @@ export default function khReqMethod({
   isDownLoadFile,
   baseURL,
   timeout,
-  isAlertErrorMsg = true
+  isAlertErrorMsg
 }) {
   return service({
     url: url,
     method: method ?? 'post',
     data: data ?? {},
     isParams: isParams ?? false,
-    bfLoading: bfLoading ?? false,
+    bfLoading: bfLoading ?? true,
     afHLoading: afHLoading ?? true,
     isUploadFile: isUploadFile ?? false,
     isDownLoadFile: isDownLoadFile ?? false,
-    isAlertErrorMsg: isAlertErrorMsg,
+    isAlertErrorMsg: isAlertErrorMsg ?? true,
     baseURL: baseURL ?? import.meta.env.VITE_APP_BASE_URL, // 设置基本基础url
     timeout: timeout ?? 15000 // 配置默认超时时间
   })

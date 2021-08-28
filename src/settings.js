@@ -25,7 +25,12 @@ const setting = {
    * @description Whether show the drop-down
    */
   ShowDropDown: true,
-  showHamburger: true
+  showHamburger: true,
+  /**
+   * @type {boolean} true | false
+   * @description Whether need login
+   */
+  isNeedLogin: true
 }
 
 export default setting

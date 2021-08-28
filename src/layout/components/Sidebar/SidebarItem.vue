@@ -8,19 +8,13 @@
         </el-menu-item>
       </Link>
     </template>
-    <el-submenu v-else ref="'subMenu'" :index="resolvePath(item.path)" popper-append-to-body>
+    <el-sub-menu v-else ref="'subMenu'" :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" />
         <span>{{ item.meta.title }}</span>
       </template>
-      <SidebarItem
-        v-for="child in item.children"
-        :key="child.path"
-        :is-nest="true"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-      />
-    </el-submenu>
+      <SidebarItem v-for="child in item.children" :key="child.path" :is-nest="true" :item="child" :base-path="resolvePath(child.path)" />
+    </el-sub-menu>
   </template>
 </template>
 

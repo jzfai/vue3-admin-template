@@ -6,7 +6,7 @@ const globolMixins = {
   data() {
     /* element form校验相关*/
     // 密码必须为6-18位字母、数字
-    var passwordValid = (rule, value, callback) => {
+    let passwordValid = (rule, value, callback) => {
       // mixins {field: "desc", fullField: "desc", type: "string", validator: ƒ}
       // console.log('mixins', rule, value)
       if (!/^(?![^a-zA-Z]+$)(?!\D+$)/.test(value)) {
@@ -16,7 +16,7 @@ const globolMixins = {
       }
     }
     // 大于0的整数
-    var upZeroInt = (rule, value, callback) => {
+    let upZeroInt = (rule, value, callback) => {
       // mixins {field: "desc", fullField: "desc", type: "string", validator: ƒ}
       // console.log('mixins', rule, value)
       if (!/^\+?[1-9]\d*$/.test(value)) {
@@ -25,7 +25,7 @@ const globolMixins = {
         callback()
       }
     }
-    var upZeroIntCanNull = (rule, value, callback) => {
+    let upZeroIntCanNull = (rule, value, callback) => {
       // mixins {field: "desc", fullField: "desc", type: "string", validator: ƒ}
       // console.log('mixins', rule, value)
       if (!value) {
@@ -38,7 +38,7 @@ const globolMixins = {
         }
       }
     }
-    var validatePass = (rule, value, callback) => {
+    let validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
@@ -264,7 +264,6 @@ const globolMixins = {
       /* dialog相关*/
       dialogTitleMixin: '添加',
       detailDialogMixin: false,
-      detailDialogTitleMixin: '',
       isDialogEditMixin: false,
       dialogVisibleMixin: false,
       tableLoadingMixin: false,
@@ -283,7 +282,8 @@ const globolMixins = {
     // 读取.env 多坏境里的数据
     this.VITE_APP_IMAGE_URL_PRE = import.meta.env.VITE_APP_BASE_URL
     this.VITE_APP_BASE_URL = import.meta.env.VITE_APP_BASE_URL
-    this.VITE_APP_BASE_WS_URL = import.meta.env.VITE_APP_ENV === 'serve' ? import.meta.env.VITE_APP_BASE_WS_URL : socketUrl
+    this.VITE_APP_BASE_WS_URL =
+      import.meta.env.VITE_APP_ENV === 'serve' ? import.meta.env.VITE_APP_BASE_WS_URL : socketUrl
     // 获取token和个人基本信息
     this.accessTokenMixin = getToken()
     this.userBaseInfoMixin = JSON.parse(localStorage.getItem('L_userBaseInfo'))
@@ -356,17 +356,7 @@ const globolMixins = {
       this.selectPageReq()
     },
     /* dialog*/
-    // 清空
-    reshowDataMixin(row, form) {
-      Object.keys(row).forEach((fItem) => {
-        Object.keys(form).forEach((sItem) => {
-          if (fItem === sItem) {
-            // console.log('复制了', sItem)
-            form[sItem] = row[sItem]
-          }
-        })
-      })
-    },
+
     /* 级联*/
     casHandleChangeMixin(valueArr) {
       // 解决目前级联选择器搜索输入报错问题
@@ -491,6 +481,9 @@ const globolMixins = {
     goUploadFileMixin() {
       this.$refs.refSettingFile.click()
     },
+    beforeCloseDetailModal() {
+      this.detailDialogMixin = false
+    },
     /*
     /*
     * time:传入的时间ms
@@ -502,6 +495,21 @@ const globolMixins = {
           clearTimeout(timer)
           resolve()
         }, time)
+      })
+    },
+    resetDataMixin(form) {
+      Object.keys(form).forEach((sItem) => {
+        form[sItem] = ''
+      })
+    },
+    reshowDataMixin(row, form) {
+      Object.keys(row).forEach((fItem) => {
+        Object.keys(form).forEach((sItem) => {
+          if (fItem === sItem) {
+            // console.log('复制了', sItem)
+            form[sItem] = row[sItem]
+          }
+        })
       })
     }
   }

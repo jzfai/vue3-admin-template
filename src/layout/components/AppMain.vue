@@ -52,8 +52,9 @@ const cachedViews = computed(() => {
 // let {levelList} = toRefs(state);
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .app-main {
+  padding: 10px;
   /*50 = navbar  */
   min-height: calc(100vh - 50px);
   width: 100%;

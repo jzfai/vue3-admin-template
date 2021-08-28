@@ -1,9 +1,12 @@
+#### 更新日志
+```
+1.setting.js文件中增加了是否需要登录属性 false-->不需要登录直接进入主页面
+2.修复main-container页面部分显示问题
+3.element-plus更新到最新版本"element-plus": "^1.1.0-beta.7",
+4.把element-plus默认语言修改成中文
+```
 ### 前言
-
 ## typescript 版本已经开发完成如果需要的请查看 master-ts 分支
-
-master-ts：增加了
-1.eslint+prettier 代码校验 2.使用 git-hooks 钩子
 
 #### 本架构使用的技术为：vue3.2(setup-script)+vite2.4+element-plus 的新一代的前端框架，框架使用类似 vue-admin-template
 
