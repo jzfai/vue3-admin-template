@@ -1,15 +1,9 @@
 <template>
-  <div>release</div>
+  <div>vue3推荐模板可以集成在你们的vscode或webstorm中，有助于快速开发</div>
 </template>
 
 <script setup>
 import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
-/*
-  composition-api
- * 一般根据页面层次来排序 如页面 表格查询和筛选->table的操作
- * 每个模块按：响应数据定义->公用方法->请求方法->页面按钮操作方法 进行排序
- * */
-
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
@@ -25,7 +19,7 @@ let { proxy } = getCurrentInstance()
 //   levelList: null
 // });
 
-//const routes = computed(() => {
+// const routes = computed(() => {
 //    return proxy.$store.state.permission.routes;
 //  });
 // watch(() => props.name, (oldValue,newValue) => {
