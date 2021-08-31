@@ -20,7 +20,7 @@ let { proxy } = getCurrentInstance()
 /*getter*/
 let getterValue = ref(null)
 const getterFunc = () => {
-  getterValue = store.getters.cachedViews
+  getterValue.value = store.getters.cachedViews
 }
 
 /*mutations*/
