@@ -8,7 +8,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 const prodMock = true
 export default ({ command }) => {
   return {
-    base: '/',
+    base: './',
     define: {
       'process.platform': null,
       'process.version': null
