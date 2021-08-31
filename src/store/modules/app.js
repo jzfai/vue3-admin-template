@@ -9,7 +9,7 @@ const state = {
 }
 
 const mutations = {
-  /**/
+  /*mutations建议以M_开头*/
   M_sidebar_opened: (state, data) => {
     state.sidebar.opened = data
   },
@@ -31,9 +31,15 @@ const mutations = {
     state.cachedViews = []
   }
 }
+const actions = {
+  A_sidebar_opened({ commit }, data) {
+    commit('M_sidebar_opened', data)
+  }
+}
 
 export default {
   namespaced: true,
   state,
-  mutations
+  mutations,
+  actions
 }

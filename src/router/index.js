@@ -21,6 +21,12 @@ export const constantRoutes = [
         meta: { title: 'Hook示例', icon: 'dashboard' }
       },
       {
+        path: 'vuex-use',
+        component: () => import('@/views/example/vuex-use/VuexUse.vue'),
+        name: 'VuexUse',
+        meta: { title: 'vuex示例', icon: 'dashboard' }
+      },
+      {
         path: 'mock-test',
         component: () => import('@/views/example/mock-test/MockTest.vue'),
         name: 'MockTest',
