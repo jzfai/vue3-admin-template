@@ -1,6 +1,17 @@
+#### 更新日志
+```
+// 2021-08-28
+1.setting.js文件中增加了是否需要登录属性 false-->不需要登录直接进入主页面
+2.修复main-container页面部分显示问题
+3.element-plus更新到最新版本"element-plus": "^1.1.0-beta.7",
+4.把element-plus默认语言修改成中文
+// 2021-08-31
+5.增加了mock, hook , svg-icon,vuex的使用示例
+```
 ### 前言
+## typescript 版本已经开发完成如果需要的请查看 master-ts 分支
 
-#### 本架构使用的技术为：vue3.2(setup-script)+vite2.4+element-plus 的新一代的前端框架，框架使用类似vue-admin-template
+#### 本架构使用的技术为：vue3.2(setup-script)+vite2.4+element-plus 的新一代的前端框架，框架使用类似 vue-admin-template
 
 ```
 框架有js和ts版本
@@ -10,19 +21,17 @@ ts版本分支：master-ts(正在开发中)
 vue2.0和vue3.0的区别，以及如何快速的把vue2.0迁移到3.0中的教程
 ```
 
-github代码地址：https://github.com/jzfai/vue3.0-admin-template
+github 代码地址：https://github.com/jzfai/vue3.0-admin-template
 
->开发和使用感受：两个字    真香！！！！！
+> 开发和使用感受：两个字 真香！！！！！
 
-#### 和vue-admin-template的区别
+#### 和 vue-admin-template 的区别
 
-##### 1.布局方式全部采用flex代替以前的float，float布局方式全部移除
+##### 1.布局方式全部采用 flex 代替以前的 float，float 布局方式全部移除
 
-##### 2.采用vue3(setup-script)书写，用vite2替换webpack，加入了vue3的jsx写法
+##### 2.采用 vue3(setup-script)书写，用 vite2 替换 webpack，加入了 vue3 的 jsx 写法
 
 ##### 3.简化了部分复杂的逻辑
-
-
 
 ### 效果
 
@@ -30,12 +39,9 @@ github代码地址：https://github.com/jzfai/vue3.0-admin-template
 
 ![http://8.135.1.141/file/images/1629713090928.png](http://8.135.1.141/file/images/1629713090928.png)
 
-
-
 ![http://8.135.1.141/file/images/1629541566667.png](https://upload-images.jianshu.io/upload_images/21080604-9a46f48ee9114e08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-
-#### 页面首次渲染  加载资源（366K） 页面完全打开（0.36s）
+#### 页面首次渲染 加载资源（366K） 页面完全打开（0.36s）
 
 ![http://8.135.1.141/file/images/1629541566667.png](https://upload-images.jianshu.io/upload_images/21080604-b5dc141d2d6425e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -65,8 +71,10 @@ yarn run dev
 },
 ```
 
+##### 后期会出架构中 vue3.0+vite2.0 开发时的一些坑以及如何快速的把 vue2.0 项目迁移到 3.0，框架还在努力开发中，但是基本功能已经完成
 
-##### 后期会出架构中vue3.0+vite2.0开发时的一些坑以及如何快速的把vue2.0项目迁移到3.0，框架还在努力开发中，但是基本功能已经完成
+## 大家的支持是我前进的动力 欢迎加入一起开发
+
 
 
 
