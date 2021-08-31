@@ -1,9 +1,10 @@
 <template>
-  <div>component</div>
+  <div>svg-icon 使用示例</div>
+  <svg-icon icon-class="assign" class="svg-icon" />
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue'
+import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
@@ -42,4 +43,9 @@ let { proxy } = getCurrentInstance()
 // let {levelList} = toRefs(state);
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.svg-icon {
+  font-size: 50px;
+  color: red;
+}
+</style>

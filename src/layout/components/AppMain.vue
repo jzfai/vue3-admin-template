@@ -56,10 +56,10 @@ const cachedViews = computed(() => {
 .app-main {
   padding: 10px;
   /*50 = navbar  */
-  min-height: calc(100vh - 50px);
+  height: calc(100vh - 50px);
   width: 100%;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 }
 .fixed-header + .app-main {
   padding-top: 50px;

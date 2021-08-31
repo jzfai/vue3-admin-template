@@ -2,7 +2,12 @@
 <template>
   <div class="navbar rowBC">
     <div class="rowSC">
-      <hamburger v-if="settings.showHamburger" :is-active="opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+      <hamburger
+        v-if="settings.showHamburger"
+        :is-active="opened"
+        class="hamburger-container"
+        @toggleClick="toggleSideBar"
+      />
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
