@@ -48,10 +48,10 @@ export default ({ command }) => {
         mockPath: 'mock',
         localEnabled: command === 'serve',
         prodEnabled: command !== 'serve' && prodMock,
-        injectCode: `
-          import { setupProdMockServer } from './mockProdServer';
-          setupProdMockServer();
-        `,
+        // injectCode: `
+        //   import { setupProdMockServer } from './mockProdServer';
+        //   setupProdMockServer();
+        // `,
         logger: true
       })
     ],
