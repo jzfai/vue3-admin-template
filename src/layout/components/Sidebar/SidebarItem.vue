@@ -13,7 +13,13 @@
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" />
         <span>{{ item.meta.title }}</span>
       </template>
-      <SidebarItem v-for="child in item.children" :key="child.path" :is-nest="true" :item="child" :base-path="resolvePath(child.path)" />
+      <SidebarItem
+        v-for="child in item.children"
+        :key="child.path"
+        :is-nest="true"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+      />
     </el-sub-menu>
   </template>
 </template>
@@ -80,7 +86,6 @@ let resolvePath = (routePath) => {
 </script>
 
 <style lang="scss">
-@import '@/styles/variables.scss';
 .sub-el-icon,
 .nav-icon {
   display: inline-block;

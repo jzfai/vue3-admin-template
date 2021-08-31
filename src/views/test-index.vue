@@ -9,9 +9,4 @@
 
 <script setup></script>
 
-<style lang="scss" scoped>
-.svg-icon {
-  font-size: 50px;
-  color: red;
-}
-</style>
+<style lang="scss" scoped></style>

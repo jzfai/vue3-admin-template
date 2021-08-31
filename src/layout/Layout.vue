@@ -40,12 +40,11 @@ let classObj = computed(() => {
 <style lang="scss" scoped>
 @import '@/styles/variables.scss';
 .layout-wrapper {
-  display: flex;
-  align-content: start;
-  justify-content: start;
+  //display: flex;
+  //align-content: start;
+  //justify-content: start;
 }
 .main-container {
-  width: calc(100% - #{$sideBarWidth});
   min-height: 100%;
   transition: margin-left 0.28s;
   margin-left: $sideBarWidth;
@@ -70,7 +69,6 @@ let classObj = computed(() => {
   }
   .main-container {
     margin-left: 54px !important;
-    width: calc(100% - 54px) !important;
   }
 }
 .hideSidebar {

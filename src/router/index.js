@@ -10,15 +10,27 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/test-index',
-    meta: { title: '测试首页', icon: 'dashboard' },
-    alwaysShow: false,
+    redirect: '/hook',
+    meta: { title: '示例', icon: 'dashboard' },
+    alwaysShow: true,
     children: [
       {
-        path: 'test-index',
-        component: () => import('@/views/test-index.vue'),
-        name: 'TestIndex',
-        meta: { title: 'TestIndex', icon: 'dashboard' }
+        path: 'hook',
+        component: () => import('@/views/example/hook/Hook.vue'),
+        name: 'Hook',
+        meta: { title: 'Hook示例', icon: 'dashboard' }
+      },
+      {
+        path: 'mock-test',
+        component: () => import('@/views/example/mock-test/MockTest.vue'),
+        name: 'MockTest',
+        meta: { title: 'Mock示例', icon: 'dashboard' }
+      },
+      {
+        path: 'svg-icon',
+        component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
+        name: 'SvgIcon',
+        meta: { title: 'Svg示例', icon: 'dashboard' }
       }
     ]
   }
