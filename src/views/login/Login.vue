@@ -1,9 +1,7 @@
 <!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
-    <!--注意此处ref中的refloginForm 必须加上单引号，不然build后访问会报错
-    应该是转换为h函数时有问题,已经提了个问题到官方 -->
-    <el-form ref="'refloginForm'" size="medium" class="login-form" :model="formInline" :rules="formRulesMixin">
+    <el-form ref="refloginForm" size="medium" class="login-form" :model="formInline" :rules="formRulesMixin">
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
@@ -25,7 +23,7 @@
           </span>
           <el-input
             :key="passwordType"
-            ref="'password'"
+            ref="password"
             v-model="formInline.password"
             :type="passwordType"
             name="password"
@@ -143,20 +141,13 @@ let loginReq = () => {
 }
 let handleLogin = () => {
   let refloginForm = ''
-  //此处build的时候，template官方转vnode发生错误,先这样写
-  if (proxy.isBuildEnvMixin()) {
-    refloginForm = proxy.$refs['refloginForm']
-  } else {
-    refloginForm = proxy.$refs["'refloginForm'"]
-  }
-  refloginForm.validate((valid) => {
+  proxy.$refs['refloginForm'].validate((valid) => {
     if (valid) {
       loginReq()
     } else {
       return false
     }
   })
-  // localStorage.setItem("jwtToken", "11111111");
 }
 /*
  * 密码的显示和隐藏
@@ -171,12 +162,7 @@ let showPwd = () => {
   proxy.$nextTick(() => {
     console.log(proxy.$refs.password)
     let refPassword = null
-    if (proxy.isBuildEnvMixin()) {
-      refPassword = proxy.$refs['password']
-    } else {
-      refPassword = proxy.$refs["'password'"]
-    }
-    refPassword.focus()
+    proxy.$refs["'password'"].focus()
   })
 }
 </script>
