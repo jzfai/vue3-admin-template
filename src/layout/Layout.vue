@@ -10,14 +10,11 @@
     </div>
   </div>
 </template>
-
 <!--原理vue2.0-->
 <script>
-import ResizeHandler from './mixin/ResizeHandler'
 /*可以设置默认的名字*/
 export default {
-  name: 'Layout',
-  mixins: [ResizeHandler]
+  name: 'Layout'
 }
 </script>
 
@@ -35,6 +32,9 @@ let classObj = computed(() => {
     hideSidebar: !settings.showLeftMenu
   }
 })
+//import ResizeHook to   listen  page size that   open or close
+import H_ResizeHook from './hook/ResizeHandler'
+H_ResizeHook()
 </script>
 
 <style lang="scss" scoped>

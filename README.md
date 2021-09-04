@@ -7,7 +7,12 @@
 4.把element-plus默认语言修改成中文
 // 2021-08-31
 5.增加了mock, hook , svg-icon,vuex的使用示例
+// 2021-09-04
+1.修复了build后,ref的问题(https://github.com/vuejs/vue-next/issues/4431)
+2.vue,element-plus,vite及插件更新到最新版本
+3.ResizeHandler.js 方法从mixin 改为hooks
 ```
+
 ### 前言
 ## typescript 版本已经开发完成如果需要的请查看 master-ts 分支
 
