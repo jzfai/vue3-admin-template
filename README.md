@@ -67,9 +67,10 @@ yarn run dev
 "scripts": {
   "dev": "vite --mode serve-dev", ---- 开发时运行
    "build": "vite build --mode build",  ---- 打包发布生产环境
-   "serve": "vite preview --mode build" ---- 这个是在你本地打包完后（yarn run build）后会生产一个dist文件夹，
-   "preview:build": "yarn run build && vite preview " --- 构建并查看（建议更新上生成前运行一次）
-   这个命令在你本地启动一个本地服务用于查看dist文件内容，发布生产前可以用这个先看下打包的效果
+   "serve": "vite preview --mode build" ---- 这个是在你本地打包完后（yarn run build）后会生产一个dist文件夹，这个命令在你本地启动一个本地服务用于查看dist文件内容，发布生产前可以用这个先看下打包的效果
+     
+   "preview:build": "yarn run build && vite preview " --- 构建并查看（建议更新上product前运行一次,查看是否有问题）
+
 },
 ```
 
