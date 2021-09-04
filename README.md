@@ -18,8 +18,8 @@
 
 ```
 框架有js和ts版本
-js版本分支：https://github.com/jzfai/vue3.0-admin-template
-ts版本分支：https://github.com/jzfai/vue3.0-admin-ts
+js版本分支：https://github.com/jzfai/vue3-admin-template
+ts版本分支：https://github.com/jzfai/vue3-admin-ts
 如果想学习vue3+vite2的可以把这个框架和vue-admin-template框架进行对比，后期也我会出在架构设计过程中
 vue2和vue3的区别，以及如何快速的把vue2迁移到3中的教程
 ```
@@ -51,10 +51,10 @@ vue2和vue3的区别，以及如何快速的把vue2迁移到3中的教程
 ```javascript
 
 克隆项目
-git clone https://github.com/jzfai/vue3.0-admin-template.git
+git clone https://github.com/jzfai/vue3-admin-template.git
 
 进入项目目录
-cd  vue3.0-admin-template
+cd  vue3-admin-template
 
 运行yarn安装依赖
 yarn
@@ -74,7 +74,7 @@ yarn run dev
 },
 ```
 
-##### 后期会出架构中 vue3.0+vite2.0 开发时的一些坑以及如何快速的把 vue2.0 项目迁移到 3.0，框架还在努力开发中，但是基本功能已经完成
+##### 后期会出架构中 vue3+vite2 开发时的一些坑以及如何快速的把 vue2 项目迁移到 vue3，框架还在努力开发中，但是基本功能已经完成
 
 ## 大家的支持是我前进的动力 欢迎加入一起开发
 
