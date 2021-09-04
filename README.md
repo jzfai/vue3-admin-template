@@ -72,6 +72,7 @@ yarn run dev
   "dev": "vite --mode serve-dev", ---- 开发时运行
    "build": "vite build --mode build",  ---- 打包发布生产环境
    "serve": "vite preview --mode build" ---- 这个是在你本地打包完后（yarn run build）后会生产一个dist文件夹，
+   "preview:build": "yarn run build && vite preview " --- 构建并查看（建议更新上生成前运行一次）
    这个命令在你本地启动一个本地服务用于查看dist文件内容，发布生产前可以用这个先看下打包的效果
 },
 ```
@@ -81,12 +82,13 @@ yarn run dev
 ## 大家的支持是我前进的动力 欢迎加入一起开发
 
 
+### 如果需要实时交流的可以加入wx群(有vue3+ts视频教程)  二维码不定时更新
+### ![http://8.135.1.141/file/images/5226812254b48d989a32e515b46c80f.jpg](http://8.135.1.141/file/images/5226812254b48d989a32e515b46c80f.jpg)
 
 
 #### 如果需要实时交流的可以加入QQ群(有vue3+ts视频教程)
 
 ### ![http://8.135.1.141/file/images/1630398868394.png](http://8.135.1.141/file/images/1630398868394.png)
-
 
 
 ### 大家的支持是我前进的动力    欢迎加入一起开发
