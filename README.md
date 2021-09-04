@@ -14,19 +14,15 @@
 ```
 
 ### 前言
-## typescript 版本已经开发完成如果需要的请查看 master-ts 分支
-
-#### 本架构使用的技术为：vue3.2(setup-script)+vite2.4+element-plus 的新一代的前端框架，框架使用类似 vue-admin-template
+#### 本架构使用的技术为：vue3.2(setup-script)+vite2.4+element-plus+typescript 的新一代的前端框架，框架使用类似 vue-admin-template
 
 ```
 框架有js和ts版本
-js版本分支：master
-ts版本分支：master-ts(正在开发中)
+js版本分支：https://github.com/jzfai/vue3.0-admin-template
+ts版本分支：https://github.com/jzfai/vue3.0-admin-ts
 如果想学习vue3.0+vite2.0的可以把这个框架和vue-admin-template框架进行对比，后期也我会出在架构设计过程中
 vue2.0和vue3.0的区别，以及如何快速的把vue2.0迁移到3.0中的教程
 ```
-
-github 代码地址：https://github.com/jzfai/vue3.0-admin-template
 
 > 开发和使用感受：两个字 真香！！！！！
 
@@ -80,11 +76,6 @@ yarn run dev
 ##### 后期会出架构中 vue3.0+vite2.0 开发时的一些坑以及如何快速的把 vue2.0 项目迁移到 3.0，框架还在努力开发中，但是基本功能已经完成
 
 ## 大家的支持是我前进的动力 欢迎加入一起开发
-
-
-### 如果需要实时交流的可以加入wx群(有vue3+ts视频教程)  二维码不定时更新
-### ![http://8.135.1.141/file/images/5226812254b48d989a32e515b46c80f.jpg](http://8.135.1.141/file/images/5226812254b48d989a32e515b46c80f.jpg)
-
 
 #### 如果需要实时交流的可以加入QQ群(有vue3+ts视频教程)
 
