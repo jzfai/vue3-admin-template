@@ -37,6 +37,12 @@ export const constantRoutes = [
         component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
         name: 'SvgIcon',
         meta: { title: 'Svg示例', icon: 'dashboard' }
+      },
+      {
+        path: 'parent-children',
+        component: () => import('@/views/example/parent-children/Parent.vue'),
+        name: 'Parent',
+        meta: { title: '父子通信', icon: 'dashboard' }
       }
     ]
   }
