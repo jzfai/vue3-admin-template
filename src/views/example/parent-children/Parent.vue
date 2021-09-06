@@ -5,6 +5,8 @@
 </template>
 
 <script setup>
+//script-setup vue官方说明
+//https://v3.cn.vuejs.org/api/sfc-script-setup.html#使用组件
 import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
 import Children from './Children.vue'
 //获取store和router
