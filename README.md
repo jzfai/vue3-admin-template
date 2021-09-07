@@ -16,7 +16,7 @@
 ```
 
 ### 前言
-#### 本架构使用的技术为：vue3(setup-script)+vite2+element-plus+typescript 的新一代的前端框架，框架使用类似 vue-admin-template
+#### 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，框架使用类似 vue-admin-template
 
 ```
 框架有js和ts版本
