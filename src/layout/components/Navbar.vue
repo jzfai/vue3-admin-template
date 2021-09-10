@@ -11,7 +11,7 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
-    <div class="heardCenterTitle" v-if="settings.showTitle">vue3.0 admin Template</div>
+    <div class="heardCenterTitle" v-if="settings.showTitle">vue3 admin template</div>
     <div class="right-menu" v-if="settings.ShowDropDown">
       <el-dropdown trigger="click" size="medium">
         <!--<span class="el-dropdown-link">-->
