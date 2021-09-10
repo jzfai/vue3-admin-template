@@ -1,5 +1,5 @@
 const setting = {
-  title: 'Vue3.0 Admin Template',
+  title: 'vue3 admin template',
   /**
    * @type {boolean} true | false
    * @description Whether fix the header

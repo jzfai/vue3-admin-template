@@ -9,6 +9,7 @@ module.exports = {
     node: true
   },
   globals: {
+    defineEmits: true,
     document: true,
     localStorage: true,
     window: true,
