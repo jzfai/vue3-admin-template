@@ -1,4 +1,3 @@
-
 export default {
   data() {
     return {
@@ -25,7 +24,6 @@ export default {
     },
     heartStart() {
       this.timeoutObj && clearTimeout(this.timeoutObj)
-      // this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj)
       this.timeoutObj = setInterval(() => {
         // console.log('发送heartCheck',this.connectSocketName)
         if (this.webSocket.readyState !== 1) {
@@ -46,8 +44,6 @@ export default {
       } else {
         // console.log('socket重新连接了' + this.connectSocketName+"count"+this.socketReconnectNum)
         this.socketReconnectNum++
-        // await this.$comentUtil.sleep(6000)
-        // this.lockReconnect = true;
         this.socketConnectMixin()
       }
     },
@@ -59,8 +55,8 @@ export default {
     /* 使用方法*/
     socketConnectMixin() {
       // console.log("socketConnectMixin被执行了",this.socketReconnectNum);
-      return new Promise(resolve => {
-        if (typeof (WebSocket) === 'undefined') {
+      return new Promise((resolve) => {
+        if (typeof WebSocket === 'undefined') {
           console.log('遗憾：您的浏览器不支持WebSocket')
         } else {
           console.log(' new WebSocket', this.connectSocketUrl)
@@ -68,7 +64,7 @@ export default {
           // 连接打开事件
           this.webSocket.onopen = () => {
             this.heartStart()
-            resolve();
+            resolve()
           }
           // 收到消息事件
           this.webSocket.onmessage = (msg) => {

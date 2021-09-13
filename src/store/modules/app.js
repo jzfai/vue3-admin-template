@@ -4,17 +4,17 @@ const state = {
     //opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
   },
-  device:'desktop',
-  cachedViews:["DemoTest"]
+  device: 'desktop',
+  cachedViews: ['DemoTest']
 }
 
 const mutations = {
-  /**/
-  M_sidebar_opened: (state,data) => {
-    state.sidebar.opened=data
+  /*mutations建议以M_开头*/
+  M_sidebar_opened: (state, data) => {
+    state.sidebar.opened = data
   },
   M_toggleSideBar: (state) => {
-    state.sidebar.opened=!state.sidebar.opened
+    state.sidebar.opened = !state.sidebar.opened
   },
 
   /*keepAlive缓存*/
@@ -31,9 +31,15 @@ const mutations = {
     state.cachedViews = []
   }
 }
+const actions = {
+  A_sidebar_opened({ commit }, data) {
+    commit('M_sidebar_opened', data)
+  }
+}
 
 export default {
   namespaced: true,
   state,
-  mutations
+  mutations,
+  actions
 }

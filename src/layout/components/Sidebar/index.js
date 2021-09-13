@@ -1,2 +1,2 @@
-import  component from  "./Sidebar"
-export  default component;
+import component from './Sidebar'
+export default component

@@ -1,5 +1,6 @@
-const setting= {
-  title: 'Vue3 Admin Template',
+
+const setting = {
+  title: 'vue3 admin template',
   /**
    * @type {boolean} true | false
    * @description Whether fix the header
@@ -14,7 +15,7 @@ const setting= {
    * @type {boolean} true | false
    * @description Whether show the title in Navbar
    */
-  showTitle:false,
+  showTitle: false,
   /**
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
@@ -24,9 +25,13 @@ const setting= {
    * @type {boolean} true | false
    * @description Whether show the drop-down
    */
-  ShowDropDown:true,
-  showHamburger:true
+  ShowDropDown: true,
+  showHamburger: true,
+  /**
+   * @type {boolean} true | false
+   * @description Whether need login
+   */
+  isNeedLogin: true
 }
 
-
-export  default setting;
+export default setting

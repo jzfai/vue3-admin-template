@@ -5,5 +5,4 @@ declare module '*.vue' {
   export default component
 }
 
-
-declare module './*';
+declare module './*'
