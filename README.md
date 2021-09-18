@@ -14,8 +14,8 @@ vue,element-plus,vite及插件更新到最新版本
 ```
 
 ### 前言
-### 本架构为最基础的版本，适合学习和作为基础模板使用，如果需要查看具体实例请查看 [https://github.com/jzfai/vue3-admin-plus.git]: vue3-element-plus
-
+### 本架构为最基础的版本，适合学习和作为基础模板使用，如果需要查看具体实例请查看 
+[https://github.com/jzfai/vue3-admin-plus.git]: vue3-element-plus
 #### 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，框架使用类似 vue-admin-template
 
 ```
