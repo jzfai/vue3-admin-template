@@ -83,6 +83,6 @@ yarn run dev
 
 
 
- ![http://8.135.1.141/file/images/wx-groud.png](http://8.135.1.141/file/images/wx-groud.png)
+ ![http://8.135.1.141/file/images/wx-groud.png](http://8.135.1.141/file/images/wx-groud1.png)
 
 大家的支持是我前进的动力    欢迎加入一起开发
