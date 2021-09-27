@@ -1,20 +1,11 @@
 #### 更新日志
 ```
-// 2021-08-31
-5.增加了mock, hook , svg-icon,vuex的使用示例
-// 2021-09-04
-1.修复了build后,ref的问题(https://github.com/vuejs/vue-next/issues/4431)
-2.vue,element-plus,vite及插件更新到最新版本
-3.ResizeHandler.js 方法从mixin 改为hooks
-// 2021-09-06
-1.增加父子通信例子 parent-children
-// 2021-09-10
-vue,element-plus,vite及插件更新到最新版本
-增加数据java后台：https://github.com/jzfai/micro-service-plus.git
+// 2021-09-27
+add multi function   can  view  http://8.135.1.141/vue3-admin-template
 ```
 
 ### 前言
-### 本架构为最基础的版本，适合学习和作为基础模板使用，如果需要查看具体实例请查看 
+### 本架构为最基础的版本，适合学习和作为基础模板使用，如果需要查看具体实例请查看
 #### https://github.com/jzfai/vue3-admin-plus.git
 [https://github.com/jzfai/vue3-admin-plus.git]: vue3-element-plus
 #### 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，框架使用类似 vue-admin-template

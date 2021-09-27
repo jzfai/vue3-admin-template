@@ -3,7 +3,7 @@
     <template v-if="showSidebarItem(item.children, item)">
       <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
-          <item v-if="item.meta" :icon="item.meta && item.meta.icon" />
+          <item :icon="onlyOneChild.meta?.icon || item.meta?.icon" />
           <template #title>{{ onlyOneChild.meta?.title }}</template>
         </el-menu-item>
       </Link>
@@ -26,13 +26,13 @@
 
 <script setup>
 /*初始化参数比如引入组件，proxy,state等*/
-import { reactive, defineComponent, getCurrentInstance, toRef, onMounted, watch, toRefs, computed } from 'vue'
+import { getCurrentInstance, onMounted } from 'vue'
 import Link from './Link'
 import Item from './Item'
 import { isExternal } from '@/utils/validate'
 import path from 'path'
 let { proxy } = getCurrentInstance()
-const props = defineProps({
+defineProps({
   //每一个router Item
   item: {
     type: Object,
@@ -86,14 +86,6 @@ let resolvePath = (routePath) => {
 </script>
 
 <style lang="scss">
-.sub-el-icon,
-.nav-icon {
-  display: inline-block;
-  font-size: 14px;
-  margin-right: 10px;
-  position: relative;
-}
-
 // menu hover
 /* .submenu-title-noDropdown,
   .el-submenu__title {

@@ -3,7 +3,7 @@
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
         <span v-if="item.redirect === 'noRedirect' || index == levelList.length - 1" class="no-redirect">
-          {{ item.meta.title }}
+          {{ item.meta?.title }}
         </span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
@@ -12,11 +12,8 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeMount, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
+import { onMounted, onBeforeMount, getCurrentInstance, watch, ref } from 'vue'
 import { compile } from 'path-to-regexp'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
 let levelList = ref(null)
 let { proxy } = getCurrentInstance()
 const getBreadcrumb = () => {
@@ -25,10 +22,9 @@ const getBreadcrumb = () => {
   const first = matched[0]
   if (!isDashboard(first)) {
     //it can replace the first page if not exits
-    // matched = [{path: '/dashboard', meta: {title: 'Dashboard'}}].concat(matched)
+    matched = [{ path: '/dashboard', meta: { title: 'Dashboard' } }].concat(matched)
   }
   levelList.value = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false)
-  console.log('levelList', levelList)
 }
 
 const isDashboard = (route) => {

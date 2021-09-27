@@ -11,12 +11,9 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
-    <div class="heardCenterTitle" v-if="settings.showTitle">vue3 admin template</div>
+    <div class="heardCenterTitle" v-if="settings.showTitle">{{ settings.showTitle }}</div>
     <div class="right-menu" v-if="settings.ShowDropDown">
       <el-dropdown trigger="click" size="medium">
-        <!--<span class="el-dropdown-link">-->
-        <!--下拉菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-        <!--</span>-->
         <div class="avatar-wrapper">
           <img
             src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
@@ -26,8 +23,17 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>修改密码</el-dropdown-item>
-            <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
+            <router-link to="/">
+              <el-dropdown-item>Home</el-dropdown-item>
+            </router-link>
+            <a target="_blank" href="https://github.com/jzfai/vue3-admin-template">
+              <el-dropdown-item>Github</el-dropdown-item>
+            </a>
+            <a target="_blank" href="https://github.com/jzfai/vue3-admin-template">
+              <el-dropdown-item>Docs</el-dropdown-item>
+            </a>
+            <!--<el-dropdown-item>修改密码</el-dropdown-item>-->
+            <el-dropdown-item divided @click="loginOut">login out</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -41,6 +47,7 @@ import Hamburger from './Hamburger'
 import { onMounted, getCurrentInstance, computed, watch, ref, toRefs, reactive } from 'vue'
 import settings from '@/settings'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import { useStore } from 'vuex'
 let { proxy } = getCurrentInstance()
 
 const opened = computed(() => {
@@ -68,10 +75,11 @@ let logutReq = () => {
       })
   })
 }
-const logout = async () => {
-  // await logutReq();
-  removeToken()
-  proxy.$router.push(`/login?redirect=${proxy.$route.fullPath}`)
+const store = useStore()
+const loginOut = () => {
+  store.dispatch('user/logout').then(() => {
+    proxy.$router.push(`/login?redirect=${proxy.$route.fullPath}`)
+  })
 }
 </script>
 

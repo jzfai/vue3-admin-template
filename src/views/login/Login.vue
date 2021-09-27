@@ -28,7 +28,7 @@
             :type="passwordType"
             name="password"
             @keyup.enter="handleLogin"
-            placeholder="密码(123456)"
+            placeholder="password(123456)"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -37,7 +37,7 @@
       </el-form-item>
       <div class="tip-message">{{ tipMessage }}</div>
       <el-button :loading="loading" type="primary" class="login-btn" size="medium" @click.prevent="handleLogin">
-        登 录
+        login
       </el-button>
     </el-form>
   </div>
@@ -51,15 +51,13 @@ export default {
 </script>
 
 <script setup>
-/*
- * 初始化参数比如引入组件，proxy,state等
- * */
 import { reactive, getCurrentInstance, watch, toRefs, ref } from 'vue'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import settings from '@/settings'
-
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 let { proxy } = getCurrentInstance()
-//form表单
+//form
 let formInline = reactive({
   username: 'admin',
   password: '123456'
@@ -68,16 +66,12 @@ let onSubmit = () => {
   console.log('submit!')
 }
 
-/*
- * 监听路由变化处理
- * */
 let state = reactive({
   otherQuery: {},
   redirect: undefined
 })
-import { useRoute } from 'vue-router'
-// state.otherQuery={}
-// state.redirect=undefined
+
+/* listen router change  */
 const route = useRoute()
 let getOtherQuery = (query) => {
   return Object.keys(query).reduce((acc, cur) => {
@@ -91,7 +85,6 @@ let getOtherQuery = (query) => {
 watch(
   route,
   (route) => {
-    console.log('监听到路由的变化', route)
     const query = route.query
     if (query) {
       state.redirect = query.redirect
@@ -100,11 +93,10 @@ watch(
   },
   { immediate: true }
 )
-//导出属性到页面中使用
 let { otherQuery, redirect } = toRefs(state)
 
 /*
- * 登录相关
+ *  login relative
  * */
 let resetData = () => {
   tipMessage.value = ''
@@ -114,31 +106,7 @@ let resetData = () => {
 }
 let loading = ref(false)
 let tipMessage = ref('')
-let loginReq = () => {
-  loading.value = true
-  proxy
-    .$axiosReq({
-      url: '/ty-user/user/loginValid',
-      data: formInline,
-      method: 'post',
-      bfLoading: false,
-      isParams: true,
-      isAlertErrorMsg: false
-    })
-    .then((resData) => {
-      //需要将用户信息存储到本地
-      if (resData.code === 20000) {
-        setToken(resData.data?.jwtToken)
-        proxy.$router.push({ path: state.redirect || '/', query: state.otherQuery })
-        resetData()
-      } else {
-        tipMessage.value = resData.msg
-        proxy.sleepMixin(30).then(() => {
-          loading.value = false
-        })
-      }
-    })
-}
+const store = useStore()
 let handleLogin = () => {
   let refloginForm = ''
   proxy.$refs['refloginForm'].validate((valid) => {
@@ -149,8 +117,23 @@ let handleLogin = () => {
     }
   })
 }
+let loginReq = () => {
+  loading.value = true
+  store
+    .dispatch('user/login', formInline)
+    .then(() => {
+      proxy.$router.push({ path: state.redirect || '/', query: state.otherQuery })
+    })
+    .catch((res) => {
+      tipMessage.value = res.msg
+      proxy.sleepMixin(30).then(() => {
+        loading.value = false
+      })
+    })
+}
+
 /*
- * 密码的显示和隐藏
+ *  password show or hidden
  * */
 let passwordType = ref('password')
 let showPwd = () => {

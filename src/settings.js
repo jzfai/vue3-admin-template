@@ -1,5 +1,5 @@
 const setting = {
-  title: 'vue3 admin template',
+  title: 'Vue3 Admin Template',
   /**
    * @type {boolean} true | false
    * @description Whether fix the header
@@ -30,7 +30,13 @@ const setting = {
    * @type {boolean} true | false
    * @description Whether need login
    */
-  isNeedLogin: true
+  isNeedLogin: true,
+
+  /**
+   * @type {boolean} true | false
+   * @description Whether need nprogress
+   */
+  isNeedNprogress: true
 }
 
 export default setting
