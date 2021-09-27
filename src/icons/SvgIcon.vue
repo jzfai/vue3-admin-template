@@ -1,6 +1,5 @@
 <template>
   <svg :class="svgClass" aria-hidden="true">
-    <!--<use :xlink:href="iconName" :fill="color"/>-->
     <use :xlink:href="iconName" />
   </svg>
 </template>
@@ -37,6 +36,14 @@ export default defineComponent({
 </script>
 
 <style scope>
+.sub-el-icon,
+.nav-icon {
+  display: inline-block;
+  font-size: 15px;
+  margin-right: 12px;
+  position: relative;
+}
+
 .svg-icon {
   width: 1em;
   height: 1em;

@@ -23,7 +23,7 @@ export default ({ command }) => {
       // proxy: {
       //   // 类型： Record<string, string | ProxyOp 为开发服务器配置自定义代理规则
       //   '/scala-ms': {
-      //     target: 'http://shangchai.intranet.ruixiude.com:15980/',
+      //     target: 'http://xxxx:15980/',
       //     changeOrigin: true,
       //     secure: false
       //   }
@@ -37,9 +37,9 @@ export default ({ command }) => {
         additionalLegacyPolyfills: ['regenerator-runtime/runtime']
       }),
       viteSvgIcons({
-        // 指定需要缓存的图标文件夹（可以配置多个）
-        iconDirs: [path.resolve(process.cwd(), 'src/icons/common'), path.resolve(process.cwd(), 'src/icons/navBar')],
-        // 指定symbolId格式
+        // config svg dir that can config multi
+        iconDirs: [path.resolve(process.cwd(), 'src/icons/common'), path.resolve(process.cwd(), 'src/icons/nav-bar')],
+        // appoint svg icon using mode
         symbolId: 'icon-[dir]-[name]'
       }),
       //https://blog.csdn.net/weixin_42067720/article/details/115579817

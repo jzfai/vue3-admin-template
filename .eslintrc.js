@@ -45,7 +45,7 @@ module.exports = {
     'vue/no-setup-props-destructure': ['off'],
     '@typescript-eslint/no-empty-function': ['off'],
     //这个为了适配script-setup的变量问题
-    '@typescript-eslint/no-unused-vars': ['off'],
+    //'@typescript-eslint/no-unused-vars': ['off'],
     'no-param-reassign': ['off']
   },
   overrides: [

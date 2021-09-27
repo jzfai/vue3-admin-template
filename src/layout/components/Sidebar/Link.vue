@@ -6,10 +6,7 @@
 
 <script setup>
 import { isExternal } from '@/utils/validate'
-import { onMounted, computed, getCurrentInstance, watch, ref, toRefs, reactive } from 'vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
+import { onMounted, computed, getCurrentInstance, reactive } from 'vue'
 let { proxy } = getCurrentInstance()
 const props = defineProps({
   to: {
@@ -41,26 +38,10 @@ const linkProps = (to) => {
 const state = reactive({
   levelList: null
 })
-
-// watch(() => props.name, (oldValue,newValue) => {
-//
-//   },
-//   { immediate: true }
-// );
-
-// const store = useStore()
-// const router = useRouter()
 onMounted(() => {
   console.log(state.levelList)
   console.log(props.to)
 })
-// let helloFunc = () => {
-//   console.log("helloFunc");
-// };
-//导出给refs使用
-// defineExpose({ helloFunc });
-//导出属性到页面中使用
-// let {levelList} = toRefs(state);
 </script>
 
 <style scoped lang="scss"></style>

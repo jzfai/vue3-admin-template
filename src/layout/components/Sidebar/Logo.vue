@@ -14,41 +14,19 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive } from 'vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
-const props = defineProps({
+import { toRefs, reactive } from 'vue'
+import setting from '@/settings'
+defineProps({
   collapse: {
     type: Boolean,
     required: true
   }
 })
 const state = reactive({
-  title: 'vue3 admin template',
+  title: setting.title,
   logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
 })
-
-//const routes = computed(() => {
-//    return proxy.$store.state.permission.routes;
-//  });
-// watch(() => props.name, (oldValue,newValue) => {
-//
-//   },
-//   { immediate: true }
-// );
-// let {proxy} = getCurrentInstance();
-// const store = useStore()
-// const router = useRouter()
-// onMounted(()=>{
-//   console.log("页面挂载了")
-// })
-// let helloFunc = () => {
-//   console.log("helloFunc");
-// };
-//导出给refs使用
-// defineExpose({ helloFunc });
-//导出属性到页面中使用
+//export to page for
 let { title, logo } = toRefs(state)
 </script>
 

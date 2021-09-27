@@ -21,14 +21,13 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, computed } from 'vue'
+import { computed } from 'vue'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 //导入配置文件
 import settings from '@/settings'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-let { proxy } = getCurrentInstance()
 const store = useStore()
 const router = useRouter()
 let routes = computed(() => {
@@ -39,9 +38,7 @@ const isCollapse = computed(() => {
 })
 const variables = computed(() => {
   /*vite中获取scss变量有问题*/
-  // let data=JSON.parse(JSON.stringify(scssVariables.replace(/:export/,'')))
-  // console.log(typeof  JSON.parse(data));
-  // return scssVariables
+  //let data=JSON.parse(JSON.stringify(scssVariables.replace(/:export/,'')))
   return {
     menuText: '#bfcbd9',
     menuActiveText: '#409EFF',
