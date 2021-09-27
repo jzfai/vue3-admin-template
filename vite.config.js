@@ -42,16 +42,16 @@ export default ({ command }) => {
         // appoint svg icon using mode
         symbolId: 'icon-[dir]-[name]'
       }),
-      //https://blog.csdn.net/weixin_42067720/article/details/115579817
+      //https://github.com/anncwb/vite-plugin-mock/blob/HEAD/README.zh_CN.md
       viteMockServe({
         supportTs: true,
         mockPath: 'mock',
         localEnabled: command === 'serve',
-        prodEnabled: command !== 'serve' && prodMock,
-        // injectCode: `
-        //   import { setupProdMockServer } from './mockProdServer';
-        //   setupProdMockServer();
-        // `,
+        prodEnabled: prodMock,
+        injectCode: `
+          import { setupProdMockServer } from './mockProdServer';
+          setupProdMockServer();
+        `,
         logger: true
       })
     ],
