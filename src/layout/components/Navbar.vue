@@ -44,9 +44,9 @@
 <script setup>
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
-import { getCurrentInstance } from 'vue'
+import { computed, getCurrentInstance } from 'vue'
 import settings from '@/settings'
-import { useStore, computed } from 'vuex'
+import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 let { proxy } = getCurrentInstance()
 
