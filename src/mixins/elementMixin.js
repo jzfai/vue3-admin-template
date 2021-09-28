@@ -128,7 +128,7 @@ const mixin = {
     //   console.log('我是mixin里的selectPageReq方法')
     // },
     /* 级联*/
-    casHandleChangeMixin(valueArr) {
+    casHandleChangeMixin() {
       // 解决目前级联选择器搜索输入报错问题
       ++this.cascaderKey
     },
@@ -138,7 +138,7 @@ const mixin = {
      * type：通知类型
      * duration：通知显示时长（ms）
      * */
-    elMessageMixin(message, type, duration) {
+    elMessageMixin(message, type) {
       type = type || 'success'
       this.$message({
         showClose: true,

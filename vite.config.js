@@ -73,6 +73,14 @@ export default ({ command }) => {
       },
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mjs']
     },
+    css: {
+      preprocessorOptions: {
+        //define global scss variable
+        scss: {
+          additionalData: `@import "@/styles/variables.scss";`
+        }
+      }
+    },
     optimizeDeps: {
       include: ['element-plus/lib/locale/lang/zh-cn', 'element-plus/lib/locale/lang/en']
     }

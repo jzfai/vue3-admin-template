@@ -37,8 +37,9 @@ const isCollapse = computed(() => {
   return store.state.app.sidebar.opened
 })
 const variables = computed(() => {
-  /*vite中获取scss变量有问题*/
-  //let data=JSON.parse(JSON.stringify(scssVariables.replace(/:export/,'')))
+  // let data = JSON.parse(scssVariables.replace(/:export\s*/, ''))
+  // console.log('scssVariables')
+  // console.log(typeof data)
   return {
     menuText: '#bfcbd9',
     menuActiveText: '#409EFF',
@@ -51,16 +52,6 @@ const variables = computed(() => {
   }
 })
 const activeMenu = computed(() => router.currentRoute.value.fullPath)
-// let activeMenu2 = () => {
-//   console.log("p1111ath",111);
-//   const {meta, path} = router
-//   // if set path, the sidebar will highlight the path you set
-//   // if (meta.activeMenu) {
-//   //   return meta.activeMenu
-//   // }
-//   console.log("path",path);
-//   return path
-// }
 </script>
 
 <style lang="scss">

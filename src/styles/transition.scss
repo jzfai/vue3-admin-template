@@ -2,7 +2,7 @@
 /* fade */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.28s;
+  transition: opacity 0.25s;
 }
 
 .fade-enter-from,
@@ -13,7 +13,7 @@
 /* fade-transform AppMain*/
 .fade-transform-leave-active,
 .fade-transform-enter-active {
-  transition: all 0.5s;
+  transition: all 0.38s;
 }
 
 .fade-transform-enter-from {
@@ -24,6 +24,9 @@
 .fade-transform-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+.fade-transform-active {
+  position: absolute;
 }
 
 /* breadcrumb transition */

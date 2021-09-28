@@ -2,7 +2,7 @@
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-        <span v-if="item.redirect === 'noRedirect' || index == levelList.length - 1" class="no-redirect">
+        <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
           {{ item.meta?.title }}
         </span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
@@ -47,20 +47,6 @@ const handleLink = (item) => {
   }
   proxy.$router.push(pathCompile(path))
 }
-// const props = defineProps({
-//   name: {
-//     require: true,
-//     default: "fai",
-//     type:String,
-//   },
-// });
-// const state = reactive({
-//   levelList: null
-// });
-
-//const routes = computed(() => {
-//    return proxy.$store.state.permission.routes;
-//  });
 watch(
   () => proxy.$route,
   () => {
@@ -68,21 +54,12 @@ watch(
   },
   { immediate: true }
 )
-// const store = useStore()
-// const router = useRouter()
 onMounted(() => {
   console.log(proxy.$route)
 })
 onBeforeMount(() => {
   getBreadcrumb()
 })
-// let helloFunc = () => {
-//   console.log("helloFunc");
-// };
-//导出给refs使用
-// defineExpose({ helloFunc });
-//导出属性到页面中使用
-// let {levelList} = toRefs(state);
 </script>
 
 <style lang="scss" scoped>

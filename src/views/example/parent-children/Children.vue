@@ -4,8 +4,7 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
-let { proxy } = getCurrentInstance()
+import { onMounted, ref, toRefs } from 'vue'
 const props = defineProps({
   fatherName: {
     require: true,

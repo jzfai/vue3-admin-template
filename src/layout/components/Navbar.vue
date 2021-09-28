@@ -44,10 +44,10 @@
 <script setup>
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
-import { onMounted, getCurrentInstance, computed, watch, ref, toRefs, reactive } from 'vue'
+import { getCurrentInstance } from 'vue'
 import settings from '@/settings'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { useStore } from 'vuex'
+import { useStore, computed } from 'vuex'
+import { ElMessage } from 'element-plus'
 let { proxy } = getCurrentInstance()
 
 const opened = computed(() => {
@@ -60,24 +60,10 @@ const toggleSideBar = () => {
 /*
  * 退出登录
  * */
-let logutReq = () => {
-  return new Promise((resolve) => {
-    proxy
-      .$axiosReq({
-        url: '/ty-user/user/loginValid',
-        method: 'post',
-        isParams: true
-      })
-      .then((res) => {
-        if (res.code === 20000) {
-          resolve(res)
-        }
-      })
-  })
-}
 const store = useStore()
 const loginOut = () => {
   store.dispatch('user/logout').then(() => {
+    ElMessage({ message: '退出登录成功', type: 'success' })
     proxy.$router.push(`/login?redirect=${proxy.$route.fullPath}`)
   })
 }

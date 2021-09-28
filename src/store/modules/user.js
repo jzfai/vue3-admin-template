@@ -1,9 +1,10 @@
 import { loginReq, logoutReq, getInfoReq } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
+    //token: getToken(),
     username: '',
     avatar: ''
   }
@@ -22,11 +23,13 @@ const mutations = {
 
 const actions = {
   // user login
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   login({ commit }, data) {
     return new Promise((resolve, reject) => {
       loginReq(data)
         .then((res) => {
           if (res.code === 20000) {
+            //commit('SET_Token', res.data?.jwtToken)
             setToken(res.data?.jwtToken)
             resolve()
           } else {

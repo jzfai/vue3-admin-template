@@ -38,8 +38,8 @@ H_ResizeHook()
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables.scss';
 .layout-wrapper {
+  overflow: hidden;
   //display: flex;
   //align-content: start;
   //justify-content: start;
