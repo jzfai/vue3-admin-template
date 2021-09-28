@@ -76,7 +76,7 @@ const mixin = {
     },
 
     sleepMixin(time) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const timer = setTimeout(() => {
           clearTimeout(timer)
           resolve()

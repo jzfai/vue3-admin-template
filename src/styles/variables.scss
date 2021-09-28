@@ -11,13 +11,15 @@ $subMenuHover: #001528;
 $sideBarWidth: 210px;
 
 //导出scss定义的样式变量
-:export {
-  menuText: $menuText;
-  menuActiveText: $menuActiveText;
-  subMenuActiveText: $subMenuActiveText;
-  menuBg: $menuBg;
-  menuHover: $menuHover;
-  subMenuBg: $subMenuBg;
-  subMenuHover: $subMenuHover;
-  sideBarWidth: $sideBarWidth;
-}
+/*vite无法获取scss变量https://github.com/vitejs/vite/issues/1279*/
+//:export {
+//  menuText: $menuText;
+//  menuActiveText: $menuActiveText;
+//  subMenuActiveText: $subMenuActiveText;
+//  menuBg: $menuBg;
+//  menuHover: $menuHover;
+//  subMenuBg: $subMenuBg;
+//  subMenuHover: $subMenuHover;
+//  sideBarWidth: $sideBarWidth;
+//}
+

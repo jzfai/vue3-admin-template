@@ -40,7 +40,6 @@
 <script setup>
 import { toRefs, reactive, onBeforeMount } from 'vue'
 import { getList } from '@/api/table'
-
 const statusFilter = (status) => {
   const statusMap = {
     published: 'success',

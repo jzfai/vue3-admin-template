@@ -129,7 +129,7 @@ export default {
   /*
    * 传入一串num四个 一个空格
    * */
-  toSplitNumFor(num, numToSpace) {
+  toSplitNumFor(num) {
     return num.replace(/(.{4})/g, '$1 ')
   },
   // 匹配银行卡号
@@ -267,7 +267,7 @@ export default {
    * objKey： arrObj中对象的某一个key名称
    * return: arrObj2删除过后的数组
    * */
-  byArrObjFindArrObj2(arrObj, arrObj2, objKey, value) {
+  byArrObjFindArrObj2(arrObj, arrObj2, objKey) {
     let arrObj3 = []
     arrObj
       .map((value) => {

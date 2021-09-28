@@ -16,9 +16,9 @@
 </template>
 
 <script setup>
-import {getCurrentInstance } from 'vue'
+import { getCurrentInstance } from 'vue'
 let { proxy } = getCurrentInstance()
-const props = defineProps({
+defineProps({
   isActive: {
     type: Boolean,
     default: false

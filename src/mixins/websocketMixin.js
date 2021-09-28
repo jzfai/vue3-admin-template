@@ -89,7 +89,7 @@ export default {
       })
     },
     // webSocket消息监听
-    webSocketMessage(msg) {},
+    webSocketMessage() {},
     // 关闭websocket连接
     webSocketClose() {
       this.webSocket.close()

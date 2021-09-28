@@ -5,7 +5,7 @@ const state = {
     withoutAnimation: false
   },
   device: 'desktop',
-  cachedViews: ['DemoTest']
+  cachedViews: []
 }
 
 const mutations = {

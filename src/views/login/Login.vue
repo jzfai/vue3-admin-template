@@ -37,7 +37,7 @@
       </el-form-item>
       <div class="tip-message">{{ tipMessage }}</div>
       <el-button :loading="loading" type="primary" class="login-btn" size="medium" @click.prevent="handleLogin">
-        login
+        Login
       </el-button>
     </el-form>
   </div>
@@ -51,21 +51,17 @@ export default {
 </script>
 
 <script setup>
-import { reactive, getCurrentInstance, watch, toRefs, ref } from 'vue'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { reactive, getCurrentInstance, watch, ref } from 'vue'
 import settings from '@/settings'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+import { ElMessage } from 'element-plus'
 let { proxy } = getCurrentInstance()
 //form
 let formInline = reactive({
   username: 'admin',
   password: '123456'
 })
-let onSubmit = () => {
-  console.log('submit!')
-}
-
 let state = reactive({
   otherQuery: {},
   redirect: undefined
@@ -93,17 +89,10 @@ watch(
   },
   { immediate: true }
 )
-let { otherQuery, redirect } = toRefs(state)
 
 /*
  *  login relative
  * */
-let resetData = () => {
-  tipMessage.value = ''
-  proxy.sleepMixin(20).then(() => {
-    loading.value = false
-  })
-}
 let loading = ref(false)
 let tipMessage = ref('')
 const store = useStore()
@@ -122,6 +111,7 @@ let loginReq = () => {
   store
     .dispatch('user/login', formInline)
     .then(() => {
+      ElMessage({ message: '登录成功', type: 'success' })
       proxy.$router.push({ path: state.redirect || '/', query: state.otherQuery })
     })
     .catch((res) => {
