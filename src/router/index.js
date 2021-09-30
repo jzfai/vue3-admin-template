@@ -3,13 +3,29 @@ import Layout from '@/layout'
 
 export const constantRoutes = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/Login.vue'),
     hidden: true
   },
   {
     path: '/404',
-    component: () => import('@/views/404'),
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/error-page/401'),
     hidden: true
   },
   {
@@ -131,7 +147,7 @@ export const asyncRoutes = [
   {
     path: '/using-demo',
     component: Layout,
-    meta: { title: 'Use demo', icon: 'eye-open' },
+    meta: { title: 'Use Demo', icon: 'eye-open' },
     alwaysShow: true,
     children: [
       {
@@ -162,7 +178,7 @@ export const asyncRoutes = [
         path: 'parent-children',
         component: () => import('@/views/example/parent-children/Parent.vue'),
         name: 'Parent',
-        meta: { title: '' }
+        meta: { title: 'Parent-Children' }
       }
     ]
   },

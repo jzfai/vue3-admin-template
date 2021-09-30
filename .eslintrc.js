@@ -44,7 +44,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': ['off'],
     'vue/no-setup-props-destructure': ['off'],
     '@typescript-eslint/no-empty-function': ['off'],
-    //这个为了适配script-setup的变量问题
+    //是否开启变量未使用校验（要求比较高的同学可以开启）
     //'@typescript-eslint/no-unused-vars': ['off'],
     'no-param-reassign': ['off']
   },

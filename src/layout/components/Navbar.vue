@@ -71,7 +71,7 @@ const loginOut = () => {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 50px;
+  height: $navBarHeight;
   overflow: hidden;
   position: relative;
   background: #fff;
