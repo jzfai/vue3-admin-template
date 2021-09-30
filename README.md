@@ -5,6 +5,8 @@ add multi function   can  view  http://8.135.1.141/vue3-admin-template
 add prod mock
 // 2021-09-28
 add keep-alive transition and fix some issue
+// 2021-09-30
+add tag view
 ```
 ### 前言
 ### 本架构为最基础的版本，适合学习和作为基础模板使用，如果需要查看具体实例请查看
@@ -73,8 +75,6 @@ yarn run dev
 ##### 后期会出架构中 vue3+vite2 开发时的一些坑以及如何快速的把 vue2 项目迁移到 vue3，框架还在努力开发中，但是基本功能已经完成
 
 #### 如果需要实时交流的可以加入wx群(有vue3+ts视频教程)
-
-
 
  ![http://8.135.1.141/file/images/wx-groud.png](http://8.135.1.141/file/images/wx-groud1.png)
 

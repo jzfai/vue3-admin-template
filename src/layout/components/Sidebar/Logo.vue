@@ -49,7 +49,8 @@ let { title, logo } = toRefs(state)
   height: 50px;
   line-height: 50px;
   background: #2b2f3a;
-  text-align: center;
+  padding-left: 14px;
+  text-align: left;
   overflow: hidden;
   & .sidebar-logo-link {
     height: 100%;
