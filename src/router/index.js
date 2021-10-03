@@ -145,9 +145,9 @@ export const constantRoutes = [
 ]
 export const asyncRoutes = [
   {
-    path: '/using-demo',
+    path: '/writing-demo',
     component: Layout,
-    meta: { title: 'Use Demo', icon: 'eye-open' },
+    meta: { title: 'Writing Demo', icon: 'eye-open' },
     alwaysShow: true,
     children: [
       {
@@ -160,7 +160,7 @@ export const asyncRoutes = [
         path: 'vuex-use',
         component: () => import('@/views/example/vuex-use/VuexUse.vue'),
         name: 'VuexUse',
-        meta: { title: 'vuex-Demo' }
+        meta: { title: 'Vuex-Demo' }
       },
       {
         path: 'mock-test',
