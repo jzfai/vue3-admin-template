@@ -29,6 +29,7 @@ module.exports = {
     ecmaVersion: 2021
   },
   rules: {
+    'linebreak-style': ['error', 'unix'],
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-absolute-path': 'off',
@@ -44,8 +45,8 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': ['off'],
     'vue/no-setup-props-destructure': ['off'],
     '@typescript-eslint/no-empty-function': ['off'],
-    //是否开启变量未使用校验（要求比较高的同学可以开启）
-    //'@typescript-eslint/no-unused-vars': ['off'],
+    //can config  to 2 if need more then required
+    '@typescript-eslint/no-unused-vars': [1],
     'no-param-reassign': ['off']
   },
   overrides: [
