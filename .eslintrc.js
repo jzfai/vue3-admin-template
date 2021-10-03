@@ -14,9 +14,7 @@ module.exports = {
     localStorage: true,
     window: true,
     defineProps: true,
-    defineExpose: true,
-    Obj_type: true,
-    axios_c_ty: true
+    defineExpose: true
   },
   extends: [
     'plugin:vue/vue3-essential',
