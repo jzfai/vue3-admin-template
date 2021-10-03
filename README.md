@@ -1,12 +1,9 @@
 #### 更新日志
 ```
-// 2021-09-27
-add multi function   can  view  http://8.135.1.141/vue3-admin-template
-add prod mock
-// 2021-09-28
-add keep-alive transition and fix some issue
 // 2021-09-30
 add tag view
+// 2021-10-03
+fix tags view some issue
 ```
 ### 前言
 ### 本架构为最基础的版本，适合学习和作为基础模板使用，如果需要查看具体实例请查看
