@@ -73,6 +73,6 @@ yarn run dev
 
 #### 如果需要实时交流的可以加入wx群(有vue3+ts视频教程)
 
- ![http://8.135.1.141/file/images/wx-groud.png](http://8.135.1.141/file/images/wx-groud1.png)
+ ![http://8.135.1.141/file/images/wx-groud.png](http://8.135.1.141/file/images/wx-groud2.png)
 
 大家的支持是我前进的动力    欢迎加入一起开发
