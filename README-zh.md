@@ -9,6 +9,13 @@
 
 [国内访问](http://8.135.1.141/vue3-admin-template)
 
+## 更新日志
+
+```javascript
+//10-08
+add error log collection func
+```
+
 ## 例子
 
  ---- 我们先看看加载速度和构建后的包大小：
@@ -159,7 +166,7 @@ Modern browsers and Internet Explorer 11+.
 
 ## 版本
 
-[MIT](https://github.com/jzfai/vue3-admin-templateLICENSE) license.
+[MIT](https://github.com/jzfai/vue3-admin-template/blob/master/LICENSE) license.
 
 Copyright (c) 2021-present  kuanghua
 
