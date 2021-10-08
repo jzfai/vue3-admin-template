@@ -60,7 +60,8 @@ onBeforeMount(() => {
 const fetchData = () => {
   state.listLoading = true
   getList().then((response) => {
-    state.list = response.data.items
+    console.log('response', response)
+    state.list = response.data?.data.items
     state.listLoading = false
   })
 }

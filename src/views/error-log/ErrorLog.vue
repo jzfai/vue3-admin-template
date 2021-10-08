@@ -182,7 +182,6 @@ const handleSelectionChange = (val) => {
 }
 const multiDelBtnClick = async () => {
   let rowDeleteIdArrMixin = []
-  // let selectionArr = proxy.$refs.refuserTable //--c
   let deleteNameTitle = ''
   rowDeleteIdArrMixin = multipleSelection.value.map((mItem) => {
     deleteNameTitle = deleteNameTitle + mItem.pageUrl + ','
@@ -203,8 +202,8 @@ const multiDelBtnClick = async () => {
       bfLoading: true
     })
     .then(() => {
+      selectPageReq()
       proxy.elMessageMixin('删除成功')
-      proxy.selectPageReq()
     })
 }
 </script>
