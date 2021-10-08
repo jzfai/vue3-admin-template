@@ -1,4 +1,4 @@
-# vue-admin-template
+# vue3-admin-template
 
 English | [简体中文](./README-zh.md)
 
