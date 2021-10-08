@@ -9,16 +9,19 @@ A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plu
 [Access address](http://8.135.1.141/vue3-admin-template)
 [国内访问](http://8.135.1.141/vue3-admin-template)
 
-## Demo
-
-![template-demo](http://8.135.1.141/file/images/template-demo.png)
-
 ## Update log
 
 ```javascript
 //10-03
 change vue3-admin-template to  ts version
 ```
+## Demo
+
+ ---- Let's look at the loading speed and the size of the built package first.：
+
+![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
+
+![template-demo](http://8.135.1.141/file/images/template-demo.png)
 
 ## Related items
 
