@@ -52,7 +52,15 @@ const setting = {
    * @type {boolean} true | false
    * @description Whether  open prod mock
    */
-  openProdMock: true
+  openProdMock: true,
+
+  /**
+   * @type {string | array} 'serve' | ['build', 'serve']
+   * @description Need show err logs component.
+   * The default is only used in the production env
+   * If you want to also use it in dev, you can pass ['build', 'serve']
+   */
+  errorLog: 'serve'
 }
 
 export default setting
