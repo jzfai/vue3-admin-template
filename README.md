@@ -6,6 +6,8 @@ English | [简体中文](./README-zh.md)
 
 A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus and similar design  for   vue-admin-template
 
+Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
+
 [Access address](http://8.135.1.141/vue3-admin-template)
 
 [国内访问](http://8.135.1.141/vue3-admin-template)
@@ -24,17 +26,10 @@ add error log collection func
 
 ![template-demo](http://8.135.1.141/file/images/template-demo.png)
 
-## Related items
-
-- js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
-- ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
-- js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
-- react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
-- Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
-
 ## Documents
 
 -- Efforts are being made to develop documents ......
+
 You can refer to first：[documentation of vue-admin-template ](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
 
 ## Build Setup
@@ -104,7 +99,7 @@ Modern browsers and Internet Explorer 11+.
 | --------- | --------- | --------- | --------- |
 |Edge| last 2 versions| last 2 versions| last 2 versions
 
-## Discussion and Cmmunication
+## Discussion and Communication(There are vue3+ts and react17 video tutorials in the group)
 [WeChat group](http://8.135.1.141/file/images/wx-groud.png)
 
 ## License
