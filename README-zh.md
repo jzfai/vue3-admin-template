@@ -5,6 +5,8 @@
 
 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，框架使用类似 vue-admin-template
 
+使用 eslint+prettier+gitHooks 格式和校验代码,提高代码规范性和开发效率
+
 [Access address](http://8.135.1.141/vue3-admin-template)
 
 [国内访问](http://8.135.1.141/vue3-admin-template)
@@ -35,6 +37,7 @@ add error log collection func
 
 ## 文档
 -- 文档努力开发中。。。。
+
 可以先参考(和vue-admin-template使用类似)：[vue-admin-template使用文档](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
 
 
@@ -164,7 +167,7 @@ Modern browsers and Internet Explorer 11+.
 | --------- | --------- | --------- | --------- |
 |Edge| last 2 versions| last 2 versions| last 2 versions
 
-## 讨论和交流
+## 讨论和交流(群里有vue3+ts和react17视频教程 )
 [WeChat group](http://8.135.1.141/file/images/wx-groud.png)
 
 ## 版本
