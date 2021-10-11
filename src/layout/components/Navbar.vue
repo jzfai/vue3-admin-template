@@ -1,4 +1,3 @@
-<!--suppress ALL -->
 <template>
   <div class="navbar rowBC">
     <div class="rowSC">
