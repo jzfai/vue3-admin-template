@@ -16,6 +16,8 @@
 ```javascript
 //10-08
 add error log collection func
+//10-14
+add permission of role and code
 ```
 
 
@@ -56,7 +58,6 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 -- 文档努力开发中。。。。
 
 可以先参考(和vue-admin-template使用类似)：[vue-admin-template使用文档](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
-
 
 
 #### 和 vue-admin-template 的区别

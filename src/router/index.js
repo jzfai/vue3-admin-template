@@ -41,7 +41,44 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/writing-demo',
+    component: Layout,
+    meta: { title: 'Writing Demo', icon: 'eye-open' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'hook',
+        component: () => import('@/views/example/hook/Hook.vue'),
+        name: 'Hook',
+        meta: { title: 'Hook-Demo' }
+      },
+      {
+        path: 'vuex-use',
+        component: () => import('@/views/example/vuex-use/VuexUse.vue'),
+        name: 'VuexUse',
+        meta: { title: 'Vuex-Demo' }
+      },
+      {
+        path: 'mock-test',
+        component: () => import('@/views/example/mock-test/MockTest.vue'),
+        name: 'MockTest',
+        meta: { title: 'Mock-Demo' }
+      },
+      {
+        path: 'svg-icon',
+        component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
+        name: 'SvgIcon',
+        meta: { title: 'Svg-Demo' }
+      },
+      {
+        path: 'parent-children',
+        component: () => import('@/views/example/parent-children/Parent.vue'),
+        name: 'Parent',
+        meta: { title: 'Parent-Children' }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,
@@ -156,48 +193,74 @@ export const constantRoutes = [
     ]
   }
 ]
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
 export const asyncRoutes = [
   {
-    path: '/writing-demo',
+    path: '/permission',
     component: Layout,
-    meta: { title: 'Writing Demo', icon: 'eye-open' },
-    alwaysShow: true,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'Permission',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
     children: [
       {
-        path: 'hook',
-        component: () => import('@/views/example/hook/Hook.vue'),
-        name: 'Hook',
-        meta: { title: 'Hook-Demo' }
+        path: 'roleIndex',
+        component: () => import('@/views/permission/index'),
+        name: 'Permission',
+        meta: {
+          title: 'Role Index'
+          //roles: ['admin'] // or you can only set roles in sub nav
+        }
       },
       {
-        path: 'vuex-use',
-        component: () => import('@/views/example/vuex-use/VuexUse.vue'),
-        name: 'VuexUse',
-        meta: { title: 'Vuex-Demo' }
+        path: 'page',
+        component: () => import('@/views/permission/page'),
+        name: 'PagePermission',
+        meta: {
+          title: 'Page Permission',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
       },
       {
-        path: 'mock-test',
-        component: () => import('@/views/example/mock-test/MockTest.vue'),
-        name: 'MockTest',
-        meta: { title: 'Mock-Demo' }
+        path: 'directive',
+        component: () => import('@/views/permission/directive'),
+        name: 'DirectivePermission',
+        meta: {
+          title: 'Directive Permission'
+          // if do not set roles, means: this page does not require permission
+        }
       },
       {
-        path: 'svg-icon',
-        component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
-        name: 'SvgIcon',
-        meta: { title: 'Svg-Demo' }
+        path: 'code-index',
+        component: () => import('@/views/permission/CodePermission'),
+        name: 'CodePermission',
+        meta: {
+          title: 'Code Index'
+        }
       },
       {
-        path: 'parent-children',
-        component: () => import('@/views/example/parent-children/Parent.vue'),
-        name: 'Parent',
-        meta: { title: 'Parent-Children' }
-      }
+        path: 'code-page',
+        component: () => import('@/views/permission/CodePage'),
+        name: 'CodePage',
+        meta: {
+          title: 'Code Page',
+          code: 1
+        }
+      },
+
+      // 404 page must be placed at the end !!!
+      // using pathMatch install of "*" in vue-router 4.0
+      { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
     ]
-  },
-  // 404 page must be placed at the end !!!
-  // using pathMatch install of "*" in vue-router 4.0
-  { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
+  }
 ]
 
 const router = createRouter({
@@ -205,14 +268,5 @@ const router = createRouter({
   scrollBehavior: () => ({ top: 0 }),
   routes: constantRoutes
 })
-
-export function resetRouter() {
-  const newRouter = createRouter({
-    history: createWebHashHistory(),
-    scrollBehavior: () => ({ top: 0 }),
-    routes: constantRoutes
-  })
-  router.matcher = newRouter.matcher // reset router
-}
 
 export default router

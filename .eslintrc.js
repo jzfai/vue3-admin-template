@@ -31,6 +31,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-absolute-path': 'off',
+    'no-async-promise-executor': 'off',
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
     'vue/html-self-closing': 'off',
