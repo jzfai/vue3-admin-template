@@ -14,10 +14,11 @@
 ## 更新日志
 
 ```javascript
-//10-08
-add error log collection func
 //10-14
 add permission of role and code
+//11-11
+update element-plus vite2 vue3 version ,add func of element-svg icon for side menu
+add domo of 'import export download template' in CRUD
 ```
 
 
