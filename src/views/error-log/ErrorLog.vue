@@ -2,7 +2,13 @@
   <!--操作-->
   <div class="mr-3 rowSS">
     <el-button type="primary" @click="errorLogProd">错误日志测试</el-button>
-    <el-button type="primary" icon="el-icon-delete" @click="multiDelBtnClick">删除</el-button>
+    <el-button type="primary" @click="multiDelBtnClick">
+      <!-- 感觉写法复杂了-->
+      <el-icon style="vertical-align: middle">
+        <Delete />
+      </el-icon>
+      <span style="vertical-align: middle">删除</span>
+    </el-button>
     <!--条件搜索-->
     <el-form ref="refsearchFormMixin" :inline="true" class="demo-searchFormMixin ml-2">
       <el-form-item label-width="0px" label="" prop="errorLog" label-position="left">
@@ -24,14 +30,15 @@
           end-placeholder="结束日期"
         />
       </el-form-item>
-      <!--查询按钮-->
-      <el-button @click="searchBtnClick">查询</el-button>
     </el-form>
+    <!--查询按钮-->
+    <el-button @click="searchBtnClick">查询</el-button>
   </div>
   <!--表格和分页-->
   <el-table
     id="resetElementDialog"
     ref="refuserTable"
+    :height="`calc(100vh - ${settings.delWindowHeight})`"
     size="mini"
     border
     @selection-change="handleSelectionChange"
@@ -40,19 +47,17 @@
     <el-table-column type="selection" align="center" width="50" />
     <el-table-column align="center" prop="errorLog" label="错误日志" min-width="300" />
     <el-table-column align="center" prop="pageUrl" label="页面路径" width="180" />
+    <el-table-column align="center" prop="browserType" label="浏览器类型" width="180" />
     <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
-    <!--    <el-table-column align="center" prop="id" label="id主键" min-width="100" />-->
     <!--点击操作-->
     <el-table-column fixed="right" align="center" label="操作" width="80">
       <template #default="{ row }">
-        <!--        <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>-->
-        <!--        <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>-->
         <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
   <!--分页-->
-  <div class="block columnCC mt-2 mb-5">
+  <div class="block columnCC mt-2">
     <el-pagination
       :current-page="pageNum"
       :page-sizes="[10, 20, 50, 100]"
@@ -90,8 +95,9 @@
 </template>
 
 <script setup>
+import { Delete } from '@element-plus/icons'
 import { onMounted, getCurrentInstance, ref, reactive } from 'vue'
-
+import settings from '@/settings'
 let { proxy } = getCurrentInstance()
 import bus from '@/utils/bus'
 /*
@@ -143,13 +149,12 @@ const dateTimePacking = (timeArr) => {
 }
 onMounted(() => {
   selectPageReq()
-  //监听页面报错然后触发更新
   bus.on('reloadErrorPage', () => {
     selectPageReq()
   })
 })
 const searchBtnClick = () => {
-  pageNum = 1
+  pageNum.value = 1
   selectPageReq()
 }
 
@@ -181,6 +186,7 @@ const handleSelectionChange = (val) => {
 }
 const multiDelBtnClick = async () => {
   let rowDeleteIdArrMixin = []
+  // let selectionArr = proxy.$refs.refuserTable //--c
   let deleteNameTitle = ''
   rowDeleteIdArrMixin = multipleSelection.value.map((mItem) => {
     deleteNameTitle = deleteNameTitle + mItem.pageUrl + ','
@@ -201,8 +207,8 @@ const multiDelBtnClick = async () => {
       bfLoading: true
     })
     .then(() => {
-      selectPageReq()
       proxy.elMessageMixin('删除成功')
+      selectPageReq()
     })
 }
 </script>

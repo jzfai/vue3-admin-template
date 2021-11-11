@@ -4,8 +4,8 @@ import setting from '@/settings'
 import bus from '@/utils/bus'
 export default function (app) {
   //type judge
-  // base type  using type of
-  // Reference type using instance of
+  // base type  using 'type of'
+  // Reference type using 'instance of'
   // recommend to reading https://www.jianshu.com/p/ddc7f189d130
   const checkNeed = () => {
     const env = import.meta.env.VITE_APP_ENV
@@ -22,7 +22,11 @@ export default function (app) {
     app.config.errorHandler = (err) => {
       request({
         url: '/ty-user/errorCollection/insert',
-        data: { pageUrl: window.location.href, errorLog: `${err.message}---${err.stack}` },
+        data: {
+          pageUrl: window.location.href,
+          errorLog: `${err.message}---${err.stack.substr(0, 300)}`,
+          browserType: navigator.userAgent
+        },
         method: 'post',
         bfLoading: false,
         isAlertErrorMsg: true

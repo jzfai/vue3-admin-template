@@ -35,11 +35,7 @@ const setting = {
    * @description Whether need login
    */
   isNeedLogin: true,
-  /**
-   * @type {boolean} true | false
-   * @description Whether need nprogress
-   */
-  isNeedNprogress: true,
+
   /**
    * @type {boolean} true | false
    * @description Whether show TagsView
@@ -55,6 +51,16 @@ const setting = {
    * @description Whether  open prod mock
    */
   openProdMock: true,
+
+  //animation relative (closing  some  animation can improve the performance of page)
+  /**
+   * @type {boolean} true | false
+   * @description Whether need nprogress
+   */
+  isNeedNprogress: true,
+
+  //table height(100vh-delWindowHeight)
+  delWindowHeight: '210px',
   /**
    * @type {string | array} 'serve' | ['build', 'serve']
    * @description Need show err logs component.
