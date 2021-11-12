@@ -18,7 +18,6 @@
         "core-js": "^3.6.5",
         "echarts": "4.2.1",
         "element-plus": "^1.2.0-beta.3",
-        "js-cookie": "2.2.0",
         "mitt": "^3.0.0",
         "moment-mini": "^2.22.1",
         "nprogress": "^0.2.0",
@@ -26,8 +25,8 @@
         "path-to-regexp": "^6.2.0",
         "tinymce": "^4.9.11",
         "vue": "3.2.21",
-        "vue-router": "^4.0.12",
-        "vuex": "^4.0.2"
+        "vue-router": "4.0.12",
+        "vuex": "4.0.2"
     },
     "devDependencies": {
         "@fullcalendar/vue3": "^5.8.0",

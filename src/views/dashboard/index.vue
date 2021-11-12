@@ -4,7 +4,7 @@
     <div>update element-plus to 1.2.+, add svg icon, icon-font is abandoned</div>
     <i class="el-icon-add-location">abandoned</i>
     <div>
-      <el-icon>
+      <el-icon >
         <Svg.Edit></Svg.Edit>
       </el-icon>
     </div>
