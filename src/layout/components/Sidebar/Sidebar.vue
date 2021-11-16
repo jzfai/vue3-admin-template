@@ -5,7 +5,7 @@
     <!--router nav-->
     <el-scrollbar>
       <el-menu
-          class="el-menu-vertical"
+        class="el-menu-vertical"
         :default-active="activeMenu"
         :collapse="!isCollapse"
         :unique-opened="false"
