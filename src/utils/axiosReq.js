@@ -47,7 +47,6 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (res) => {
-    console.log('res', res)
     if (requestData.afHLoading && loadingE) {
       loadingE.close()
     }

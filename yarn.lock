@@ -21,7 +21,7 @@
   resolved "https://registry.npmmirror.com/@babel/compat-data/download/@babel/compat-data-7.16.0.tgz#ea269d7f78deb3a7826c39a4048eecda541ebdaa"
   integrity sha1-6iadf3jes6eCbDmkBI7s2lQevao=
 
-"@babel/core@^7.15.5":
+"@babel/core@^7.16.0":
   version "7.16.0"
   resolved "https://registry.npmmirror.com/@babel/core/download/@babel/core-7.16.0.tgz#c4ff44046f5fe310525cc9eb4ef5147f0c5374d4"
   integrity sha1-xP9EBG9f4xBSXMnrTvUUfwxTdNQ=
@@ -286,7 +286,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-transform-typescript@^7.15.4":
+"@babel/plugin-transform-typescript@^7.16.1":
   version "7.16.1"
   resolved "https://registry.npmmirror.com/@babel/plugin-transform-typescript/download/@babel/plugin-transform-typescript-7.16.1.tgz#cc0670b2822b0338355bc1b3d2246a42b8166409"
   integrity sha1-zAZwsoIrAzg1W8Gz0iRqQrgWZAk=
@@ -295,10 +295,10 @@
     "@babel/helper-plugin-utils" "^7.14.5"
     "@babel/plugin-syntax-typescript" "^7.16.0"
 
-"@babel/standalone@^7.15.7":
-  version "7.16.3"
-  resolved "https://registry.npmmirror.com/@babel/standalone/download/@babel/standalone-7.16.3.tgz#7a546b4c8530a77b0db68158542552a803af7e03"
-  integrity sha512-hoStDfHl2+EYUv1LNHhZTysa+lMSwIEkkT4HnDNX+F0zqvPdoE2QLF7qtkd45cgCGOwQjrvwe2mOKcX3f6Wr8A==
+"@babel/standalone@^7.16.4":
+  version "7.16.4"
+  resolved "https://registry.npmmirror.com/@babel/standalone/download/@babel/standalone-7.16.4.tgz#f62a5b14fc0e881668f26739f28bcdaacedd3080"
+  integrity sha512-FDRLwjeQfPm5jaHNuB+vwNyGCp24Ah3kEsbLzKmh0eSru+QCr4DmjgbRPoz71AwXLVtXU+l/i7MlVlIj5XO7Gw==
 
 "@babel/template@^7.0.0", "@babel/template@^7.14.5":
   version "7.14.5"
@@ -650,33 +650,33 @@
     "@typescript-eslint/types" "4.30.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vitejs/plugin-legacy@^1.6.2":
-  version "1.6.2"
-  resolved "https://registry.npmmirror.com/@vitejs/plugin-legacy/download/@vitejs/plugin-legacy-1.6.2.tgz#638bfe74715bdba33a68b3de555f615e1b246cdb"
-  integrity sha1-Y4v+dHFb26M6aLPeVV9hXhskbNs=
+"@vitejs/plugin-legacy@^1.6.3":
+  version "1.6.3"
+  resolved "https://registry.npmmirror.com/@vitejs/plugin-legacy/download/@vitejs/plugin-legacy-1.6.3.tgz#314be9df113e5c2747ab10d29e5e9ebe0048c99f"
+  integrity sha512-YivdG6gT91/wjFL6woTwVRgK9KHrju8GwXwgv5FdfAVo0GK0FK4V+YEobmDKRcOMKXQ1U5awY5HqbPIsoJalKQ==
   dependencies:
-    "@babel/standalone" "^7.15.7"
-    core-js "^3.18.1"
+    "@babel/standalone" "^7.16.4"
+    core-js "^3.19.1"
     magic-string "^0.25.7"
     regenerator-runtime "^0.13.9"
-    systemjs "^6.10.3"
+    systemjs "^6.11.0"
 
-"@vitejs/plugin-vue-jsx@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npmmirror.com/@vitejs/plugin-vue-jsx/download/@vitejs/plugin-vue-jsx-1.2.0.tgz?cache=0&sync_timestamp=1635883591319&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vitejs%2Fplugin-vue-jsx%2Fdownload%2F%40vitejs%2Fplugin-vue-jsx-1.2.0.tgz#a4216bdbb8b12800537d39e3b5711fcf2eb470ef"
-  integrity sha1-pCFr27ixKABTfTnjtXEfzy60cO8=
+"@vitejs/plugin-vue-jsx@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.npmmirror.com/@vitejs/plugin-vue-jsx/download/@vitejs/plugin-vue-jsx-1.3.0.tgz?cache=0&sync_timestamp=1637580574611&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vitejs%2Fplugin-vue-jsx%2Fdownload%2F%40vitejs%2Fplugin-vue-jsx-1.3.0.tgz#3c91cfc2dbf7fee149794dac884e94288c9aa485"
+  integrity sha512-mm2jT63s/DWapVWT62t7xsMmwqsLNj5LUpokSXWnlUv9oxPfZsAymhHs6byWxvuvC5jo3zzFMO7rs8ax4PcyxA==
   dependencies:
-    "@babel/core" "^7.15.5"
+    "@babel/core" "^7.16.0"
     "@babel/plugin-syntax-import-meta" "^7.10.4"
-    "@babel/plugin-transform-typescript" "^7.15.4"
+    "@babel/plugin-transform-typescript" "^7.16.1"
     "@rollup/pluginutils" "^4.1.1"
-    "@vue/babel-plugin-jsx" "^1.0.7"
+    "@vue/babel-plugin-jsx" "^1.1.1"
     hash-sum "^2.0.0"
 
-"@vitejs/plugin-vue@^1.9.4":
-  version "1.9.4"
-  resolved "https://registry.npmmirror.com/@vitejs/plugin-vue/download/@vitejs/plugin-vue-1.9.4.tgz?cache=0&sync_timestamp=1635475280393&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vitejs%2Fplugin-vue%2Fdownload%2F%40vitejs%2Fplugin-vue-1.9.4.tgz#4f48485432cbb986a9fb9d254dc33ce30ddccbfa"
-  integrity sha1-T0hIVDLLuYap+50lTcM84w3cy/o=
+"@vitejs/plugin-vue@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.npmmirror.com/@vitejs/plugin-vue/download/@vitejs/plugin-vue-1.10.1.tgz#d140e93d574c5eac247a79f5b15df665dcb7635b"
+  integrity sha512-oL76QETMSpVE9jIScirGB2bYJEVU/+r+g+K7oG+sXPs9TZljqveoVRsmLyXlMZTjpQkLL8gz527cW80NMGVKJg==
 
 "@volar/code-gen@0.28.1":
   version "0.28.1"
@@ -737,7 +737,7 @@
   resolved "https://registry.npm.taobao.org/@vue/babel-helper-vue-transform-on/download/@vue/babel-helper-vue-transform-on-1.0.2.tgz?cache=0&sync_timestamp=1610812489009&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fbabel-helper-vue-transform-on%2Fdownload%2F%40vue%2Fbabel-helper-vue-transform-on-1.0.2.tgz#9b9c691cd06fc855221a2475c3cc831d774bc7dc"
   integrity sha1-m5xpHNBvyFUiGiR1w8yDHXdLx9w=
 
-"@vue/babel-plugin-jsx@^1.0.7":
+"@vue/babel-plugin-jsx@^1.1.1":
   version "1.1.1"
   resolved "https://registry.npmmirror.com/@vue/babel-plugin-jsx/download/@vue/babel-plugin-jsx-1.1.1.tgz?cache=0&sync_timestamp=1634464305912&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fbabel-plugin-jsx%2Fdownload%2F%40vue%2Fbabel-plugin-jsx-1.1.1.tgz#0c5bac27880d23f89894cd036a37b55ef61ddfc1"
   integrity sha1-DFusJ4gNI/iYlM0Daje1XvYd38E=
@@ -762,23 +762,23 @@
     estree-walker "^2.0.2"
     source-map "^0.6.1"
 
-"@vue/compiler-core@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/compiler-core/download/@vue/compiler-core-3.2.21.tgz#26566c32b2ad838199d471ef5df620a83846f24e"
-  integrity sha1-JlZsMrKtg4GZ1HHvXfYgqDhG8k4=
+"@vue/compiler-core@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/compiler-core/download/@vue/compiler-core-3.2.23.tgz#ef1769fbf313306b47c858735a9300aa2a20f104"
+  integrity sha512-4ZhiI/orx+7EJ1B+0zjgvXMV2uRN+XBfG06UN2sJfND9rH5gtEQT3QmO4erum1o6Irl7y754W8/KSaDJh4EUQg==
   dependencies:
     "@babel/parser" "^7.15.0"
-    "@vue/shared" "3.2.21"
+    "@vue/shared" "3.2.23"
     estree-walker "^2.0.2"
     source-map "^0.6.1"
 
-"@vue/compiler-dom@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/compiler-dom/download/@vue/compiler-dom-3.2.21.tgz#d6f6c85364ef8888f9c4e9122bfba11e78fb398c"
-  integrity sha1-1vbIU2TviIj5xOkSK/uhHnj7OYw=
+"@vue/compiler-dom@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/compiler-dom/download/@vue/compiler-dom-3.2.23.tgz#1dc5ba6c61f4d9e5e22442bfbf1ca306bb698507"
+  integrity sha512-X2Nw8QFc5lgoK3kio5ktM95nqmLUH+q+N/PbV4kCHzF1avqv/EGLnAhaaF0Iu4bewNvHJAAhhwPZFeoV/22nbw==
   dependencies:
-    "@vue/compiler-core" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/compiler-core" "3.2.23"
+    "@vue/shared" "3.2.23"
 
 "@vue/compiler-dom@^3.2.20":
   version "3.2.20"
@@ -788,29 +788,29 @@
     "@vue/compiler-core" "3.2.20"
     "@vue/shared" "3.2.20"
 
-"@vue/compiler-sfc@3.2.21", "@vue/compiler-sfc@^3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/compiler-sfc/download/@vue/compiler-sfc-3.2.21.tgz#42639ee49e725afb7d8f1d1940e75dc17a56002c"
-  integrity sha1-QmOe5J5yWvt9jx0ZQOddwXpWACw=
+"@vue/compiler-sfc@3.2.23", "@vue/compiler-sfc@^3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/compiler-sfc/download/@vue/compiler-sfc-3.2.23.tgz#35ef678240b29da5144bc3c6447fa51a07d78875"
+  integrity sha512-Aw+pb50Q5zTjyvWod8mNKmYZDRGHJBptmNNWE+84ZxrzEztPgMz8cNYIzWGbwcFVkmJlhvioAMvKnB+LM/sjSA==
   dependencies:
     "@babel/parser" "^7.15.0"
-    "@vue/compiler-core" "3.2.21"
-    "@vue/compiler-dom" "3.2.21"
-    "@vue/compiler-ssr" "3.2.21"
-    "@vue/ref-transform" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/compiler-core" "3.2.23"
+    "@vue/compiler-dom" "3.2.23"
+    "@vue/compiler-ssr" "3.2.23"
+    "@vue/ref-transform" "3.2.23"
+    "@vue/shared" "3.2.23"
     estree-walker "^2.0.2"
     magic-string "^0.25.7"
     postcss "^8.1.10"
     source-map "^0.6.1"
 
-"@vue/compiler-ssr@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/compiler-ssr/download/@vue/compiler-ssr-3.2.21.tgz#37d124f89e8adef9fd56b85775de4b5310a0436e"
-  integrity sha1-N9Ek+J6K3vn9VrhXdd5LUxCgQ24=
+"@vue/compiler-ssr@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/compiler-ssr/download/@vue/compiler-ssr-3.2.23.tgz#cd9c6541c388553f6448244a9f2a76dfdba027ba"
+  integrity sha512-Bqzn4jFyXPK1Ehqiq7e/czS8n62gtYF1Zfeu0DrR5uv+SBllh7LIvZjZU6+c8qbocAd3/T3I3gn2cZGmnDb6zg==
   dependencies:
-    "@vue/compiler-dom" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/compiler-dom" "3.2.23"
+    "@vue/shared" "3.2.23"
 
 "@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.18":
   version "6.0.0-beta.20.1"
@@ -831,12 +831,12 @@
   dependencies:
     vue-eslint-parser "^7.0.0"
 
-"@vue/reactivity@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/reactivity/download/@vue/reactivity-3.2.21.tgz#073ad144192ed78a07e151e95a3baa515e4099a2"
-  integrity sha1-BzrRRBku14oH4VHpWjuqUV5AmaI=
+"@vue/reactivity@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/reactivity/download/@vue/reactivity-3.2.23.tgz#d2f10749d554f7e94d8d52f36e7e6a0b021a2418"
+  integrity sha512-8RGVr/5Kpgb/EkCjgHXqttgA5IMc6n0lIXFY4TVbMkzdXrvaIhzBd7Te44oIDsTSYVKZLpfHd6/wEnuDqE8vFw==
   dependencies:
-    "@vue/shared" "3.2.21"
+    "@vue/shared" "3.2.23"
 
 "@vue/reactivity@^3.2.20":
   version "3.2.20"
@@ -845,51 +845,51 @@
   dependencies:
     "@vue/shared" "3.2.20"
 
-"@vue/ref-transform@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/ref-transform/download/@vue/ref-transform-3.2.21.tgz#b0c554c9f640c3f005f77e676066aa0faba90984"
-  integrity sha1-sMVUyfZAw/AF935nYGaqD6upCYQ=
+"@vue/ref-transform@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/ref-transform/download/@vue/ref-transform-3.2.23.tgz#5c8b0c0638db27094ddd689020c60cf1aa33d873"
+  integrity sha512-gW0GD2PSAs/th7mC7tPB/UwpIQxclbApVtsDtscDmOJXb2+cdu60ny+SuHNgfrlUT/JqWKQHq7jFKO4woxLNaA==
   dependencies:
     "@babel/parser" "^7.15.0"
-    "@vue/compiler-core" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/compiler-core" "3.2.23"
+    "@vue/shared" "3.2.23"
     estree-walker "^2.0.2"
     magic-string "^0.25.7"
 
-"@vue/runtime-core@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/runtime-core/download/@vue/runtime-core-3.2.21.tgz#e12dac8c3893b7aebfc37e32066718d8aa686ac5"
-  integrity sha1-4S2sjDiTt66/w34yBmcY2KpoasU=
+"@vue/runtime-core@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/runtime-core/download/@vue/runtime-core-3.2.23.tgz#f620ce0142e87cbc99c50ac285e644ed9b57986f"
+  integrity sha512-wSI5lmY2kCGLf89iiygqxVh6/5bsawz78Me9n1x4U2bHnN0yf3PWyuhN0WgIE8VfEaF7e75E333uboNEIFjgkg==
   dependencies:
-    "@vue/reactivity" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/reactivity" "3.2.23"
+    "@vue/shared" "3.2.23"
 
-"@vue/runtime-dom@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/runtime-dom/download/@vue/runtime-dom-3.2.21.tgz#33dd15bc85281e773177a30dc6931c294bd77aa1"
-  integrity sha1-M90VvIUoHncxd6MNxpMcKUvXeqE=
+"@vue/runtime-dom@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/runtime-dom/download/@vue/runtime-dom-3.2.23.tgz#e6a3362a8a03f034ef6ff9b8281b166f0f314bfc"
+  integrity sha512-z6lp0888NkLmxD9j2sGoll8Kb7J743s8s6w7GbiyUc4WZwm0KJ35B4qTFDMoIU0G7CatS6Z+yRTpPHc6srtByg==
   dependencies:
-    "@vue/runtime-core" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/runtime-core" "3.2.23"
+    "@vue/shared" "3.2.23"
     csstype "^2.6.8"
 
-"@vue/server-renderer@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/server-renderer/download/@vue/server-renderer-3.2.21.tgz#887d0a44de76f72313cff2686a24c0315231d634"
-  integrity sha1-iH0KRN529yMTz/JoaiTAMVIx1jQ=
+"@vue/server-renderer@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/server-renderer/download/@vue/server-renderer-3.2.23.tgz#c7e22c02d8a518bd2499565b7c7c88b1842edd44"
+  integrity sha512-mgQ2VAE5WjeZELJKNbwE69uiBNpN+3LyL0ZDki1bJWVwHD2fhPfx7pwyYuiucE81xz2LxVsyGxhKKUL997g8vw==
   dependencies:
-    "@vue/compiler-ssr" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/compiler-ssr" "3.2.23"
+    "@vue/shared" "3.2.23"
 
 "@vue/shared@3.2.20", "@vue/shared@^3.2.20":
   version "3.2.20"
   resolved "https://registry.npmmirror.com/@vue/shared/download/@vue/shared-3.2.20.tgz?cache=0&sync_timestamp=1633712593357&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.2.20.tgz#53746961f731a8ea666e3316271e944238dc31db"
   integrity sha1-U3RpYfcxqOpmbjMWJx6UQjjcMds=
 
-"@vue/shared@3.2.21":
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/@vue/shared/download/@vue/shared-3.2.21.tgz#4cd80c0e62cf65a7adab2449e86b6f0cb33a130b"
-  integrity sha1-TNgMDmLPZaetqyRJ6GtvDLM6Ews=
+"@vue/shared@3.2.23":
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/@vue/shared/download/@vue/shared-3.2.23.tgz#e885a2ba099d40b69d5461157f3ade31e46a09a9"
+  integrity sha512-U+/Jefa0QfXUF2qVy9Dqlrb6HKJSr9/wJcM66wXmWcTOoqg7hOWzF4qruDle51pyF4x3wMn6TSH54UdjKjCKMA==
 
 "@vueuse/core@^6.7.3":
   version "6.8.0"
@@ -1441,7 +1441,7 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.npm.taobao.org/copy-descriptor/download/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-core-js@^3.18.1:
+core-js@^3.19.1:
   version "3.19.1"
   resolved "https://registry.npmmirror.com/core-js/download/core-js-3.19.1.tgz#f6f173cae23e73a7d88fa23b6e9da329276c6641"
   integrity sha1-9vFzyuI+c6fYj6I7bp2jKSdsZkE=
@@ -4288,7 +4288,7 @@ svg-baker@1.7.0, svg-baker@^1.5.0, svg-baker@^1.7.0:
 
 svg-sprite-loader@^6.0.11:
   version "6.0.11"
-  resolved "https://registry.npmmirror.com/svg-sprite-loader/download/svg-sprite-loader-6.0.11.tgz?cache=0&sync_timestamp=1635154306036&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsvg-sprite-loader%2Fdownload%2Fsvg-sprite-loader-6.0.11.tgz#a4d60cee3d74232a2c17d31c73a2008295f61220"
+  resolved "https://registry.npmmirror.com/svg-sprite-loader/download/svg-sprite-loader-6.0.11.tgz#a4d60cee3d74232a2c17d31c73a2008295f61220"
   integrity sha1-pNYM7j10IyosF9Mcc6IAgpX2EiA=
   dependencies:
     bluebird "^3.5.0"
@@ -4318,7 +4318,7 @@ svgo@^2.7.0:
     nanocolors "^0.1.12"
     stable "^0.1.8"
 
-systemjs@^6.10.3:
+systemjs@^6.11.0:
   version "6.11.0"
   resolved "https://registry.npmmirror.com/systemjs/download/systemjs-6.11.0.tgz#8df8e74fc05822e6c40170aa409b9ca64833315f"
   integrity sha1-jfjnT8BYIubEAXCqQJucpkgzMV8=
@@ -4618,7 +4618,7 @@ vite-plugin-svg-icons@^1.0.5:
 
 vite@^2.6.14:
   version "2.6.14"
-  resolved "https://registry.npmmirror.com/vite/download/vite-2.6.14.tgz?cache=0&sync_timestamp=1636491769573&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvite%2Fdownload%2Fvite-2.6.14.tgz#35c09a15e4df823410819a2a239ab11efb186271"
+  resolved "https://registry.npmmirror.com/vite/download/vite-2.6.14.tgz#35c09a15e4df823410819a2a239ab11efb186271"
   integrity sha512-2HA9xGyi+EhY2MXo0+A2dRsqsAG3eFNEVIo12olkWhOmc8LfiM+eMdrXf+Ruje9gdXgvSqjLI9freec1RUM5EA==
   dependencies:
     esbuild "^0.13.2"
@@ -4794,16 +4794,16 @@ vue-tsc@^0.28.1:
   dependencies:
     vscode-vue-languageservice "0.28.1"
 
-vue@3.2.21:
-  version "3.2.21"
-  resolved "https://registry.npmmirror.com/vue/download/vue-3.2.21.tgz#55f5665172d95cf97e806b9aad0a375180be23a1"
-  integrity sha1-VfVmUXLZXPl+gGuarQo3UYC+I6E=
+vue@3.2.23:
+  version "3.2.23"
+  resolved "https://registry.npmmirror.com/vue/download/vue-3.2.23.tgz#fe17e4a98bee1afe2aed351a0a80e052728f9ce2"
+  integrity sha512-MGp9JZC37lzGhwSu6c1tQxrQbXbw7XKFqtYh7SFwNrNK899FPxGAHwSHMZijMChTSC3uZrD2BGO/3EHOgMJ0cw==
   dependencies:
-    "@vue/compiler-dom" "3.2.21"
-    "@vue/compiler-sfc" "3.2.21"
-    "@vue/runtime-dom" "3.2.21"
-    "@vue/server-renderer" "3.2.21"
-    "@vue/shared" "3.2.21"
+    "@vue/compiler-dom" "3.2.23"
+    "@vue/compiler-sfc" "3.2.23"
+    "@vue/runtime-dom" "3.2.23"
+    "@vue/server-renderer" "3.2.23"
+    "@vue/shared" "3.2.23"
 
 vuedraggable@*:
   version "2.24.3"
