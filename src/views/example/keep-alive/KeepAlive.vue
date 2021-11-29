@@ -13,6 +13,11 @@
   </div>
 </template>
 
+<!--
+使用keep-alive
+1.设置name（必须）
+2.在路由配置处设置cachePage：即可缓存
+-->
 <script>
 export default {
   name: 'KeepAlive'

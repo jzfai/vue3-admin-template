@@ -13,26 +13,9 @@
         @contextmenu.prevent="openMenu(tag, $event)"
       >
         {{ tag.title }}
-
         <Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></Close>
       </router-link>
     </div>
-    <!--    <scroll-pane ref="refScrollPane" class="tags-view-wrapper" @scroll="handleScroll">-->
-    <!--      <router-link-->
-    <!--        v-for="tag in visitedViews"-->
-    <!--        ref="refTag"-->
-    <!--        :key="tag.path"-->
-    <!--        :class="isActive(tag) ? 'active' : ''"-->
-    <!--        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"-->
-    <!--        tag="span"-->
-    <!--        class="tags-view-item"-->
-    <!--        @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"-->
-    <!--        @contextmenu.prevent="openMenu(tag, $event)"-->
-    <!--      >-->
-    <!--        {{ tag.title }}-->
-    <!--        <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />-->
-    <!--      </router-link>-->
-    <!--    </scroll-pane>-->
     <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li>
@@ -43,10 +26,9 @@
 </template>
 
 <script setup>
-// import ScrollPane from './ScrollPane'
 import path from 'path'
 import { Close } from '@element-plus/icons'
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
+import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, nextTick } from 'vue'
 //获取store和router
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
@@ -151,7 +133,7 @@ const addTags = () => {
 const refTag = ref(null)
 const refScrollPane = ref(null)
 const moveToCurrentTag = () => {
-  proxy.$nextTick(() => {
+  nextTick(() => {
     // console.log('refTag', tag)
     for (const tag of tag.value.tag) {
       if (tag.to.path === proxy.$route.path) {

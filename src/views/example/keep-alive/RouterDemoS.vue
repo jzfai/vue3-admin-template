@@ -9,6 +9,7 @@
         <el-input v-model="searchFormMixin.pageUrl" class="widthPx-150" placeholder="demo1" />
       </el-form-item>
     </el-form>
+    <el-button type="primary" @click="routerBackMixin">返回</el-button>
   </div>
 </template>
 
