@@ -59,11 +59,9 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
 
 ## 文档
--- 文档努力开发中。。。。
-
-可以先参考(和vue-admin-template使用类似)：[vue-admin-template使用文档](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
-
-
+- [目录结构，代码格式eslint+pretty，以及git hooks 使用（基础篇）](https://juejin.cn/post/7036301333304967181)
+- [前端proxy跨域，nginx，后端跨域配置介绍， 以及跨域原理简介（基础篇）](https://juejin.cn/post/7029560170451566606)
+- [Vue3 ref和reactive的使用和区别以及响应式原理](https://juejin.cn/post/7029559671648518151)
 #### 和 vue-admin-template 的区别
 
 1.布局方式全部采用 flex 代替以前的 float，float 布局方式全部移除,优化了部分布局方式
