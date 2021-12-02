@@ -47,11 +47,12 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
 ## 相关项目
 
-框架有js，ts和plus版本
+框架有js，ts，plus和electron版本
 
 - js版本：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
 - ts版本：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - js实例参考plus版本：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- electron版本：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
 - react版本： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
 - java微服务后台数据：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 
@@ -59,9 +60,11 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
 
 ## 文档
+
 - [目录结构，代码格式eslint+pretty，以及git hooks 使用（基础篇）](https://juejin.cn/post/7036301333304967181)
 - [前端proxy跨域，nginx，后端跨域配置介绍， 以及跨域原理简介（基础篇）](https://juejin.cn/post/7029560170451566606)
 - [Vue3 ref和reactive的使用和区别以及响应式原理](https://juejin.cn/post/7029559671648518151)
+
 #### 和 vue-admin-template 的区别
 
 1.布局方式全部采用 flex 代替以前的 float，float 布局方式全部移除,优化了部分布局方式
@@ -69,7 +72,6 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 2.采用 vue3(setup-script)书写，用 vite2 替换 webpack，加入了 vue3 的 jsx 写法，vite2速度更快,使用vue3 的 composition 代替 vue2 option api 写法，更易维护和迁移
 
 3.简化了部分复杂的逻辑，优化了架构部分设计方式
-
 
 
 vue3和vue2在性能上的对比

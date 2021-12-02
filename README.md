@@ -2,7 +2,7 @@
 
 **English** | [中文](./README-zh_CN.md)
 
-> A basic vue3 admin template with  vite2 & Element-Plus UI & axios & svg-icon& permission control & lint
+> vue3 admin plus provides enterprise-level development demo
 
 A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus ，It's fast!
 
@@ -11,18 +11,8 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 
 ## Update log
 
-```javascript
-//11-11
-update element-plus vite2 vue3 version ,add func of element-svg icon for side menu
-add domo of 'import export download template' in CRUD
-//11-26
-update vue3 version and so on;
-add keep-alive use demo and router using  demo ，look for "http://8.135.1.141/vue3-admin-template/#/writing-demo/keep-alive"
-add the param cachePage and leaveRmCachePage to route for keep-alive look for https://github.com/jzfai/vue3-admin-template/blob/master/src/router/index.js
-add collection  the error log of img loading fail look for "http://8.135.1.141/vue3-admin-template/#/error-log/log"
-in router page you need add root element,such as div, but is not necessary for children component
-fix some issue
-```
+[真香定律！带你用vue3+vite2撸后台](https://juejin.cn/post/7036302298435289095)
+
 
 ## Online experience
 
@@ -38,34 +28,25 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
  ---- Let's look at the loading speed and the size of the built package first.：
 
+http://8.135.1.141/file/vap-assets/
 ![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
 
-![template-demo](http://8.135.1.141/file/images/template-demo.png)
-
+![template-demo](http://8.135.1.141/file/images/plus-demo.png)
 
 ## Related items
 
-The framework is available in js, ts and plus versions
+The framework is available in js, ts , plus and electron versions
 - js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
 - ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- js version for electron：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
 - react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
 - java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 > development and  experience：two words  Really fragrant！！！！！
 
 ## Documents
-- [目录结构，代码格式eslint+pretty，以及git hooks 使用（基础篇）](https://juejin.cn/post/7036301333304967181)
-- [前端proxy跨域，nginx，后端跨域配置介绍， 以及跨域原理简介（基础篇）](https://juejin.cn/post/7029560170451566606)
-- [Vue3 ref和reactive的使用和区别以及响应式原理](https://juejin.cn/post/7029559671648518151)
 
-#### The difference with vue-admin-template
-
-1.The layout method uses flex instead of the previous float, and the float layout method is completely removed, and some layout methods are optimized.
-
-2.Use vue3 (setup-script) to write, replace webpack with vite2, add vue3's jsx writing method, vite2 is faster, use vue3 composition instead of vue2 option api writing, easier to maintain and migrate
-
-3.Simplified some complex logic and optimized the design method of the architecture part
-
+- [真香定律！带你用vue3+vite2撸后台](https://juejin.cn/post/7036302298435289095)
 
 #### Comparison of performance between vue3 and vue2
 
@@ -126,7 +107,8 @@ yarn run lint
 
 ## Extra
 
-Architecture development is not easy. If you feel good, please give me a start. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
+Architecture development is not easy. If you feel good, please give me a **start**. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
+
 
 ## Browsers support
 
