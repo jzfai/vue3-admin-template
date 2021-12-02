@@ -11,8 +11,13 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 
 ## Update log
 
-[真香定律！带你用vue3+vite2撸后台](https://juejin.cn/post/7036302298435289095)
+--- to look the doc
 
+- [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
+
+## Documents
+
+- [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
 
 ## Online experience
 
@@ -44,9 +49,7 @@ The framework is available in js, ts , plus and electron versions
 - java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 > development and  experience：two words  Really fragrant！！！！！
 
-## Documents
 
-- [真香定律！带你用vue3+vite2撸后台](https://juejin.cn/post/7036302298435289095)
 
 #### Comparison of performance between vue3 and vue2
 
