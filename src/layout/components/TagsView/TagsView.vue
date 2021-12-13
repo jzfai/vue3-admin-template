@@ -27,7 +27,7 @@
 
 <script setup>
 import path from 'path'
-import { Close } from '@element-plus/icons'
+import { Close } from '@element-plus/icons-vue'
 import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, nextTick } from 'vue'
 //获取store和router
 import { useRouter } from 'vue-router'
@@ -130,31 +130,11 @@ const addTags = () => {
   }
   return false
 }
-const refTag = ref(null)
-const refScrollPane = ref(null)
-const moveToCurrentTag = () => {
-  nextTick(() => {
-    // console.log('refTag', tag)
-    for (const tag of tag.value.tag) {
-      if (tag.to.path === proxy.$route.path) {
-        refScrollPane.value.moveToTarget(tag)
-        // when query is different then update
-        if (tag.to.fullPath !== proxy.$route.fullPath) {
-          store.dispatch('tagsView/updateVisitedView', proxy.$route)
-        }
-        break
-      }
-    }
-  })
-}
-
 const refreshSelectedTag = (view) => {
-  store.dispatch('tagsView/delCachedView', view).then(() => {
-    const { fullPath } = view
-    proxy.$nextTick(() => {
-      proxy.$router.replace({
-        path: '/redirect' + fullPath
-      })
+  const { fullPath } = view
+  proxy.$nextTick(() => {
+    proxy.$router.replace({
+      path: '/redirect' + fullPath
     })
   })
 }
@@ -167,9 +147,7 @@ const closeSelectedTag = (view) => {
 }
 const closeOthersTags = () => {
   proxy.$router.push(state.selectedTag)
-  store.dispatch('tagsView/delOthersViews', state.selectedTag).then(() => {
-    moveToCurrentTag()
-  })
+  store.dispatch('tagsView/delOthersViews', state.selectedTag)
 }
 const closeAllTags = (view) => {
   store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {

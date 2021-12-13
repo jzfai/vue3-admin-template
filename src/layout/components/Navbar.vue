@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { CaretBottom } from '@element-plus/icons'
+import { CaretBottom } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
 import { computed, getCurrentInstance } from 'vue'

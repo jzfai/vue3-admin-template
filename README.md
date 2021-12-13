@@ -8,6 +8,7 @@ A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plu
 
 Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
 
+Vite need Node.js >= 12.0.0。
 
 ## Update log
 
@@ -33,7 +34,6 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
  ---- Let's look at the loading speed and the size of the built package first.：
 
-http://8.135.1.141/file/vap-assets/
 ![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
 
 ![template-demo](http://8.135.1.141/file/images/plus-demo.png)
