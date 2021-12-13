@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import * as Svg from '@element-plus/icons'
+import * as Svg from '@element-plus/icons-vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 let store = useStore()

@@ -108,7 +108,7 @@ export default {
 </script>
 
 <script setup>
-import { Delete } from '@element-plus/icons'
+import { Delete } from '@element-plus/icons-vue'
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
 import settings from '@/settings'
 let { proxy } = getCurrentInstance()
@@ -160,7 +160,7 @@ let selectPageReq = () => {
     proxy.pageTotalMixin = resData.data?.total
   })
 }
-import tablePageHook from '@/hooks/tablePageHook'
+import tablePageHook from '@/hooks/useTablePage'
 let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = tablePageHook(selectPageReq)
 const dateTimePacking = (timeArr) => {
   if (timeArr && timeArr.length === 2) {

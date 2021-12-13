@@ -75,7 +75,6 @@ const actions = {
       resolve([...state.visitedViews])
     })
   },
-
   delOthersViews({ dispatch, state }, view) {
     return new Promise((resolve) => {
       dispatch('delOthersVisitedViews', view)

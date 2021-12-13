@@ -71,7 +71,11 @@ const setting = {
   /**
    * @type {string} 'roles' | 'code'
    */
-  permissionMode: 'roles'
+  permissionMode: 'roles',
+  /*
+   * setting dev token when  isNeedLogin is setting false
+   * */
+  tmpToken: 'tmp_token'
 }
 
 export default setting
