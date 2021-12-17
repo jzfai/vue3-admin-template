@@ -21,10 +21,12 @@ let errorLogReq = (errLog) => {
 }
 
 export default function (app) {
-  //type judge
-  // base type  using 'type of'
-  // Reference type using 'instance of'
-  // recommend to reading https://www.jianshu.com/p/ddc7f189d130
+  /*
+   * type judge
+   * base type  using 'type of'
+   * Reference type using 'instance of'
+   * recommend to reading https://www.jianshu.com/p/ddc7f189d130
+   * */
   const checkNeed = () => {
     const env = import.meta.env.VITE_APP_ENV
     let { errorLog } = setting
@@ -37,21 +39,45 @@ export default function (app) {
     return false
   }
   if (checkNeed()) {
-    //error log white
-    let whiteList = ['cancel']
-    //add img load error log listen
-    document.addEventListener(
+    //JS运行时错误和资源加载错误
+    window.addEventListener(
       'error',
-      (err) => {
-        let errLog = `${JSON.stringify(err.target.outerHTML)}`
-        errorLogReq(errLog)
+      ({ error, target }) => {
+        if (target.outerHTML) {
+          //img error collection
+          let errLog = `${JSON.stringify(target.outerHTML)}`
+          //console.log('errorString', errLog)
+          errorLogReq(errLog)
+        } else {
+          let errLog = `${error.stack.substr(0, 300)}`
+          //console.log('errorString', errLog)
+          errorLogReq(errLog)
+        }
       },
+      //use Event capture  to collection  img error
       true
     )
-    app.config.errorHandler = (err) => {
-      if (whiteList.includes(err)) return
-      let errLog = `${err.message}---${err.stack.substr(0, 300)}`
+    //promise被reject并且错误信息没有被处理的时候，会抛出一个unhandledrejection
+    //接口错误处理，cross origin , 404,401
+    window.addEventListener('unhandledrejection', ({ reason }) => {
+      let errLog = ''
+      if (typeof reason === 'string') {
+        errLog = reason
+      } else {
+        errLog = `${reason.stack.substr(0, 300)}`
+      }
       errorLogReq(errLog)
+      //console.log('unhandledrejection:', errLog) // 捕获后自定义处理
+    })
+
+    //些特殊情况下，还需要捕获处理console.error，捕获方式就是重写window.console.error
+    let _oldConsoleError = window.console.error
+    window.console.error = function () {
+      let errLog = Object.values(arguments).join(',')
+      if (errLog.indexOf('custom') === -1) {
+        errorLogReq(errLog)
+      }
+      _oldConsoleError && _oldConsoleError.apply(window, arguments)
     }
   }
 }

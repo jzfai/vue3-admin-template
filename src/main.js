@@ -44,6 +44,6 @@ import './permission'
 
 //error log  collection
 import errorLog from '@/hooks/useErrorLog'
-errorLog(app)
+errorLog()
 
 app.use(router).mount('#app')

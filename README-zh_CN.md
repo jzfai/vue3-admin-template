@@ -104,9 +104,6 @@ yarn run build
 ## 其它
 
 ```bash
-# 预览发布环境效果
-yarn run preview:build-serve
-
 # 预览生产环境
 yarn run preview
 

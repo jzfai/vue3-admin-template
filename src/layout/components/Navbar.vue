@@ -10,14 +10,11 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
-    <div class="heardCenterTitle" v-if="settings.showTitle">{{ settings.showTitle }}</div>
-    <div class="right-menu" v-if="settings.ShowDropDown">
+    <div class="heardCenterTitle" v-if="settings.showNavbarTitle">{{ settings.title }}</div>
+    <div class="right-menu rowSC" v-if="settings.ShowDropDown">
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
-          <img
-            src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
-            class="user-avatar"
-          />
+          <img src="@/assets/layout/animation-image.gif" class="user-avatar" />
           <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
           <!--el-icon-x  is  destructed-->
           <!--<i class="el-icon-caret-bottom" />-->
@@ -47,22 +44,24 @@ import { CaretBottom } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
 import { computed, getCurrentInstance } from 'vue'
-import settings from '@/settings'
-import { useStore } from 'vuex'
-import { ElMessage } from 'element-plus'
-let { proxy } = getCurrentInstance()
 
+import { ElMessage } from 'element-plus'
+import { useStore } from 'vuex'
+const store = useStore()
+
+let { proxy } = getCurrentInstance()
+let settings = computed(() => {
+  return store.state.app.settings
+})
 const opened = computed(() => {
-  return proxy.$store.state.app.sidebar.opened
+  return store.state.app.sidebar.opened
 })
 const toggleSideBar = () => {
-  proxy.$store.commit('app/M_toggleSideBar')
+  store.commit('app/M_toggleSideBar')
 }
-
 /*
  * 退出登录
  * */
-const store = useStore()
 const loginOut = () => {
   store.dispatch('user/logout').then(() => {
     ElMessage({ message: '退出登录成功', type: 'success' })

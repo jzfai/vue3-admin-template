@@ -3,7 +3,6 @@
     <!--操作-->
     <div class="mr-3 rowSS">
       <el-button type="primary" @click="errorLogProd">错误日志测试</el-button>
-      <el-button type="primary" @click="errorLogImg">图片加载错误测试</el-button>
       <el-button type="primary" @click="multiDelBtnClick">
         <!-- 感觉写法复杂了-->
         <el-icon style="vertical-align: middle">
@@ -47,10 +46,17 @@
       :data="usertableData"
     >
       <el-table-column type="selection" align="center" width="50" />
-      <el-table-column align="center" prop="errorLog" label="错误日志" min-width="300" />
-      <el-table-column align="center" prop="pageUrl" label="页面路径" width="180" />
+      <el-table-column align="center" prop="errorLog" label="错误日志" width="450">
+        <template #default="{ row }">
+          <div>{{ row.errorLog }}</div>
+          <el-button type="text" size="small" @click="consoleToPlatform(row.errorLog)">
+            click it console to platform to track
+          </el-button>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="pageUrl" label="页面路径" min-width="180" />
       <el-table-column align="center" prop="version" label="版本号" width="60" />
-      <el-table-column align="center" prop="browserType" label="浏览器类型" width="180" />
+      <el-table-column align="center" prop="browserType" label="浏览器类型" min-width="180" />
       <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
       <!--点击操作-->
       <el-table-column fixed="right" align="center" label="操作" width="80">
@@ -122,8 +128,12 @@ let testData = ref('testData')
 onMounted(() => {
   console.log('testData', testData)
 })
-let errorLogProd = () => {
+const errorLogProd = () => {
   throw new Error('产生的错误日志')
+}
+const consoleToPlatform = (err) => {
+  //加个custom不收集
+  console.error('custom' + err)
 }
 
 //img loader err test
@@ -136,7 +146,7 @@ const errorLogImg = () => {
 let usertableData = ref([])
 let searchFormMixin = reactive({
   errorLog: '',
-  pageUrl: '',
+  pageUrl: '8.135.1.141',
   createTime: '',
   id: ''
 })
@@ -153,6 +163,7 @@ let selectPageReq = () => {
     method: 'get',
     data,
     isParams: true,
+    bfLoading: false,
     isAlertErrorMsg: false
   }
   proxy.$axiosReq(reqConfig).then((resData) => {
