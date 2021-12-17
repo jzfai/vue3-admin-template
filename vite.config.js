@@ -6,16 +6,23 @@ import viteSvgIcons from 'vite-plugin-svg-icons'
 //mock
 import { viteMockServe } from 'vite-plugin-mock'
 import setting from './src/settings'
-import packageJson from './package.json'
 // import { loadEnv } from 'vite'
 const prodMock = setting.openProdMock
+// import packageJson from './package.json'
 export default ({ command, mode }) => {
+  /*
+   console.log(command, mode)
+  * serve serve-dev
+  * */
   return {
     /*
-     * "/vue3-admin-template" nginx deploy folder
+     * "/vue3-admin-plus" nginx deploy folder
      * detail to look https://vitejs.cn/config/#base
+     * how to config, such as http://8.135.1.141/vue3-admin-plus/#/dashboard
+     * "/vue3-admin-plus/" --> config to base is you need
+     * http://8.135.1.141 --> if you config "/" , you can visit attached  to http://8.135.1.141
      * */
-    base: `/${packageJson.name}/`,
+    base: setting.viteBasePath,
     define: {
       'process.platform': null,
       'process.version': null
@@ -69,8 +76,10 @@ export default ({ command, mode }) => {
       chunkSizeWarningLimit: 2000,
       //remote console.log in prod
       terserOptions: {
+        //detail to look https://terser.org/docs/api-reference#compress-options
         compress: {
-          drop_console: true,
+          drop_console: false,
+          pure_funcs: ['console.log', 'console.info'],
           drop_debugger: true
         }
       },
@@ -89,6 +98,7 @@ export default ({ command, mode }) => {
         '~': resolve(__dirname, './'),
         '@': resolve(__dirname, 'src')
       }
+      // why remove it , look for https://github.com/vitejs/vite/issues/6026
       // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mjs']
     },
     css: {

@@ -1,9 +1,11 @@
+import defaultSettings from '@/settings'
 const state = {
   sidebar: {
     opened: true,
     withoutAnimation: false
   },
   device: 'desktop',
+  settings: defaultSettings,
   cachedViews: []
 }
 
