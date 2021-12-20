@@ -81,11 +81,13 @@ git clone https://github.com/jzfai/vue3-admin-template.git
 # 进入项目目录
 cd  vue3-admin-template
 
-# 安装依赖(建议用yarn)
-yarn
+# pnpm address https://pnpm.io/zh/motivation
+# 安装依赖(建议用pnpm)
+# 你可以使用 "npm -g i pnpm" 去安装pnpm
+pnpm i
 
 # 启动服务
-yarn run dev
+pnpm run dev
 ```
 
 浏览器访问 http://localhost:5001
@@ -95,20 +97,23 @@ yarn run dev
 
 ```bash
 # 构建测试环境
-yarn run build-serve
+pnpm run build-serve
 
 # 构建生产环境
-yarn run build
+pnpm run build
 ```
 
 ## 其它
 
 ```bash
+# 预览发布环境效果
+pnpm run preview:build-serve
+
 # 预览生产环境
-yarn run preview
+pnpm run preview
 
 # 代码格式检查并自动修复
-yarn run lint
+pnpm run lint
 ```
 
 ## 功能
