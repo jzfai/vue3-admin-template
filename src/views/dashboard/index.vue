@@ -8,17 +8,22 @@
         <Svg.Edit></Svg.Edit>
       </el-icon>
     </div>
+    <div class="mt-2">this is var from vite.config.js define</div>
+    <div>{{ showObj }},{{ showObjString }}</div>
   </div>
 </template>
 
 <script setup>
 import * as Svg from '@element-plus/icons-vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 let store = useStore()
 const username = computed(() => {
   return store.state.user.username
 })
+const showObj = ref(GLOBAL_VAR)
+// eslint-disable-next-line no-undef
+const showObjString = ref(GLOBAL_STRING)
 </script>
 
 <style lang="scss" scoped>

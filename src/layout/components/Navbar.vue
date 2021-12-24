@@ -10,7 +10,7 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
-    <div class="heardCenterTitle" v-if="settings.showNavbarTitle">{{ settings.title }}</div>
+    <div class="heardCenterTitle" v-if="settings.showNavbarTitle">{{ settings.showNavbarTitle }}</div>
     <div class="right-menu rowSC" v-if="settings.ShowDropDown">
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
@@ -44,9 +44,10 @@ import { CaretBottom } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
 import { computed, getCurrentInstance } from 'vue'
-
 import { ElMessage } from 'element-plus'
 import { useStore } from 'vuex'
+
+
 const store = useStore()
 
 let { proxy } = getCurrentInstance()

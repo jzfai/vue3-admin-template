@@ -3,12 +3,14 @@ import vue from '@vitejs/plugin-vue'
 import legacy from '@vitejs/plugin-legacy'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteSvgIcons from 'vite-plugin-svg-icons'
+
 //mock
 import { viteMockServe } from 'vite-plugin-mock'
 import setting from './src/settings'
 // import { loadEnv } from 'vite'
 const prodMock = setting.openProdMock
 // import packageJson from './package.json'
+
 export default ({ command, mode }) => {
   /*
    console.log(command, mode)
@@ -23,9 +25,15 @@ export default ({ command, mode }) => {
      * http://8.135.1.141 --> if you config "/" , you can visit attached  to http://8.135.1.141
      * */
     base: setting.viteBasePath,
+    //define global var
     define: {
+      //fix "path" module issue
       'process.platform': null,
-      'process.version': null
+      'process.version': null,
+      GLOBAL_STRING: JSON.stringify('i am global var from vite.config.js define'),
+      GLOBAL_VAR: {
+        test: 'i am global var from vite.config.js define'
+      }
     },
     clearScreen: false,
     server: {
