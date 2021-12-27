@@ -47,7 +47,6 @@ import { computed, getCurrentInstance } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useStore } from 'vuex'
 
-
 const store = useStore()
 
 let { proxy } = getCurrentInstance()
@@ -65,8 +64,9 @@ const toggleSideBar = () => {
  * */
 const loginOut = () => {
   store.dispatch('user/logout').then(() => {
-    ElMessage({ message: '退出登录成功', type: 'success' })
-    proxy.$router.push(`/login?redirect=${proxy.$route.fullPath}`)
+    // ElMessage({ message: '退出登录成功', type: 'success' })
+    //record the back point
+    // proxy.$router.push(`/login?redirect=${proxy.$route.fullPath}`)
     //此处reload清空路由和重置部分状态
     location.reload()
   })
