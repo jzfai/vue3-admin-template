@@ -299,7 +299,6 @@ export const asyncRoutes = [
           code: 1
         }
       },
-
       // 404 page must be placed at the end !!!
       // using pathMatch install of "*" in vue-router 4.0
       { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
