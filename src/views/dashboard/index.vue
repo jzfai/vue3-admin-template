@@ -3,6 +3,7 @@
     <div class="dashboard-text">name: {{ username }}</div>
     <div>update element-plus to 1.2.+, add svg icon, icon-font is abandoned</div>
     <i class="el-icon-add-location">abandoned</i>
+    <div>update element-plus version to 1.3.0-beta.7 the size options change to "large default small"</div>
     <div>
       <el-icon>
         <Svg.Edit></Svg.Edit>
