@@ -18,14 +18,13 @@
 1.设置name（必须）
 2.在路由配置处设置cachePage：即可缓存
 -->
-<script>
-export default {
-  name: 'KeepAlive'
-}
-</script>
+<script setup name="KeepAlive">
+//$ref语法
+let testRef = $ref(1)
+//赋值
+testRef = 2
+console.log(testRef)
 
-<script setup>
-import { onActivated, onDeactivated, getCurrentInstance } from 'vue'
 onActivated(() => {
   console.log('onActivated')
 })

@@ -7,11 +7,11 @@ import '@/styles/index.scss' // global css
 import store from './store'
 app.use(store)
 
-//import element-plus
-import ElementPlus from 'element-plus'
+/*on demand element-plus look for app.vue and vite.config.js */
+// import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
-app.use(ElementPlus, { size: 'small', locale: zhCn })
+// import zhCn from 'element-plus/es/locale/lang/zh-cn'
+// app.use(ElementPlus, { size: 'small', locale: zhCn })
 
 //global mixin(can choose by you need )
 import elementMixin from '@/mixins/elementMixin'
@@ -29,7 +29,7 @@ app.config.globalProperties.$axiosReq = axiosReq
 //import svg-icon doc in  https://github.com/anncwb/vite-plugin-svg-icons/blob/main/README.zh_CN.md
 import 'virtual:svg-icons-register'
 import svgIcon from '@/icons/SvgIcon.vue'
-app.component('svg-icon', svgIcon)
+app.component('SvgIcon', svgIcon)
 
 //global mount moment-mini
 import $momentMini from 'moment-mini'

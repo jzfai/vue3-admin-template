@@ -1,11 +1,25 @@
 import path, { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
-import legacy from '@vitejs/plugin-legacy'
+// import legacy from '@vitejs/plugin-legacy'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteSvgIcons from 'vite-plugin-svg-icons'
 
 //mock
 import { viteMockServe } from 'vite-plugin-mock'
+
+//setup name
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+
+//auto import element-plus
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+//auto import vue https://www.npmjs.com/package/unplugin-auto-import
+import AutoImport from 'unplugin-auto-import/vite'
+
+//  import image
+//  直接使用 <img :src="Logo" />
+// import ViteImages from 'vite-plugin-vue-images'
 import setting from './src/settings'
 // import { loadEnv } from 'vite'
 const prodMock = setting.openProdMock
@@ -52,7 +66,9 @@ export default ({ command, mode }) => {
       // }
     },
     plugins: [
-      vue(),
+      vue({
+        refTransform: true // 开启ref转换 还是实验性
+      }),
       vueJsx(),
       // legacy({
       //   targets: ['ie >= 11'],
@@ -75,6 +91,27 @@ export default ({ command, mode }) => {
           setupProdMockServer();
         `,
         logger: true
+      }),
+      VueSetupExtend(),
+      //https://github.com/antfu/unplugin-auto-import/blob/HEAD/src/types.ts
+      AutoImport({
+        imports: [
+          'vue',
+          'vuex',
+          'vue-router',
+          {
+            '@/hooks/useTest': ['testFunc']
+          }
+        ],
+        eslintrc: {
+          enabled: true, // Default `false`
+          filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+          globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+        },
+        dts: true
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
       })
     ],
     build: {
