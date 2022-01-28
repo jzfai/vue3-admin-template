@@ -16,15 +16,20 @@
 
 <script setup>
 import * as Svg from '@element-plus/icons-vue'
-import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
+import dd from ''
 let store = useStore()
+// useTest()
 const username = computed(() => {
   return store.state.user.username
 })
 const showObj = ref(GLOBAL_VAR)
 // eslint-disable-next-line no-undef
 const showObjString = ref(GLOBAL_STRING)
+
+//test hooks
+import { useCommon } from '@/hooks/globle/useCommon.js'
+
+// let {} = useCommon()
 </script>
 
 <style lang="scss" scoped>

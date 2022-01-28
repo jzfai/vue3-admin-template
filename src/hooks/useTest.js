@@ -14,3 +14,7 @@ export default function () {
     hooksFunc
   }
 }
+
+export const testFunc = () => {
+  console.log(111)
+}
