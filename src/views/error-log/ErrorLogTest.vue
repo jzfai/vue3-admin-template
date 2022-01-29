@@ -54,19 +54,15 @@ const consoleErrorFun = () => {
 const normalError = () => {
   throw new Error(' throw new Error("")\n')
 }
-
-let { proxy } = getCurrentInstance()
 let reqCrossOrigin = () => {
-  proxy
-    .$axiosReq({
-      baseURL: 'http://8.135.1.141/micro-service-test',
-      url: '/integration-front/brand/updateBy',
-      data: { id: 'fai' },
-      method: 'put',
-      isParams: true,
-      bfLoading: true
-    })
-    .then(() => {})
+  axiosReq({
+    baseURL: 'http://8.135.1.141/micro-service-test',
+    url: '/integration-front/brand/updateBy',
+    data: { id: 'fai' },
+    method: 'put',
+    isParams: true,
+    bfLoading: true
+  }).then(() => {})
 }
 
 import axiosReq from '@/utils/axiosReq'

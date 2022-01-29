@@ -20,7 +20,7 @@
     "@element-plus/icons-vue": "0.2.4",
     "axios": "0.21.3",
     "echarts": "4.2.1",
-    "element-plus": "1.3.0-beta.7",
+    "element-plus": "1.3.0-beta.9",
     "mitt": "3.0.0",
     "moment-mini": "^2.22.1",
     "nprogress": "0.2.0",

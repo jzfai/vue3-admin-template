@@ -3,7 +3,7 @@
     <div class="dashboard-text">name: {{ username }}</div>
     <div>update element-plus to 1.2.+, add svg icon, icon-font is abandoned</div>
     <i class="el-icon-add-location">abandoned</i>
-    <div>update element-plus version to 1.3.0-beta.7 the size options change to "large default small"</div>
+    <div>update element-plus version to 1.3.0-beta.9 the size options change to "large default small"</div>
     <div>
       <el-icon>
         <Svg.Edit></Svg.Edit>
@@ -16,7 +16,6 @@
 
 <script setup>
 import * as Svg from '@element-plus/icons-vue'
-import dd from ''
 let store = useStore()
 // useTest()
 const username = computed(() => {
@@ -25,11 +24,6 @@ const username = computed(() => {
 const showObj = ref(GLOBAL_VAR)
 // eslint-disable-next-line no-undef
 const showObjString = ref(GLOBAL_STRING)
-
-//test hooks
-import { useCommon } from '@/hooks/globle/useCommon.js'
-
-// let {} = useCommon()
 </script>
 
 <style lang="scss" scoped>

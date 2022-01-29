@@ -8,22 +8,22 @@ import store from './store'
 app.use(store)
 
 /*on demand element-plus look for app.vue and vite.config.js */
-// import ElementPlus from 'element-plus'
+import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-// import zhCn from 'element-plus/es/locale/lang/zh-cn'
-// app.use(ElementPlus, { size: 'small', locale: zhCn })
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+app.use(ElementPlus, { size: 'small', locale: zhCn })
 
 //global mixin(can choose by you need )
-import elementMixin from '@/mixins/elementMixin'
-app.mixin(elementMixin)
-import commonMixin from '@/mixins/commonMixin'
-app.mixin(commonMixin)
-import routerMixin from '@/mixins/routerMixin'
-app.mixin(routerMixin)
+// import elementMixin from '@/mixins/elementMixin'
+// app.mixin(elementMixin)
+// import commonMixin from '@/mixins/commonMixin'
+// app.mixin(commonMixin)
+// import routerMixin from '@/mixins/routerMixin'
+// app.mixin(routerMixin)
 
 //import axios req
-import axiosReq from '@/utils/axiosReq'
-app.config.globalProperties.$axiosReq = axiosReq
+// import axiosReq from '@/utils/axiosReq'
+// app.config.globalProperties.$axiosReq = axiosReq
 
 //svg-icon
 //import svg-icon doc in  https://github.com/anncwb/vite-plugin-svg-icons/blob/main/README.zh_CN.md
@@ -32,8 +32,8 @@ import svgIcon from '@/icons/SvgIcon.vue'
 app.component('SvgIcon', svgIcon)
 
 //global mount moment-mini
-import $momentMini from 'moment-mini'
-app.config.globalProperties.$momentMini = $momentMini
+// import $momentMini from 'moment-mini'
+// app.config.globalProperties.$momentMini = $momentMini
 
 //import global directive
 import directive from '@/directive'

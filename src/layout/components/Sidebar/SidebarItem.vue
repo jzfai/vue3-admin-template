@@ -26,13 +26,11 @@
 
 <script setup>
 /*初始化参数比如引入组件，proxy,state等*/
-import { getCurrentInstance } from 'vue'
 import Link from './Link.vue'
 import Item from './Item.jsx'
 import { isExternal } from '@/utils/validate'
 import path from 'path'
-let { proxy } = getCurrentInstance()
-defineProps({
+const props = defineProps({
   //每一个router Item
   item: {
     type: Object,
@@ -50,14 +48,14 @@ defineProps({
   }
 })
 //显示sidebarItem 的情况
-proxy.onlyOneChild = null
+let onlyOneChild = $ref(null)
 let showSidebarItem = (children = [], parent) => {
   const showingChildren = children.filter((item) => {
     if (item.hidden) {
       return false
     } else {
       // Temp set(will be used if only has one showing child)
-      proxy.onlyOneChild = item
+      onlyOneChild = item
       return true
     }
   })
@@ -65,7 +63,7 @@ let showSidebarItem = (children = [], parent) => {
     return true
   }
   if (showingChildren.length === 0) {
-    proxy.onlyOneChild = { ...parent, path: '', noChildren: true }
+    onlyOneChild = { ...parent, path: '', noChildren: true }
     return true
   }
   return false
@@ -74,9 +72,9 @@ let resolvePath = (routePath) => {
   if (isExternal(routePath)) {
     return routePath
   }
-  if (isExternal(proxy.basePath)) {
-    return proxy.basePath
+  if (isExternal(props.basePath)) {
+    return props.basePath
   }
-  return path.resolve(proxy.basePath, routePath)
+  return path.resolve(props.basePath, routePath)
 }
 </script>

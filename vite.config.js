@@ -11,7 +11,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 //auto import element-plus
-import Components from 'unplugin-vue-components/vite'
+// import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 //auto import vue https://www.npmjs.com/package/unplugin-auto-import
@@ -95,12 +95,16 @@ export default ({ command, mode }) => {
       VueSetupExtend(),
       //https://github.com/antfu/unplugin-auto-import/blob/HEAD/src/types.ts
       AutoImport({
+        // resolvers: [ElementPlusResolver()],
         imports: [
           'vue',
           'vuex',
           'vue-router',
           {
-            '@/hooks/useTest': ['testFunc']
+            '@/hooks/global/useCommon': ['useCommon'],
+            '@/hooks/global/useElement': ['useElement'],
+            '@/hooks/global/useVueRouter': ['useVueRouter'],
+            '@/utils/axiosReq': ['axiosReq']
           }
         ],
         eslintrc: {
@@ -109,10 +113,10 @@ export default ({ command, mode }) => {
           globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
         },
         dts: true
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()]
       })
+      // Components({
+      //   resolvers: [ElementPlusResolver()]
+      // })
     ],
     build: {
       // minify: 'terser',
@@ -155,7 +159,7 @@ export default ({ command, mode }) => {
       }
     }
     // optimizeDeps: {
-    //   include: ['element-plus/lib/locale/lang/zh-cn', 'element-plus/lib/locale/lang/en']
+    //   include: ['element-plus']
     // }
   }
 }

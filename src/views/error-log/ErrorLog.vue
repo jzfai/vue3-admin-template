@@ -11,16 +11,16 @@
         <span style="vertical-align: middle">删除</span>
       </el-button>
       <!--条件搜索-->
-      <el-form ref="refsearchFormMixin" :inline="true" class="demo-searchFormMixin ml-2">
+      <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-2">
         <el-form-item label-width="0px" label="" prop="errorLog" label-position="left">
-          <el-input v-model="searchFormMixin.errorLog" class="widthPx-150" placeholder="错误日志" />
+          <el-input v-model="searchForm.errorLog" class="widthPx-150" placeholder="错误日志" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="pageUrl" label-position="left">
-          <el-input v-model="searchFormMixin.pageUrl" class="widthPx-150" placeholder="页面路径" />
+          <el-input v-model="searchForm.pageUrl" class="widthPx-150" placeholder="页面路径" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
           <el-date-picker
-            v-model="startEndArrMixin"
+            v-model="startEndArr"
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
@@ -71,16 +71,16 @@
         :page-sizes="[10, 20, 50, 100]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="pageTotalMixin"
+        :total="totalPage"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       />
     </div>
     <!--详情-->
     <el-dialog
-      v-if="detailDialogMixin"
-      :title="dialogTitleMixin"
-      v-model="detailDialogMixin"
+      v-if="detailDialog"
+      :title="dialogTitle"
+      v-model="detailDialog"
       width="40vw"
       :close-on-click-modal="false"
     >
@@ -96,7 +96,7 @@
       </div>
       <template #footer>
         <span class="dialog-footer">
-          <el-button type="primary" @click="detailDialogMixin = false">确 定</el-button>
+          <el-button type="primary" @click="detailDialog = false">确 定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -116,7 +116,6 @@ export default {
 import { Delete } from '@element-plus/icons-vue'
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
 import settings from '@/settings'
-let { proxy } = getCurrentInstance()
 import bus from '@/utils/bus'
 /*
  * 一般根据页面层次来排序 如此页面 表格查询和筛选->table的操作
@@ -143,14 +142,16 @@ const errorLogImg = () => {
 
 /*表格查询和筛选*/
 let usertableData = ref([])
-let searchFormMixin = reactive({
+let searchForm = reactive({
   errorLog: '',
   pageUrl: '8.135.1.141',
   createTime: '',
   id: ''
 })
+
+let { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()
 let selectPageReq = () => {
-  const data = Object.assign(searchFormMixin, {
+  const data = Object.assign(searchForm, {
     pageNum: pageNum,
     pageSize: pageSize
   })
@@ -165,20 +166,20 @@ let selectPageReq = () => {
     bfLoading: false,
     isAlertErrorMsg: false
   }
-  proxy.$axiosReq(reqConfig).then((resData) => {
+  axiosReq(reqConfig).then((resData) => {
     usertableData.value = resData.data?.records
-    proxy.pageTotalMixin = resData.data?.total
+    totalPage.value = resData.data?.total
   })
 }
 import tablePageHook from '@/hooks/useTablePage'
 let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = tablePageHook(selectPageReq)
 const dateTimePacking = (timeArr) => {
   if (timeArr && timeArr.length === 2) {
-    searchFormMixin.startTime = timeArr[0]
-    searchFormMixin.endTime = timeArr[1]
+    searchForm.startTime = timeArr[0]
+    searchForm.endTime = timeArr[1]
   } else {
-    searchFormMixin.startTime = ''
-    searchFormMixin.endTime = ''
+    searchForm.startTime = ''
+    searchForm.endTime = ''
   }
 }
 onMounted(() => {
@@ -196,8 +197,9 @@ const searchBtnClick = () => {
 /*详情*/
 let detailData = ref({})
 /*删除*/
+let { elConfirm, elMessage } = useElement()
 let deleteByIdReq = (id) => {
-  return proxy.$axiosReq({
+  return axiosReq({
     url: '/integration-front/errorCollection/deleteById',
     data: { id: id },
     isParams: true,
@@ -206,12 +208,11 @@ let deleteByIdReq = (id) => {
   })
 }
 let tableDelClick = async (row) => {
-  await proxy
-    .elConfirmMixin('确定', `您确定要删除【${row.pageUrl}】吗？`)
+  await elConfirm('确定', `您确定要删除【${row.pageUrl}】吗？`)
     .then(() => {
       deleteByIdReq(row.id).then(() => {
         selectPageReq()
-        proxy.elMessageMixin(`【${row.pageUrl}】删除成功`)
+        elMessage(`【${row.pageUrl}】删除成功`)
       })
     })
     //不写catch会报错
@@ -224,31 +225,29 @@ const handleSelectionChange = (val) => {
   multipleSelection.value = val
 }
 const multiDelBtnClick = async () => {
-  let rowDeleteIdArrMixin = []
+  let rowDeleteIdArr = []
   // let selectionArr = proxy.$refs.refuserTable //--c
   let deleteNameTitle = ''
-  rowDeleteIdArrMixin = multipleSelection.value.map((mItem) => {
+  rowDeleteIdArr = multipleSelection.value.map((mItem) => {
     deleteNameTitle = deleteNameTitle + mItem.pageUrl + ','
     return mItem.id
   })
-  if (rowDeleteIdArrMixin.length === 0) {
-    proxy.elMessageMixin('表格选项不能为空', 'warning')
+  if (rowDeleteIdArr.length === 0) {
+    elMessage('表格选项不能为空', 'warning')
     return
   }
   let stringLength = deleteNameTitle.length - 1
-  await proxy.elConfirmMixin('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
-  const data = rowDeleteIdArrMixin
-  proxy
-    .$axiosReq({
-      url: `/integration-front/errorCollection/deleteBatchIds`,
-      data,
-      method: 'DELETE',
-      bfLoading: true
-    })
-    .then(() => {
-      proxy.elMessageMixin('删除成功')
-      selectPageReq()
-    })
+  await elConfirm('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
+  const data = rowDeleteIdArr
+  axiosReq({
+    url: `/integration-front/errorCollection/deleteBatchIds`,
+    data,
+    method: 'DELETE',
+    bfLoading: true
+  }).then(() => {
+    elMessage('删除成功')
+    selectPageReq()
+  })
 }
 </script>
 
