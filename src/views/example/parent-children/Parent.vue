@@ -14,13 +14,13 @@ import Children from './Children.vue'
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
-let { proxy } = getCurrentInstance()
 
-let refChildren = ref(null)
+const refChildren = ref(null)
+
 onMounted(() => {
   /*获取子元素两种方法*/
   //第一种
-  console.log(proxy.$refs['refChildren'].value)
+  console.log(refChildren.value)
   //第二种
   console.log(refChildren.value)
 })

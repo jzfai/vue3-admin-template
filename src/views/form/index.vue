@@ -50,8 +50,6 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, reactive } from 'vue'
-let { proxy } = getCurrentInstance()
 let subform = reactive({
   name: '',
   region: '',
@@ -62,13 +60,11 @@ let subform = reactive({
   resource: '',
   desc: ''
 })
+let { elMessage } = useElement()
 const onSubmit = () => {
-  proxy.$message('submit!')
+  elMessage('submit!')
 }
 const onCancel = () => {
-  proxy.$message({
-    message: 'cancel!',
-    type: 'warning'
-  })
+  elMessage('cancel!')
 }
 </script>

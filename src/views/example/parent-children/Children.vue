@@ -24,9 +24,8 @@ let childMethod = () => {
   return 'childMethod'
 }
 
-const { proxy } = getCurrentInstance()
 let getFatherMethod = () => {
-  proxy.$parent.fartherMethod()
+  parent.fartherMethod()
 }
 //emit
 // 定义emit事件

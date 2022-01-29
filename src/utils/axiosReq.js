@@ -110,7 +110,7 @@ service.interceptors.response.use(
   }
 )
 
-export default function axiosReq({
+export const axiosReq = ({
   url,
   data,
   method,
@@ -122,7 +122,7 @@ export default function axiosReq({
   baseURL,
   timeout,
   isAlertErrorMsg
-}) {
+}) => {
   return service({
     url: url,
     method: method ?? 'get',
@@ -137,3 +137,4 @@ export default function axiosReq({
     timeout: timeout ?? 15000 // 配置默认超时时间
   })
 }
+export default axiosReq

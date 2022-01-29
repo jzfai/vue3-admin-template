@@ -1,5 +1,6 @@
 {
   "globals": {
+    "axiosReq": true,
     "computed": true,
     "createApp": true,
     "createLogger": true,
@@ -43,19 +44,21 @@
     "shallowReactive": true,
     "shallowReadonly": true,
     "shallowRef": true,
-    "testFunc": true,
     "toRaw": true,
     "toRef": true,
     "toRefs": true,
     "triggerRef": true,
     "unref": true,
     "useAttrs": true,
+    "useCommon": true,
     "useCssModule": true,
     "useCssVars": true,
+    "useElement": true,
     "useRoute": true,
     "useRouter": true,
     "useSlots": true,
     "useStore": true,
+    "useVueRouter": true,
     "watch": true,
     "watchEffect": true
   }

@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
-    <el-form ref="refloginForm" size="medium" class="login-form" :model="formInline" :rules="formRulesMixin">
+    <el-form ref="refloginForm" class="login-form" :model="formInline" :rules="formRulesMixin">
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
@@ -36,7 +36,7 @@
         </div>
       </el-form-item>
       <div class="tip-message">{{ tipMessage }}</div>
-      <el-button :loading="loading" type="primary" class="login-btn" size="medium" @click.prevent="handleLogin">
+      <el-button :loading="loading" type="primary" class="login-btn" size="default" @click.prevent="handleLogin">
         Login
       </el-button>
     </el-form>
@@ -53,10 +53,9 @@ export default {
 <script setup>
 import { reactive, getCurrentInstance, watch, ref } from 'vue'
 import settings from '@/settings'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
-let { proxy } = getCurrentInstance()
 //form
 let formInline = reactive({
   username: 'admin',
@@ -96,9 +95,10 @@ watch(
 let loading = ref(false)
 let tipMessage = ref('')
 const store = useStore()
+const refloginForm = ref(null)
 let handleLogin = () => {
   let refloginForm = ''
-  proxy.$refs['refloginForm'].validate((valid) => {
+  refloginForm.validate((valid) => {
     if (valid) {
       loginReq()
     } else {
@@ -112,11 +112,11 @@ let loginReq = () => {
     .dispatch('user/login', formInline)
     .then(() => {
       ElMessage({ message: '登录成功', type: 'success' })
-      proxy.$router.push({ path: state.redirect || '/', query: state.otherQuery })
+      useRouter().push({ path: state.redirect || '/', query: state.otherQuery })
     })
     .catch((res) => {
       tipMessage.value = res.msg
-      proxy.sleepMixin(30).then(() => {
+      useCommon.sleepMixin(30).then(() => {
         loading.value = false
       })
     })
@@ -132,7 +132,7 @@ let showPwd = () => {
   } else {
     passwordType.value = 'password'
   }
-  proxy.$nextTick(() => {
+  nextTick(() => {
     refPassword.value.focus()
   })
 }
