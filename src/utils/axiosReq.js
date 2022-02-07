@@ -110,7 +110,7 @@ service.interceptors.response.use(
   }
 )
 
-export const axiosReq = ({
+export function axiosReq({
   url,
   data,
   method,
@@ -122,7 +122,7 @@ export const axiosReq = ({
   baseURL,
   timeout,
   isAlertErrorMsg
-}) => {
+}) {
   return service({
     url: url,
     method: method ?? 'get',

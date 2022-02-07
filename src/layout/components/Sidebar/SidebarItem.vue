@@ -48,14 +48,14 @@ const props = defineProps({
   }
 })
 //显示sidebarItem 的情况
-let onlyOneChild = $ref(null)
+let onlyOneChild = ref(null)
 let showSidebarItem = (children = [], parent) => {
   const showingChildren = children.filter((item) => {
     if (item.hidden) {
       return false
     } else {
       // Temp set(will be used if only has one showing child)
-      onlyOneChild = item
+      onlyOneChild.value = item
       return true
     }
   })
@@ -63,7 +63,7 @@ let showSidebarItem = (children = [], parent) => {
     return true
   }
   if (showingChildren.length === 0) {
-    onlyOneChild = { ...parent, path: '', noChildren: true }
+    onlyOneChild.value = { ...parent, path: '', noChildren: true }
     return true
   }
   return false

@@ -1,11 +1,11 @@
 <!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
-    <el-form ref="refloginForm" class="login-form" :model="formInline" :rules="formRulesMixin">
+    <el-form ref="refloginForm" class="login-form" :model="formInline" :rules="formRules">
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
-      <el-form-item prop="username" :rules="formRulesMixin.isNotNull">
+      <el-form-item prop="username" :rules="formRules.isNotNull">
         <div class="rowSC">
           <span class="svg-container">
             <svg-icon icon-class="user" />
@@ -15,8 +15,8 @@
           <div class="show-pwd" />
         </div>
       </el-form-item>
-      <!--<el-form-item prop="password" :rules="formRulesMixin.passwordValid">-->
-      <el-form-item prop="password" :rules="formRulesMixin.isNotNull">
+      <!--<el-form-item prop="password" :rules="formRules.passwordValid">-->
+      <el-form-item prop="password" :rules="formRules.isNotNull">
         <div class="rowSC flex-1">
           <span class="svg-container">
             <svg-icon icon-class="password" />
@@ -43,19 +43,13 @@
   </div>
 </template>
 
-<script>
-/*可以设置默认的名字*/
-export default {
-  name: 'Login'
-}
-</script>
-
 <script setup>
-import { reactive, getCurrentInstance, watch, ref } from 'vue'
 import settings from '@/settings'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
+//element valid
+const formRules = useElement().formRules
 //form
 let formInline = reactive({
   username: 'admin',
@@ -97,8 +91,7 @@ let tipMessage = ref('')
 const store = useStore()
 const refloginForm = ref(null)
 let handleLogin = () => {
-  let refloginForm = ''
-  refloginForm.validate((valid) => {
+  refloginForm.value.validate((valid) => {
     if (valid) {
       loginReq()
     } else {
@@ -106,19 +99,24 @@ let handleLogin = () => {
     }
   })
 }
+
+//use the auto import from vite.config.js of AutoImport
+const router = useRouter()
 let loginReq = () => {
   loading.value = true
   store
     .dispatch('user/login', formInline)
     .then(() => {
       ElMessage({ message: '登录成功', type: 'success' })
-      useRouter().push({ path: state.redirect || '/', query: state.otherQuery })
+      router.push({ path: state.redirect || '/', query: state.otherQuery })
     })
     .catch((res) => {
       tipMessage.value = res.msg
-      useCommon.sleepMixin(30).then(() => {
-        loading.value = false
-      })
+      useCommon()
+        .sleep(30)
+        .then(() => {
+          loading.value = false
+        })
     })
 }
 /*

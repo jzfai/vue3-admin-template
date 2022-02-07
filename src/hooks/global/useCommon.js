@@ -1,7 +1,7 @@
 import { getToken } from '@/utils/auth'
 import momentMini from 'moment-mini'
 export const useCommonExample = () => {
-  let state = reactive({
+  const state = reactive({
     totalPage: 0,
     searchForm: {},
     /* 文件上传相关*/
@@ -20,7 +20,10 @@ export const useCommonExample = () => {
     currentTime: '',
     todayTimeLast: '',
     yesterdayTime: null,
-    beforeThreeDateTime: ''
+    beforeThreeDateTime: '',
+    /*dialog*/
+    dialogTitle: '',
+    dialogVisible: false
   })
   // 读取.env 多坏境里的数据
   state.VITE_APP_IMAGE_URL_PRE = import.meta.env.VITE_APP_BASE_URL
@@ -47,20 +50,15 @@ export const useCommonExample = () => {
   }
 
   /*文件上传*/
-  const handleChange = (file, fileList) => {
+  const handleChange = (fileList) => {
     state.fileList = fileList
-  }
-
-  const refSettingFile = ref()
-  const goUploadFile = () => {
-    refSettingFile.value.click()
   }
 
   const sleep = (time) => {
     return new Promise((resolve) => {
       const timer = setTimeout(() => {
         clearTimeout(timer)
-        resolve()
+        resolve(null)
       }, time)
     })
   }
@@ -68,7 +66,6 @@ export const useCommonExample = () => {
   return {
     clearParamsIsNull,
     handleChange,
-    goUploadFile,
     sleep,
     ...toRefs(state)
   }

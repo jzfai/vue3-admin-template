@@ -10,9 +10,9 @@ import { viteMockServe } from 'vite-plugin-mock'
 //setup name
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
-//auto import element-plus
+//auto import element-plus has some issue
 // import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 //auto import vue https://www.npmjs.com/package/unplugin-auto-import
 import AutoImport from 'unplugin-auto-import/vite'
@@ -67,7 +67,7 @@ export default ({ command, mode }) => {
     },
     plugins: [
       vue({
-        refTransform: true // 开启ref转换 还是实验性
+        // refTransform: true // 开启ref转换 还是实验性   use example for $ref
       }),
       vueJsx(),
       // legacy({
@@ -112,7 +112,7 @@ export default ({ command, mode }) => {
           filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
           globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
         },
-        dts: true
+        dts: true //auto generation auto-imports.d.ts file
       })
       // Components({
       //   resolvers: [ElementPlusResolver()]
