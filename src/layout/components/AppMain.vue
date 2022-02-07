@@ -16,9 +16,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
 let store = useStore()
 let route = useRoute()
 let settings = computed(() => {

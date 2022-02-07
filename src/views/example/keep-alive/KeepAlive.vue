@@ -20,11 +20,12 @@
 -->
 <script setup name="KeepAlive">
 let { searchForm } = useCommon()
-//$ref语法
-let testRef = $ref(1)
+//$ref(experimental)
+//let testRef = $ref(1)
+let testRef = ref(1)
 //赋值
-testRef = 2
-console.log(testRef)
+testRef.value = 2
+console.log(testRef.value)
 
 onActivated(() => {
   console.log('onActivated')

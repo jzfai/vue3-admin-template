@@ -105,13 +105,6 @@
   </div>
 </template>
 
-<script>
-/*可以设置默认的名字*/
-export default {
-  name: 'ErrorLog'
-}
-</script>
-
 <script setup>
 import { Delete } from '@element-plus/icons-vue'
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
@@ -226,7 +219,6 @@ const handleSelectionChange = (val) => {
 }
 const multiDelBtnClick = async () => {
   let rowDeleteIdArr = []
-  // let selectionArr = proxy.$refs.refuserTable //--c
   let deleteNameTitle = ''
   rowDeleteIdArr = multipleSelection.value.map((mItem) => {
     deleteNameTitle = deleteNameTitle + mItem.pageUrl + ','

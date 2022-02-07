@@ -2,7 +2,7 @@ import { ElLoading, ElNotification, ElMessage, ElMessageBox } from 'element-plus
 const useElementExample = () => {
   /* element form校验相关*/
   // 密码必须为6-18位字母、数字
-  let passwordValid = (rule, value, callback) => {
+  const passwordValid = (rule, value, callback) => {
     if (!/^(?![^a-zA-Z]+$)(?!\D+$)/.test(value)) {
       callback(new Error('6-18位字母、数字'))
     } else {
@@ -10,14 +10,14 @@ const useElementExample = () => {
     }
   }
   // 大于0的整数
-  let upZeroInt = (rule, value, callback) => {
+  const upZeroInt = (rule, value, callback) => {
     if (!/^\+?[1-9]\d*$/.test(value)) {
       callback(new Error('大于0的整数'))
     } else {
       callback()
     }
   }
-  let upZeroIntCanNull = (rule, value, callback) => {
+  const upZeroIntCanNull = (rule, value, callback) => {
     if (!value) {
       callback()
     } else {
@@ -28,7 +28,7 @@ const useElementExample = () => {
       }
     }
   }
-  let validatePass = (rule, value, callback) => {
+  const validatePass = (rule, value, callback) => {
     if (value === '') {
       callback(new Error('请输入密码'))
     } else {
@@ -36,7 +36,7 @@ const useElementExample = () => {
     }
   }
 
-  let state = reactive({
+  const state = reactive({
     /* table*/
     tableData: [],
     rowDeleteIdArr: [],
@@ -106,10 +106,10 @@ const useElementExample = () => {
   })
 
   /* 级联*/
-  let cascaderKey = ref(null)
+  const cascaderKey = ref(null)
   const casHandleChange = () => {
     // 解决目前级联选择器搜索输入报错问题
-    ++cascaderKey.value
+    cascaderKey.value += cascaderKey.value
   }
   /*
    * 通知弹框
@@ -118,11 +118,10 @@ const useElementExample = () => {
    * duration：通知显示时长（ms）
    * */
   const elMessage = (message, type) => {
-    type = type || 'success'
     ElMessage({
       showClose: true,
       message: message || '成功',
-      type: type,
+      type: type || 'success',
       center: false
     })
   }
@@ -132,7 +131,7 @@ const useElementExample = () => {
    * */
   let loadingId = null
   const elLoading = () => {
-    loadingId = ElLoading({
+    loadingId = ElLoading.service({
       lock: true,
       text: '数据载入中',
       spinner: 'el-icon-loading',
@@ -147,9 +146,9 @@ const useElementExample = () => {
    * duration：提示时长（ms）
    * */
   const elNotify = (message, type, title, duration) => {
-    type = type || 'success'
-    ElNotification[type]({
+    ElNotification({
       title: title || '提示',
+      type: type || 'success',
       message: message || '请传入提示消息',
       position: 'top-right',
       duration: duration || 2500,
@@ -163,12 +162,14 @@ const useElementExample = () => {
   * return Promise
   * */
   const elConfirmNoCancelBtn = (title, message) => {
-    return ElMessageBox(message || '你确定要删除吗', title || '确认框', {
+    return ElMessageBox({
+      message: message || '你确定要删除吗',
+      title: title || '确认框',
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       showCancelButton: false,
       type: 'warning'
-    }).catch(() => {})
+    })
   }
   /*
    * 确认弹框
@@ -177,7 +178,9 @@ const useElementExample = () => {
    * return Promise
    * */
   const elConfirm = (title, message) => {
-    return ElMessageBox(message || '你确定要删除吗', title || '确认框', {
+    return ElMessageBox({
+      message: message || '你确定要删除吗',
+      title: title || '确认框',
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       type: 'warning'
