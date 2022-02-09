@@ -65,7 +65,7 @@ const handleLink = (item) => {
   router.push(pathCompile(path))
 }
 watch(
-  () => route,
+  () => route.path,
   () => {
     getBreadcrumb()
   },

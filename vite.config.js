@@ -157,9 +157,9 @@ export default ({ command, mode }) => {
           additionalData: `@import "@/styles/variables.scss";`
         }
       }
+    },
+    optimizeDeps: {
+      include: ['moment-mini']
     }
-    // optimizeDeps: {
-    //   include: ['element-plus']
-    // }
   }
 }
