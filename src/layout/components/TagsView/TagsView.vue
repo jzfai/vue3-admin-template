@@ -33,8 +33,8 @@ import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, 
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
-const router = useRouter()
-const route = useRoute()
+const $router = useRouter()
+const $route = useRoute()
 const state = reactive({
   visible: false,
   top: 0,
@@ -51,7 +51,7 @@ const routes = computed(() => {
 })
 
 watch(
-  () => route,
+  () => $route.path,
   () => {
     addTags()
     // tag remove has issue
@@ -86,7 +86,7 @@ onMounted(() => {
 })
 
 const isActive = (route) => {
-  return route.path === route.path
+  return route.path === $route.path
 }
 const isAffix = (tag) => {
   return tag.meta && tag.meta.affix
@@ -124,16 +124,16 @@ const initTags = () => {
 }
 
 const addTags = () => {
-  const { name } = route
+  const { name } = $route
   if (name) {
-    store.dispatch('tagsView/addView', route)
+    store.dispatch('tagsView/addView', $route)
   }
   return false
 }
 const refreshSelectedTag = (view) => {
   const { fullPath } = view
   nextTick(() => {
-    router.replace({
+    $router.replace({
       path: '/redirect' + fullPath
     })
   })
@@ -146,7 +146,7 @@ const closeSelectedTag = (view) => {
   })
 }
 const closeOthersTags = () => {
-  router.push(state.selectedTag)
+  $router.push(state.selectedTag)
   store.dispatch('tagsView/delOthersViews', state.selectedTag)
 }
 const closeAllTags = (view) => {
@@ -160,15 +160,15 @@ const closeAllTags = (view) => {
 const toLastView = (visitedViews, view) => {
   const latestView = visitedViews.slice(-1)[0]
   if (latestView) {
-    router.push(latestView.fullPath)
+    $router.push(latestView.fullPath)
   } else {
     // now the default is to redirect to the home page if there is no tags-view,
     // you can adjust it according to your needs.
     if (view.name === 'Dashboard') {
       // to reload home page
-      router.replace({ path: '/redirect' + view.fullPath })
+      $router.replace({ path: '/redirect' + view.fullPath })
     } else {
-      router.push('/')
+      $router.push('/')
     }
   }
 }
