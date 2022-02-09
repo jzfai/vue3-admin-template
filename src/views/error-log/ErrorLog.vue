@@ -160,6 +160,7 @@ let selectPageReq = () => {
     isAlertErrorMsg: false
   }
   axiosReq(reqConfig).then((resData) => {
+    console.log('我进来了ddd', resData)
     usertableData.value = resData.data?.records
     totalPage.value = resData.data?.total
   })
