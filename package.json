@@ -14,7 +14,7 @@
     "tsc-check": "tsc"
   },
   "peerDependencies": {
-    "vue": "3.2.26"
+    "vue": "3.2.29"
   },
   "dependencies": {
     "@element-plus/icons-vue": "0.2.4",
