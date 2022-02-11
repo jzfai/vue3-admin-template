@@ -4,9 +4,7 @@
 </template>
 
 <script setup name="DeepChildrenSd">
-const $store = useStore()
 let testInput = ref('')
-//$store.commit('app/M_ADD_CACHED_VIEW_DEEP', 'DeepChildren')
 </script>
 
 <style scoped lang="scss"></style>
