@@ -52,8 +52,8 @@
 </template>
 
 <script setup>
-import { computed, getCurrentInstance, ref } from 'vue'
-import { useStore } from 'vuex'
+// import { computed, getCurrentInstance, ref } from 'vue'
+// import { useStore } from 'vuex'
 const store = useStore()
 let settings = computed(() => {
   return store.state.app.settings || {}

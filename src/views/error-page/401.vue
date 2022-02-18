@@ -32,7 +32,6 @@
 
 <script setup>
 import errGif from '@/assets/401_images/401.gif'
-import { getCurrentInstance, toRefs, reactive } from 'vue'
 
 const state = reactive({
   errGif: errGif + '?' + +new Date(),
