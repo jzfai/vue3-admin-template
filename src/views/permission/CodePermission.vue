@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 //获取store和router
 const codeArr = computed(() => {
   return localStorage.getItem('codeArr')

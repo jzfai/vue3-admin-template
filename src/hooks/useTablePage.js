@@ -1,4 +1,3 @@
-import { onMounted, ref } from 'vue'
 export default function (selectPageReq) {
   /*分页*/
   const pageNum = ref(1)

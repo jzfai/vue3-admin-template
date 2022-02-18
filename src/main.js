@@ -31,6 +31,15 @@ import 'virtual:svg-icons-register'
 import svgIcon from '@/icons/SvgIcon.vue'
 app.component('SvgIcon', svgIcon)
 
+
+//element svg icon
+import ElSvgIcon from "@/components/ElSvgIcon.vue"
+app.component("ElSvgIcon",ElSvgIcon)
+
+// import $momentMini from 'moment-mini'
+// app.config.globalProperties.$momentMini = $momentMini
+
+
 //global mount moment-mini
 // import $momentMini from 'moment-mini'
 // app.config.globalProperties.$momentMini = $momentMini

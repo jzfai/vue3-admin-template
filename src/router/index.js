@@ -200,6 +200,13 @@ export const constantRoutes = [
         meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
       },
       {
+        path: 'tab-keep-alive',
+        component: () => import('@/views/example/keep-alive/TabKeepAlive.vue'),
+        name: 'TabKeepAlive',
+        //closeTabRmCache: remove cachePage when tabs close, default false
+        meta: { title: 'Tab-Keep-Alive', cachePage: true, closeTabRmCache: true }
+      },
+      {
         path: 'router-demo-f',
         name: 'routerDemoF',
         hidden: true,

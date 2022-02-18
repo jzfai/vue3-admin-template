@@ -24,7 +24,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 let message = computed(() => {
   return 'The webmaster said that you can not enter this page...'
 })

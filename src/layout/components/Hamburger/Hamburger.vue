@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue'
 defineProps({
   isActive: {
     type: Boolean,

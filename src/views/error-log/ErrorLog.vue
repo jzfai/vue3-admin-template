@@ -16,7 +16,7 @@
           <el-input v-model="searchForm.errorLog" class="widthPx-150" placeholder="错误日志" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="pageUrl" label-position="left">
-          <el-input v-model="searchForm.pageUrl" class="widthPx-150" placeholder="页面路径" />
+          <el-input v-model="searchForm.pageUrl" class="widthPx-200" placeholder="页面路径" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
           <el-date-picker
@@ -135,11 +135,13 @@ const errorLogImg = () => {
 
 /*表格查询和筛选*/
 let usertableData = ref([])
+
+import packages from  "/package.json"
+console.log(packages);
 let searchForm = reactive({
   errorLog: '',
-  pageUrl: '8.135.1.141',
+  pageUrl: `8.135.1.141/${packages.name}`,
   createTime: '',
-  id: ''
 })
 
 let { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()

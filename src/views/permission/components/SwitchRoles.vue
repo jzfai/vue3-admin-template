@@ -12,7 +12,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 //获取store和router
 import { useStore } from 'vuex'
 const store = useStore()

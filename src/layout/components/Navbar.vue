@@ -43,8 +43,6 @@
 import { CaretBottom } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
-import { computed, getCurrentInstance } from 'vue'
-import { ElMessage } from 'element-plus'
 import { useStore } from 'vuex'
 const store = useStore()
 let settings = computed(() => {
