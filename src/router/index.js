@@ -262,7 +262,13 @@ export const constantRoutes = [
         name: 'Tree',
         component: () => import('@/views/tree/index.vue'),
         meta: { title: 'Tree', icon: 'tree' }
-      }
+      },
+      {
+        path: 'worker-Demo',
+        name: 'WorkerDemo',
+        component: () => import('@/views/example/worker'),
+        meta: { title: 'Worker Demo', icon: 'nested' }
+      },
     ]
   }
 ]
