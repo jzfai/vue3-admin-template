@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar rowBC">
+  <div class="navbar rowBC reset-el-dropdown">
     <div class="rowSC">
       <hamburger
         v-if="settings.showHamburger"
