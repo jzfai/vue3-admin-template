@@ -10,9 +10,9 @@
         :collapse="!isCollapse"
         :unique-opened="false"
         :collapse-transition="false"
-        :background-color="scssJson.menuBg"
-        :text-color="scssJson.menuText"
-        :active-text-color="scssJson.menuActiveText"
+        :background-color="scssJson.backgroundColor"
+        :text-color="scssJson.textColor"
+        :active-text-color="scssJson.activeTextColor"
         mode="vertical"
       >
         <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
@@ -75,6 +75,28 @@ const activeMenu = computed(() => {
   .el-scrollbar__wrap {
     padding-bottom: 8vh;
   }
+
+  //menu style
+  .el-menu-item:hover {
+    background-color: $menuHover;
+  }
+  //sub menu style
+  .el-menu--inline {
+    background-color: $subBackgroundColor;
+    .el-menu-item {
+      color: $subTextColor;
+      &:hover {
+        background-color: $subMenuHover;
+      }
+    }
+    .is-active {
+      color: $subActiveTextColor;
+    }
+  }
+
+  //.el-sub-menu {
+  //  background-color: $subBackgroundColor;
+  //}
 }
 
 .el-menu-vertical {
