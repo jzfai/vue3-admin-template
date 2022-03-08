@@ -65,6 +65,11 @@ export default ({ command, mode }) => {
       //   }
       // }
     },
+    preview: {
+      port: 5001,
+      host: '0.0.0.0',
+      strictPort: true
+    },
     plugins: [
       vue({
         // refTransform: true // 开启ref转换 还是实验性   use example for $ref
@@ -159,7 +164,7 @@ export default ({ command, mode }) => {
             AtRule: {
               charset: (atRule) => {
                 if (atRule.name === 'charset') {
-                  atRule.remove();
+                  atRule.remove()
                 }
               }
             }

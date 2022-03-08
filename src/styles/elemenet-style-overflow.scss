@@ -128,3 +128,10 @@
     margin-bottom: 12px !important;
   }
 }
+
+//reset element divide style
+.reset-el-dropdown {
+  .el-dropdown-menu__item--divided {
+    height: 1px;
+  }
+}

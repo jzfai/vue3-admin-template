@@ -206,5 +206,9 @@ $light_gray: #eee;
     height: 42px; //此处调整item的高度
     caret-color: #fff;
   }
+  //hiden the input border
+  .el-input__inner {
+    box-shadow: none !important;
+  }
 }
 </style>
