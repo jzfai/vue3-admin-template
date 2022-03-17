@@ -20,6 +20,34 @@
 2.在路由配置处设置cachePage：即可缓存
 -->
 <script setup name="KeepAlive">
+/*
+*
+* //如果页面进行了缓存首次页面进入会触发的生命周期
+//1. 先触发setup -> beforeCreate  create
+//2. onMounted
+//3. onActived
+
+//再次进来
+onActivated(() => {})
+
+//页面离开（如果页面进行了缓存）
+onDeactivated(() => {})
+//如果页面缓存不会触发这个钩子
+onUnmounted(() => {}) -->
+* */
+
+// console.log('setup')
+// onMounted(() => {
+//   console.log('onMounted')
+// })
+// onActivated(() => {
+//   console.log('onActivated')
+// })
+//
+// onDeactivated(() => {
+//   console.log('onDeactivated')
+// })
+
 let { searchForm } = useCommon()
 //$ref(experimental)
 //let testRef = $ref(1)
@@ -28,12 +56,12 @@ let testRef = ref(1)
 testRef.value = 2
 // console.log(testRef.value)
 
-onActivated(() => {
-  console.log('onActivated')
-})
-onDeactivated(() => {
-  console.log('onDeactivated')
-})
+// onActivated(() => {
+//   console.log('onActivated')
+// })
+// onDeactivated(() => {
+//   console.log('onDeactivated')
+// })
 
 const $route = useRoute()
 const $store = useStore()

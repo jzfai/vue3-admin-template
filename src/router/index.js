@@ -156,11 +156,13 @@ export const constantRoutes = [
     ]
   },
   {
+    //一级理由
     path: '/writing-demo',
     component: Layout,
     meta: { title: 'Writing Demo', icon: 'eye-open' },
     alwaysShow: true,
     children: [
+      //二级理由
       {
         path: 'hook',
         component: () => import('@/views/example/hook/Hook.vue'),
@@ -225,9 +227,10 @@ export const constantRoutes = [
         name: 'DeepRouterKeepAlive',
         component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
         //注：移除父容器页面缓存会把子页面一起移除了
-        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: false },
+        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: true },
         alwaysShow: true,
         children: [
+          //三级理由
           {
             path: 'deep-children',
             name: 'DeepChildren',

@@ -38,8 +38,11 @@ router.beforeEach(async (to, from, next) => {
           store.commit('permission/M_routes', accessRoutes)
           // dynamically add accessible routes
           //router4 addRoutes destroyed
+          //添加路由accessRoutes
           accessRoutes.forEach((route) => {
-            router.addRoute(route)
+            if (!router.hasRoute(route.name)) {
+              router.addRoute(route)
+            }
           })
           //already get userInfo
           store.commit('permission/M_isGetUserInfo', true)
@@ -47,7 +50,7 @@ router.beforeEach(async (to, from, next) => {
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
-          await store.dispatch('user/resetToken')
+          await store.commit('user/M_resetState')
           next(`/login?redirect=${to.path}`)
           if (settings.isNeedNprogress) NProgress.done()
         }

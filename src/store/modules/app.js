@@ -6,7 +6,7 @@ const state = {
   },
   device: 'desktop',
   settings: defaultSettings,
-  cachedViews: [],
+  cachedViews: [], //二级路由的缓存数组
   cachedViewsDeep: [] //third router keep-alive
 }
 /*mutations建议以M_开头*/

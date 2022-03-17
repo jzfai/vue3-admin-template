@@ -10,8 +10,7 @@
     "build": "vite build --mode build",
     "preview": "npm run build && vite preview ",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
-    "prepare": "husky install",
-    "tsc-check": "tsc"
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "vue": "3.2.29"
@@ -20,7 +19,7 @@
     "@element-plus/icons-vue": "0.2.4",
     "axios": "0.21.3",
     "echarts": "4.2.1",
-    "element-plus": "2.0.5",
+    "element-plus": "2.1.4",
     "mitt": "3.0.0",
     "moment-mini": "2.22.1",
     "nprogress": "0.2.0",
@@ -28,7 +27,7 @@
     "path-to-regexp": "6.2.0",
     "tinymce": "4.9.11",
     "vue": "3.2.31",
-    "vue-router": "4.0.12",
+    "vue-router": "4.0.14",
     "vuex": "4.0.2"
   },
   "devDependencies": {
