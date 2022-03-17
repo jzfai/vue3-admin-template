@@ -107,7 +107,9 @@ let loginReq = () => {
     .dispatch('user/login', formInline)
     .then(() => {
       ElMessage({ message: '登录成功', type: 'success' })
-      router.push({ path: state.redirect || '/', query: state.otherQuery })
+      router.push({ path: '/' })
+      //注意：下面这个有问题
+      // router.push({ path: state.redirect || '/', query: state.otherQuery })
     })
     .catch((res) => {
       tipMessage.value = res.msg
