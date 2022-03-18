@@ -27,6 +27,7 @@
 //2. onMounted
 //3. onActived
 
+*
 //再次进来
 onActivated(() => {})
 
@@ -36,17 +37,17 @@ onDeactivated(() => {})
 onUnmounted(() => {}) -->
 * */
 
-// console.log('setup')
-// onMounted(() => {
-//   console.log('onMounted')
-// })
-// onActivated(() => {
-//   console.log('onActivated')
-// })
-//
-// onDeactivated(() => {
-//   console.log('onDeactivated')
-// })
+console.log('setup')
+onMounted(() => {
+  console.log('onMounted')
+})
+onActivated(() => {
+  console.log('onActivated')
+})
+
+onDeactivated(() => {
+  console.log('onDeactivated')
+})
 
 let { searchForm } = useCommon()
 //$ref(experimental)
@@ -65,6 +66,11 @@ testRef.value = 2
 
 const $route = useRoute()
 const $store = useStore()
+
+// setTimeout(() => {
+//   $store.commit('app/M_DEL_CACHED_VIEW', 'KeepAlive')
+// }, 4000)
+
 // cacheGroup为缓存分组  KeepAlive->routerDemoF->routerDemoS
 let cacheGroup = ['KeepAlive', 'routerDemoF', 'routerDemoS']
 const unWatch = watch(
