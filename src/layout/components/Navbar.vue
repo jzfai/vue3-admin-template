@@ -63,10 +63,7 @@ const route = useRoute()
 const loginOut = () => {
   store.dispatch('user/logout').then(() => {
     ElMessage({ message: '退出登录成功', type: 'success' })
-    // record the back point
-    //此处reload清空路由和重置部分状态
-    router.push(`/login?redirect=${route.fullPath}`)
-    // location.reload()
+    router.push(`/login?redirect=/`)
   })
 }
 </script>
