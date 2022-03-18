@@ -2,6 +2,7 @@ import store from '@/store'
 import axios from 'axios'
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
 import { getToken, setToken } from '@/utils/auth'
+import router from '@/router'
 let reqConfig
 let loadingE
 
@@ -70,9 +71,9 @@ service.interceptors.response.use(
           showCancelButton: false,
           type: 'warning'
         }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
+          store.dispatch('user/resetState').then(() => {
             //direct return
-            return Promise.reject(res.data)
+            router.push({ path: '/login' })
           })
         })
       }

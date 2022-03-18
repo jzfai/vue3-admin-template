@@ -44,13 +44,14 @@ router.beforeEach(async (to, from, next) => {
               router.addRoute(route)
             }
           })
+
           //already get userInfo
           store.commit('permission/M_isGetUserInfo', true)
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
-          await store.commit('user/M_resetState')
+          // await store.dispatch('user/resetState')
           next(`/login?redirect=${to.path}`)
           if (settings.isNeedNprogress) NProgress.done()
         }

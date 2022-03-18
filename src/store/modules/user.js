@@ -2,7 +2,6 @@ import { loginReq, logoutReq, getInfoReq } from '@/api/user'
 import { setToken, removeToken } from '@/utils/auth'
 
 import router, { constantRoutes, asyncRoutes } from '@/router'
-import store from '@/store'
 
 //当路由被删除时，所有的别名和子路由也会被同时删除
 //https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E5%88%A0%E9%99%A4%E8%B7%AF%E7%94%B1
