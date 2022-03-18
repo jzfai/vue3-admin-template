@@ -9,8 +9,8 @@ import getPageTitle from '@/utils/getPageTitle'
 
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to, from, next) => {
-  // start progress bar
-  if (settings.isNeedNprogress) NProgress.start()
+  if (settings.isNeedNprogress) NProgress.sta
+  // start progress barrt()
   // set page title
   document.title = getPageTitle(to.meta.title)
   let hasToken = getToken()

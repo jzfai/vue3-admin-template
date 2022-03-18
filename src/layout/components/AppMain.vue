@@ -3,6 +3,7 @@
     <router-view v-slot="{ Component }">
       <!--has transition  Judging by settings.mainNeedAnimation-->
       <transition v-if="settings.mainNeedAnimation" mode="out-in" name="fade-transform">
+        <!--  根据路由的name进行的缓存       -->
         <keep-alive :include="cachedViews">
           <component :is="Component" :key="key" />
         </keep-alive>
@@ -34,10 +35,10 @@ const cachedViews = computed(() => {
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
 
-//二级路由router
+//保存的是上一次访问的路由信息
 let oldRoute = null
 
-//如果这个存在，存储的是三级路由的oldRouter pre
+//三级路由的上一级的父元素的路由信息
 let deepOldRouter = null
 
 //移除二级路由下的三级的children的vuex
@@ -50,6 +51,7 @@ const removeDeepChildren = (deepOldRouter) => {
 watch(
   () => route.name,
   () => {
+    //判断几级路由
     const routerLevel = route.matched.length
     //二级路由处理
     if (routerLevel === 2) {
@@ -86,9 +88,11 @@ watch(
       //如果路由等级为3级处理流程
       //三级时存储当前路由对象的上一级
       /*移除缓存*/
+      //二级路由
       const parentRoute = route.matched[1]
       //deepOldRouter不为空，且deepOldRouter不是当前路由的父对象，则需要清除deepOldRouter缓存
       //一般为三级路由跳转三级路由的情况
+      //不同父级
       if (deepOldRouter?.name && deepOldRouter.name !== parentRoute.name) {
         //不同二级之间的三级跳转
         //三级路由->三级级路由
@@ -101,6 +105,7 @@ watch(
         //同一 二级之间的三级跳转
         //三级路由->二级路由
         //否则走正常两级路由处理流程
+        //同一父级
         if (oldRoute?.name) {
           if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
             store.commit('app/M_DEL_CACHED_VIEW_DEEP', oldRoute.name)
