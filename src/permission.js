@@ -52,7 +52,7 @@ router.beforeEach(async (to, from, next) => {
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
-          // await store.dispatch('user/resetState')
+          await store.dispatch('user/resetState')
           next(`/login?redirect=${to.path}`)
           if (settings.isNeedNprogress) NProgress.done()
         }
