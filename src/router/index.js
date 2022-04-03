@@ -57,7 +57,6 @@ export const constantRoutes = [
   {
     path: '/error-log',
     component: Layout,
-    name: 'ErrorLog',
     redirect: '/error-log/list',
     meta: { title: 'ErrorLog', icon: 'bug' },
     children: [
@@ -76,6 +75,122 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/writing-demo',
+    component: Layout,
+    meta: { title: 'Writing Demo', icon: 'eye-open' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'hook',
+        component: () => import('@/views/example/hook/Hook.vue'),
+        name: 'Hook',
+        meta: { title: 'Hook-Demo' }
+      },
+      {
+        path: 'vuex-use',
+        component: () => import('@/views/example/vuex-use/VuexUse.vue'),
+        name: 'VuexUse',
+        meta: { title: 'Vuex-Demo' }
+      },
+      {
+        path: 'mock-test',
+        component: () => import('@/views/example/mock-test/MockTest.vue'),
+        name: 'MockTest',
+        meta: { title: 'Mock-Demo' }
+      },
+      {
+        path: 'svg-icon',
+        component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
+        name: 'SvgIcon',
+        meta: { title: 'Svg-Demo' }
+      },
+      {
+        path: 'parent-children',
+        component: () => import('@/views/example/parent-children/Parent.vue'),
+        name: 'Parent',
+        meta: { title: 'Parent-Children' }
+      },
+      {
+        path: 'keep-alive',
+        component: () => import('@/views/example/keep-alive'),
+        name: 'KeepAlive',
+        //cachePage: cachePage when page enter, default false
+        //leaveRmCachePage: remove cachePage when page leave, default false
+        meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
+      },
+      {
+        path: 'tab-keep-alive',
+        component: () => import('@/views/example/keep-alive/TabKeepAlive.vue'),
+        name: 'TabKeepAlive',
+        //closeTabRmCache: remove cachePage when tabs close, default false
+        meta: { title: 'Tab-Keep-Alive', cachePage: true, closeTabRmCache: true }
+      },
+      {
+        path: 'router-demo-f',
+        name: 'routerDemoF',
+        hidden: true,
+        component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
+        meta: { title: 'RouterDemo-F', activeMenu: '/writing-demo/keep-alive' }
+      },
+      {
+        path: 'router-demo-s',
+        name: 'routerDemoS',
+        hidden: true,
+        component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
+        meta: { title: 'RouterDemo-S', activeMenu: '/writing-demo/keep-alive' }
+      },
+      {
+        path: 'deep-router-keep-alive',
+        name: 'DeepRouterKeepAlive',
+        component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
+        //注：移除父容器页面缓存会把子页面一起移除了
+        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: false },
+        alwaysShow: true,
+        children: [
+          {
+            path: 'deep-children',
+            name: 'DeepChildren',
+            component: () => import('@/views/example/keep-alive/deep-children/DeepChildren.vue'),
+            meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: true }
+          },
+          {
+            path: 'deep-children-sd',
+            name: 'DeepChildrenSd',
+            component: () => import('@/views/example/keep-alive/deep-children/DeepChildrenSd.vue'),
+            meta: { title: 'DeepChildrenSd', cachePage: true, leaveRmCachePage: false }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: 'Example', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index.vue'),
+        meta: { title: 'Table', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index.vue'),
+        meta: { title: 'Tree', icon: 'tree' }
+      },
+      {
+        path: 'worker-Demo',
+        name: 'WorkerDemo',
+        component: () => import('@/views/example/worker'),
+        meta: { title: 'Worker Demo', icon: 'nested' }
+      }
+    ]
+  },
+  {
     path: '/form',
     component: Layout,
     children: [
@@ -87,6 +202,7 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
     path: '/nested',
     component: Layout,
@@ -150,132 +266,13 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://github.com/jzfai/vue3-admin-template.git',
+        component: () => {},
+        path: 'https://github.com/jzfai/vue3-admin-ts.git',
         meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-  {
-    //一级理由
-    path: '/writing-demo',
-    component: Layout,
-    meta: { title: 'Writing Demo', icon: 'eye-open' },
-    alwaysShow: true,
-    children: [
-      //二级理由
-      {
-        path: 'hook',
-        component: () => import('@/views/example/hook/Hook.vue'),
-        name: 'Hook',
-        meta: { title: 'Hook-Demo' }
-      },
-      {
-        path: 'vuex-use',
-        component: () => import('@/views/example/vuex-use/VuexUse.vue'),
-        name: 'VuexUse',
-        meta: { title: 'Vuex-Demo' }
-      },
-      {
-        path: 'mock-test',
-        component: () => import('@/views/example/mock-test/MockTest.vue'),
-        name: 'MockTest',
-        meta: { title: 'Mock-Demo' }
-      },
-      {
-        path: 'svg-icon',
-        component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
-        name: 'SvgIcon',
-        meta: { title: 'Svg-Demo' }
-      },
-      {
-        path: 'parent-children',
-        component: () => import('@/views/example/parent-children/Parent.vue'),
-        name: 'Parent',
-        meta: { title: 'Parent-Children' }
-      },
-      {
-        path: 'keep-alive',
-        component: () => import('@/views/example/keep-alive'),
-        name: 'KeepAlive',
-        //cachePage: cachePage when page enter, default false
-        //leaveRmCachePage: remove cachePage when page leave, default false
-        meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
-      },
-      {
-        path: 'tab-keep-alive',
-        component: () => import('@/views/example/keep-alive/TabKeepAlive.vue'),
-        name: 'TabKeepAlive',
-        //closeTabRmCache: remove cachePage when tabs close, default false
-        meta: { title: 'Tab-Keep-Alive', cachePage: true, closeTabRmCache: true }
-      },
-      {
-        path: 'router-demo-f',
-        name: 'routerDemoF',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
-        meta: { title: 'RouterDemo-F', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
-      },
-      {
-        path: 'router-demo-s',
-        name: 'routerDemoS',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
-        meta: { title: 'RouterDemo-S', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
-      },
-      {
-        path: 'deep-router-keep-alive',
-        name: 'DeepRouterKeepAlive',
-        component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
-        //注：移除父容器页面缓存会把子页面一起移除了
-        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: true },
-        alwaysShow: true,
-        children: [
-          //三级理由
-          {
-            path: 'deep-children',
-            name: 'DeepChildren',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildren.vue'),
-            meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: true }
-          },
-          {
-            path: 'deep-children-sd',
-            name: 'DeepChildrenSd',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildrenSd.vue'),
-            meta: { title: 'DeepChildrenSd', cachePage: true, leaveRmCachePage: false }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index.vue'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index.vue'),
-        meta: { title: 'Tree', icon: 'tree' }
-      },
-      {
-        path: 'worker-Demo',
-        name: 'WorkerDemo',
-        component: () => import('@/views/example/worker'),
-        meta: { title: 'Worker Demo', icon: 'nested' }
       }
     ]
   }
 ]
-
 /**
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
@@ -298,7 +295,7 @@ export const asyncRoutes = [
         component: () => import('@/views/permission'),
         name: 'Permission',
         meta: {
-          title: 'Role Index'
+          title: 'role Index'
           //roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -349,5 +346,13 @@ const router = createRouter({
   scrollBehavior: () => ({ top: 0 }),
   routes: constantRoutes
 })
+
+// export function resetRouter() {
+//   const newRouter = createRouter({
+//     history: createWebHashHistory(),
+//     scrollBehavior: () => ({ top: 0 }),
+//     routes: constantRoutes
+//   })
+// }
 
 export default router

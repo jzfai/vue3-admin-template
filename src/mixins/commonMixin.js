@@ -1,6 +1,4 @@
 import { getToken } from '@/utils/auth'
-import momentMini from 'moment-mini'
-
 const mixin = {
   data() {
     return {
@@ -36,11 +34,11 @@ const mixin = {
     this.accessTokenMixin = getToken()
     this.userBaseInfoMixin = JSON.parse(localStorage.getItem('L_userBaseInfo'))
     /* 获取时间点*/
-    this.todayTimeMixin = momentMini().startOf('day').format('YYYY-MM-DD HH:mm:ss')
-    this.currentTimeMixin = momentMini(new Date()).format('YYYY-MM-DD HH:mm:ss')
-    this.todayTimeMixinLast = momentMini().endOf('day').format('YYYY-MM-DD HH:mm:ss')
-    this.beforeThreeDateTimeMixin = momentMini().add(-3, 'days').format('YYYY-MM-DD HH:mm:ss')
-    this.yesterdayTimeMixin = momentMini().add(-1, 'days').format('YYYY-MM-DD HH:mm:ss')
+    this.todayTimeMixin = this.$momentMini().startOf('day').format('YYYY-MM-DD HH:mm:ss')
+    this.currentTimeMixin = this.$momentMini(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    this.todayTimeMixinLast = this.$momentMini().endOf('day').format('YYYY-MM-DD HH:mm:ss')
+    this.beforeThreeDateTimeMixin = this.$momentMini().add(-3, 'days').format('YYYY-MM-DD HH:mm:ss')
+    this.yesterdayTimeMixin = this.$momentMini().add(-1, 'days').format('YYYY-MM-DD HH:mm:ss')
   },
   methods: {
     /* 数组操作相关api*/
@@ -81,7 +79,7 @@ const mixin = {
       return new Promise((resolve) => {
         const timer = setTimeout(() => {
           clearTimeout(timer)
-          resolve()
+          resolve(true)
         }, time)
       })
     },

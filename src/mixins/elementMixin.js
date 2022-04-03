@@ -2,7 +2,7 @@ const mixin = {
   data() {
     /* element form校验相关*/
     // 密码必须为6-18位字母、数字
-    let passwordValid = (rule, value, callback) => {
+    const passwordValid = (rule, value, callback) => {
       if (!/^(?![^a-zA-Z]+$)(?!\D+$)/.test(value)) {
         callback(new Error('6-18位字母、数字'))
       } else {
@@ -10,14 +10,14 @@ const mixin = {
       }
     }
     // 大于0的整数
-    let upZeroInt = (rule, value, callback) => {
+    const upZeroInt = (rule, value, callback) => {
       if (!/^\+?[1-9]\d*$/.test(value)) {
         callback(new Error('大于0的整数'))
       } else {
         callback()
       }
     }
-    let upZeroIntCanNull = (rule, value, callback) => {
+    const upZeroIntCanNull = (rule, value, callback) => {
       if (!value) {
         callback()
       } else {
@@ -28,7 +28,7 @@ const mixin = {
         }
       }
     }
-    let validatePass = (rule, value, callback) => {
+    const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
@@ -193,5 +193,7 @@ const mixin = {
     }
   }
 }
+
+const detailDialogMixin = false
 
 export default mixin

@@ -23,23 +23,24 @@
 
 <script setup>
 import { compile } from 'path-to-regexp'
-let levelList = ref(null)
+const levelList = ref(null)
+
 //Whether close the animation fo breadcrumb
-import { useStore } from 'vuex'
-let store = useStore()
-let settings = computed(() => {
-  return store.state.app.settings
+
+import { useAppStore } from '@/store/app'
+const appStore = useAppStore()
+const settings = computed(() => {
+  return appStore.settings
 })
 
 const route = useRoute()
-const router = useRouter()
 const getBreadcrumb = () => {
   // only show routes with meta.title
   let matched = route.matched.filter((item) => item.meta && item.meta.title)
   const first = matched[0]
   if (!isDashboard(first)) {
     //it can replace the first page if not exits
-    matched = [{ path: '/', meta: { title: 'Dashboard' } }].concat(matched)
+    matched = [{ path: '/dashboard', meta: { title: 'Dashboard' } }].concat(matched)
   }
   levelList.value = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false)
 }
@@ -56,13 +57,16 @@ const pathCompile = (path) => {
   const toPath = compile(path)
   return toPath(params)
 }
+const router = useRouter()
 const handleLink = (item) => {
   const { redirect, path } = item
   if (redirect) {
     router.push(redirect)
     return
   }
-  router.push(pathCompile(path))
+  if (path) {
+    router.push(pathCompile(path))
+  }
 }
 watch(
   () => route.path,

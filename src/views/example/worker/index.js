@@ -1,3 +1,3 @@
-import worker from "./Worker.vue";
+import worker from './Worker.vue'
 
 export default worker

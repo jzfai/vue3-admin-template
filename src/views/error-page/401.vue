@@ -1,6 +1,6 @@
 <template>
   <div class="errPage-container">
-    <el-button class="pan-back-btn" @click="back">返回</el-button>
+    <el-button icon="el-icon-arrow-left" class="pan-back-btn" @click="back">返回</el-button>
     <el-row>
       <el-col :span="12">
         <h1 class="text-jumbo text-ginormous">Oops!</h1>
@@ -38,6 +38,7 @@ const state = reactive({
   ewizardClap: 'https://wpimg.wallstcn.com/007ef517-bafd-4066-aae4-6883632d9646',
   dialogVisible: false
 })
+
 const route = useRoute()
 const router = useRouter()
 const back = () => {
@@ -48,7 +49,7 @@ const back = () => {
   }
 }
 //导出属性到页面中使用
-let { ewizardClap, dialogVisible } = toRefs(state)
+const { ewizardClap, dialogVisible } = toRefs(state)
 </script>
 
 <style lang="scss" scoped>

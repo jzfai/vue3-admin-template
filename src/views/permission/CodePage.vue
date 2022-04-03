@@ -27,7 +27,6 @@
 //   { immediate: true }
 // );
 
-// const store = useStore()
 // const router = useRouter()
 // onMounted(()=>{
 //   console.log("页面挂载了")

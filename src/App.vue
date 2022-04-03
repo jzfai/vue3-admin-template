@@ -2,11 +2,12 @@
   <router-view />
 </template>
 <script setup>
-// import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { setToken } from '@/utils/auth'
-const store = useStore()
-let settings = computed(() => {
-  return store.state.app.settings
+import { useAppStore } from '@/store/app'
+
+const appStore = useAppStore()
+const settings = computed(() => {
+  return appStore.settings
 })
 onBeforeMount(() => {
   //set tmp token when setting isNeedLogin false
