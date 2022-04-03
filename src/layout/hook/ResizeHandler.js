@@ -1,8 +1,8 @@
-import { onBeforeMount, onMounted, onBeforeUnmount } from 'vue'
-import store from '@/store'
 const { body } = document
 const WIDTH = 992
+import { useAppStore } from '@/store/app'
 export default function () {
+  const appStore = useAppStore()
   const $_isMobile = () => {
     const rect = body.getBoundingClientRect()
     return rect.width - 1 < WIDTH
@@ -10,15 +10,13 @@ export default function () {
   const $_resizeHandler = () => {
     if (!document.hidden) {
       const isMobile = $_isMobile()
-      // console.log('toggleDevice')
-      // store.dispatch('app/toggleDevice', isMobile ? 'mobile' : 'desktop')
       if (isMobile) {
         // console.log('closeSideBar')
-        // store.dispatch('app/closeSideBar', { withoutAnimation: true })
         /*此处只做根据window尺寸关闭sideBar功能*/
-        store.commit('app/M_sidebar_opened', false)
+
+        appStore.M_sidebar_opened(false)
       } else {
-        store.commit('app/M_sidebar_opened', true)
+        appStore.M_sidebar_opened(true)
       }
     }
   }
@@ -28,11 +26,9 @@ export default function () {
   onMounted(() => {
     const isMobile = $_isMobile()
     if (isMobile) {
-      store.commit('app/M_sidebar_opened', false)
-      // store.dispatch('app/toggleDevice', 'mobile')
-      // store.dispatch('app/closeSideBar', { withoutAnimation: true })
+      appStore.M_sidebar_opened(false)
     } else {
-      store.commit('app/M_sidebar_opened', true)
+      appStore.M_sidebar_opened(true)
     }
   })
   onBeforeUnmount(() => {

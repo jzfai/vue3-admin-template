@@ -1,5 +1,6 @@
 import { getToken } from '@/utils/auth'
 import momentMini from 'moment-mini'
+
 export const useCommonExample = () => {
   const state = reactive({
     totalPage: 0,
@@ -15,16 +16,13 @@ export const useCommonExample = () => {
     VITE_APP_BASE_WS_URL: '', // 请求的url地址
     accessToken: '', // 请求头的token
     userBaseInfo: {}, // 用户信息
+    startEndArr: [],
     /* 时间点相关*/
     todayTime: '',
     currentTime: '',
     todayTimeLast: '',
-    yesterdayTime: null,
-    beforeThreeDateTime: '',
-    startEndArr: [],
-    /*dialog*/
-    dialogTitle: '',
-    dialogVisible: false
+    yesterdayTime: '',
+    beforeThreeDateTime: ''
   })
   // 读取.env 多坏境里的数据
   state.VITE_APP_IMAGE_URL_PRE = import.meta.env.VITE_APP_BASE_URL
@@ -42,18 +40,13 @@ export const useCommonExample = () => {
    * 清空空的参数项
    * objParam：传入的参数
    * */
-  const clearParamsIsNull = (objParam) => {
-    const obj = Object.keys(objParam)
-    obj.forEach((fItem) => {
-      if (objParam[fItem] === '' || objParam[fItem] === null || objParam[fItem] === undefined) delete objParam[fItem]
-    })
-    return objParam
-  }
-
-  /*文件上传*/
-  const handleChange = (fileList) => {
-    state.fileList = fileList
-  }
+  // const clearParamsIsNull = (objParam) => {
+  //   const obj = Object.keys(objParam)
+  //   obj.forEach((fItem) => {
+  //     if (objParam[fItem] === '' || objParam[fItem] === null || objParam[fItem] === undefined) delete objParam[fItem]
+  //   })
+  //   return objParam
+  // }
 
   const sleep = (time) => {
     return new Promise((resolve) => {
@@ -65,8 +58,6 @@ export const useCommonExample = () => {
   }
 
   return {
-    clearParamsIsNull,
-    handleChange,
     sleep,
     ...toRefs(state)
   }

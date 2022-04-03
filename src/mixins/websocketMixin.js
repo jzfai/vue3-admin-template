@@ -63,7 +63,7 @@ export default {
           // 连接打开事件
           this.webSocket.onopen = () => {
             this.heartStart()
-            resolve()
+            resolve(true)
           }
           // 收到消息事件
           this.webSocket.onmessage = (msg) => {

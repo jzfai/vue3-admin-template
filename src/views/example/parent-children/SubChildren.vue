@@ -31,6 +31,7 @@
 <script setup>
 //provide and inject using
 let title = inject('title')
+
 const modalOpen = ref(false)
 
 const showModalOpen = () => {

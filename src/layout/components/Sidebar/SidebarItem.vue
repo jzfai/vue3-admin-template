@@ -27,7 +27,7 @@
 <script setup>
 /*初始化参数比如引入组件，proxy,state等*/
 import Link from './Link.vue'
-import Item from './Item.jsx'
+import Item from './Item'
 import { isExternal } from '@/utils/validate'
 import path from 'path'
 const props = defineProps({
@@ -47,9 +47,13 @@ const props = defineProps({
     default: ''
   }
 })
+onMounted(() => {
+  // console.log("我挂载了");
+  // console.log(proxy.item);
+})
 //显示sidebarItem 的情况
 let onlyOneChild = ref(null)
-let showSidebarItem = (children = [], parent) => {
+const showSidebarItem = (children = [], parent) => {
   const showingChildren = children.filter((item) => {
     if (item.hidden) {
       return false
@@ -68,7 +72,7 @@ let showSidebarItem = (children = [], parent) => {
   }
   return false
 }
-let resolvePath = (routePath) => {
+const resolvePath = (routePath) => {
   if (isExternal(routePath)) {
     return routePath
   }
@@ -78,3 +82,17 @@ let resolvePath = (routePath) => {
   return path.resolve(props.basePath, routePath)
 }
 </script>
+
+<style lang="scss">
+// menu hover
+/* .submenu-title-noDropdown,
+  .el-submenu__title {
+    &:hover {
+      background-color: $menuHover !important;
+    }
+  }
+
+  .is-active>.el-submenu__title {
+    color: $subMenuActiveText !important;
+  }*/
+</style>

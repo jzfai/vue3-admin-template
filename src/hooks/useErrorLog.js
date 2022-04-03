@@ -3,7 +3,7 @@ import request from '@/utils/axiosReq'
 import setting from '@/settings'
 import bus from '@/utils/bus'
 import pack from '../../package.json'
-let errorLogReq = (errLog) => {
+const errorLogReq = (errLog) => {
   request({
     url: '/integration-front/errorCollection/insert',
     data: {
@@ -20,7 +20,7 @@ let errorLogReq = (errLog) => {
   })
 }
 
-export default function (app) {
+export default function () {
   /*
    * type judge
    * base type  using 'type of'
@@ -29,7 +29,7 @@ export default function (app) {
    * */
   const checkNeed = () => {
     const env = import.meta.env.VITE_APP_ENV
-    let { errorLog } = setting
+    const { errorLog } = setting
     if (typeof errorLog === 'string') {
       return env === errorLog
     }
@@ -45,11 +45,11 @@ export default function (app) {
       ({ error, target }) => {
         if (target.outerHTML) {
           //img error collection
-          let errLog = `${JSON.stringify(target.outerHTML)}`
+          const errLog = `${JSON.stringify(target.outerHTML)}`
           //console.log('errorString', errLog)
           errorLogReq(errLog)
         } else {
-          let errLog = `${error?.stack?.substr(0, 300)}`
+          const errLog = `${error?.stack?.substr(0, 300)}`
           //console.log('errorString', errLog)
           errorLogReq(errLog)
         }
@@ -66,8 +66,6 @@ export default function (app) {
       } else {
         errLog = `${reason?.stack?.substr(0, 300)}`
       }
-
-      console.log("unhandledrejection", reason);
       //未授权和取消不捕捉
       //此处可添加不捕捉状态码
       const unhandledCode = '403, 401'
@@ -79,12 +77,15 @@ export default function (app) {
     })
 
     //些特殊情况下，还需要捕获处理console.error，捕获方式就是重写window.console.error
-    let _oldConsoleError = window.console.error
+    const _oldConsoleError = window.console.error
     window.console.error = function () {
-      let errLog = Object.values(arguments).join(',')
+      // eslint-disable-next-line prefer-rest-params
+      const errLog = Object.values(arguments).join(',')
       if (errLog.indexOf('custom') === -1) {
         errorLogReq(errLog)
       }
+      // @ts-ignore
+      // eslint-disable-next-line prefer-rest-params
       _oldConsoleError && _oldConsoleError.apply(window, arguments)
     }
   }

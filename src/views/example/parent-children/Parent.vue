@@ -48,11 +48,7 @@ const fartherMethod = () => {
   console.log('fartherMethod')
 }
 //provide
-//provide 和 inject 绑定不是响应式的
 provide('title', 'provide and inject using')
-// const changeProvide = () => {
-//   testProvide.value = '改变后的值'
-// }
 
 //v-model sync
 const parentTitle = ref('parentTitle')

@@ -22,33 +22,33 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 //导入配置文件
-import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
-const store = useStore()
-const $route = useRoute()
-let routes = computed(() => {
-  return store.state.permission.routes
+
+const appStore = useAppStore()
+const settings = computed(() => {
+  return appStore.settings
+})
+
+const route = useRoute()
+const permissionStore = usePermissionStore()
+const routes = computed(() => {
+  return permissionStore.routes
 })
 const isCollapse = computed(() => {
-  return store.state.app.sidebar.opened
-})
-let settings = computed(() => {
-  return store.state.app.settings
+  return appStore.sidebar.opened
 })
 
 //change  scss variable to js
 const dillScssExportToJson = (scssExportJson) => {
-  let jsonString = scssExportJson.replace(/:export\s*/, '').replace(/[\s+\r\n]/g, '')
-  let scssJson = {}
+  const jsonString = scssExportJson.replace(/:export\s*/, '').replace(/[\s+\r\n]/g, '')
+  const scssJson = {}
   jsonString
     .slice(1, jsonString.length - 2)
     .split(';')
     .forEach((fItem) => {
-      let arr = fItem.split(':')
+      const arr = fItem.split(':')
       scssJson[arr[0]] = arr[1]
     })
   return scssJson
@@ -56,9 +56,11 @@ const dillScssExportToJson = (scssExportJson) => {
 
 //get scss variable
 import scssExportJson from '@/styles/variables-to-js.scss'
-let scssJson = dillScssExportToJson(scssExportJson)
+import { useAppStore } from '@/store/app'
+import { usePermissionStore } from '@/store/permission'
+const scssJson = dillScssExportToJson(scssExportJson)
 const activeMenu = computed(() => {
-  const { meta, fullPath } = $route
+  const { meta, fullPath } = route
   // if set path, the sidebar will highlight the path you set
   if (meta.activeMenu) {
     return meta.activeMenu
@@ -73,7 +75,7 @@ const activeMenu = computed(() => {
     border-right: none;
   }
   .el-scrollbar__wrap {
-    padding-bottom: 8vh;
+    padding-bottom: 10vh;
   }
 }
 

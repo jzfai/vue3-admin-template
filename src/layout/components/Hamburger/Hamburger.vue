@@ -22,9 +22,10 @@ defineProps({
     default: false
   }
 })
-const emits = defineEmits(['toggleClick'])
+
+const emit = defineEmits(['toggleClick'])
 const toggleClick = () => {
-  emits('toggleClick')
+  emit('toggleClick')
 }
 </script>
 

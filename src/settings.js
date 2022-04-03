@@ -1,6 +1,4 @@
 const setting = {
-  /*page layout related*/
-  //sideBar or navbar show title
   title: 'Vue3 Admin Template',
   /**
    * @type {boolean} true | false

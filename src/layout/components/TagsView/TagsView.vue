@@ -26,15 +26,18 @@
 </template>
 
 <script setup>
+// import ScrollPane from './ScrollPane'
 import path from 'path'
 import { Close } from '@element-plus/icons-vue'
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, nextTick } from 'vue'
 //获取store和router
-import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
-const store = useStore()
-const $router = useRouter()
+
+import { useAppStore } from '@/store/app'
+import { useTagsViewStore } from '@/store/tagsView'
+import { usePermissionStore } from '@/store/permission'
+
 const $route = useRoute()
+const $router = useRouter()
+
 const state = reactive({
   visible: false,
   top: 0,
@@ -44,12 +47,12 @@ const state = reactive({
 })
 
 const visitedViews = computed(() => {
-  return store.state.tagsView.visitedViews
+  return tagsViewStore.visitedViews
 })
+const permissionStore = usePermissionStore()
 const routes = computed(() => {
-  return store.state.permission.routes
+  return permissionStore.routes
 })
-
 watch(
   () => $route.path,
   () => {
@@ -113,12 +116,13 @@ const filterAffixTags = (routes, basePath = '/') => {
   })
   return tags
 }
+const tagsViewStore = useTagsViewStore()
 const initTags = () => {
   const affixTags = (state.affixTags = filterAffixTags(routes.value))
   for (const tag of affixTags) {
     // Must have tag name
     if (tag.name) {
-      store.dispatch('tagsView/addVisitedView', tag)
+      tagsViewStore.addVisitedView(tag)
     }
   }
 }
@@ -126,7 +130,7 @@ const initTags = () => {
 const addTags = () => {
   const { name } = $route
   if (name) {
-    store.dispatch('tagsView/addView', $route)
+    tagsViewStore.addView($route)
   }
   return false
 }
@@ -138,8 +142,9 @@ const refreshSelectedTag = (view) => {
     })
   })
 }
+const appStore = useAppStore()
 const closeSelectedTag = (view) => {
-  store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
+  tagsViewStore.delView(view).then(({ visitedViews }) => {
     if (isActive(view)) {
       toLastView(visitedViews, view)
     }
@@ -147,21 +152,20 @@ const closeSelectedTag = (view) => {
     if (view.meta?.closeTabRmCache) {
       const routerLevel = view.matched.length
       if (routerLevel === 2) {
-        store.commit('app/M_DEL_CACHED_VIEW', view.name)
+        appStore.M_DEL_CACHED_VIEW(view.name)
       }
-      //三级路由
       if (routerLevel === 3) {
-        store.commit('app/M_DEL_CACHED_VIEW_DEEP', view.name)
+        appStore.M_DEL_CACHED_VIEW_DEEP(view.name)
       }
     }
   })
 }
 const closeOthersTags = () => {
   $router.push(state.selectedTag)
-  store.dispatch('tagsView/delOthersViews', state.selectedTag)
+  tagsViewStore.delOthersViews(state.selectedTag)
 }
 const closeAllTags = (view) => {
-  store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
+  tagsViewStore.delAllViews().then(({ visitedViews }) => {
     if (state.affixTags.some((tag) => tag.path === view.path)) {
       return
     }
@@ -183,7 +187,8 @@ const toLastView = (visitedViews, view) => {
     }
   }
 }
-const proxy = getCurrentInstance().proxy
+
+const { proxy } = getCurrentInstance()
 const openMenu = (tag, e) => {
   const menuMinWidth = 105
   const offsetLeft = proxy.$el.getBoundingClientRect().left // container margin left
@@ -208,7 +213,7 @@ const closeMenu = () => {
 // }
 
 //export to page use
-let { visible, top, left, selectedTag } = toRefs(state)
+const { visible, top, left, selectedTag } = toRefs(state)
 </script>
 
 <style lang="scss" scoped>
