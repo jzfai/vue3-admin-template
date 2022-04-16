@@ -144,14 +144,14 @@ export const constantRoutes = [
         name: 'DeepRouterKeepAlive',
         component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
         //注：移除父容器页面缓存会把子页面一起移除了
-        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: false },
+        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: true },
         alwaysShow: true,
         children: [
           {
             path: 'deep-children',
             name: 'DeepChildren',
             component: () => import('@/views/example/keep-alive/deep-children/DeepChildren.vue'),
-            meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: true }
+            meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: false }
           },
           {
             path: 'deep-children-sd',
@@ -346,13 +346,5 @@ const router = createRouter({
   scrollBehavior: () => ({ top: 0 }),
   routes: constantRoutes
 })
-
-// export function resetRouter() {
-//   const newRouter = createRouter({
-//     history: createWebHashHistory(),
-//     scrollBehavior: () => ({ top: 0 }),
-//     routes: constantRoutes
-//   })
-// }
 
 export default router

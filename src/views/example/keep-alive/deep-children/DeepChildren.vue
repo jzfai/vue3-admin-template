@@ -5,6 +5,10 @@
 
 <script setup name="DeepChildren">
 let testInput = ref('')
+
+onMounted(() => {
+  console.log('DeepChildren')
+})
 </script>
 
 <style scoped lang="scss"></style>
