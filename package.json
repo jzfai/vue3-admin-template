@@ -1,6 +1,6 @@
 {
   "name": "vue3-admin-template",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "license": "ISC",
   "author": "kuanghua(869653722@qq.com)",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "1.1.4",
-    "js-error-collection": "^1.0.5",
+    "js-errorlog-collection": "^1.0.5",
     "axios": "0.21.3",
     "echarts": "5.3.2",
     "element-plus": "2.1.9",
