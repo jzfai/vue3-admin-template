@@ -1,17 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-#yarn run lint
-#npx --no-install commitlint --edit "$1"
-#npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+
 #推送之前运行eslint检查
 npm  run lint
-#wait
-
-
-
 ##推送之前运行单元测试检查
-npm run test:unit
-#wait
-#echo $?
-#[ $? -ne 0 ] && exit
+#npm run test:unit
 
