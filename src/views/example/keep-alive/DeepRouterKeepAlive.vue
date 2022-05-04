@@ -5,7 +5,7 @@
     <!--  three router   -->
     <router-view v-slot="{ Component }">
       <keep-alive :include="cachedViewsDeep">
-        <component :is="Component" :key="Component" />
+        <component :is="Component"  />
       </keep-alive>
     </router-view>
   </div>
