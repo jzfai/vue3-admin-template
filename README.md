@@ -17,7 +17,6 @@ Vite need Node.js >= 12.0.0。
 - [中文官网](https://github.jzfai.top/vue3-admin-doc/zh/)
 
 
-
 ## Online experience
 
 [github address](https://github.com/jzfai/vue3-admin-template.git)
