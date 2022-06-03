@@ -74,7 +74,7 @@ cd vue3-admin-template
 
 # pnpm address https://pnpm.io/zh/motivation
 # install dependency(Recommend use pnpm)
-# you can  use "npm -g i pnpm" to install pnpm 
+# you can  use "npm -g i pnpm@6.32.3" to install pnpm 
 pnpm i
 
 # develop
@@ -126,5 +126,5 @@ Modern browsers and Internet Explorer 11+.
 
 [MIT](https://github.com/jzfai/vue3-admin-template/blob/master/LICENSE) license.
 
-Copyright (c) 2021-present  kuanghua
+Copyright (c) 2022-present  kuanghua
 

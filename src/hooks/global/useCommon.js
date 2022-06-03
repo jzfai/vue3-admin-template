@@ -5,6 +5,7 @@ export const useCommonExample = () => {
   const state = reactive({
     totalPage: 0,
     searchForm: {},
+    /*s*/
     /* 文件上传相关*/
     fileList: [],
     chooseFileName: '',
