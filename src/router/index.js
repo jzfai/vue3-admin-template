@@ -43,6 +43,19 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/generation-code',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'index',
+        name: 'CodeGenerator',
+        component: () => import('@/views/code-generator'),
+        meta: { title: 'CodeGenerator', elSvgIcon: 'Fold' }
+      }
+    ]
+  },
+  {
     path: '/setting-switch',
     component: Layout,
     children: [
@@ -171,34 +184,10 @@ export const constantRoutes = [
     meta: { title: 'Example', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index.vue'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index.vue'),
-        meta: { title: 'Tree', icon: 'tree' }
-      },
-      {
         path: 'worker-Demo',
         name: 'WorkerDemo',
         component: () => import('@/views/example/worker'),
         meta: { title: 'Worker Demo', icon: 'nested' }
-      }
-    ]
-  },
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index.vue'),
-        meta: { title: 'Form', icon: 'table' }
       }
     ]
   },

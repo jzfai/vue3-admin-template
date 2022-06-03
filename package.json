@@ -1,10 +1,11 @@
 {
   "name": "vue3-admin-template",
-  "version": "1.5.5",
+  "version": "1.6.0",
   "license": "ISC",
   "packageManager": "pnpm@6.32.3",
   "author": "kuanghua(869653722@qq.com)",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite --mode serve-dev --host",
     "test": "vite --mode serve-test --host",
     "build:test": "vite build --mode  build-test",
@@ -22,7 +23,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "1.1.4",
-    "js-errorlog-collection": "^1.0.5",
+    "js-error-collection": "^1.0.7",
     "axios": "0.21.3",
     "echarts": "5.3.2",
     "element-plus": "2.1.9",
@@ -33,7 +34,7 @@
     "path-to-regexp": "6.2.0",
     "pinia": "2.0.13",
     "tinymce": "4.9.11",
-    "vue": "3.2.33",
+    "vue": "3.2.36",
     "vue-router": "4.0.14"
   },
   "devDependencies": {
@@ -61,7 +62,7 @@
     "typescript": "4.5.4",
     "unplugin-auto-import": "^0.5.11",
     "unplugin-vue-components": "^0.17.14",
-    "vite": "2.9.5",
+    "vite": "2.9.9",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "1.2.1",
@@ -90,6 +91,6 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">= 14"
+    "node": ">= 12"
   }
 }
