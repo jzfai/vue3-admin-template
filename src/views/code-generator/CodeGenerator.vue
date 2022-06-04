@@ -1,5 +1,5 @@
 <template>
-  <div class="CodeGenerator">
+  <div class="CodeGenerator scroll-y pb-5">
     <!--项目和作者信息配置-->
     <div class="mb-1">项目和作者信息配置</div>
     <el-form ref="refForm" label-width="150px" :inline="true" :model="poaForm" :rules="formRules" class="pr-5">
@@ -95,7 +95,7 @@
     <div class="rowSS">
       <el-input v-model="dataBaseUrl" class="widthPx-200" placeholder="dataBaseUrl" />
       <el-input v-model="dbName" class="widthPx-200" placeholder="dbName" />
-      <el-button @click="searchDataBase">查询库</el-button>
+      <el-button @click="searchDataBase">查询表</el-button>
     </div>
     <div class="mt-1">请选择表(最多支持三张表)</div>
     <el-radio-group v-model="dbRadio" class="mt-1" @click.stop>
@@ -120,13 +120,13 @@
     <div class="rowSS mt-2">
       <el-input v-model="dbTableUrl" class="widthPx-200" placeholder="dbTableUrl" />
       <el-input v-model="tbName" class="widthPx-200" placeholder="tbName" />
-      <el-button @click="searchDbTable">查询表</el-button>
+      <el-button @click="searchDbTable">查询表字段</el-button>
     </div>
     <!--  显示表字段信息（可多选） -->
     <div class="mb-1 mt-1">示表字段信息（可多选）</div>
     <div class="mt-1">
       <el-checkbox-group v-model="checkColumnArr">
-        <el-checkbox v-for="(item, index) in tbData" :key="index" :label="item.COLUMN_NAME">
+        <el-checkbox v-for="(item, index) in tbData" :key="index" :label="item">
           {{ item.COLUMN_NAME }}({{ item.COLUMN_COMMENT }})
         </el-checkbox>
       </el-checkbox-group>
@@ -137,23 +137,20 @@
       </div>
     </div>
     <!--  查询配置  -->
-    <div class="mb-1 mt-1">查询配置</div>
-    <el-button>新增</el-button>
-    <el-button>删除</el-button>
-    <el-table ref="refSearchTable" :data="searchTableData" border @selection-change="handleSelectionChange">
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table>
+    <div class="mt-2 mb-1">查询配置</div>
+    <SearchTableConfig ref="refSearchTableConfig" />
     <!--  表格配置  -->
-
+    <div class="mt-1 mb-1">表格配置</div>
+    <TableConfig ref="refTableConfig" />
     <!--  提交from表单配置  -->
+    <div class="mt-1 mb-1">提交from表单配置</div>
+    <FormTableConfig ref="refFormTableConfig" />
   </div>
 </template>
 
 <script setup>
 const { formRules, elMessage, currentTime } = useElement()
-
+import commonUtil from '@/utils/commonUtil'
 /*项目和作者信息配置*/
 const poaForm = reactive({
   author: '熊猫哥',
@@ -175,106 +172,80 @@ const ccForm = reactive({
 })
 /*获取库和表信息*/
 //库
-let dataBaseUrl = ref('/dataBase/getAllTableFromDb')
-let dbRadio = ref(null)
-let dbName = ref('micro-service-plus')
-let chooseDbArr = ref([])
-let chooseDbRadio = ref(null)
-let dbData = ref([])
+let dataBaseUrl = $ref('/dataBase/getAllTableFromDb')
+let dbRadio = $ref(null)
+let dbName = $ref('micro-service-plus')
+let chooseDbArr = $ref([])
+let chooseDbRadio = $ref(null)
+let dbData = $ref([])
 const dbRadioClick = (item) => {
-  if (chooseDbArr.value.length >= 3) {
-    elMessage('最多支持3个选择')
+  if (chooseDbArr.length >= 3) {
+    elMessage('最多支持3个选择', 'warning')
     return
   }
-  chooseDbArr.value.push(item)
+  if (commonUtil.findArrObjByKey(chooseDbArr, 'tableName', item.tableName)) {
+    elMessage(`${item.tableName}已存在`, 'warning')
+    return
+  }
+  chooseDbArr.push(item)
 }
 const dbChooseRadioClick = (tableName) => {
-  tbName.value = tableName
-  tbData.value = []
+  tbName = tableName
+  tbData = []
 }
 const deleteChooseRadio = (index) => {
-  chooseDbArr.value.splice(index, 1)
-  tbData.value = []
+  chooseDbArr.splice(index, 1)
+  tbData = []
 }
 const searchDataBase = () => {
   let reqConfig = {
     baseURL: 'http://localhost:10106',
-    url: dataBaseUrl.value,
+    url: dataBaseUrl,
     method: 'get',
-    data: { dbName: dbName.value },
+    data: { dbName: dbName },
     isParams: true
   }
   console.log('reqConfig', reqConfig)
   axiosReq(reqConfig).then(({ data }) => {
-    dbData.value = data
+    dbData = data
   })
 }
 //表
-let dbTableUrl = ref('/dataBase/getAllColumnFromTb')
-let tbName = ref('')
-let tbData = ref([])
+let dbTableUrl = $ref('/dataBase/getAllColumnFromTb')
+let tbName = $ref('tb_brand')
+let tbData = $ref([])
 const searchDbTable = () => {
   let reqConfig = {
     baseURL: 'http://localhost:10106',
-    url: dbTableUrl.value,
+    url: dbTableUrl,
     method: 'get',
-    data: { dbName: dbName.value, tbName: tbName.value },
+    data: { dbName: dbName, tbName: tbName },
     isParams: true
   }
   axiosReq(reqConfig).then(({ data }) => {
-    tbData.value = data
+    tbData = data
   })
 }
-let checkColumnArr = ref([])
+let checkColumnArr = $ref([])
 /*显示表字段信息（可多选）*/
-const generatorToSearch = () => {}
-const generatorToTable = () => {}
-const generatorToFrom = () => {}
-
-/*查询配置*/
-let searchTableData = ref([])
-let searchSelection = ref([])
-const handleSelectionChange = (val) => {
-  searchSelection.value = val
+//Search
+import SearchTableConfig from './SearchTableConfig.vue'
+const refSearchTableConfig = $ref(null)
+const generatorToSearch = () => {
+  refSearchTableConfig.setSearchTableData(checkColumnArr)
 }
-
-// import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
-// let { proxy } = getCurrentInstance()
-// const props = defineProps({
-//   name: {
-//     require: true,
-//     default: "fai",
-//     type:String,
-//   },
-// });
-// const state = reactive({
-//   levelList: null
-// });
-
-//const routes = computed(() => {
-//    return proxy.$store.state.permission.routes;
-//  });
-// watch(() => props.name, (oldValue,newValue) => {
-//
-//   },
-//   { immediate: true }
-// );
-
-// const store = useStore()
-// const router = useRouter()
-// onMounted(()=>{
-//   console.log("页面挂载了")
-// })
-// let helloFunc = () => {
-//   console.log("helloFunc");
-// };
-//导出给refs使用
-// defineExpose({ helloFunc });
-//导出属性到页面中使用
-// let {levelList} = toRefs(state);
+//table
+import TableConfig from './tableConfig.vue'
+const refTableConfig = $ref(null)
+const generatorToTable = () => {
+  refTableConfig.setTableData(checkColumnArr)
+}
+//Form
+import FormTableConfig from './FormTableConfig.vue'
+const refFormTableConfig = $ref(null)
+const generatorToFrom = () => {
+  refFormTableConfig.setFormTableData(checkColumnArr)
+}
 </script>
 
 <style scoped lang="scss"></style>

@@ -75,7 +75,7 @@ export default ({ command, mode }) => {
     },
     plugins: [
       vue({
-        // refTransform: true // 开启ref转换 还是实验性   use example for $ref
+        refTransform: true // 开启ref转换 还是实验性   use example for $ref
       }),
       vueJsx(),
       // legacy({
