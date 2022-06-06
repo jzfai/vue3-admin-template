@@ -1,9 +1,9 @@
 <template>
   <el-table ref="refSearchTable" :data="searchTableData" border @selection-change="handleSearchSelection">
-    <el-table-column prop="TABLE_SCHEMA" label="表名" align="center" width="100" />
+    <el-table-column prop="TABLE_NAME" label="表名" align="center" width="120" />
     <el-table-column prop="originField" label="字段名" align="center" width="100" />
     <el-table-column prop="desc" label="字段描述" width="140" />
-    <el-table-column prop="componentType" align="center" label="组件类型" min-width="400">
+    <el-table-column prop="componentType" align="center" label="组件类型" width="400">
       <template #default="{ row }">
         <el-radio-group v-model="row.componentType">
           <el-radio
@@ -71,7 +71,7 @@
       </template>
     </el-table-column>
 
-    <el-table-column prop="width" align="center" label="控件的宽度" min-width="100">
+    <el-table-column prop="width" align="center" label="控件的宽度" width="80">
       <template #default="{ row }">
         <el-input v-model="row.width" placeholder="控件的宽度" />
       </template>
@@ -96,8 +96,8 @@ import commonUtil from '@/utils/commonUtil'
 const setSearchTableData = (checkColumnArr) => {
   checkColumnArr.forEach((fItem) => {
     const hasKey =
-      commonUtil.findArrObjByKey(searchTableData, fItem, 'originField') &&
-      commonUtil.findArrObjByKey(searchTableData, fItem, 'TABLE_SCHEMA')
+      commonUtil.findArrObjByKey(searchTableData, 'COLUMN_NAME', fItem.COLUMN_NAME) &&
+      commonUtil.findArrObjByKey(searchTableData, 'TABLE_SCHEMA', fItem.TABLE_SCHEMA)
     if (!hasKey) {
       fItem.field = changeDashToCase(fItem.COLUMN_NAME) //_转驼峰
       fItem.fieldCase = changeTheFirstWordToCase(changeDashToCase(fItem.COLUMN_NAME)) //_转驼峰
@@ -130,7 +130,7 @@ const deleteSearchItem = (row, index) => {
   searchTableData.splice(index, 1)
 }
 
-defineExpose({ setSearchTableData })
+defineExpose({ setSearchTableData, searchTableData })
 </script>
 
 <style scoped lang="scss"></style>
