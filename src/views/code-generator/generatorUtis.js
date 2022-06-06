@@ -72,7 +72,6 @@ export const componentTypeArr = [
   { label: 'datetimerange', title: 'datetimerange' },
   { label: 'datetime', title: 'datetime' },
   { label: 'date', title: 'date' },
-  { label: 'uploadImage', title: 'uploadImage' },
   { label: 'uploadImage', title: 'uploadImage' }
 ]
 

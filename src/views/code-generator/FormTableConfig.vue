@@ -1,8 +1,9 @@
 <template>
   <el-table ref="refformTable" :data="formTableData" border @selection-change="handleSearchSelection">
+    <el-table-column prop="TABLE_NAME" label="表名" align="center" width="120" />
     <el-table-column prop="originField" label="字段名" align="center" width="100" />
     <el-table-column prop="desc" label="字段描述" width="140" />
-    <el-table-column prop="componentType" align="center" label="组件类型" min-width="400">
+    <el-table-column prop="componentType" align="center" label="组件类型" width="400">
       <template #default="{ row }">
         <el-radio-group v-model="row.componentType">
           <el-radio
@@ -70,7 +71,7 @@
       </template>
     </el-table-column>
 
-    <el-table-column prop="width" align="center" label="控件的宽度" min-width="100">
+    <el-table-column prop="width" align="center" label="控件的宽度" width="100">
       <template #default="{ row }">
         <el-input v-model="row.width" placeholder="控件的宽度" />
       </template>
@@ -91,22 +92,29 @@ import {
   componentTypeMapping,
   tbTypeMapping
 } from './generatorUtis'
+import commonUtil from '@/utils/commonUtil'
 
 const setFormTableData = (checkColumnArr) => {
   //对字段进行处理和映射
-  formTableData = checkColumnArr.map((mItem) => {
-    mItem.field = changeDashToCase(mItem.COLUMN_NAME) //_转驼峰
-    mItem.fieldCase = changeTheFirstWordToCase(changeDashToCase(mItem.COLUMN_NAME)) //_转驼峰
-    mItem.originField = mItem.COLUMN_NAME
-    mItem.desc = mItem.COLUMN_COMMENT
-    mItem.type = tbTypeMapping(mItem.DATA_TYPE) //数据库和java中的类型做映射
-    mItem.componentType = componentTypeMapping(mItem.DATA_TYPE, mItem.COLUMN_NAME) //数据库和前端控件中的类型做映射
-    mItem.rule = 'isNotNull' //数据库和java中的类型做映射
-    mItem.value = 'value'
-    mItem.label = 'label'
-    mItem.children = 'children'
-    mItem.width = 100
-    return mItem
+  checkColumnArr.forEach((fItem) => {
+    const hasKey =
+      commonUtil.findArrObjByKey(formTableData, 'COLUMN_NAME', fItem.COLUMN_NAME) &&
+      commonUtil.findArrObjByKey(formTableData, 'TABLE_SCHEMA', fItem.TABLE_SCHEMA)
+    if (!hasKey) {
+      fItem.field = changeDashToCase(fItem.COLUMN_NAME) //_转驼峰
+      fItem.fieldCase = changeTheFirstWordToCase(changeDashToCase(fItem.COLUMN_NAME)) //_转驼峰
+      fItem.originField = fItem.COLUMN_NAME
+      fItem.tbName = fItem.COLUMN_NAME
+      fItem.desc = fItem.COLUMN_COMMENT
+      fItem.type = tbTypeMapping(fItem.DATA_TYPE) //数据库和java中的类型做映射
+      fItem.componentType = componentTypeMapping(fItem.DATA_TYPE, fItem.COLUMN_NAME) //数据库和前端控件中的类型做映射
+      fItem.rule = 'isNotNull' //数据库和java中的类型做映射
+      fItem.value = 'value'
+      fItem.label = 'label'
+      fItem.children = 'children'
+      fItem.width = 100
+      formTableData.push(fItem)
+    }
   })
 }
 /*查询配置*/
@@ -124,7 +132,7 @@ const deleteSearchItem = (row, index) => {
   formTableData.splice(index, 1)
 }
 
-defineExpose({ setFormTableData })
+defineExpose({ setFormTableData, formTableData })
 </script>
 
 <style scoped lang="scss"></style>

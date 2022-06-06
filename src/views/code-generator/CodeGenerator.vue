@@ -109,7 +109,7 @@
         v-for="(item, index) in chooseDbArr"
         :key="index"
         :label="item.tableName"
-        @change="dbChooseRadioClick(item.tableName)"
+        @change="dbChooseRadioClick(item)"
       >
         {{ item.tableName }}({{ item.tableComment }})
         <el-button type="text" @click="deleteChooseRadio(index)">删除</el-button>
@@ -130,7 +130,7 @@
           {{ item.COLUMN_NAME }}({{ item.COLUMN_COMMENT }})
         </el-checkbox>
       </el-checkbox-group>
-      <div class="mt-1">
+      <div v-if="tbData.length" class="mt-1">
         <el-button @click="generatorToSearch">生成到查询</el-button>
         <el-button @click="generatorToTable">生成到表格</el-button>
         <el-button @click="generatorToFrom">生成到表单</el-button>
@@ -145,18 +145,29 @@
     <!--  提交from表单配置  -->
     <div class="mt-1 mb-1">提交from表单配置</div>
     <FormTableConfig ref="refFormTableConfig" />
+
+    <div class="mt-2">
+      <el-button @click="generatorTemp">生成模板代码</el-button>
+    </div>
   </div>
 </template>
 
 <script setup>
-const { formRules, elMessage, currentTime } = useElement()
+import { changeDashToCase, changeTheFirstWordToCase } from '@/views/code-generator/generatorUtis'
+
+const { currentTime } = useCommon()
+const { formRules, elMessage } = useElement()
 import commonUtil from '@/utils/commonUtil'
 /*项目和作者信息配置*/
 const poaForm = reactive({
   author: '熊猫哥',
   packageName: 'top.kuanghua.vg',
   serviceName: 'velocity-generator',
-  dataTime: ''
+  dataTime: '',
+  multiTableName: 'brand',
+  multiTableNameCase: 'Brand',
+  isMultiTable: false,
+  multiTableDesc: '实现品牌表操作'
 })
 poaForm.dataTime = currentTime
 /*前端页面参数配置*/
@@ -189,9 +200,20 @@ const dbRadioClick = (item) => {
   }
   chooseDbArr.push(item)
 }
-const dbChooseRadioClick = (tableName) => {
-  tbName = tableName
+
+//保存tb的信息
+let currentTableInfo = $ref({})
+const dbChooseRadioClick = (item) => {
+  tbName = item.tableName
   tbData = []
+  const dillTableName = changeDashToCase(item.tableName.replace('tb_', '').replace('t_', ''))
+  currentTableInfo = {
+    tableName: dillTableName,
+    originTableName: item.tableName,
+    tableDesc: item.tableComment,
+    tableNameCase: changeTheFirstWordToCase(dillTableName),
+    uniKey: 'id'
+  }
 }
 const deleteChooseRadio = (index) => {
   chooseDbArr.splice(index, 1)
@@ -205,7 +227,6 @@ const searchDataBase = () => {
     data: { dbName: dbName },
     isParams: true
   }
-  console.log('reqConfig', reqConfig)
   axiosReq(reqConfig).then(({ data }) => {
     dbData = data
   })
@@ -214,6 +235,7 @@ const searchDataBase = () => {
 let dbTableUrl = $ref('/dataBase/getAllColumnFromTb')
 let tbName = $ref('tb_brand')
 let tbData = $ref([])
+let multiTableConfig = $ref([])
 const searchDbTable = () => {
   let reqConfig = {
     baseURL: 'http://localhost:10106',
@@ -223,6 +245,22 @@ const searchDbTable = () => {
     isParams: true
   }
   axiosReq(reqConfig).then(({ data }) => {
+    //得到主键key
+    let priKeyArr = []
+    data.forEach((fItem) => {
+      if (fItem.COLUMN_KEY) {
+        priKeyArr.push(fItem.COLUMN_NAME)
+      }
+    })
+
+    //插入表信息
+    const firstData = data[0]
+    if (!commonUtil.findArrObjByKey(multiTableConfig, 'originTableName', firstData.TABLE_NAME)) {
+      multiTableConfig.push({
+        ...currentTableInfo,
+        uniKey: priKeyArr
+      })
+    }
     tbData = data
   })
 }
@@ -245,6 +283,65 @@ import FormTableConfig from './FormTableConfig.vue'
 const refFormTableConfig = $ref(null)
 const generatorToFrom = () => {
   refFormTableConfig.setFormTableData(checkColumnArr)
+}
+
+//生成模板
+const generatorTemp = () => {
+  const searchTableConfig = refSearchTableConfig.searchTableData
+  const tableShowData = refTableConfig.tableShowData
+  const formTableData = refFormTableConfig.formTableData
+  let reqApiPre
+  if (poaForm.isMultiTable) {
+    reqApiPre = `/${poaForm.serviceName}/${poaForm.multiTableName}`
+  } else {
+    reqApiPre = `/${poaForm.serviceName}/${poaForm.tbName}`
+  }
+
+  let generatorData = {
+    projectOrAuthor: {
+      ...poaForm
+    },
+    commonConfig: {
+      ...ccForm
+    },
+    multiTableConfig,
+    dbTableConfig: multiTableConfig[0],
+    apiConfig: {
+      queryApi: `${reqApiPre}/selectPage`,
+      queryApiType: 'get',
+      insertApi: `/insert`,
+      insertApiType: 'post',
+      updateApi: `${reqApiPre}/updateById`,
+      updateApiType: 'update',
+      deleteApi: `${reqApiPre}/deleteById`,
+      deleteApiType: 'delete',
+      deleteMultiApi: `${reqApiPre}/deleteBatchIds`,
+      deleteMultiApiType: 'delete',
+      detailApi: `${reqApiPre}/selectById`,
+      detailApiType: 'get'
+    },
+    queryConfig: searchTableConfig,
+    tableConfig: tableShowData,
+    formConfig: formTableData
+  }
+  console.log(generatorData)
+  console.log(JSON.stringify(generatorData))
+  let reqConfig = {
+    baseURL: 'http://localhost:10106',
+    url: '/Generator/generatorVms',
+    method: 'post',
+    isDownLoadFile: true,
+    data: generatorData
+  }
+  axiosReq(reqConfig).then((res) => {
+    //得到主键key
+    const url = window.URL.createObjectURL(new Blob([res.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', decodeURI(res.headers?.exportfilename))
+    document.body.appendChild(link)
+    link.click()
+  })
 }
 </script>
 
