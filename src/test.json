@@ -1,0 +1,90 @@
+{
+  "apiConfig": {
+    "deleteApi": "/api/v1.0/aulton-ms-generatorOrder_swapController/${idKey}",
+    "deleteApiType": "delete",
+    "infoApi": "/api/v1.0/aulton-ms-generatorOrder_swapController/${idKey}",
+    "infoApiType": "get",
+    "insertApi": "/api/v1.0/aulton-ms-generatorOrder_swapController/",
+    "insertApiType": "post",
+    "queryPageApi": "/api/v1.0/aulton-ms-generatorOrder_swapController/listPaged/",
+    "queryPageApiType": "post",
+    "updateApi": "/api/v1.0/aulton-ms-generatorOrder_swapController/",
+    "updateApiType": "put"
+  },
+  "dataTablePageConfig": {
+    "idKey": "id",
+    "tableFieldConfigList": [
+      {
+        "componentConfig": { "componentType": "INPUT" },
+        "desc": "订单名称",
+        "field": "order_name",
+        "hidden": false,
+        "minWidth": 6,
+        "table": "order_swap"
+      },
+      {
+        "componentConfig": { "componentType": "INPUT" },
+        "desc": "实付（单位：里程为公里，电量为元）",
+        "field": "actual_price",
+        "hidden": false,
+        "minWidth": 6,
+        "table": "order_swap_details"
+      },
+      {
+        "componentConfig": { "componentType": "INPUT" },
+        "desc": "主键",
+        "field": "id",
+        "hidden": true,
+        "table": "order_swap"
+      }
+    ],
+    "title": "查询订单列表"
+  },
+  "editPageConfig": {
+    "editFieldConfigs": [
+      {
+        "componentConfig": { "componentType": "INPUT" },
+        "desc": "订单名称",
+        "disable": false,
+        "field": "order_name",
+        "required": true,
+        "rules": "",
+        "table": "order_swap"
+      },
+      {
+        "componentConfig": { "componentType": "INPUT" },
+        "desc": "前次odo",
+        "disable": false,
+        "field": "previous_odo",
+        "required": true,
+        "rules": "",
+        "table": "order_swap_details"
+      },
+      {
+        "componentConfig": { "componentType": "INPUT" },
+        "desc": "本次odo",
+        "disable": false,
+        "field": "current_odo",
+        "required": true,
+        "rules": "",
+        "table": "order_swap_details"
+      }
+    ],
+    "idKey": "id",
+    "title": "新增订单"
+  },
+  "searchConditionConfigs": [
+    {
+      "componentConfig": { "componentType": "INPUT" },
+      "desc": "订单名称",
+      "field": "order_name",
+      "table": "order_swap"
+    },
+    {
+      "componentConfig": { "componentFromType": "static", "componentType": "select" },
+      "desc": "车型",
+      "field": "car_model",
+      "table": "order_swap_details"
+    }
+  ]
+}

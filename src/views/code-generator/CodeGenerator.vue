@@ -324,7 +324,6 @@ const generatorTemp = () => {
     tableConfig: tableShowData,
     formConfig: formTableData
   }
-  console.log(generatorData)
   console.log(JSON.stringify(generatorData))
   let reqConfig = {
     baseURL: 'http://localhost:10106',
