@@ -43,19 +43,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/generation-code',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'index',
-        name: 'CodeGenerator',
-        component: () => import('@/views/code-generator'),
-        meta: { title: 'CodeGenerator', elSvgIcon: 'Fold' }
-      }
-    ]
-  },
-  {
     path: '/setting-switch',
     component: Layout,
     children: [

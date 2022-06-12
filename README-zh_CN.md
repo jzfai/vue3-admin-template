@@ -28,20 +28,20 @@ Vite 需要 Node.js 版本 >= 12.0.0。
 
 [github address](https://github.com/jzfai/vue3-admin-template.git)
 
-[Access address](http://8.135.1.141/vue3-admin-template)
+[Access address](https://github.jzfai.top/vue3-admin-template)
 
 github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
-国内体验地址：http://8.135.1.141/vue3-admin-template
+国内体验地址：https://github.jzfai.top/vue3-admin-template
 
 
 ## 例子
 
  ---- 我们先看看加载速度和构建后的包大小：
 
-![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
+![template-speed-analysis](https://github.jzfai.top/file/images/template-speed-analysis.png)
 
-![template-demo](http://8.135.1.141/file/images/template-demo.png)
+![template-demo](https://github.jzfai.top/file/images/template-demo.png)
 
 ## 相关项目
 
@@ -83,7 +83,7 @@ cd  vue3-admin-template
 
 # pnpm address https://pnpm.io/zh/motivation
 # 安装依赖(建议用pnpm)
-# 你可以使用 "npm -g i pnpm" 去安装pnpm
+# 你可以使用 "npm -g i  pnpm@6.32.3" 去安装pnpm
 pnpm i
 
 # 启动服务
@@ -201,7 +201,7 @@ Modern browsers and Internet Explorer 11+.
 |Edge| last 2 versions| last 2 versions| last 2 versions
 
 ## 讨论和交流(含vue3+ts视频教程)
-[WeChat group](http://8.135.1.141/file/images/wx-groud.png)
+[WeChat group](https://github.jzfai.top/file/images/wx-groud.png)
 
 ## 版本
 

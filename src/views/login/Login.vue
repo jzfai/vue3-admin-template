@@ -191,6 +191,10 @@ $light_gray: #eee;
 <style lang="scss">
 //css 样式重置 增加个前缀避免全局污染
 .login-container {
+  .el-input__wrapper {
+    background-color: transparent;
+    box-shadow: none;
+  }
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.1);

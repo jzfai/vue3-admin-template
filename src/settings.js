@@ -86,7 +86,7 @@ const setting = {
    * vite.config.js base config
    * such as
    * */
-  viteBasePath: '/vue3-admin-template/'
+  viteBasePath: './'
 }
 
 export default setting
