@@ -14,10 +14,7 @@
     <div v-if="settings.ShowDropDown" class="right-menu">
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
-          <img
-            src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
-            class="user-avatar"
-          />
+          <img src="https://github.jzfai.top/file/images/nav-right-logo.gif" class="user-avatar" />
           <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
         </div>
         <template #dropdown>
@@ -75,11 +72,11 @@ const loginOut = () => {
 
 <style lang="scss" scoped>
 .navbar {
-  height: $navBarHeight;
+  height: var(--nav-bar-height);
   overflow: hidden;
   position: relative;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  background: var(--nav-bar-background);
+  box-shadow: var(--nav-bar-box-shadow);
 }
 
 //logo
@@ -119,5 +116,6 @@ const loginOut = () => {
 .right-menu {
   cursor: pointer;
   margin-right: 40px;
+  background-color: var(--nav-bar-right-menu-background);
 }
 </style>

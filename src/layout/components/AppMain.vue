@@ -9,7 +9,7 @@
       </transition>
       <!-- no transition -->
       <keep-alive v-else :include="cachedViews">
-        <component :is="Component" />
+        <component :is="Component" :key="key" />
       </keep-alive>
     </router-view>
   </div>
@@ -46,7 +46,6 @@ watch(
   () => route.name,
   () => {
     const routerLevel = route.matched.length
-
     //二级路由处理
     if (routerLevel === 2) {
       if (deepOldRouter?.name) {
@@ -112,23 +111,16 @@ watch(
 
 <style scoped lang="scss">
 .app-main {
-  padding: $appMainPadding;
+  padding: var(--app-main-padding);
   /*50 = navbar  */
   position: relative;
   overflow: hidden;
+  background-color: var(--app-main-background);
 }
 .show-tag-view {
-  height: calc(100vh - #{$navBarHeight} - #{$tagViewHeight}) !important;
+  height: calc(100vh - #{var(--nav-bar-height)} - #{var(--tag-view-height)}) !important;
 }
 .fixed-header + .app-main {
   padding-top: 50px;
-}
-</style>
-
-<style lang="scss">
-.el-popup-parent--hidden {
-  .fixed-header {
-    padding-right: 15px;
-  }
 }
 </style>

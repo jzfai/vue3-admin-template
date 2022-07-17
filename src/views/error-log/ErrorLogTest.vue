@@ -59,7 +59,6 @@ let reqCrossOrigin = () => {
   }).then(() => {})
 }
 
-import axiosReq from '@/utils/axiosReq'
 import { useAppStore } from '@/store/app'
 let req404 = () => {
   axiosReq({
