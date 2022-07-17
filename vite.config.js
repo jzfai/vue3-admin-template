@@ -26,21 +26,20 @@ import AutoImport from 'unplugin-auto-import/vite'
 import setting from './src/settings'
 // import { loadEnv } from 'vite'
 const prodMock = setting.openProdMock
-// import packageJson from './package.json'
+//auto import element-plus
+import Components from 'unplugin-vue-components/vite'
+// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
+// import packageJson from './package.json'
+import { optimizeDepsArr } from './optimize-include'
+const pathSrc = path.resolve(__dirname, 'src')
 export default ({ command, mode }) => {
   /*
    console.log(command, mode)
   * serve serve-dev
   * */
   return {
-    /*
-     * "/vue3-admin-plus" nginx deploy folder
-     * detail to look https://vitejs.cn/config/#base
-     * how to config, such as https://github.jzfai.top/vue3-admin-plus/#/dashboard
-     * "/vue3-admin-plus/" --> config to base is you need
-     * https://github.jzfai.top --> if you config "/" , you can visit attached  to https://github.jzfai.top
-     * */
+    //detail to look https://vitejs.cn/config/#base
     base: setting.viteBasePath,
     //define global var
     define: {
@@ -74,8 +73,13 @@ export default ({ command, mode }) => {
       strictPort: true
     },
     plugins: [
-      vue({
-        refTransform: true // 开启ref转换 还是实验性   use example for $ref
+      vue({ reactivityTransform: true }),
+      Components({
+        // resolvers: [
+        //   ElementPlusResolver({
+        //     importStyle: 'sass'
+        //   })
+        // ]
       }),
       vueJsx(),
       // legacy({
@@ -106,7 +110,7 @@ export default ({ command, mode }) => {
         // resolvers: [ElementPlusResolver()],
         imports: [
           'vue',
-          'vuex',
+          'pinia',
           'vue-router',
           {
             '@/hooks/global/useCommon': ['useCommon'],
@@ -122,9 +126,6 @@ export default ({ command, mode }) => {
         },
         dts: true //auto generation auto-imports.d.ts file
       }),
-      // Components({
-      //   resolvers: [ElementPlusResolver()]
-      // })
       // auto config of index.html title
       createHtmlPlugin({
         inject: {
@@ -139,7 +140,7 @@ export default ({ command, mode }) => {
       minify: 'terser',
       brotliSize: false,
       // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 2000,
+      chunkSizeWarningLimit: 5000,
       //remote console.log in prod
       terserOptions: {
         //detail to look https://terser.org/docs/api-reference#compress-options
@@ -161,37 +162,37 @@ export default ({ command, mode }) => {
     },
     resolve: {
       alias: {
-        '~': resolve(__dirname, './'),
-        '@': resolve(__dirname, 'src')
+        '~/': `${pathSrc}/`,
+        '@/': `${pathSrc}/`
       }
-      // why remove it , look for https://github.com/vitejs/vite/issues/6026
+      //why remove it , look for https://github.com/vitejs/vite/issues/6026
       // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mjs']
     },
     css: {
-      postcss: {
-        //remove build charset warning
-        plugins: [
-          {
-            postcssPlugin: 'internal:charset-removal',
-            AtRule: {
-              charset: (atRule) => {
-                if (atRule.name === 'charset') {
-                  atRule.remove()
-                }
-              }
-            }
-          }
-        ]
-      },
+      // postcss: {
+      //   //remove build charset warning
+      //   plugins: [
+      //     {
+      //       postcssPlugin: 'internal:charset-removal',
+      //       AtRule: {
+      //         charset: (atRule) => {
+      //           if (atRule.name === 'charset') {
+      //             atRule.remove()
+      //           }
+      //         }
+      //       }
+      //     }
+      //   ]
+      // },
       preprocessorOptions: {
         //define global scss variable
         scss: {
-          additionalData: `@import "@/styles/variables.scss";`
+          additionalData: `@use '@/theme/index.scss' as * ;`
         }
       }
     },
     optimizeDeps: {
-      include: ['moment-mini']
+      include: ['element-plus/es', 'moment-mini', ...optimizeDepsArr()]
     }
   }
 }
