@@ -20,6 +20,12 @@ import VueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
 //auto import vue https://www.npmjs.com/package/unplugin-auto-import
 import AutoImport from 'unplugin-auto-import/vite'
 
+import UnoCSS from 'unocss/vite'
+import { presetAttributify, presetIcons, presetUno } from 'unocss'
+
+import mkcert from 'vite-plugin-mkcert'
+import DefineOptions from 'unplugin-vue-define-options/vite'
+
 //  import image
 //  直接使用 <img :src="Logo" />
 // import ViteImages from 'vite-plugin-vue-images'
@@ -31,7 +37,7 @@ import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // import packageJson from './package.json'
-import { optimizeDepsArr } from './optimize-include'
+import { optimizeDependencies, optimizeElementPlus } from './optimize-include'
 const pathSrc = path.resolve(__dirname, 'src')
 export default ({ command, mode }) => {
   /*
@@ -57,7 +63,9 @@ export default ({ command, mode }) => {
       // 服务配置
       port: 5001, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
-      cors: true // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
+      cors: true, // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
+      host: true,
+      https: false //whether open https 开启https首次运行比较慢 且有个输入密码过程
       //proxy look for https://vitejs.cn/config/#server-proxy
       // proxy: {
       //   '/api': {
@@ -69,7 +77,7 @@ export default ({ command, mode }) => {
     },
     preview: {
       port: 5001,
-      host: '0.0.0.0',
+      host: true,
       strictPort: true
     },
     plugins: [
@@ -82,8 +90,14 @@ export default ({ command, mode }) => {
         // ]
       }),
       vueJsx(),
+      UnoCSS({
+        presets: [presetUno(), presetAttributify(), presetIcons()]
+      }),
+      DefineOptions(),
+      mkcert(),
+      //compatible with old browsers
       // legacy({
-      //   targets: ['ie >= 11'],
+      //   targets: ['chrome 52'],
       //   additionalLegacyPolyfills: ['regenerator-runtime/runtime']
       // }),
       viteSvgIcons({
@@ -186,13 +200,15 @@ export default ({ command, mode }) => {
       // },
       preprocessorOptions: {
         //define global scss variable
-        scss: {
-          additionalData: `@use '@/theme/index.scss' as * ;`
-        }
+        // scss: {
+        //   additionalData: `@use '@/theme/index.scss' as * ;`
+        // }
       }
     },
     optimizeDeps: {
-      include: ['element-plus/es', 'moment-mini', ...optimizeDepsArr()]
+      //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
+      // include: [...optimizeDependencies]
+      include: ['moment-mini']
     }
   }
 }

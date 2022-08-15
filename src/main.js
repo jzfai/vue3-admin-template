@@ -43,6 +43,11 @@ import './permission'
 import errorLog from '@/hooks/useErrorLog'
 errorLog()
 
+//import theme
+import './theme/index.scss'
+//import unocss
+import 'uno.css'
+
 //pinia
 import { createPinia } from 'pinia'
 
