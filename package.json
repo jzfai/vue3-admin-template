@@ -1,6 +1,6 @@
 {
   "name": "vue3-admin-template",
-  "version": "1.8.1",
+  "version": "1.9.1",
   "license": "MIT",
   "author": "kuanghua(869653722@qq.com)",
   "packageManager": "pnpm@7.9.0",
@@ -58,7 +58,6 @@
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "1.2.1",
     "vite-plugin-svg-icons": "1.0.5",
-    "vite-plugin-vue-setup-extend-plus": "0.0.2",
     "jest": "<27",
     "ts-jest": "<27",
     "tslib": "^2.4.0",

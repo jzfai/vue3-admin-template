@@ -8,7 +8,7 @@ A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plu
 
 Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
 
-Vite need Node.js >= 12.0.0。
+suggestion the Node.js >= 16.0.0。
 
 ## Documents
 
@@ -27,13 +27,7 @@ Vite need Node.js >= 12.0.0。
 
 github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
-## Demo
 
- ---- Let's look at the loading speed and the size of the built package first.：
-
-![template-speed-analysis](https://github.jzfai.top/file/images/template-speed-analysis.png)
-
-![template-demo](https://github.jzfai.top/file/images/plus-demo.png)
 
 ## Related items
 
@@ -47,21 +41,6 @@ The framework is available in js, ts , plus and electron versions
 > development and  experience：two words  Really fragrant！！！！！
 
 
-
-#### Comparison of performance between vue3 and vue2
-
-- 41% reduction in package size
-
-- The initial rendering is 55% faster, the update rendering is 133% faster
-
-- Memory reduction 54%
-
-- **Use Proxy instead of defineProperty to implement data responsiveness**
-
-- **Rewrite the implementation of virtual DOM and Tree-Shaking**
-
-
-[Comparison of packaging speed between vite2 and webpack](https://github.com/jzfai/vue3-admin-template/issues/2)
 
 ## Build Setup
 
@@ -113,18 +92,10 @@ Architecture development is not easy. If you feel good, please give me a **start
 
 Note: Vue3 is not supported the Internet Explorer
 
-Modern browsers and Internet Explorer 11+.
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --------- | --------- | --------- | --------- |
-|Edge| last 2 versions| last 2 versions| last 2 versions
 
 ## Discussion and Communication
 [WeChat group](https://github.jzfai.top/file/images/wx-groud.png)
 
-## License
 
-[MIT](https://github.com/jzfai/vue3-admin-template/blob/master/LICENSE) license.
-
-Copyright (c) 2022-present  kuanghua
 

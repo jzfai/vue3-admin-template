@@ -1,11 +1,11 @@
 <template>
-  <div class="mt-2">
+  <div class="mt-20px">
     sub-children
     <div>{{ title }}</div>
   </div>
   <!--  Teleport  https://www.jianshu.com/p/1ecf5006b1ae-->
 
-  <div class="mt-2">Teleport</div>
+  <div class="mt-20px">Teleport</div>
   <!--
      teleport container
      attention: the container must have when the teleport render

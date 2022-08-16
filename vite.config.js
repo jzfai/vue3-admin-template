@@ -11,7 +11,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
 //setup name
-import VueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
+// import VueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
 
 //auto import element-plus has some issue
 // import Components from 'unplugin-vue-components/vite'
@@ -118,7 +118,7 @@ export default ({ command, mode }) => {
         `,
         logger: true
       }),
-      VueSetupExtend(),
+      // VueSetupExtend(), //instance of  DefineOptions
       //https://github.com/antfu/unplugin-auto-import/blob/HEAD/src/types.ts
       AutoImport({
         // resolvers: [ElementPlusResolver()],
@@ -207,7 +207,7 @@ export default ({ command, mode }) => {
     },
     optimizeDeps: {
       //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
-      // include: [...optimizeDependencies]
+      // include: [...optimizeDependencies] //on-demand dependencies in package.json
       include: ['moment-mini']
     }
   }

@@ -2,10 +2,10 @@
   <div>
     <div>getter</div>
     <el-button @click="getterFunc">获取getter:{{ getterValue }}</el-button>
-    <div class="mt-2">commit</div>
+    <div class="mt-20px">commit</div>
     <el-button @click="c_openSideBar">c_openSideBar</el-button>
     <el-button @click="c_closeSideBar">c_closeSideBar</el-button>
-    <div class="mt-2">action</div>
+    <div class="mt-20px">action</div>
     <el-button @click="openSideBar">openSideBar</el-button>
     <el-button @click="closeSideBar">closeSideBar</el-button>
   </div>

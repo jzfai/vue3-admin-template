@@ -3,22 +3,22 @@
     <!--    <teleport to="body">-->
     <!--      <div>i come from ErrorLogTest.vue</div>-->
     <!--    </teleport>-->
-    <div class="mt-2">throw unhandledrejection</div>
+    <div class="mt-2px">throw unhandledrejection</div>
     <el-button type="primary" @click="handle">unhandledrejection</el-button>
 
-    <div class="mt-2">throw console.error</div>
+    <div class="mt-2px">throw console.error</div>
     <el-button type="primary" @click="consoleErrorFun">console.error</el-button>
 
-    <div class="mt-2">throw normalError</div>
+    <div class="mt-2px">throw normalError</div>
     <el-button type="primary" @click="normalError">normalError</el-button>
 
     <!--req relative-->
-    <div class="mt-2">throw req cross origin</div>
+    <div class="mt-2px">throw req cross origin</div>
     <el-button type="primary" @click="reqCrossOrigin">reqCrossOrigin</el-button>
-    <div class="mt-2">throw req 404 error</div>
+    <div class="mt-2px">throw req 404 error</div>
     <el-button type="primary" @click="req404">req404</el-button>
     <!-- resource load error   -->
-    <div class="mt-2">throw image load error</div>
+    <div class="mt-2px">throw image load error</div>
     <el-button type="primary" @click="errorLogImg">imageLoadError</el-button>
     <!--image load error demo-->
     <img v-if="imgShow" src="http://img.png" />

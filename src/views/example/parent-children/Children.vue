@@ -6,7 +6,7 @@
     <SubChildren />
   </div>
 
-  <div class="mt-2">插槽</div>
+  <div class="mt-20px">插槽</div>
   <!-- 默认插槽 -->
   <slot>
     <!-- slot内为后备内容 -->
@@ -25,7 +25,7 @@
     </slot>
   </footer>
 
-  <div class="mt-2">v-model sync</div>
+  <div class="mt-20px">v-model sync</div>
   <div>{{ childrenTitle }}</div>
   <el-button @click="changeParentValue">changeParentValue</el-button>
 </template>

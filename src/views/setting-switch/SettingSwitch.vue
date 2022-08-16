@@ -1,52 +1,52 @@
 <template>
   <div class="scroll-y">
-    <h3 class="mb-2">props operate demo of settings.js</h3>
+    <h3 class="mb-20px">props operate demo of settings.js</h3>
     <div class="rowSS">
-      <div class="mb-1">
+      <div class="mb-10px">
         page layout related
-        <div class="mt-2">
+        <div class="mt-20px">
           sidebarLogo：
           <el-switch v-model="appStore.settings.sidebarLogo" />
         </div>
-        <div class="mt-3">
+        <div class="mt-30px">
           showNavbarTitle：
           <el-switch v-model="appStore.settings.showNavbarTitle" />
         </div>
-        <div class="mt-3">
+        <div class="mt-30px">
           ShowDropDown：
           <el-switch v-model="appStore.settings.ShowDropDown" />
         </div>
-        <div class="mt-3">
+        <div class="mt-30px">
           showHamburger：
           <el-switch v-model="appStore.settings.showHamburger" />
         </div>
-        <div class="mt-3">
+        <div class="mt-30px">
           showLeftMenu：
           <el-switch v-model="appStore.settings.showLeftMenu" />
         </div>
-        <div class="mt-3">
+        <div class="mt-30px">
           showTagsView：
           <el-switch v-model="appStore.settings.showTagsView" />
         </div>
-        <div class="mt-3">
+        <div class="mt-30px">
           showTopNavbar：
           <el-switch v-model="appStore.settings.showTopNavbar" />
         </div>
       </div>
 
-      <div class="mb-1 ml-6">
+      <div class="mb-10px ml-60px">
         page animation related
-        <div class="mt-2">
+        <div class="mt-20px">
           mainNeedAnimation：places to "settings file" for setting
           <!-- <el-switch v-model="appStore.settings.mainNeedAnimation" />-->
         </div>
-        <div class="mt-3">
+        <div class="mt-30px">
           isNeedNprogress：
           <el-switch v-model="appStore.settings.isNeedNprogress" />
         </div>
       </div>
     </div>
-    <div class="mt-2 mb-1">store.commit to change</div>
+    <div class="mt-20px mb-10px">store.commit to change</div>
     <el-button type="primary" @click="testChangeSettings">testChangeSettings</el-button>
   </div>
 </template>
