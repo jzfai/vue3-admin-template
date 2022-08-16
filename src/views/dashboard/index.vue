@@ -35,27 +35,27 @@
     <!--    <div>update element-plus to 1.2.+, add svg icon, icon-font is abandoned</div>-->
     <!--    <i class="el-icon-add-location">abandoned</i>-->
     <!--    <div>update element-plus version to 2.0.1 release version the size options change to "large default small"</div>-->
-    <!--    <div class="mt-2">global element svg
+    <!--    <div class="mt-20px">global element svg
      icon</div>-->
     <!--    <ElSvgIcon name="Edit" :size="30" color="red" />-->
-    <!--    <div class="mt-2">this is var from vite.config.js define</div>-->
+    <!--    <div class="mt-20px">this is var from vite.config.js define</div>-->
     <!--    <div>{{ showObj }},{{ showObjString }}</div>-->
     <!--    -->
-    <div class="mt-5 text-18px font600">unocss</div>
+    <div class="mt-5px text-18px font600">unocss</div>
     <!-- bg-#fff   -->
-    <div class="mb1 w300 h10 text-16px font600">
+    <div class="mb-40px w-900px h-10px text-16px">
       <div>
         you can look
         <el-link class="text-red" href="https://uno.antfu.me/" target="_blank">https://uno.antfu.me/</el-link>
-        to search you need such as "margin-left" and then get the sortcut(ml)
+        to search you need such as "margin-left:10px" and then get the sortcut(ml-10px)
       </div>
     </div>
 
-    <div class="mt3 mb1">
-      <div class="mb1">### How to migrate</div>
-      <div class="mb1">See how to migrate from **ElementUI** to **Element Plus** in our dedicated discussion:</div>
-      <div class="mb1">- For English: [#5658](https://github.com/element-plus/element-plus/discussions/5658)</div>
-      <div class="mb1">- 简体中文: [#5657](https://github.com/element-plus/element-plus/discussions/5657)</div>
+    <div class="mt-3px mb1">
+      <div class="mb-1px">### How to migrate</div>
+      <div class="mb-1px">See how to migrate from **ElementUI** to **Element Plus** in our dedicated discussion:</div>
+      <div class="mb-1px">- For English: [#5658](https://github.com/element-plus/element-plus/discussions/5658)</div>
+      <div class="mb-1px">- 简体中文: [#5657](https://github.com/element-plus/element-plus/discussions/5657)</div>
     </div>
   </div>
 </template>
