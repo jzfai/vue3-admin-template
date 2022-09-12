@@ -53,7 +53,7 @@ cd vue3-admin-template
 
 # pnpm address https://pnpm.io/zh/motivation
 # install dependency(Recommend use pnpm)
-# you can  use "npm -g i pnpm@6.32.3" to install pnpm 
+# you can  use "npm -g i pnpm@7.9.0" to install pnpm 
 pnpm i
 
 # develop

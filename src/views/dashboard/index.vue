@@ -3,6 +3,7 @@
     <el-button @click="toggleHtmlClass('dark')">切换主题色(dark-theme)</el-button>
     <el-button @click="toggleHtmlClass('lighting-theme')">切换主题色(lighting-theme)</el-button>
     <el-button @click="toggleHtmlClass('base-theme')">切换主题色(base-theme)(default)</el-button>
+    <el-button @click="toggleHtmlClass('china-red')">切换主题色(china-red)(default)</el-button>
     <p>
       See
       <a href="https://element-plus.org" target="_blank">element-plus</a>
