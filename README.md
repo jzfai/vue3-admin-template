@@ -23,9 +23,10 @@ suggestion the Node.js >= 16.0.0。
 
 [Access address](https://github.jzfai.top/vue3-admin-template)
 
+
 国内体验地址：https://github.jzfai.top/vue3-admin-template
 
-github 地址：  https://github.com/jzfai/vue3-admin-template.git
+github 地址：https://github.com/jzfai/vue3-admin-template.git
 
 
 

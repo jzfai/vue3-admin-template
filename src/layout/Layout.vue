@@ -47,7 +47,6 @@ ResizeHook()
   transition: margin-left 0.28s;
   margin-left: var(--side-bar-width);
   position: relative;
-  border-left: 1px solid var(--layout-border-left-color);
 }
 .sidebar-container {
   transition: width 0.28s;
@@ -61,6 +60,7 @@ ResizeHook()
   left: 0;
   z-index: 1001;
   overflow: hidden;
+  border-right: 0.5px solid #eee;
 }
 .closeSidebar {
   .sidebar-container {
