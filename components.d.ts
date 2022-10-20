@@ -3,6 +3,8 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
+export {}
+
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ElSvgIcon: typeof import('./src/components/ElSvgIcon.vue')['default']
@@ -11,5 +13,3 @@ declare module '@vue/runtime-core' {
     TestUnit: typeof import('./src/components/TestUnit.vue')['default']
   }
 }
-
-export {}

@@ -41,8 +41,6 @@ The framework is available in js, ts , plus and electron versions
 - java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 > development and  experience：two words  Really fragrant！！！！！
 
-
-
 ## Build Setup
 
 ```bash
@@ -92,7 +90,6 @@ Architecture development is not easy. If you feel good, please give me a **start
 ## Browsers support
 
 Note: Vue3 is not supported the Internet Explorer
-
 
 
 ## Discussion and Communication
