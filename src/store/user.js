@@ -49,7 +49,9 @@ export const useUserStore = defineStore('user', {
           })
           .catch((error) => {
             reject(error)
-          })
+          }).finally(()=>{
+            window.location.reload()
+        })
       })
     },
     // get user info
