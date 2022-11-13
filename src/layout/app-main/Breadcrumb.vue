@@ -27,10 +27,9 @@ const levelList = ref(null)
 
 //Whether close the animation fo breadcrumb
 
-import { useAppStore } from '@/store/app'
-const appStore = useAppStore()
+const basicStore = useBasicStore()
 const settings = computed(() => {
-  return appStore.settings
+  return basicStore.settings
 })
 
 const route = useRoute()

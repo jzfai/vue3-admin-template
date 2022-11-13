@@ -13,10 +13,9 @@
 
 <script setup>
 defineOptions({ name: 'DeepRouterKeepAlive' })
-import { useAppStore } from '@/store/app'
 
 let testInput = ref('')
-const appStore = useAppStore()
+const appStore = useBasicStore()
 const cachedViewsDeep = computed(() => {
   return appStore.cachedViewsDeep
 })

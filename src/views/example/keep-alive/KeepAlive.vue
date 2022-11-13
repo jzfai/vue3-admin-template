@@ -21,8 +21,6 @@
 <script setup>
 defineOptions({ name: 'KeepAlive' })
 
-import { useAppStore } from '@/store/app'
-
 let { searchForm } = useCommon()
 //$ref(experimental)
 //let testRef = $ref(1)
@@ -41,7 +39,7 @@ onDeactivated(() => {
 const $route = useRoute()
 // cacheGroup为缓存分组  KeepAlive->routerDemoF->routerDemoS
 let cacheGroup = ['KeepAlive', 'routerDemoF', 'routerDemoS']
-const appStore = useAppStore()
+const appStore = useBasicStore()
 const unWatch = watch(
   () => $route.name,
   () => {

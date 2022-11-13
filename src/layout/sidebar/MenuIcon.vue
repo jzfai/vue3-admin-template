@@ -1,19 +1,16 @@
 <template>
-  <el-icon class="el-svg-icon">
-    <component :is="ElSvg[elSvgName]" />
+  <!-- 如果有 elSvgIcon 显示 elSvgIcon 没有显示 icon-->
+  <el-icon v-if="meta?.elSvgIcon" class="el-svg-icon">
+    <component :is="ElSvg[meta.elSvgIcon]" />
   </el-icon>
+  <svg-icon v-else-if="meta?.icon" :icon-class="meta?.icon" class="nav-icon" />
 </template>
 
 <script setup>
 import * as ElSvg from '@element-plus/icons-vue'
-const props = defineProps({
-  elSvgName: {
-    require: true,
-    default: 'Fold',
-    type: String
-  }
+defineProps({
+  meta: { type: Object, default: null }
 })
-const { elSvgName } = props
 </script>
 
 <style scoped lang="scss">

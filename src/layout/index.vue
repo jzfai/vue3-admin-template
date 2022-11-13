@@ -10,24 +10,18 @@
     </div>
   </div>
 </template>
-<!--原理vue2.0-->
-<script>
-/*可以设置默认的名字*/
-export default {
-  name: 'Layout'
-}
-</script>
-
 <script setup>
-import { Sidebar, Navbar, AppMain, TagsView } from './components'
-
-const appStore = useAppStore()
+import Sidebar from './sidebar/index.vue'
+import AppMain from './app-main/index.vue'
+import Navbar from './app-main/Navbar.vue'
+import TagsView from './app-main/TagsView.vue'
+const basicStore = useBasicStore()
 const opened = computed(() => {
-  return appStore.sidebar.opened
+  return basicStore.sidebar.opened
 })
-
+//import ResizeHook to   listen  page size that   open or close
 const settings = computed(() => {
-  return appStore.settings
+  return basicStore.settings
 })
 const classObj = computed(() => {
   return {
@@ -35,10 +29,7 @@ const classObj = computed(() => {
     hideSidebar: !settings.value.showLeftMenu
   }
 })
-//import ResizeHook to   listen  page size that   open or close
-import ResizeHook from './hook/ResizeHandler'
-import { useAppStore } from '@/store/app'
-ResizeHook()
+resizeHandler()
 </script>
 
 <style lang="scss" scoped>

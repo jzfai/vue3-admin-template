@@ -40,21 +40,20 @@
 <script setup>
 import { CaretBottom } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
-import Breadcrumb from './Breadcrumb'
-import Hamburger from './Hamburger'
+import Breadcrumb from './Breadcrumb.vue'
+import Hamburger from './Hamburger.vue'
 
-import { useAppStore } from '@/store/app'
 import { useUserStore } from '@/store/user'
 
 const settings = computed(() => {
-  return appStore.settings
+  return basicStore.settings
 })
 const opened = computed(() => {
-  return appStore.sidebar.opened
+  return basicStore.sidebar.opened
 })
-const appStore = useAppStore()
+const basicStore = useBasicStore()
 const toggleSideBar = () => {
-  appStore.M_toggleSideBar()
+  basicStore.M_toggleSideBar()
 }
 /*
  * 退出登录

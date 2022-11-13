@@ -3,14 +3,14 @@
     <template v-if="showSidebarItem(item.children, item)">
       <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
-          <item :meta="onlyOneChild.meta || item.meta" />
+          <MenuIcon :meta="onlyOneChild.meta || item.meta" />
           <template #title>{{ onlyOneChild.meta?.title }}</template>
         </el-menu-item>
       </Link>
     </template>
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template v-if="item.meta" #title>
-        <item :meta="item.meta" />
+        <MenuIcon :meta="item.meta" />
         <span>{{ item.meta.title }}</span>
       </template>
       <SidebarItem
@@ -25,10 +25,8 @@
 </template>
 
 <script setup>
-/*初始化参数比如引入组件，proxy,state等*/
 import Link from './Link.vue'
-import Item from './Item'
-import { isExternal } from '@/utils/validate'
+import MenuIcon from './MenuIcon.vue'
 import path from 'path'
 const props = defineProps({
   //每一个router Item
@@ -46,10 +44,6 @@ const props = defineProps({
     type: String,
     default: ''
   }
-})
-onMounted(() => {
-  // console.log("我挂载了");
-  // console.log(proxy.item);
 })
 //显示sidebarItem 的情况
 let onlyOneChild = ref(null)

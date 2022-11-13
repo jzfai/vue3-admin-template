@@ -31,7 +31,6 @@ import path from 'path'
 import { Close } from '@element-plus/icons-vue'
 //获取store和router
 
-import { useAppStore } from '@/store/app'
 import { useTagsViewStore } from '@/store/tagsView'
 import { usePermissionStore } from '@/store/permission'
 
@@ -142,7 +141,7 @@ const refreshSelectedTag = (view) => {
     })
   })
 }
-const appStore = useAppStore()
+const basicStore = useBasicStore()
 const closeSelectedTag = (view) => {
   tagsViewStore.delView(view).then(({ visitedViews }) => {
     if (isActive(view)) {
@@ -152,10 +151,10 @@ const closeSelectedTag = (view) => {
     if (view.meta?.closeTabRmCache) {
       const routerLevel = view.matched.length
       if (routerLevel === 2) {
-        appStore.M_DEL_CACHED_VIEW(view.name)
+        basicStore.M_DEL_CACHED_VIEW(view.name)
       }
       if (routerLevel === 3) {
-        appStore.M_DEL_CACHED_VIEW_DEEP(view.name)
+        basicStore.M_DEL_CACHED_VIEW_DEEP(view.name)
       }
     }
   })

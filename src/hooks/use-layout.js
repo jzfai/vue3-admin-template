@@ -1,8 +1,17 @@
-const { body } = document
-const WIDTH = 992
-import { useAppStore } from '@/store/app'
-export default function () {
-  const appStore = useAppStore()
+/**
+ * 判断是否是外链
+ * @param {string} path
+ * @returns {Boolean}
+ */
+export function isExternal(path) {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
+
+/*判断窗口变化控制侧边栏收起或展开*/
+export function resizeHandler() {
+  const { body } = document
+  const WIDTH = 992
+  const appStore = useBasicStore()
   const $_isMobile = () => {
     const rect = body.getBoundingClientRect()
     return rect.width - 1 < WIDTH

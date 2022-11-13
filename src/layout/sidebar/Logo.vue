@@ -1,12 +1,14 @@
 <template>
   <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <transition name="sidebarLogoFade">
-      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <svg-icon v-if="logo" icon-class="sidebar-logo" class="sidebar-logo" />
+      <!--  折叠显示   -->
+      <router-link v-if="collapse" class="sidebar-logo-link" to="/">
+        <svg-icon v-if="logo" :icon-class="logo" class="sidebar-logo" />
         <h1 v-else class="sidebar-title">{{ title }}</h1>
       </router-link>
-      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <svg-icon v-if="logo" icon-class="sidebar-logo" class="sidebar-logo" />
+      <!--  正常显示   -->
+      <router-link v-else class="sidebar-logo-link" to="/">
+        <svg-icon v-if="logo" :icon-class="logo" class="sidebar-logo" />
         <h1 class="sidebar-title">{{ title }}</h1>
       </router-link>
     </transition>
@@ -17,6 +19,7 @@
 import setting from '@/settings'
 import SvgIcon from '@/icons/SvgIcon.vue'
 defineProps({
+  //是否折叠
   collapse: {
     type: Boolean,
     required: true
@@ -24,18 +27,15 @@ defineProps({
 })
 const state = reactive({
   title: setting.title,
-  logo: 'https://github.jzfai.top/file/images/pd-logo.svg'
+  //src/icons/common/sidebar-logo.svg
+  logo: 'sidebar-logo'
 })
-//export to page for
+//export to page for use
 const { title, logo } = toRefs(state)
 </script>
 
 <style lang="scss">
-/*
-   vue3.0 过度效果
-   enter-> enter-from
-   leave-> leave-from
-  */
+//vue3.0 过度效果更改  enter-> enter-from   leave-> leave-from
 .sidebarLogoFade-enter-active {
   transition: opacity 2s;
 }
@@ -56,6 +56,7 @@ const { title, logo } = toRefs(state)
     height: 100%;
     width: 100%;
     & .sidebar-logo {
+      fill: currentColor;
       color: var(--sidebar-logo-color);
       width: var(--sidebar-logo-width);
       height: var(--sidebar-logo-height);

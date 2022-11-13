@@ -76,7 +76,6 @@ export default ({ command, mode }) => {
       UnoCSS({
         presets: [presetUno(), presetAttributify(), presetIcons()]
       }),
-
       DefineOptions(),
       mkcert(),
       //compatible with old browsers
@@ -116,18 +115,9 @@ export default ({ command, mode }) => {
         ]
       }),
       AutoImport({
-        // resolvers: [ElementPlusResolver()],
-        imports: [
-          'vue',
-          'pinia',
-          'vue-router',
-          {
-            '@/hooks/global/useCommon': ['useCommon'],
-            '@/hooks/global/useElement': ['useElement'],
-            '@/hooks/global/useVueRouter': ['useVueRouter'],
-            '@/utils/axiosReq': ['axiosReq']
-          }
-        ],
+        imports: ['vue', 'vue-router'],
+        //配置后会自动扫描目录下的文件
+        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/api/**'],
         eslintrc: {
           enabled: true, // Default `false`
           filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`

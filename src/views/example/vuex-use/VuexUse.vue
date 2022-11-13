@@ -12,8 +12,7 @@
 </template>
 
 <script setup>
-import { useAppStore } from '@/store/app'
-const appStore = useAppStore()
+const appStore = useBasicStore()
 /*getter*/
 const getterValue = ref(null)
 const getterFunc = () => {

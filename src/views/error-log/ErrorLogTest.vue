@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-const appStore = useAppStore()
+const appStore = useBasicStore()
 let settings = computed(() => {
   return appStore.settings || {}
 })
@@ -59,7 +59,6 @@ let reqCrossOrigin = () => {
   }).then(() => {})
 }
 
-import { useAppStore } from '@/store/app'
 let req404 = () => {
   axiosReq({
     // baseURL: 'https://github.jzfai.top/micro-service-test',

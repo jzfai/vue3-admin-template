@@ -52,13 +52,11 @@
 </template>
 
 <script setup>
-import { useAppStore } from '@/store/app'
-
 const settings = computed(() => {
   return appStore.settings || {}
 })
 
-const appStore = useAppStore()
+const appStore = useBasicStore()
 const testChangeSettings = () => {
   appStore.M_settings({ sidebarLogo: !settings.value.sidebarLogo })
 }
