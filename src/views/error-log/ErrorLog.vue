@@ -123,7 +123,7 @@ const errorLogProd = () => {
 }
 const consoleToPlatform = (err) => {
   //加个custom不收集
-  console.error(`custom${  err}`)
+  console.error(`custom${err}`)
 }
 
 //img loader err test
@@ -142,7 +142,7 @@ const searchForm = reactive({
   id: ''
 })
 
-const { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()
+let { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()
 const selectPageReq = () => {
   const data = Object.assign(searchForm, {
     pageNum,
@@ -221,7 +221,7 @@ const multiDelBtnClick = async () => {
   let rowDeleteIdArr = []
   let deleteNameTitle = ''
   rowDeleteIdArr = multipleSelection.value.map((mItem) => {
-    deleteNameTitle = `${deleteNameTitle + mItem.pageUrl  },`
+    deleteNameTitle = `${deleteNameTitle + mItem.pageUrl},`
     return mItem.id
   })
   if (rowDeleteIdArr.length === 0) {

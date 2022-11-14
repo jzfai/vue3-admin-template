@@ -26,10 +26,6 @@ import './permission'
 // import ElSvgIcon from '@/components/ElSvgIcon.vue'
 // app.component('ElSvgIcon', ElSvgIcon)
 
-//error log  collection
-import errorLog from '@/hooks/useErrorLog'
-errorLog()
-
 //import theme
 import './theme/index.scss'
 

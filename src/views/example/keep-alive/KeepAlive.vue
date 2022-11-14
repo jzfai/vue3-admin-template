@@ -44,11 +44,9 @@ const unWatch = watch(
   () => $route.name,
   () => {
     if (!cacheGroup.includes($route.name)) {
-      useCommon()
-        .sleep(300)
-        .then(() => {
-          cacheGroup.forEach((fItem) => basicStore.delCachedView(fItem))
-        })
+      sleepTimeout(300).then(() => {
+        cacheGroup.forEach((fItem) => basicStore.delCachedView(fItem))
+      })
       //remove watch
       unWatch()
     }

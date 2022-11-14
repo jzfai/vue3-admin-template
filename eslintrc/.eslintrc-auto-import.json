@@ -75,7 +75,6 @@
     "useAttrs": true,
     "useBasicStore": true,
     "useCommon": true,
-    "useCommonExample": true,
     "useCssModule": true,
     "useCssVars": true,
     "useElement": true,

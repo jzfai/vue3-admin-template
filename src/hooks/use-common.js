@@ -15,3 +15,16 @@ export const sleepTimeout = (time) => {
     }, time)
   })
 }
+
+export const useCommon = () => {
+  const state = reactive({
+    totalPage: 0,
+    startEndArr: [],
+    searchForm: {},
+    dialogTitle: '',
+    detailDialog: false
+  })
+  return {
+    ...toRefs(state)
+  }
+}

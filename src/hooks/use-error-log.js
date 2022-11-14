@@ -3,9 +3,10 @@ import setting from '@/settings'
 import bus from '@/utils/bus'
 import pack from '../../package.json'
 import { jsErrorCollection } from 'js-error-collection'
+let reqUrl = '/integration-front/errorCollection/insert'
 const errorLogReq = (errLog) => {
   axiosReq({
-    url: '/integration-front/errorCollection/insert',
+    url: reqUrl,
     data: {
       pageUrl: window.location.href,
       errorLog: errLog,
@@ -40,7 +41,7 @@ export default function () {
   }
   if (checkNeed()) {
     jsErrorCollection({ runtimeError: true, rejectError: true, consoleError: true }, (errLog) => {
-      errorLogReq(errLog)
+      if (!errLog.includes(reqUrl)) errorLogReq(errLog)
     })
   }
 }

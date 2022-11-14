@@ -14,12 +14,10 @@
 
 <script setup>
 const { codes, roles } = useBasicStore()
-
 const freshRoles = (rolesArr) => {
   roles.value = rolesArr
   freshRouter({ roles: rolesArr })
 }
-
 const freshCodes = (codesArr) => {
   codes.value = codesArr
   freshRouter({ codes: codesArr })

@@ -60,16 +60,6 @@ export const useTagsViewStore = defineStore('tagsView', {
           resolve([...state.visitedViews])
         })
       })
-    },
-    updateVisitedView(view) {
-      this.$patch((state) => {
-        for (let v of state.visitedViews) {
-          if (v.path === view.path) {
-            v = Object.assign(v, view)
-            break
-          }
-        }
-      })
     }
   }
 })
