@@ -14,8 +14,7 @@
 </template>
 
 <script setup>
-let searchForm = useCommon().searchForm
-let { routerBack, routerPush, getQueryParam } = useVueRouter()
+const searchForm = useCommon().searchForm
 onMounted(() => {
   //get page pass url data
   console.log(getQueryParam())

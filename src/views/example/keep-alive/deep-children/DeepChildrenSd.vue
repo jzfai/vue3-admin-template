@@ -5,7 +5,7 @@
 
 <script setup>
 defineOptions({ name: 'DeepChildrenSd' })
-let testInput = ref('')
+const testInput = ref('')
 </script>
 
 <style scoped lang="scss"></style>

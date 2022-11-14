@@ -23,7 +23,7 @@ const props = defineProps({
     type: String
   }
 })
-let { name } = props
+const { name } = props
 </script>
 
 <style scoped lang="scss">

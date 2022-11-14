@@ -17,7 +17,7 @@ const useVueRouterExample = function () {
       data = {}
     }
     router.push({
-      name: name,
+      name,
       query: data
     })
   }
@@ -31,7 +31,7 @@ const useVueRouterExample = function () {
       data = {}
     }
     router.replace({
-      name: name,
+      name,
       query: data
     })
   }

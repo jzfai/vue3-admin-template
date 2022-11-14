@@ -13,7 +13,7 @@
 const workerCode = () => {
   onmessage = (e) => {
     console.time('加载时间')
-    console.log('接收到主线程的信息' + e.data)
+    console.log(`接收到主线程的信息${  e.data}`)
     //处理复杂的js逻辑
     let countNum = 0
     for (let i = 0; i < e.data; i++) {
@@ -36,7 +36,7 @@ const changeFuncToUrl = (func) => {
 //主线程逻辑
 const worker = changeFuncToUrl(workerCode)
 worker.postMessage(30000000)
-let showPageRef = ref(null)
+const showPageRef = ref(null)
 worker.onmessage = (e) => {
   console.log(`主进程收到了子进程发出的信息：${e.data}`)
   showPageRef.value = e.data

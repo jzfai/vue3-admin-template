@@ -1,18 +1,18 @@
 <template>
   <div id="Sidebar" class="reset-menu-style">
     <!--logo-->
-    <Logo v-if="settings.sidebarLogo" :collapse="!isCollapse" />
-    <!--router nav-->
+    <Logo v-if="settings.sidebarLogo" :collapse="!sidebar.opened" />
+    <!--router menu-->
     <el-scrollbar>
       <el-menu
         class="el-menu-vertical"
         :default-active="activeMenu"
-        :collapse="!isCollapse"
+        :collapse="!sidebar.opened"
         :unique-opened="false"
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item v-for="route in allRoutes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -21,28 +21,11 @@
 <script setup>
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
-//导入配置文件
-const basicStore = useBasicStore()
-const settings = computed(() => {
-  return basicStore.settings
-})
-
-const route = useRoute()
-const permissionStore = usePermissionStore()
-const routes = computed(() => {
-  return permissionStore.routes
-})
-const isCollapse = computed(() => {
-  return basicStore.sidebar.opened
-})
-import { usePermissionStore } from '@/store/permission'
-
+const { settings, allRoutes, sidebar } = storeToRefs(useBasicStore())
+const { meta, path } = useRoute()
 const activeMenu = computed(() => {
-  const { meta, path } = route
   // if set path, the sidebar will highlight the path you set
-  if (meta.activeMenu) {
-    return meta.activeMenu
-  }
+  if (meta.activeMenu) meta.activeMenu
   return path
 })
 </script>

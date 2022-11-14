@@ -7,18 +7,6 @@ import '@/styles/index.scss' // global css
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 app.use(ElementPlus)
-// import zhCn from 'element-plus/es/locale/lang/zh-cn'
-
-// global mixin
-// import elementMixin from '@/mixins/elementMixin'
-// app.mixin(elementMixin)
-// import commonMixin from '@/mixins/commonMixin'
-// app.mixin(commonMixin)
-// import routerMixin from '@/mixins/routerMixin'
-// app.mixin(routerMixin)
-// //import axios req
-// import axiosReq from '@/utils/axiosReq'
-// app.config.globalProperties.$axiosReq = axiosReq
 
 //svg-icon
 //import svg-icon doc in  https://github.com/anncwb/vite-plugin-svg-icons/blob/main/README.zh_CN.md
@@ -34,7 +22,6 @@ import directive from '@/directives'
 directive(app)
 //import router intercept
 import './permission'
-
 //element svg icon(unplugin-vue-components auto scan)
 // import ElSvgIcon from '@/components/ElSvgIcon.vue'
 // app.component('ElSvgIcon', ElSvgIcon)
@@ -45,12 +32,16 @@ errorLog()
 
 //import theme
 import './theme/index.scss'
+
+//axios cancel req
+window.__axiosPromiseArr = []
 //import unocss
 import 'uno.css'
 
 //pinia
 import { createPinia } from 'pinia'
-
-app.use(createPinia())
-
+const pinia = createPinia()
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 app.use(router).mount('#app')

@@ -1,11 +1,10 @@
 //https://blog.csdn.net/weixin_34865745/article/details/113992767
-import request from '@/utils/axiosReq'
 import setting from '@/settings'
 import bus from '@/utils/bus'
 import pack from '../../package.json'
 import { jsErrorCollection } from 'js-error-collection'
 const errorLogReq = (errLog) => {
-  request({
+  axiosReq({
     url: '/integration-front/errorCollection/insert',
     data: {
       pageUrl: window.location.href,
@@ -34,7 +33,7 @@ export default function () {
     if (typeof errorLog === 'string') {
       return env === errorLog
     }
-    if (errorLog instanceof Array) {
+    if (Array.isArray(errorLog)) {
       return errorLog.includes(env)
     }
     return false

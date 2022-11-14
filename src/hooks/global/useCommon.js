@@ -1,4 +1,3 @@
-import { getToken } from '@/utils/auth'
 import momentMini from 'moment-mini'
 
 export const useCommonExample = () => {

@@ -14,12 +14,11 @@
   </div>
 </template>
 <script setup>
-let { searchForm } = useCommon()
+const { searchForm } = useCommon()
 onMounted(() => {
   //get page pass url data
-  console.log(useVueRouter().getQueryParam())
+  console.log(getQueryParam())
 })
-let { routerBack, routerPush } = useVueRouter()
 const routerDemoS = () => {
   routerPush('routerDemoS', { name: 'routerDemoS' })
 }

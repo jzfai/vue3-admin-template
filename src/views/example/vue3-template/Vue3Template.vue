@@ -27,13 +27,13 @@ const router = useRouter()
 onMounted(() => {
   console.log('页面挂载了')
 })
-let helloFunc = () => {
+const helloFunc = () => {
   console.log('helloFunc')
 }
 // 导出给父元素使用
 defineExpose({ helloFunc })
 // 导出属性到页面中使用
-let { levelList } = toRefs(state)
+const { levelList } = toRefs(state)
 </script>
 
 <style scoped lang="scss"></style>

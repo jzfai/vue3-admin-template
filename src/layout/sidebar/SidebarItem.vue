@@ -27,7 +27,7 @@
 <script setup>
 import Link from './Link.vue'
 import MenuIcon from './MenuIcon.vue'
-import path from 'path'
+import { resolve } from 'path-browserify'
 const props = defineProps({
   //每一个router Item
   item: {
@@ -46,7 +46,7 @@ const props = defineProps({
   }
 })
 //显示sidebarItem 的情况
-let onlyOneChild = ref(null)
+const onlyOneChild = ref(null)
 const showSidebarItem = (children = [], parent) => {
   const showingChildren = children.filter((item) => {
     if (item.hidden) {
@@ -73,6 +73,6 @@ const resolvePath = (routePath) => {
   if (isExternal(props.basePath)) {
     return props.basePath
   }
-  return path.resolve(props.basePath, routePath)
+  return resolve(props.basePath, routePath)
 }
 </script>

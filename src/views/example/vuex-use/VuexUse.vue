@@ -12,28 +12,28 @@
 </template>
 
 <script setup>
-const appStore = useBasicStore()
+const basicStore = useBasicStore()
 /*getter*/
 const getterValue = ref(null)
 const getterFunc = () => {
-  getterValue.value = appStore.cachedViews
+  getterValue.value = basicStore.cachedViews
 }
 
 /*mutations*/
 /*建议commit用M_开头 action用A_开头*/
 
 const c_openSideBar = () => {
-  appStore.M_sidebar_opened(true)
+  basicStore.setSidebarOpen(true)
 }
 const c_closeSideBar = () => {
-  appStore.M_sidebar_opened(false)
+  basicStore.setSidebarOpen(false)
 }
 /*actions*/
 const openSideBar = () => {
-  appStore.A_sidebar_opened(true)
+  basicStore.A_sidebar_opened(true)
 }
 const closeSideBar = () => {
-  appStore.A_sidebar_opened(false)
+  basicStore.A_sidebar_opened(false)
 }
 </script>
 

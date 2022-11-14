@@ -23,8 +23,6 @@ const linkProps = (to) => {
       rel: 'noopener'
     }
   }
-  return {
-    to: to
-  }
+  return { to }
 }
 </script>

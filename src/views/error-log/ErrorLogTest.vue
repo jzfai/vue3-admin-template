@@ -26,9 +26,9 @@
 </template>
 
 <script setup>
-const appStore = useBasicStore()
-let settings = computed(() => {
-  return appStore.settings || {}
+const basicStore = useBasicStore()
+const settings = computed(() => {
+  return basicStore.settings || {}
 })
 
 const handle = () => {
@@ -39,7 +39,7 @@ const handle = () => {
   })
 }
 
-let flag = ref(null)
+const flag = ref(null)
 
 const consoleErrorFun = () => {
   console.error('console.error')
@@ -48,7 +48,7 @@ const consoleErrorFun = () => {
 const normalError = () => {
   throw new Error(' throw new Error("")\n')
 }
-let reqCrossOrigin = () => {
+const reqCrossOrigin = () => {
   axiosReq({
     baseURL: 'https://github.jzfai.top/micro-service-test',
     url: '/integration-front/brand/updateBy',
@@ -59,7 +59,7 @@ let reqCrossOrigin = () => {
   }).then(() => {})
 }
 
-let req404 = () => {
+const req404 = () => {
   axiosReq({
     // baseURL: 'https://github.jzfai.top/micro-service-test',
     url: '/integration-front/brand/updateBy1',
@@ -73,7 +73,7 @@ let req404 = () => {
 }
 
 //img loader err test
-let imgShow = ref(false)
+const imgShow = ref(false)
 const errorLogImg = () => {
   imgShow.value = !imgShow.value
 }

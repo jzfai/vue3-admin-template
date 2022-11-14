@@ -15,18 +15,12 @@ import Sidebar from './sidebar/index.vue'
 import AppMain from './app-main/index.vue'
 import Navbar from './app-main/Navbar.vue'
 import TagsView from './app-main/TagsView.vue'
-const basicStore = useBasicStore()
-const opened = computed(() => {
-  return basicStore.sidebar.opened
-})
-//import ResizeHook to   listen  page size that   open or close
-const settings = computed(() => {
-  return basicStore.settings
-})
+const { sidebar, settings } = useBasicStore()
+
 const classObj = computed(() => {
   return {
-    closeSidebar: !opened.value,
-    hideSidebar: !settings.value.showLeftMenu
+    closeSidebar: !sidebar.opened,
+    hideSidebar: !settings.showLeftMenu
   }
 })
 resizeHandler()

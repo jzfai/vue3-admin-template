@@ -114,7 +114,7 @@ import bus from '@/utils/bus'
  * 每个模块按：响应数据定义->公用方法->请求方法->页面按钮操作方法 进行排序
  * */
 
-let testData = ref('testData')
+const testData = ref('testData')
 onMounted(() => {
   console.log('testData', testData)
 })
@@ -123,35 +123,35 @@ const errorLogProd = () => {
 }
 const consoleToPlatform = (err) => {
   //加个custom不收集
-  console.error('custom' + err)
+  console.error(`custom${  err}`)
 }
 
 //img loader err test
-let imgShow = ref(false)
+const imgShow = ref(false)
 const errorLogImg = () => {
   imgShow.value = !imgShow.value
 }
 
 /*表格查询和筛选*/
-let usertableData = ref([])
+const usertableData = ref([])
 import packages from '/package.json'
-let searchForm = reactive({
+const searchForm = reactive({
   errorLog: '',
   pageUrl: `https://github.jzfai.top/${packages.name}`,
   createTime: '',
   id: ''
 })
 
-let { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()
-let selectPageReq = () => {
+const { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()
+const selectPageReq = () => {
   const data = Object.assign(searchForm, {
-    pageNum: pageNum,
-    pageSize: pageSize
+    pageNum,
+    pageSize
   })
   Object.keys(data).forEach((fItem) => {
     if (data[fItem] === '' || data[fItem] === null || data[fItem] === undefined) delete data[fItem]
   })
-  let reqConfig = {
+  const reqConfig = {
     url: '/integration-front/errorCollection/selectPage',
     method: 'get',
     data,
@@ -188,19 +188,19 @@ const searchBtnClick = () => {
 
 /*添加和修改*/
 /*详情*/
-let detailData = ref({})
+const detailData = ref({})
 /*删除*/
-let { elConfirm, elMessage } = useElement()
-let deleteByIdReq = (id) => {
+const { elConfirm, elMessage } = useElement()
+const deleteByIdReq = (id) => {
   return axiosReq({
     url: '/integration-front/errorCollection/deleteById',
-    data: { id: id },
+    data: { id },
     isParams: true,
     method: 'delete',
     bfLoading: true
   })
 }
-let tableDelClick = async (row) => {
+const tableDelClick = async (row) => {
   await elConfirm('确定', `您确定要删除【${row.pageUrl}】吗？`)
     .then(() => {
       deleteByIdReq(row.id).then(() => {
@@ -213,7 +213,7 @@ let tableDelClick = async (row) => {
 }
 
 /*批量删除*/
-let multipleSelection = ref([])
+const multipleSelection = ref([])
 const handleSelectionChange = (val) => {
   multipleSelection.value = val
 }
@@ -221,14 +221,14 @@ const multiDelBtnClick = async () => {
   let rowDeleteIdArr = []
   let deleteNameTitle = ''
   rowDeleteIdArr = multipleSelection.value.map((mItem) => {
-    deleteNameTitle = deleteNameTitle + mItem.pageUrl + ','
+    deleteNameTitle = `${deleteNameTitle + mItem.pageUrl  },`
     return mItem.id
   })
   if (rowDeleteIdArr.length === 0) {
     elMessage('表格选项不能为空', 'warning')
     return
   }
-  let stringLength = deleteNameTitle.length - 1
+  const stringLength = deleteNameTitle.length - 1
   await elConfirm('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
   const data = rowDeleteIdArr
   axiosReq({

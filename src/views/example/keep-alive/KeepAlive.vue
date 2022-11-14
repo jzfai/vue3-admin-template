@@ -21,10 +21,10 @@
 <script setup>
 defineOptions({ name: 'KeepAlive' })
 
-let { searchForm } = useCommon()
+const { searchForm } = useCommon()
 //$ref(experimental)
 //let testRef = $ref(1)
-let testRef = ref(1)
+const testRef = ref(1)
 //赋值
 testRef.value = 2
 console.log(testRef.value)
@@ -38,8 +38,8 @@ onDeactivated(() => {
 
 const $route = useRoute()
 // cacheGroup为缓存分组  KeepAlive->routerDemoF->routerDemoS
-let cacheGroup = ['KeepAlive', 'routerDemoF', 'routerDemoS']
-const appStore = useBasicStore()
+const cacheGroup = ['KeepAlive', 'routerDemoF', 'routerDemoS']
+const basicStore = useBasicStore()
 const unWatch = watch(
   () => $route.name,
   () => {
@@ -47,7 +47,7 @@ const unWatch = watch(
       useCommon()
         .sleep(300)
         .then(() => {
-          cacheGroup.forEach((fItem) => appStore.M_DEL_CACHED_VIEW(fItem))
+          cacheGroup.forEach((fItem) => basicStore.delCachedView(fItem))
         })
       //remove watch
       unWatch()
@@ -64,7 +64,7 @@ const cancelWatch = () => {
 const routerDemoF = () => {
   //推荐路由跳转根据router的name,这样在你修改路径时，只要不修改name，就没有影响。
   //推荐传递的是query参数，好处是刷新时可以回显，传入的obj对象会反序列化。
-  useVueRouter().routerPush('routerDemoF', { name: 'routerDemoF' })
+  routerPush('routerDemoF', { name: 'routerDemoF' })
 }
 </script>
 

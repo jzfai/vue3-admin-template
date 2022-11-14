@@ -20,8 +20,7 @@
     <el-input v-model="input" style="width: 200px; margin: 20px" />
     <el-tag>Tag 1</el-tag>
 
-    <br />
-    <el-date-picker v-model="curDate" type="date" placeholder="Pick a day"></el-date-picker>
+    <el-date-picker v-model="curDate" type="date" placeholder="Pick a day" />
 
     <a
       href="https://element-plus.gitee.io/en-US/guide/theming.html"
@@ -30,18 +29,6 @@
     >
       Doc of element-plus theme
     </a>
-    <!--    <div class="dashboard-container mt-5">-->
-    <!--      <div class="dashboard-text">name: {{ username }}</div>-->
-    <!--    </div>-->
-    <!--    <div>update element-plus to 1.2.+, add svg icon, icon-font is abandoned</div>-->
-    <!--    <i class="el-icon-add-location">abandoned</i>-->
-    <!--    <div>update element-plus version to 2.0.1 release version the size options change to "large default small"</div>-->
-    <!--    <div class="mt-20px">global element svg
-     icon</div>-->
-    <!--    <ElSvgIcon name="Edit" :size="30" color="red" />-->
-    <!--    <div class="mt-20px">this is var from vite.config.js define</div>-->
-    <!--    <div>{{ showObj }},{{ showObjString }}</div>-->
-    <!--    -->
     <div class="mt-5px text-18px font600">unocss</div>
     <!-- bg-#fff   -->
     <div class="mb-40px w-900px h-10px text-16px">
@@ -62,25 +49,14 @@
 </template>
 <script setup>
 import { ElMessage } from 'element-plus'
-
 const count = ref(0)
 const input = ref('element-plus')
-
 const curDate = ref('')
-
 const toast = () => {
   ElMessage.success('Hello')
 }
 import { toggleHtmlClass } from '@/theme/utils'
-
-import { useUserStore } from '@/store/user'
-
-const userStore = useUserStore()
-const username = computed(() => {
-  return userStore.username
-})
-
 const showObj = ref(GLOBAL_VAR)
 // eslint-disable-next-line no-undef
-const showObjString = ref(GLOBAL_STRING)
+// const showObjString = ref(GLOBAL_STRING)
 </script>

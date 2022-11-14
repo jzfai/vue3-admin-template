@@ -5,15 +5,20 @@
         v-for="tag in visitedViews"
         ref="refTag"
         :key="tag.path"
-        :class="isActive(tag) ? 'active' : ''"
+        v-slot="{ navigate }"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
-        tag="span"
-        class="tags-view-item"
-        @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-        @contextmenu.prevent="openMenu(tag, $event)"
+        custom
       >
-        {{ tag.title }}
-        <Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></Close>
+        <div
+          class="tags-view-item"
+          :class="isActive(tag) ? 'active' : ''"
+          @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
+          @contextmenu.prevent="openMenu(tag, $event)"
+          @click="navigate"
+        >
+          {{ tag.title }}
+          <Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
+        </div>
       </router-link>
     </div>
     <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
@@ -26,17 +31,9 @@
 </template>
 
 <script setup>
-// import ScrollPane from './ScrollPane'
-import path from 'path'
 import { Close } from '@element-plus/icons-vue'
-//获取store和router
-
-import { useTagsViewStore } from '@/store/tagsView'
-import { usePermissionStore } from '@/store/permission'
-
-const $route = useRoute()
-const $router = useRouter()
-
+const route = useRoute()
+const router = useRouter()
 const state = reactive({
   visible: false,
   top: 0,
@@ -45,29 +42,12 @@ const state = reactive({
   affixTags: []
 })
 
-const visitedViews = computed(() => {
-  return tagsViewStore.visitedViews
-})
-const permissionStore = usePermissionStore()
-const routes = computed(() => {
-  return permissionStore.routes
-})
+const { visitedViews } = storeToRefs(useTagsViewStore())
+
 watch(
-  () => $route.path,
+  () => route.path,
   () => {
     addTags()
-    // tag remove has issue
-    // moveToCurrentTag()
-  }
-)
-watch(
-  () => state.visible,
-  (value) => {
-    if (value) {
-      document.body.addEventListener('click', closeMenu)
-    } else {
-      document.body.removeEventListener('click', closeMenu)
-    }
   }
 )
 
@@ -81,24 +61,26 @@ watch(
     }
   }
 )
-
 onMounted(() => {
   initTags()
   addTags()
 })
 
-const isActive = (route) => {
-  return route.path === $route.path
+//判断当前点击的item项，是不是当前显示的路由项，如果是则高亮
+const isActive = (param) => {
+  return route.path === param.path
 }
+//当路由设置meta.affix=true,关闭按钮消失
 const isAffix = (tag) => {
   return tag.meta && tag.meta.affix
 }
 
+import { resolve } from 'path-browserify'
 const filterAffixTags = (routes, basePath = '/') => {
   let tags = []
   routes.forEach((route) => {
     if (route.meta && route.meta.affix) {
-      const tagPath = path.resolve(basePath, route.path)
+      const tagPath = resolve(basePath, route.path)
       tags.push({
         fullPath: tagPath,
         path: tagPath,
@@ -115,9 +97,13 @@ const filterAffixTags = (routes, basePath = '/') => {
   })
   return tags
 }
+
+//初始
 const tagsViewStore = useTagsViewStore()
+const { allRoutes } = useBasicStore()
 const initTags = () => {
-  const affixTags = (state.affixTags = filterAffixTags(routes.value))
+  //过滤affix=true的tags数组并赋值给state.affixTags，挂载到页面上
+  const affixTags = (state.affixTags = filterAffixTags(allRoutes))
   for (const tag of affixTags) {
     // Must have tag name
     if (tag.name) {
@@ -125,69 +111,16 @@ const initTags = () => {
     }
   }
 }
-
 const addTags = () => {
-  const { name } = $route
-  if (name) {
-    tagsViewStore.addView($route)
+  if (route?.name) {
+    tagsViewStore.addVisitedView(route)
   }
   return false
 }
-const refreshSelectedTag = (view) => {
-  const { fullPath } = view
-  nextTick(() => {
-    $router.replace({
-      path: '/redirect' + fullPath
-    })
-  })
-}
-const basicStore = useBasicStore()
-const closeSelectedTag = (view) => {
-  tagsViewStore.delView(view).then(({ visitedViews }) => {
-    if (isActive(view)) {
-      toLastView(visitedViews, view)
-    }
-    //remove keep-alive by the closeTabRmCache
-    if (view.meta?.closeTabRmCache) {
-      const routerLevel = view.matched.length
-      if (routerLevel === 2) {
-        basicStore.M_DEL_CACHED_VIEW(view.name)
-      }
-      if (routerLevel === 3) {
-        basicStore.M_DEL_CACHED_VIEW_DEEP(view.name)
-      }
-    }
-  })
-}
-const closeOthersTags = () => {
-  $router.push(state.selectedTag)
-  tagsViewStore.delOthersViews(state.selectedTag)
-}
-const closeAllTags = (view) => {
-  tagsViewStore.delAllViews().then(({ visitedViews }) => {
-    if (state.affixTags.some((tag) => tag.path === view.path)) {
-      return
-    }
-    toLastView(visitedViews, view)
-  })
-}
-const toLastView = (visitedViews, view) => {
-  const latestView = visitedViews.slice(-1)[0]
-  if (latestView) {
-    $router.push(latestView.fullPath)
-  } else {
-    // now the default is to redirect to the home page if there is no tags-view,
-    // you can adjust it according to your needs.
-    if (view.name === 'Dashboard') {
-      // to reload home page
-      $router.replace({ path: '/redirect' + view.fullPath })
-    } else {
-      $router.push('/')
-    }
-  }
-}
 
+/*右键菜单部分*/
 const { proxy } = getCurrentInstance()
+//右键打开菜单
 const openMenu = (tag, e) => {
   const menuMinWidth = 105
   const offsetLeft = proxy.$el.getBoundingClientRect().left // container margin left
@@ -204,12 +137,71 @@ const openMenu = (tag, e) => {
   state.visible = true
   state.selectedTag = tag
 }
+
+const basicStore = useBasicStore()
+
+//关闭当前标签
+const closeSelectedTag = (view) => {
+  tagsViewStore.delVisitedView(view).then((visitedViews) => {
+    if (isActive(view)) {
+      toLastView(visitedViews, view)
+    }
+    //remove keep-alive by the closeTabRmCache
+    if (view.meta?.closeTabRmCache) {
+      const routerLevel = view.matched.length
+      if (routerLevel === 2) {
+        basicStore.delCachedView(view.name)
+      }
+      if (routerLevel === 3) {
+        basicStore.setCacheViewDeep(view.name)
+      }
+    }
+  })
+}
+
+//刷新标签
+const refreshSelectedTag = (view) => {
+  const { fullPath } = view
+  nextTick(() => {
+    router.replace({
+      path: `/redirect${fullPath}`
+    })
+  })
+}
+
+//右键关闭菜单
 const closeMenu = () => {
   state.visible = false
 }
-// const handleScroll = () => {
-//   closeMenu()
-// }
+//关闭其他标签
+const closeOthersTags = () => {
+  router.push(state.selectedTag)
+  tagsViewStore.delOthersVisitedViews(state.selectedTag)
+}
+//关闭所有标签
+const closeAllTags = (view) => {
+  tagsViewStore.delAllVisitedViews().then((visitedViews) => {
+    if (state.affixTags.some((tag) => tag.path === view.path)) {
+      return
+    }
+    toLastView(visitedViews, view)
+  })
+}
+//跳转最后一个标签
+const toLastView = (visitedViews, view) => {
+  //visitedViews.at(-1)获取数组最后一个元素
+  const latestView = visitedViews.at(-1)
+  if (latestView) {
+    router.push(latestView.fullPath)
+  } else {
+    if (view.name === 'Dashboard') {
+      // to reload home page
+      router.replace({ path: `/redirect${view.fullPath}` })
+    } else {
+      router.push('/')
+    }
+  }
+}
 
 //export to page use
 const { visible, top, left, selectedTag } = toRefs(state)

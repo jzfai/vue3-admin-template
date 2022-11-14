@@ -20,7 +20,7 @@
   </header>
   <!-- 作用域插槽 -->
   <footer>
-    <slot name="footer" testProps="子组件作用域传的值">
+    <slot name="footer" test-props="子组件作用域传的值">
       <h3>没传footer插槽</h3>
     </slot>
   </footer>
@@ -45,17 +45,17 @@ const props = defineProps({
     type: String
   }
 })
-let state = reactive({
+const state = reactive({
   name: 'Children'
 })
 //导出给refs使用
-let childRef = ref('childRef')
-let childMethod = () => {
+const childRef = ref('childRef')
+const childMethod = () => {
   return 'childMethod'
 }
 
-let { proxy } = getCurrentInstance()
-let getFatherMethod = () => {
+const { proxy } = getCurrentInstance()
+const getFatherMethod = () => {
   proxy.$parent.fartherMethod()
 }
 //emit
@@ -70,14 +70,14 @@ onMounted(() => {
 
 //v-model sync
 onMounted(() => {
-  console.log('this is v-model parent data:' + props.childrenTitle)
+  console.log(`this is v-model parent data:${  props.childrenTitle}`)
 })
 const changeParentValue = () => {
   emit('update:childrenTitle', 'update it childrenTitle')
 }
 defineExpose({ childRef, childMethod })
 //export to page for use
-let { name } = toRefs(state)
+const { name } = toRefs(state)
 </script>
 
 <style scoped lang="scss"></style>

@@ -1,76 +1,6 @@
 export default {
-  /**
-   * 获取星期几
-   * @param date 日期字符串
-   * return {String}
-   */
-  dayFormat(date) {
-    switch (new Date(date).getDay()) {
-      case 0:
-        return '星期日'
-      case 1:
-        return '星期一'
-      case 2:
-        return '星期二'
-      case 3:
-        return '星期三'
-      case 4:
-        return '星期四'
-      case 5:
-        return '星期五'
-      case 6:
-        return '星期六'
-    }
-  },
-
-  /**
-   * 计算两个时间差
-   * @param {Data} startTime 开始时间（xxxx-xx-xx）
-   * @param {Data} endTime   结束时间（xxxx-xx-xx）
-   * return xx年xx天  || xx天xx小时 || xx小时xx分
-   */
-  getDateDiff(startTime, endTime) {
-    // 将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式
-    startTime = startTime.replace(/\-/g, '/')
-    endTime = endTime.replace(/\-/g, '/')
-    let sTime = new Date(startTime) // 开始时间
-    let eTime = new Date(endTime) // 结束时间
-    let timeOff = eTime - sTime // 相差时间戳（毫秒数）
-    let timeMinute = 1000 * 60
-    let timeHour = 1000 * 3600
-    let timeDay = 1000 * 3600 * 24
-    let timeYear = 1000 * 3600 * 24 * 365
-    if (timeOff / timeYear >= 1) {
-      return parseInt(timeOff / timeYear) + '年' + parseInt((timeOff % timeYear) / timeDay) + '天'
-    } else if (timeOff / timeDay >= 1) {
-      return parseInt(timeOff / timeDay) + '天' + parseInt((timeOff % timeDay) / timeHour) + '小时'
-    } else {
-      return parseInt(timeOff / timeHour) + '小时' + parseInt((timeOff % timeHour) / timeMinute) + '分'
-    }
-  },
-  /* today 是今天的时间戳(new Date().getTime()) */
-  minStartDate(today, day) {
-    const dayDiff = day * 24 * 60 * 60 * 1000 // day（多少天）的时间戳
-    const minStartTime = today - dayDiff
-    // dateTimeFormatter是第一个时间类的方法
-    return this.dateTimeFormatter(minStartTime, 'yyyy-MM-dd')
-  },
-  /* 获取两个日期相差天数
-   * */
-  dateDiff(sDate1, sDate2) {
-    let arrDate, objDate1, objDate2, iDays
-    arrDate = sDate1.split('-')
-    objDate1 = new Date(arrDate[1] + '/' + arrDate[2] + '/' + arrDate[0])
-    arrDate = sDate2.split('-')
-    objDate2 = new Date(arrDate[1] + '/' + arrDate[2] + '/' + arrDate[0])
-    iDays = parseInt(Math.abs(objDate1 - objDate2) / 1000 / 60 / 60 / 24) // 相差毫秒数转成天数
-    return iDays
-  },
-  /*
-   * 获得今天周几
-   * */
   getWeek() {
-    return '星期' + '日一二三四五六'.charAt(new Date().getDay())
+    return `星期${  '日一二三四五六'.charAt(new Date().getDay())}`
     // this.showDate=this.$momentMini(new Date()).format('YYYY年MM月DD日，')+str
   },
   /* 表单验证*/
@@ -109,20 +39,20 @@ export default {
     let resultVal
     const d = arguments[2]
     m = (r1.split('.')[1] ? r1.split('.')[1].length : 0) + (r2.split('.')[1] ? r2.split('.')[1].length : 0)
-    resultVal = (Number(r1.replace('.', '')) * Number(r2.replace('.', ''))) / Math.pow(10, m)
-    return typeof d !== 'number' ? Number(resultVal) : Number(resultVal.toFixed(parseInt(d)))
+    resultVal = (Number(r1.replace('.', '')) * Number(r2.replace('.', ''))) / 10**m
+    return typeof d !== 'number' ? Number(resultVal) : Number(resultVal.toFixed(Number.parseInt(d)))
   },
-  div: function (arg1, arg2) {
+  div (arg1, arg2) {
     const r1 = arg1.toString()
     const r2 = arg2.toString()
     let m
     let resultVal
     const d = arguments[2] || 2
     m = (r2.split('.')[1] ? r2.split('.')[1].length : 0) - (r1.split('.')[1] ? r1.split('.')[1].length : 0)
-    resultVal = (Number(r1.replace('.', '')) / Number(r2.replace('.', ''))) * Math.pow(10, m)
-    return typeof d !== 'number' ? Number(resultVal) : Number(resultVal.toFixed(parseInt(d)))
+    resultVal = (Number(r1.replace('.', '')) / Number(r2.replace('.', ''))) * 10**m
+    return typeof d !== 'number' ? Number(resultVal) : Number(resultVal.toFixed(Number.parseInt(d)))
   },
-  add: function (arg1, arg2) {
+  add (arg1, arg2) {
     arg1 = arg1.toString()
     arg2 = arg2.toString()
     const arg1Arr = arg1.split('.')
@@ -130,12 +60,12 @@ export default {
     const d1 = arg1Arr.length === 2 ? arg1Arr[1] : ''
     const d2 = arg2Arr.length === 2 ? arg2Arr[1] : ''
     const maxLen = Math.max(d1.length, d2.length)
-    const m = Math.pow(10, maxLen)
+    const m = 10**maxLen
     const result = Number(((arg1 * m + arg2 * m) / m).toFixed(maxLen))
     const d = arguments[2]
     return typeof d === 'number' ? Number(result.toFixed(d)) : result
   },
-  sub: function (arg1, arg2) {
+  sub (arg1, arg2) {
     return this.add(arg1, -Number(arg2), arguments[2])
   },
   /* 常用数组操作*/
@@ -146,7 +76,7 @@ export default {
    * */
   deleteArrItem(arr, arrItem) {
     arr.splice(
-      arr.findIndex((item) => item === arrItem),
+      arr.indexOf(arrItem),
       1
     )
   },
@@ -221,13 +151,13 @@ export default {
    * return: arrObj2删除过后的数组
    * */
   byArrObjFindArrObj2(arrObj, arrObj2, objKey, value) {
-    let arrObj3 = []
+    const arrObj3 = []
     arrObj
       .map((value) => {
         return value[objKey]
       })
       .forEach((value2) => {
-        let arrIndex = arrObj2.findIndex((item) => item[objKey] === value2)
+        const arrIndex = arrObj2.findIndex((item) => item[objKey] === value2)
         if (arrIndex !== -1) {
           arrObj3.push(arrObj2[arrIndex])
         }

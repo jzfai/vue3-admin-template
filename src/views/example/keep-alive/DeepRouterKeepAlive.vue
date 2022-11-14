@@ -14,10 +14,10 @@
 <script setup>
 defineOptions({ name: 'DeepRouterKeepAlive' })
 
-let testInput = ref('')
-const appStore = useBasicStore()
+const testInput = ref('')
+const basicStore = useBasicStore()
 const cachedViewsDeep = computed(() => {
-  return appStore.cachedViewsDeep
+  return basicStore.cachedViewsDeep
 })
 </script>
 

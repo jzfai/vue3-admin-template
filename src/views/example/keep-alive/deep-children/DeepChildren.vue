@@ -5,7 +5,7 @@
 
 <script setup>
 defineOptions({ name: 'DeepChildren' })
-let testInput = ref('')
+const testInput = ref('')
 
 onMounted(() => {
   console.log('DeepChildren')

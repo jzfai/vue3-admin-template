@@ -1,4 +1,4 @@
-import { ElLoading, ElNotification, ElMessage, ElMessageBox } from 'element-plus'
+import { ElLoading, ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 const useElementExample = () => {
   /* element form校验相关*/
   // 密码必须为6-18位字母、数字

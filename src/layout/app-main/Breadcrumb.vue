@@ -1,7 +1,8 @@
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
-    <!--has transition  Judging by settings.mainNeedAnimation-->
+    <!--  mainNeedAnimation：控制该面包屑是否需要动画  -->
     <transition-group v-if="settings.mainNeedAnimation" name="breadcrumb">
+      <!--  根据过滤后的数组生成面包屑  -->
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
         <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
           {{ item.meta?.title }}
@@ -24,59 +25,45 @@
 <script setup>
 import { compile } from 'path-to-regexp'
 const levelList = ref(null)
-
-//Whether close the animation fo breadcrumb
-
-const basicStore = useBasicStore()
-const settings = computed(() => {
-  return basicStore.settings
-})
-
+const { settings } = useBasicStore()
 const route = useRoute()
 const getBreadcrumb = () => {
-  // only show routes with meta.title
-  let matched = route.matched.filter((item) => item.meta && item.meta.title)
-  const first = matched[0]
-  if (!isDashboard(first)) {
-    //it can replace the first page if not exits
+  // only show routes with has  meta.title
+  let matched = route.matched.filter((item) => item.meta?.title)
+  //如果首页Dashboard,如果没有，添加Dashboard路由到第一个路由
+  const isHasDashboard = matched[0]?.name.toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
+  if (!isHasDashboard) {
     matched = [{ path: '/dashboard', meta: { title: 'Dashboard' } }].concat(matched)
   }
+  //过滤面包屑显示的数组
   levelList.value = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false)
 }
 
-const isDashboard = (route) => {
-  const name = route?.name
-  if (!name) {
-    return false
-  }
-  return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
-}
+//页面跳转处理
+//compile函数将返回一个用于将参数转换为有效路径的函数：
+//const  toPath =  compile ( "/user/:id" ,  {  encode : encodeURIComponent  } ) ;
+//toPath ( {  id : 123  } ) ; //=> "/user/123"
 const pathCompile = (path) => {
   const { params } = route
   const toPath = compile(path)
   return toPath(params)
 }
 const router = useRouter()
+//如果有redirect地址直接跳转，没有跳转path
 const handleLink = (item) => {
   const { redirect, path } = item
   if (redirect) {
     router.push(redirect)
     return
   }
-  if (path) {
-    router.push(pathCompile(path))
-  }
+  if (path) router.push(pathCompile(path))
 }
+//监听路由路径刷新 面包屑显示数组
 watch(
   () => route.path,
-  () => {
-    getBreadcrumb()
-  },
+  () => getBreadcrumb(),
   { immediate: true }
 )
-onBeforeMount(() => {
-  getBreadcrumb()
-})
 </script>
 
 <style lang="scss" scoped>

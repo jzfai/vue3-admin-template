@@ -1,16 +1,16 @@
 <!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
-    <el-form ref="refloginForm" class="login-form" :model="formInline" :rules="formRules">
+    <el-form ref="refLoginForm" class="login-form" :model="subForm" :rules="formRules">
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
-      <el-form-item prop="username" :rules="formRules.isNotNull">
+      <el-form-item prop="keyword" :rules="formRules.isNotNull">
         <div class="rowSC">
           <span class="svg-container">
             <svg-icon icon-class="user" />
           </span>
-          <el-input v-model="formInline.username" placeholder="用户名(admin)" />
+          <el-input v-model="subForm.keyword" placeholder="用户名(admin)" />
           <!--占位-->
           <div class="show-pwd" />
         </div>
@@ -24,7 +24,7 @@
           <el-input
             :key="passwordType"
             ref="refPassword"
-            v-model="formInline.password"
+            v-model="subForm.password"
             :type="passwordType"
             name="password"
             placeholder="password(123456)"
@@ -36,7 +36,7 @@
         </div>
       </el-form-item>
       <div class="tip-message">{{ tipMessage }}</div>
-      <el-button :loading="loading" type="primary" class="login-btn" size="default" @click.prevent="handleLogin">
+      <el-button :loading="subLoading" type="primary" class="login-btn" size="default" @click.prevent="handleLogin">
         Login
       </el-button>
     </el-form>
@@ -44,25 +44,22 @@
 </template>
 
 <script setup>
-import settings from '@/settings'
-
-import { ElMessage } from 'element-plus'
-import { useUserStore } from '@/store/user'
+const { settings } = useBasicStore()
 //element valid
 const formRules = useElement().formRules
 //form
-let formInline = reactive({
-  username: 'admin',
+const subForm = reactive({
+  keyword: 'panda',
   password: '123456'
 })
-let state = reactive({
+const state = reactive({
   otherQuery: {},
   redirect: undefined
 })
 
-/* listen router change  */
+/* listen router change and set the query  */
 const route = useRoute()
-let getOtherQuery = (query) => {
+const getOtherQuery = (query) => {
   return Object.keys(query).reduce((acc, cur) => {
     if (cur !== 'redirect') {
       acc[cur] = query[cur]
@@ -70,7 +67,6 @@ let getOtherQuery = (query) => {
     return acc
   }, {})
 }
-
 watch(
   () => route.query,
   (query) => {
@@ -85,46 +81,39 @@ watch(
 /*
  *  login relative
  * */
-let loading = ref(false)
-let tipMessage = ref('')
-
-const refloginForm = ref(null)
-let handleLogin = () => {
-  refloginForm.value.validate((valid) => {
-    if (valid) {
-      loginReq()
-    } else {
-      return false
-    }
+let subLoading = $ref(false)
+//tip message
+let tipMessage = $ref('')
+//sub form
+const refLoginForm = $ref(null)
+const handleLogin = () => {
+  refLoginForm.validate((valid) => {
+    subLoading = true
+    if (valid) loginFunc()
   })
 }
-
-//use the auto import from vite.config.js of AutoImport
 const router = useRouter()
-let loginReq = () => {
-  loading.value = true
-  const userStore = useUserStore()
-  userStore
-    .login(formInline)
-    .then(() => {
-      ElMessage({ message: '登录成功', type: 'success' })
-      router.push({ path: state.redirect || '/', query: state.otherQuery })
+const basicStore = useBasicStore()
+const loginFunc = () => {
+  loginReq(subForm)
+    .then(({ data }) => {
+      elMessage('登录成功')
+      basicStore.setToken(data?.jwtToken)
+      router.push('/')
     })
-    .catch((res) => {
-      tipMessage.value = res.msg
-      useCommon()
-        .sleep(30)
-        .then(() => {
-          loading.value = false
-        })
+    .catch((err) => {
+      tipMessage = err?.msg
+    })
+    .finally(() => {
+      subLoading = false
     })
 }
 /*
  *  password show or hidden
  * */
-let passwordType = ref('password')
+const passwordType = ref('password')
 const refPassword = ref(null)
-let showPwd = () => {
+const showPwd = () => {
   if (passwordType.value === 'password') {
     passwordType.value = ''
   } else {

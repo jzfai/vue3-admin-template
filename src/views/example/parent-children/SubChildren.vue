@@ -10,7 +10,7 @@
      teleport container
      attention: the container must have when the teleport render
      -->
-  <div id="modal-container"></div>
+  <div id="modal-container"/>
 
   <!--  to container-->
   <teleport v-if="modalOpen" to="#modal-container">
@@ -30,7 +30,7 @@
 
 <script setup>
 //provide and inject using
-let title = inject('title')
+const title = inject('title')
 
 const modalOpen = ref(false)
 

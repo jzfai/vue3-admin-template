@@ -6,15 +6,14 @@
 
 <script setup>
 import SvgIcon from '@/icons/SvgIcon.vue'
-
 defineProps({
   isActive: {
     type: Boolean,
     default: false
   }
 })
-
 const emit = defineEmits(['toggleClick'])
+//切换左侧栏关闭和隐藏
 const toggleClick = () => {
   emit('toggleClick')
 }

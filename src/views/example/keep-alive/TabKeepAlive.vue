@@ -12,10 +12,10 @@
 -->
 <script setup>
 defineOptions({ name: 'TabKeepAlive' })
-let { searchForm } = useCommon()
+const { searchForm } = useCommon()
 //$ref(experimental)
 //let testRef = $ref(1)
-let testRef = ref(1)
+const testRef = ref(1)
 //赋值
 testRef.value = 2
 // console.log(testRef.value)

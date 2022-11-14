@@ -11,36 +11,32 @@ export function isExternal(path) {
 export function resizeHandler() {
   const { body } = document
   const WIDTH = 992
-  const appStore = useBasicStore()
-  const $_isMobile = () => {
+  const basicStore = useBasicStore()
+  const isMobile = () => {
     const rect = body.getBoundingClientRect()
     return rect.width - 1 < WIDTH
   }
-  const $_resizeHandler = () => {
+  const resizeHandler = () => {
     if (!document.hidden) {
-      const isMobile = $_isMobile()
-      if (isMobile) {
-        // console.log('closeSideBar')
+      if (isMobile()) {
         /*此处只做根据window尺寸关闭sideBar功能*/
-
-        appStore.M_sidebar_opened(false)
+        basicStore.setSidebarOpen(false)
       } else {
-        appStore.M_sidebar_opened(true)
+        basicStore.setSidebarOpen(true)
       }
     }
   }
   onBeforeMount(() => {
-    window.addEventListener('resize', $_resizeHandler)
+    window.addEventListener('resize', resizeHandler)
   })
   onMounted(() => {
-    const isMobile = $_isMobile()
-    if (isMobile) {
-      appStore.M_sidebar_opened(false)
+    if (isMobile()) {
+      basicStore.setSidebarOpen(false)
     } else {
-      appStore.M_sidebar_opened(true)
+      basicStore.setSidebarOpen(true)
     }
   })
   onBeforeUnmount(() => {
-    window.removeEventListener('resize', $_resizeHandler)
+    window.removeEventListener('resize', resizeHandler)
   })
 }

@@ -6,31 +6,31 @@
         page layout related
         <div class="mt-20px">
           sidebarLogo：
-          <el-switch v-model="appStore.settings.sidebarLogo" />
+          <el-switch v-model="basicStore.settings.sidebarLogo" />
         </div>
         <div class="mt-30px">
           showNavbarTitle：
-          <el-switch v-model="appStore.settings.showNavbarTitle" />
+          <el-switch v-model="basicStore.settings.showNavbarTitle" />
         </div>
         <div class="mt-30px">
           ShowDropDown：
-          <el-switch v-model="appStore.settings.ShowDropDown" />
+          <el-switch v-model="basicStore.settings.ShowDropDown" />
         </div>
         <div class="mt-30px">
           showHamburger：
-          <el-switch v-model="appStore.settings.showHamburger" />
+          <el-switch v-model="basicStore.settings.showHamburger" />
         </div>
         <div class="mt-30px">
           showLeftMenu：
-          <el-switch v-model="appStore.settings.showLeftMenu" />
+          <el-switch v-model="basicStore.settings.showLeftMenu" />
         </div>
         <div class="mt-30px">
           showTagsView：
-          <el-switch v-model="appStore.settings.showTagsView" />
+          <el-switch v-model="basicStore.settings.showTagsView" />
         </div>
         <div class="mt-30px">
           showTopNavbar：
-          <el-switch v-model="appStore.settings.showTopNavbar" />
+          <el-switch v-model="basicStore.settings.showTopNavbar" />
         </div>
       </div>
 
@@ -38,11 +38,11 @@
         page animation related
         <div class="mt-20px">
           mainNeedAnimation：places to "settings file" for setting
-          <!-- <el-switch v-model="appStore.settings.mainNeedAnimation" />-->
+          <!-- <el-switch v-model="basicStore.settings.mainNeedAnimation" />-->
         </div>
         <div class="mt-30px">
           isNeedNprogress：
-          <el-switch v-model="appStore.settings.isNeedNprogress" />
+          <el-switch v-model="basicStore.settings.isNeedNprogress" />
         </div>
       </div>
     </div>
@@ -53,12 +53,12 @@
 
 <script setup>
 const settings = computed(() => {
-  return appStore.settings || {}
+  return basicStore.settings || {}
 })
 
-const appStore = useBasicStore()
+const basicStore = useBasicStore()
 const testChangeSettings = () => {
-  appStore.M_settings({ sidebarLogo: !settings.value.sidebarLogo })
+  basicStore.M_settings({ sidebarLogo: !settings.value.sidebarLogo })
 }
 
 const source = ref(false)

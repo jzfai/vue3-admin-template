@@ -46,7 +46,6 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    console.log('err' + error) // for debug
     ElMessage({
       message: error.ElMessage,
       type: 'error',

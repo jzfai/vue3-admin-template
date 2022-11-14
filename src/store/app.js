@@ -24,26 +24,26 @@ export const useAppStore = defineStore('app', {
         state.settings = { ...state.settings, ...data }
       })
     },
-    M_sidebar_opened(data) {
+    setSidebarOpen(data) {
       this.$patch((state) => {
         state.sidebar.opened = data
       })
     },
-    M_toggleSideBar() {
+    setToggleSideBar() {
       this.$patch((state) => {
         state.sidebar.opened = !state.sidebar.opened
       })
     },
 
     /*keepAlive缓存*/
-    M_ADD_CACHED_VIEW(view) {
+    addCachedView(view) {
       this.$patch((state) => {
         if (state.cachedViews.includes(view)) return
         state.cachedViews.push(view)
       })
     },
 
-    M_DEL_CACHED_VIEW(view) {
+    delCachedView(view) {
       this.$patch((state) => {
         const index = state.cachedViews.indexOf(view)
         index > -1 && state.cachedViews.splice(index, 1)
@@ -55,13 +55,13 @@ export const useAppStore = defineStore('app', {
       })
     },
     /*third  keepAlive*/
-    M_ADD_CACHED_VIEW_DEEP(view) {
+    addCachedViewDeep(view) {
       this.$patch((state) => {
         if (state.cachedViewsDeep.includes(view)) return
         state.cachedViewsDeep.push(view)
       })
     },
-    M_DEL_CACHED_VIEW_DEEP(view) {
+    setCacheViewDeep(view) {
       this.$patch((state) => {
         const index = state.cachedViewsDeep.indexOf(view)
         index > -1 && state.cachedViewsDeep.splice(index, 1)
@@ -74,7 +74,7 @@ export const useAppStore = defineStore('app', {
     },
 
     A_sidebar_opened(data) {
-      this.M_sidebar_opened(data)
+      this.setSidebarOpen(data)
     }
   }
 })

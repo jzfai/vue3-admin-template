@@ -1,16 +1,19 @@
 <template>
   <div class="navbar rowBC reset-el-dropdown">
     <div class="rowSC">
+      <!--  切换sidebar按钮  -->
       <hamburger
         v-if="settings.showHamburger"
-        :is-active="opened"
+        :is-active="sidebar.opened"
         class="hamburger-container"
         @toggleClick="toggleSideBar"
       />
+      <!--  面包屑导航  -->
       <breadcrumb class="breadcrumb-container" />
     </div>
-    <!--nav title-->
+    <!--导航标题-->
     <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.title }}</div>
+    <!-- 下拉操作菜单 -->
     <div v-if="settings.ShowDropDown" class="right-menu">
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
@@ -38,34 +41,27 @@
 </template>
 
 <script setup>
-import { CaretBottom } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 import Breadcrumb from './Breadcrumb.vue'
 import Hamburger from './Hamburger.vue'
-
-import { useUserStore } from '@/store/user'
-
-const settings = computed(() => {
-  return basicStore.settings
-})
-const opened = computed(() => {
-  return basicStore.sidebar.opened
-})
+import { CaretBottom } from '@element-plus/icons-vue'
 const basicStore = useBasicStore()
+const { settings, sidebar, setToggleSideBar } = basicStore
+
 const toggleSideBar = () => {
-  basicStore.M_toggleSideBar()
+  setToggleSideBar()
 }
-/*
- * 退出登录
- * */
+//退出登录
 const router = useRouter()
-const route = useRoute()
 const loginOut = () => {
-  const userStore = useUserStore()
-  userStore.logout().then(() => {
-    ElMessage({ message: '退出登录成功', type: 'success' })
-    router.push(`/login?redirect=/`)
+  elMessage('退出登录成功')
+  router.push(`/login?redirect=/`)
+  nextTick(() => {
+    resetState()
   })
+
+  // loginOutReq().then(() => {
+
+  // })
 }
 </script>
 

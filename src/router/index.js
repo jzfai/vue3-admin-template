@@ -15,7 +15,7 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login/Login.vue'),
+    component: () => import('@/views/login/index.vue'),
     hidden: true
   },
   {
@@ -50,7 +50,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/setting-switch'),
         name: 'SettingSwitch',
-        meta: { title: 'Setting Switch', icon: 'example' }
+        meta: { title: 'Setting Switch', icon: 'example', affix: true }
       }
     ]
   },
@@ -249,15 +249,13 @@ export const constantRoutes = [
     ]
   }
 ]
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
+
+//角色和code数组动态路由
+export const roleCodeRoutes = [
   {
-    path: '/permission',
+    path: '/roles-codes',
     component: Layout,
-    redirect: '/permission/page',
+    redirect: '/roles-codes/page',
     alwaysShow: true, // will always show the root menu
     name: 'Permission',
     meta: {
@@ -267,54 +265,49 @@ export const asyncRoutes = [
     },
     children: [
       {
+        path: 'index',
+        component: () => import('@/views/roles-codes/index.vue'),
+        name: 'RolesCodes',
+        meta: {
+          title: 'index'
+        }
+      },
+      {
         path: 'roleIndex',
-        component: () => import('@/views/permission'),
-        name: 'Permission',
+        component: () => import('@/views/roles-codes/role-index.vue'),
+        name: 'RoleIndex',
         meta: {
-          title: 'role Index'
-          //roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'page',
-        component: () => import('@/views/permission/page.vue'),
-        name: 'PagePermission',
-        meta: {
-          title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import('@/views/permission/directive.vue'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'Directive Permission'
-          // if do not set roles, means: this page does not require permission
+          title: 'Role Index',
+          roles: ['admin']
         }
       },
       {
         path: 'code-index',
-        component: () => import('@/views/permission/CodePermission.vue'),
-        name: 'CodePermission',
+        component: () => import('@/views/roles-codes/code-index.vue'),
+        name: 'CodeIndex',
         meta: {
-          title: 'Code Index'
+          title: 'Code Index',
+          code: 16
         }
       },
       {
-        path: 'code-page',
-        component: () => import('@/views/permission/CodePage.vue'),
-        name: 'CodePage',
+        path: 'button-permission',
+        component: () => import('@/views/roles-codes/button-permission.vue'),
+        name: 'ButtonPermission',
         meta: {
-          title: 'Code Page',
-          code: 1
+          title: 'Button Permission'
         }
       }
     ]
-  },
+  }
+]
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
   // 404 page must be placed at the end !!!
-  // using pathMatch install of "*" in vue-router 4.0
-  { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
+  { path: '/:catchAll(.*)', name: 'CatchAll', redirect: '/404', hidden: true }
 ]
 
 const router = createRouter({
