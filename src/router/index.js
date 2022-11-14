@@ -62,7 +62,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'list',
-        component: () => import('@/views/error-log'),
+        component: () => import('@/views/error-log/index.vue'),
         name: 'ErrorLog',
         meta: { title: 'Error Log' }
       },
