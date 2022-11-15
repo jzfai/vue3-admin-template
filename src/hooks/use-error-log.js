@@ -1,9 +1,9 @@
-//https://blog.csdn.net/weixin_34865745/article/details/113992767
-import setting from '@/settings'
+/*js 错误日志收集*/
+import settings from '@/settings'
 import bus from '@/utils/bus'
 import pack from '../../package.json'
 import { jsErrorCollection } from 'js-error-collection'
-let reqUrl = '/integration-front/errorCollection/insert'
+const reqUrl = '/integration-front/errorCollection/insert'
 const errorLogReq = (errLog) => {
   axiosReq({
     url: reqUrl,
@@ -13,34 +13,18 @@ const errorLogReq = (errLog) => {
       browserType: navigator.userAgent,
       version: pack.version
     },
-    method: 'post',
-    bfLoading: false,
-    isAlertErrorMsg: true
+    method: 'post'
   }).then(() => {
+    //通知错误列表页面更新数据
     bus.emit('reloadErrorPage', {})
   })
 }
 
-export default function () {
-  /*
-   * type judge
-   * base type  using 'type of'
-   * Reference type using 'instance of'
-   * recommend to reading https://www.jianshu.com/p/ddc7f189d130
-   * */
-  const checkNeed = () => {
-    const env = import.meta.env.VITE_APP_ENV
-    const { errorLog } = setting
-    if (typeof errorLog === 'string') {
-      return env === errorLog
-    }
-    if (Array.isArray(errorLog)) {
-      return errorLog.includes(env)
-    }
-    return false
-  }
-  if (checkNeed()) {
+export const useErrorLog = () => {
+  //判断该环境是否需要收集错误日志,由settings配置决定
+  if (settings.errorLog?.includes(import.meta.env.VITE_APP_ENV)) {
     jsErrorCollection({ runtimeError: true, rejectError: true, consoleError: true }, (errLog) => {
+      //判断是否是reqUrl错误，避免死循环
       if (!errLog.includes(reqUrl)) errorLogReq(errLog)
     })
   }

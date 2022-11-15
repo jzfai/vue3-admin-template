@@ -76,30 +76,6 @@
         @current-change="handleCurrentChange"
       />
     </div>
-    <!--详情-->
-    <el-dialog
-      v-if="detailDialog"
-      v-model="detailDialog"
-      :title="dialogTitle"
-      width="40vw"
-      :close-on-click-modal="false"
-    >
-      <div class="detail-container rowBC elODialogModalBodyH60vh">
-        <div class="detail-container-item">DBC文件名：{{ detailData.username }}</div>
-      </div>
-      <div class="detail-container rowBC elODialogModalBodyH60vh">
-        <div v-if="detailData.status === 1" class="detail-container-item" style="color: green">状态： 启用</div>
-        <div v-else class="detail-container-item">状态： 停用</div>
-      </div>
-      <div class="detail-container rowBC elODialogModalBodyH60vh">
-        <div class="detail-container-item">说明：{{ detailData.remark }}</div>
-      </div>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button type="primary" @click="detailDialog = false">确 定</el-button>
-        </span>
-      </template>
-    </el-dialog>
     <!--图片错误demo-->
     <img v-if="imgShow" src="http://img.png" />
   </div>
@@ -109,15 +85,6 @@
 import { Delete } from '@element-plus/icons-vue'
 import settings from '@/settings'
 import bus from '@/utils/bus'
-/*
- * 一般根据页面层次来排序 如此页面 表格查询和筛选->table的操作
- * 每个模块按：响应数据定义->公用方法->请求方法->页面按钮操作方法 进行排序
- * */
-
-const testData = ref('testData')
-onMounted(() => {
-  console.log('testData', testData)
-})
 const errorLogProd = () => {
   throw new Error('产生的错误日志')
 }
@@ -142,7 +109,11 @@ const searchForm = reactive({
   id: ''
 })
 
-let { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()
+let totalPage = ref()
+let startEndArr = ref([])
+let dialogTitle = ref([])
+let detailDialog = ref(false)
+
 const selectPageReq = () => {
   const data = Object.assign(searchForm, {
     pageNum,

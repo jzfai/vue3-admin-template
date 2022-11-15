@@ -54,130 +54,130 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/error-log',
-    component: Layout,
-    redirect: '/error-log/list',
-    meta: { title: 'ErrorLog', icon: 'bug' },
-    children: [
-      {
-        path: 'list',
-        component: () => import('@/views/error-log/index.vue'),
-        name: 'ErrorLog',
-        meta: { title: 'Error Log' }
-      },
-      {
-        path: 'error-log-test',
-        component: () => import('@/views/error-log/ErrorLogTest.vue'),
-        name: 'ErrorLogTest',
-        meta: { title: 'ErrorLog Test' }
-      }
-    ]
-  },
-  {
-    path: '/writing-demo',
-    component: Layout,
-    meta: { title: 'Writing Demo', icon: 'eye-open' },
-    alwaysShow: true,
-    children: [
-      {
-        path: 'hook',
-        component: () => import('@/views/example/hook/Hook.vue'),
-        name: 'Hook',
-        meta: { title: 'Hook-Demo' }
-      },
-      {
-        path: 'vuex-use',
-        component: () => import('@/views/example/vuex-use/VuexUse.vue'),
-        name: 'VuexUse',
-        meta: { title: 'Vuex-Demo' }
-      },
-      {
-        path: 'mock-test',
-        component: () => import('@/views/example/mock-test/MockTest.vue'),
-        name: 'MockTest',
-        meta: { title: 'Mock-Demo' }
-      },
-      {
-        path: 'svg-icon',
-        component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
-        name: 'SvgIcon',
-        meta: { title: 'Svg-Demo' }
-      },
-      {
-        path: 'parent-children',
-        component: () => import('@/views/example/parent-children/Parent.vue'),
-        name: 'Parent',
-        meta: { title: 'Parent-Children' }
-      },
-      {
-        path: 'keep-alive',
-        component: () => import('@/views/example/keep-alive'),
-        name: 'KeepAlive',
-        //cachePage: cachePage when page enter, default false
-        //leaveRmCachePage: remove cachePage when page leave, default false
-        meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
-      },
-      {
-        path: 'tab-keep-alive',
-        component: () => import('@/views/example/keep-alive/TabKeepAlive.vue'),
-        name: 'TabKeepAlive',
-        //closeTabRmCache: remove cachePage when tabs close, default false
-        meta: { title: 'Tab-Keep-Alive', cachePage: true, closeTabRmCache: true }
-      },
-      {
-        path: 'router-demo-f',
-        name: 'routerDemoF',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
-        meta: { title: 'RouterDemo-F', activeMenu: '/writing-demo/keep-alive' }
-      },
-      {
-        path: 'router-demo-s',
-        name: 'routerDemoS',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
-        meta: { title: 'RouterDemo-S', activeMenu: '/writing-demo/keep-alive' }
-      },
-      {
-        path: 'deep-router-keep-alive',
-        name: 'DeepRouterKeepAlive',
-        component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
-        //注：移除父容器页面缓存会把子页面一起移除了
-        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: true },
-        alwaysShow: true,
-        children: [
-          {
-            path: 'deep-children',
-            name: 'DeepChildren',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildren.vue'),
-            meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: false }
-          },
-          {
-            path: 'deep-children-sd',
-            name: 'DeepChildrenSd',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildrenSd.vue'),
-            meta: { title: 'DeepChildrenSd', cachePage: true, leaveRmCachePage: false }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'worker-Demo',
-        name: 'WorkerDemo',
-        component: () => import('@/views/example/worker'),
-        meta: { title: 'Worker Demo', icon: 'nested' }
-      }
-    ]
-  },
+  // {
+  //   path: '/error-log',
+  //   component: Layout,
+  //   redirect: '/error-log/list',
+  //   meta: { title: 'ErrorLog', icon: 'bug' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       component: () => import('@/views/error-log/index.vue'),
+  //       name: 'ErrorLog',
+  //       meta: { title: 'Error Log' }
+  //     },
+  //     {
+  //       path: 'error-log-test',
+  //       component: () => import('@/views/error-log/ErrorLogTest.vue'),
+  //       name: 'ErrorLogTest',
+  //       meta: { title: 'ErrorLog Test' }
+  //     }
+  //    ]
+  // },
+  // {
+  //   path: '/writing-demo',
+  //   component: Layout,
+  //   meta: { title: 'Writing Demo', icon: 'eye-open' },
+  //   alwaysShow: true,
+  //   children: [
+  //     {
+  //       path: 'hook',
+  //       component: () => import('@/views/example/hook/Hook.vue'),
+  //       name: 'Hook',
+  //       meta: { title: 'Hook-Demo' }
+  //     },
+  //     {
+  //       path: 'vuex-use',
+  //       component: () => import('@/views/example/vuex-use/VuexUse.vue'),
+  //       name: 'VuexUse',
+  //       meta: { title: 'Vuex-Demo' }
+  //     },
+  //     {
+  //       path: 'mock-test',
+  //       component: () => import('@/views/example/mock-test/MockTest.vue'),
+  //       name: 'MockTest',
+  //       meta: { title: 'Mock-Demo' }
+  //     },
+  //     {
+  //       path: 'svg-icon',
+  //       component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
+  //       name: 'SvgIcon',
+  //       meta: { title: 'Svg-Demo' }
+  //     },
+  //     {
+  //       path: 'parent-children',
+  //       component: () => import('@/views/example/parent-children/Parent.vue'),
+  //       name: 'Parent',
+  //       meta: { title: 'Parent-Children' }
+  //     },
+  //     {
+  //       path: 'keep-alive',
+  //       component: () => import('@/views/example/keep-alive'),
+  //       name: 'KeepAlive',
+  //       //cachePage: cachePage when page enter, default false
+  //       //leaveRmCachePage: remove cachePage when page leave, default false
+  //       meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
+  //     },
+  //     {
+  //       path: 'tab-keep-alive',
+  //       component: () => import('@/views/example/keep-alive/TabKeepAlive.vue'),
+  //       name: 'TabKeepAlive',
+  //       //closeTabRmCache: remove cachePage when tabs close, default false
+  //       meta: { title: 'Tab-Keep-Alive', cachePage: true, closeTabRmCache: true }
+  //     },
+  //     {
+  //       path: 'router-demo-f',
+  //       name: 'routerDemoF',
+  //       hidden: true,
+  //       component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
+  //       meta: { title: 'RouterDemo-F', activeMenu: '/writing-demo/keep-alive' }
+  //     },
+  //     {
+  //       path: 'router-demo-s',
+  //       name: 'routerDemoS',
+  //       hidden: true,
+  //       component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
+  //       meta: { title: 'RouterDemo-S', activeMenu: '/writing-demo/keep-alive' }
+  //     },
+  //     {
+  //       path: 'deep-router-keep-alive',
+  //       name: 'DeepRouterKeepAlive',
+  //       component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
+  //       //注：移除父容器页面缓存会把子页面一起移除了
+  //       meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: true },
+  //       alwaysShow: true,
+  //       children: [
+  //         {
+  //           path: 'deep-children',
+  //           name: 'DeepChildren',
+  //           component: () => import('@/views/example/keep-alive/deep-children/DeepChildren.vue'),
+  //           meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: false }
+  //         },
+  //         {
+  //           path: 'deep-children-sd',
+  //           name: 'DeepChildrenSd',
+  //           component: () => import('@/views/example/keep-alive/deep-children/DeepChildrenSd.vue'),
+  //           meta: { title: 'DeepChildrenSd', cachePage: true, leaveRmCachePage: false }
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'Example', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'worker-Demo',
+  //       name: 'WorkerDemo',
+  //       component: () => import('@/views/example/worker'),
+  //       meta: { title: 'Worker Demo', icon: 'nested' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/nested',
