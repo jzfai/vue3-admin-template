@@ -1,4 +1,7 @@
 import router from '@/router'
+import { filterAsyncRouter, progressClose, progressStart } from '@/hooks/use-permission'
+import { useBasicStore } from '@/store/basic'
+import { userInfoReq } from '@/api/user'
 //路由进入前拦截
 //to:将要进入的页面 vue-router4.0 不推荐使用next()
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
@@ -20,7 +23,8 @@ router.beforeEach(async (to) => {
           basicStore.setUserInfo(userData)
           //5.再次执行路由跳转
           return { ...to, replace: true }
-        } catch {
+        } catch (e) {
+          console.error(`route permission error${e}`)
           basicStore.resetState()
           progressClose()
           return `/login?redirect=${to.path}`

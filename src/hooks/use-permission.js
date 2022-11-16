@@ -3,7 +3,17 @@
  * @param:menuList 异步路由数组
  * return 过滤后的异步路由
  */
+import NProgress from 'nprogress'
 import Layout from '@/layout/index.vue'
+
+/*
+ * 路由操作
+ * */
+import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
+
+//进度条
+import 'nprogress/nprogress.css'
+import { useBasicStore } from '@/store/basic'
 const buttonCodes = [] //按钮权限
 export const filterAsyncRoutesByMenuList = (menuList) => {
   const filterRouter = []
@@ -115,11 +125,6 @@ function hasCodePermission(codes, routeItem) {
     return true
   }
 }
-
-/*
- * 路由操作
- * */
-import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
 //过滤异步路由
 export function filterAsyncRouter({ menuList, roles, codes }) {
   const routerParams = cloneDeep(roleCodeRoutes)
@@ -180,11 +185,7 @@ export function cloneDeep(source, hash = new WeakMap()) {
   })
   return target
 }
-
-//进度条
-import NProgress from 'nprogress'
 NProgress.configure({ showSpinner: false })
-import 'nprogress/nprogress.css'
 //开始进度条
 export const progressStart = () => {
   NProgress.start()

@@ -1,8 +1,9 @@
 /*js 错误日志收集*/
+import { jsErrorCollection } from 'js-error-collection'
+import pack from '../../package.json'
 import settings from '@/settings'
 import bus from '@/utils/bus'
-import pack from '../../package.json'
-import { jsErrorCollection } from 'js-error-collection'
+import axiosReq from '@/utils/axios-req'
 const reqUrl = '/integration-front/errorCollection/insert'
 const errorLogReq = (errLog) => {
   axiosReq({

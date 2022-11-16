@@ -16,8 +16,10 @@
 </template>
 
 <script setup>
-import setting from '@/settings'
+import { reactive, toRefs } from 'vue'
+import { useBasicStore } from '@/store/basic'
 import SvgIcon from '@/icons/SvgIcon.vue'
+const { settings } = useBasicStore()
 defineProps({
   //是否折叠
   collapse: {
@@ -26,7 +28,7 @@ defineProps({
   }
 })
 const state = reactive({
-  title: setting.title,
+  title: settings.title,
   //src/icons/common/sidebar-logo.svg
   logo: 'sidebar-logo'
 })

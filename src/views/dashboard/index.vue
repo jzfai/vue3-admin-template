@@ -10,7 +10,6 @@
       for more information.
     </p>
     <!-- example components -->
-    <el-button @click="toast">El Message</el-button>
     <el-button type="primary" @click="count++">count is: {{ count }}</el-button>
     <el-button type="success" @click="count++">count is: {{ count }}</el-button>
     <el-button type="warning" @click="count++">count is: {{ count }}</el-button>
@@ -37,6 +36,7 @@
         <el-link class="text-red" href="https://uno.antfu.me/" target="_blank">https://uno.antfu.me/</el-link>
         to search you need such as "margin-left:10px" and then get the sortcut(ml-10px)
       </div>
+      <el-button>1111</el-button>
     </div>
 
     <div class="mt-3px mb1">
@@ -45,17 +45,20 @@
       <div class="mb-1px">- For English: [#5658](https://github.com/element-plus/element-plus/discussions/5658)</div>
       <div class="mb-1px">- 简体中文: [#5657](https://github.com/element-plus/element-plus/discussions/5657)</div>
     </div>
+
+    <el-button @click="toast">El Message</el-button>
   </div>
 </template>
 <script setup>
+import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import { toggleHtmlClass } from '@/theme/utils'
 const count = ref(0)
 const input = ref('element-plus')
 const curDate = ref('')
 const toast = () => {
   ElMessage.success('Hello')
 }
-import { toggleHtmlClass } from '@/theme/utils'
 const showObj = ref(GLOBAL_VAR)
 // eslint-disable-next-line no-undef
 // const showObjString = ref(GLOBAL_STRING)

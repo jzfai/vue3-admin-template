@@ -41,9 +41,14 @@
 </template>
 
 <script setup>
+import { nextTick } from 'vue'
+import { CaretBottom } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from './Breadcrumb.vue'
 import Hamburger from './Hamburger.vue'
-import { CaretBottom } from '@element-plus/icons-vue'
+import { useBasicStore } from '@/store/basic'
+import { elMessage } from '@/hooks/use-element'
+import { resetState } from '@/hooks/use-permission'
 const basicStore = useBasicStore()
 const { settings, sidebar, setToggleSideBar } = basicStore
 

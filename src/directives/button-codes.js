@@ -1,3 +1,5 @@
+import { useBasicStore } from '@/store/basic'
+
 function checkPermission(el, { value }) {
   if (value && Array.isArray(value)) {
     if (value.length) {

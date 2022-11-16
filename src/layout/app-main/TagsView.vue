@@ -31,7 +31,14 @@
 </template>
 
 <script setup>
+import { getCurrentInstance, nextTick, onMounted, reactive, toRefs, watch } from 'vue'
 import { Close } from '@element-plus/icons-vue'
+
+import { resolve } from 'path-browserify'
+import { useRoute, useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia/dist/pinia'
+import { useBasicStore } from '@/store/basic'
+import { useTagsViewStore } from '@/store/tagsView'
 const route = useRoute()
 const router = useRouter()
 const state = reactive({
@@ -75,7 +82,6 @@ const isAffix = (tag) => {
   return tag.meta && tag.meta.affix
 }
 
-import { resolve } from 'path-browserify'
 const filterAffixTags = (routes, basePath = '/') => {
   let tags = []
   routes.forEach((route) => {

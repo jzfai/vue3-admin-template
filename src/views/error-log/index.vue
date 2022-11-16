@@ -85,6 +85,7 @@
 import { Delete } from '@element-plus/icons-vue'
 import settings from '@/settings'
 import bus from '@/utils/bus'
+import packages from '/package.json'
 const errorLogProd = () => {
   throw new Error('产生的错误日志')
 }
@@ -101,7 +102,6 @@ const errorLogImg = () => {
 
 /*表格查询和筛选*/
 const usertableData = ref([])
-import packages from '/package.json'
 const searchForm = reactive({
   errorLog: '',
   pageUrl: `https://github.jzfai.top/${packages.name}`,
@@ -109,10 +109,10 @@ const searchForm = reactive({
   id: ''
 })
 
-let totalPage = ref()
-let startEndArr = ref([])
-let dialogTitle = ref([])
-let detailDialog = ref(false)
+const totalPage = ref()
+const startEndArr = ref([])
+const dialogTitle = ref([])
+const detailDialog = ref(false)
 
 const selectPageReq = () => {
   const data = Object.assign(searchForm, {
@@ -135,8 +135,6 @@ const selectPageReq = () => {
     totalPage.value = resData.data?.total
   })
 }
-import tablePageHook from '@/hooks/useTablePage'
-let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = tablePageHook(selectPageReq)
 const dateTimePacking = (timeArr) => {
   if (timeArr && timeArr.length === 2) {
     searchForm.startTime = timeArr[0]
@@ -212,6 +210,8 @@ const multiDelBtnClick = async () => {
     selectPageReq()
   })
 }
+
+let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = useTable(selectPageReq)
 </script>
 
 <style scoped lang="scss">

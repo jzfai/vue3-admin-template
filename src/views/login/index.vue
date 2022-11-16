@@ -5,7 +5,7 @@
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
-      <el-form-item prop="keyword" :rules="formRules.isNotNull">
+      <el-form-item prop="keyword" :rules="formRules.isNotNull('usename不能为空')">
         <div class="rowSC">
           <span class="svg-container">
             <svg-icon icon-class="user" />
@@ -16,7 +16,7 @@
         </div>
       </el-form-item>
       <!--<el-form-item prop="password" :rules="formRules.passwordValid">-->
-      <el-form-item prop="password" :rules="formRules.isNotNull">
+      <el-form-item prop="password" :rules="formRules.isNotNull('密码不能为空')">
         <div class="rowSC flex-1">
           <span class="svg-container">
             <svg-icon icon-class="password" />
@@ -44,6 +44,13 @@
 </template>
 
 <script setup>
+import { onMounted, reactive, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useBasicStore } from '@/store/basic'
+import { elMessage, useElement } from '@/hooks/use-element'
+import { loginReq } from '@/api/user'
+
+/* listen router change and set the query  */
 const { settings } = useBasicStore()
 //element valid
 const formRules = useElement().formRules
@@ -56,8 +63,6 @@ const state = reactive({
   otherQuery: {},
   redirect: undefined
 })
-
-/* listen router change and set the query  */
 const route = useRoute()
 const getOtherQuery = (query) => {
   return Object.keys(query).reduce((acc, cur) => {
@@ -94,6 +99,7 @@ const handleLogin = () => {
 }
 const router = useRouter()
 const basicStore = useBasicStore()
+
 const loginFunc = () => {
   loginReq(subForm)
     .then(({ data }) => {

@@ -3,6 +3,8 @@
  * @param {string} path
  * @returns {Boolean}
  */
+import { onBeforeMount, onBeforeUnmount, onMounted } from 'vue'
+import { useBasicStore } from '@/store/basic'
 export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }

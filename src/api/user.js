@@ -1,4 +1,5 @@
 //获取用户信息
+import axiosReq from '@/utils/axios-req'
 export const userInfoReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {

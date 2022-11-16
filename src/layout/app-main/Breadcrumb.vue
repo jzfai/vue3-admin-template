@@ -23,7 +23,10 @@
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
 import { compile } from 'path-to-regexp'
+import { useRoute, useRouter } from 'vue-router'
+import { useBasicStore } from '@/store/basic'
 const levelList = ref(null)
 const { settings } = useBasicStore()
 const route = useRoute()

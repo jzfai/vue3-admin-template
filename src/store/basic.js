@@ -1,5 +1,6 @@
-import defaultSettings from '@/settings'
+import { nextTick } from 'vue'
 import { defineStore } from 'pinia'
+import defaultSettings from '@/settings'
 import router, { constantRoutes } from '@/router'
 export const useBasicStore = defineStore('basic', {
   state: () => {

@@ -25,9 +25,11 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { resolve } from 'path-browserify'
 import Link from './Link.vue'
 import MenuIcon from './MenuIcon.vue'
-import { resolve } from 'path-browserify'
+import { isExternal } from '@/hooks/use-layout'
 const props = defineProps({
   //每一个router Item
   item: {

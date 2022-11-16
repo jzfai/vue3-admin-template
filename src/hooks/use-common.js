@@ -1,3 +1,9 @@
+import { reactive, toRefs } from 'vue'
+
+//复制文本
+import useClipboard from 'vue-clipboard3'
+import { ElMessage } from 'element-plus'
+
 export const sleepTimeout = (time) => {
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
@@ -19,11 +25,7 @@ export const useCommon = () => {
     ...toRefs(state)
   }
 }
-
-//复制文本
-import useClipboard from 'vue-clipboard3'
 const { toClipboard } = useClipboard()
-import { ElMessage } from 'element-plus'
 export const copyValueToClipboard = (value) => {
   toClipboard(JSON.stringify(value))
   ElMessage.success('复制成功')

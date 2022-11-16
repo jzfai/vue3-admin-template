@@ -19,8 +19,12 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia/dist/pinia'
+import { useRoute } from 'vue-router'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
+import { useBasicStore } from '@/store/basic'
 const { settings, allRoutes, sidebar } = storeToRefs(useBasicStore())
 const { meta, path } = useRoute()
 const activeMenu = computed(() => {

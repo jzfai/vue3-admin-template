@@ -12,6 +12,7 @@ import DefineOptions from 'unplugin-vue-define-options/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import setting from './src/settings'
 const prodMock = setting.openProdMock
+import { visualizer } from 'rollup-plugin-visualizer'
 // import packageJson from './package.json'
 // import { loadEnv } from 'vite'
 // import { optimizeDependencies, optimizeElementPlus } from './optimize-include'
@@ -76,7 +77,7 @@ export default ({ command }) => {
       // VueSetupExtend(),using  DefineOptions instant of it
       //https://github.com/antfu/unplugin-auto-import/blob/HEAD/src/types.ts
       Components({
-        dirs: ['src/components', 'src/icons'],
+        // dirs: ['src/components', 'src/icons'],
         extensions: ['vue'],
         deep: true,
         dts: './typings/components.d.ts'
@@ -101,6 +102,12 @@ export default ({ command }) => {
       // auto config of index.html title
       createHtmlPlugin({
         inject: { data: { title: setting.title } }
+      }),
+      //依赖分析插件
+      visualizer({
+        open: true,
+        gzipSize: true,
+        brotliSize: true
       })
     ],
     // logLevel: 'error',

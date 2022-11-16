@@ -14,11 +14,11 @@
           type="daterange"
           format="YYYY-MM-DD"
           value-format="YYYY-MM-DD HH:mm:ss"
-          @change="dateRangePacking"
           class="w-250px"
           range-separator="-"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
+          @change="dateRangePacking"
         />
       </el-form-item>
       <el-form-item>
@@ -64,7 +64,7 @@
       </el-table-column>
     </el-table>
     <!--分页-->
-    <div class="rowCC mt-20px" v-if="totalPage >= 10">
+    <div v-if="totalPage >= 10" class="rowCC mt-20px">
       <el-pagination
         :current-page="pageNum"
         :page-sizes="[10, 20, 50, 100]"
@@ -78,10 +78,10 @@
   </div>
 </template>
 <script setup>
-defineOptions({ name: 'error-collection' })
+import { Delete, FolderAdd } from '@element-plus/icons-vue'
 import { useTable } from '@/hooks/use-table'
 import { copyValueToClipboard } from '@/hooks/use-common.js'
-import { Delete, FolderAdd } from '@element-plus/icons-vue'
+defineOptions({ name: 'error-collection' })
 const searchForm = reactive({
   log: '',
   pageUrl: '',

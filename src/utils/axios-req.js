@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { ElMessageBox, ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useBasicStore } from '@/store/basic'
 
 //使用axios.create()创建一个axios请求实例
 const service = axios.create()

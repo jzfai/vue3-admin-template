@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { isExternal } from '@/hooks/use-layout'
+
 const props = defineProps({
   to: { type: String, required: true }
 })

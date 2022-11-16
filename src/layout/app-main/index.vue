@@ -16,6 +16,10 @@
 </template>
 
 <script setup>
+import { computed, watch } from 'vue'
+import { storeToRefs } from 'pinia/dist/pinia'
+import { useRoute } from 'vue-router'
+import { useBasicStore } from '@/store/basic'
 const { settings, cachedViews } = storeToRefs(useBasicStore())
 const route = useRoute()
 const key = computed(() => route.path)

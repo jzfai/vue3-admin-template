@@ -1,5 +1,5 @@
-import defaultSettings from '@/settings'
 import { defineStore } from 'pinia'
+import defaultSettings from '@/settings'
 export const useAppStore = defineStore('app', {
   /***
    *类似于组件的 data数据的 ,用来存储全局状态的

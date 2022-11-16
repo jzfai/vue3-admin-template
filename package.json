@@ -70,6 +70,7 @@
     "mockjs": "1.1.0",
     "prettier": "2.2.1",
     "resize-observer-polyfill": "^1.5.1",
+    "rollup-plugin-visualizer": "^5.8.3",
     "sass": "^1.52.1",
     "svg-sprite-loader": "6.0.11",
     "typescript": "^4.7.2",
