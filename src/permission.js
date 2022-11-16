@@ -1,9 +1,9 @@
 import router from '@/router'
-
 //路由进入前拦截
-//to:将要进入的页面， from 将要离开的页面， next放行
+//to:将要进入的页面 vue-router4.0 不推荐使用next()
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to) => {
+  progressStart()
   const basicStore = useBasicStore()
   //1.判断token
   if (basicStore.token) {
@@ -16,12 +16,13 @@ router.beforeEach(async (to) => {
           const userData = await userInfoReq()
           //3.动态路由权限筛选
           filterAsyncRouter(userData)
-          //4.保存用户信息到store中
+          //4.保存用户信息到store
           basicStore.setUserInfo(userData)
           //5.再次执行路由跳转
           return { ...to, replace: true }
         } catch {
           basicStore.resetState()
+          progressClose()
           return `/login?redirect=${to.path}`
         }
       } else {
@@ -37,4 +38,6 @@ router.beforeEach(async (to) => {
   }
 })
 //路由进入后拦截
-router.afterEach(() => {})
+router.afterEach(() => {
+  progressClose()
+})

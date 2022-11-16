@@ -8,11 +8,7 @@ import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 const locale = $ref(zhCn) //中文
 // import en from 'element-plus/lib/locale/lang/en'
 // let locale = $ref(en) //english
-const basicStore = useBasicStore()
-const settings = computed(() => {
-  return basicStore.settings
-})
-
+const { settings } = storeToRefs(useBasicStore())
 onBeforeMount(() => {
   //set tmp token when setting isNeedLogin false
   if (!settings.value.isNeedLogin) useBasicStore().setToken(settings.value.tmpToken)
@@ -22,3 +18,9 @@ onMounted(() => {
   useErrorLog()
 })
 </script>
+<style lang="scss">
+//修改进度条样式
+#nprogress .bar {
+  background: var(--sidebar-logo-color) !important;
+}
+</style>

@@ -124,9 +124,15 @@ import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
 export function filterAsyncRouter({ menuList, roles, codes }) {
   const routerParams = cloneDeep(roleCodeRoutes)
   const basicStore = useBasicStore()
-  //const accessRoutes = filterAsyncRoutesByMenuList(menuList) //by menuList
-  const accessRoutes = filterAsyncRoutesByRoles(routerParams, roles) //by roles
-  //const accessRoutes = filterAsyncRouterByCodes(routerParams, codes) //by codes
+  let accessRoutes = []
+  const permissionMode = basicStore.settings?.permissionMode
+  if (permissionMode === 'rbac') {
+    accessRoutes = filterAsyncRoutesByMenuList(menuList) //by menuList
+  } else if (permissionMode === 'roles') {
+    accessRoutes = filterAsyncRoutesByRoles(routerParams, roles) //by roles
+  } else {
+    accessRoutes = filterAsyncRouterByCodes(routerParams, codes) //by codes
+  }
   accessRoutes.forEach((route) => router.addRoute(route))
   asyncRoutes.forEach((item) => router.addRoute(item))
   basicStore.setFilterAsyncRoutes(accessRoutes)
@@ -173,4 +179,17 @@ export function cloneDeep(source, hash = new WeakMap()) {
     }
   })
   return target
+}
+
+//进度条
+import NProgress from 'nprogress'
+NProgress.configure({ showSpinner: false })
+import 'nprogress/nprogress.css'
+//开始进度条
+export const progressStart = () => {
+  NProgress.start()
+}
+//关闭进度条
+export const progressClose = () => {
+  NProgress.done()
 }

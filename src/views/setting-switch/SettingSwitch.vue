@@ -3,7 +3,7 @@
     <h3 class="mb-20px">props operate demo of settings.js</h3>
     <div class="rowSS">
       <div class="mb-10px">
-        page layout related
+        <div class="font-bold text-20px">page layout related</div>
         <div class="mt-20px">
           sidebarLogo：
           <el-switch v-model="settings.sidebarLogo" />
@@ -33,9 +33,8 @@
           <el-switch v-model="settings.showTopNavbar" />
         </div>
       </div>
-
       <div class="mb-10px ml-60px">
-        page animation related
+        <div class="font-bold text-20px">page animation related</div>
         <div class="mt-20px">mainNeedAnimation：places to "settings file" for setting</div>
         <div class="mt-30px">
           isNeedNprogress：

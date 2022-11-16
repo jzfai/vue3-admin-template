@@ -1,5 +1,5 @@
 import { ElLoading, ElMessage, ElMessageBox, ElNotification } from 'element-plus'
-const useElement = () => {
+export const useElement = () => {
   // 正整数
   const upZeroInt = (rule, value, callback, msg) => {
     if (!value) {
@@ -96,35 +96,18 @@ const useElement = () => {
     },
     /* 时间packing相关*/
     datePickerOptions: {
+      //选择今天以后的日期，包括今天
       disabledDate: (time) => {
         return time.getTime() < Date.now() - 86400000
       }
     },
     startEndArr: [],
-    startEndArrSub: [],
     /* dialog相关*/
     dialogTitle: '添加',
     detailDialog: false,
     isDialogEdit: false,
     dialogVisible: false,
     tableLoading: false,
-    /* 级联相关*/
-    cascaderKey: 1,
-    SetKesDept: {
-      value: 'id',
-      expandTrigger: 'hover',
-      label: 'label',
-      children: 'children'
-    },
-    SetKesDeptNoStrictly: {
-      value: 'id',
-      expandTrigger: 'hover',
-      label: 'label',
-      children: 'children',
-      checkStrictly: true
-    },
-    cascaderOptionsOne: [],
-    cascaderOptions: [],
     /* 树相关*/
     treeData: [],
     defaultProps: {

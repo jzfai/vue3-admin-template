@@ -58,7 +58,7 @@ const setting = {
    */
   isNeedLogin: true,
   /**
-   * @type {string} 'roles' | 'code'
+   * @type {string} 'rbac'| 'roles' | 'code'
    */
   permissionMode: 'roles',
   /**
@@ -72,7 +72,7 @@ const setting = {
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['dev', 'test']
    */
-  errorLog: ['prod'],
+  errorLog: ['dev'],
   /*
    * table height(100vh-delWindowHeight)
    * */

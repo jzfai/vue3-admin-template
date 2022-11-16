@@ -1,6 +1,10 @@
 <template>
   <div class="mt-10px">
-    <div class="mb-10px">roles 页面权限控制</div>
+    <div class="mt-20px mb-20px text-20px font-light">
+      notice: setting the permissionMode of settings file before you test
+    </div>
+
+    <div class="mb-20px">roles 页面权限控制</div>
     <div>{{ roles }}</div>
     <el-button @click="freshRoles(['editor'])">roles切换为editor</el-button>
     <el-button @click="freshRoles(['admin'])">roles切换为admin</el-button>

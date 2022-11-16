@@ -1,12 +1,12 @@
 import { ref } from 'vue'
 import momentMini from 'moment-mini'
-
+import { elConfirm, elMessage } from './use-element'
 export const useTable = (searchForm, selectPageReq) => {
   /*define ref*/
   const tableListData = ref([])
   const totalPage = ref(0)
   const pageNum = ref(1)
-  const pageSize = ref(10)
+  const pageSize = ref(20)
 
   //列表请求
   const tableListReq = (config) => {
@@ -41,7 +41,9 @@ export const useTable = (searchForm, selectPageReq) => {
     if (timeArr && timeArr.length === 2) {
       searchForm.startTime = timeArr[0]
       //取今天23点
-      searchForm.endTime = momentMini(timeArr[1]).endOf('day').format('YYYY-MM-DD HH:mm:ss')
+      if (searchForm.endTime) {
+        searchForm.endTime = momentMini(timeArr[1]).endOf('day').format('YYYY-MM-DD HH:mm:ss')
+      }
     } else {
       searchForm.startTime = ''
       searchForm.endTime = ''
@@ -67,7 +69,6 @@ export const useTable = (searchForm, selectPageReq) => {
     multipleSelection.value = val
   }
   /*批量删除*/
-  import { elConfirm, elMessage } from './use-element'
   const multiDelBtnDill = (reqConfig) => {
     let rowDeleteIdArr = []
     let deleteNameTitle = ''

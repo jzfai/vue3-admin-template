@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox, ElMessage } from 'element-plus'
 
 //使用axios.create()创建一个axios请求实例
 const service = axios.create()
@@ -17,6 +17,8 @@ service.interceptors.request.use(
     })
     //设置token到header
     req.headers['AUTHORIZE_TOKEN'] = useBasicStore().token
+    //如果req.method给get 请求参数设置为 ?name=xxx
+    if ('get'.includes(req.method.toLowerCase())) req.params = req.data
     return req
   },
   (err) => {
@@ -33,7 +35,7 @@ service.interceptors.response.use(
     if (successCode.includes(code)) {
       return res.data
     } else {
-      if (noAuthCode.includes(code)) {
+      if (noAuthCode.includes(code) && !location.href.includes('/login')) {
         ElMessageBox.confirm('请重新登录', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',
@@ -47,13 +49,18 @@ service.interceptors.response.use(
   },
   //响应报错
   (err) => {
+    ElMessage.error({
+      message: err,
+      duration: 2 * 1000
+    })
     return Promise.reject(err)
   }
 )
-//导出service实例给页面调用 config->页面的配置
+//导出service实例给页面调用 , config->页面的配置
 export default function axiosReq(config) {
   return service({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
+    timeout: 8000,
     ...config
   })
 }
