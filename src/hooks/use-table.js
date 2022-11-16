@@ -1,8 +1,7 @@
 import { ref } from 'vue'
-import { AxiosReqTy } from '~/common'
 import momentMini from 'moment-mini'
 
-const useTableExample = (searchForm, selectPageReq) => {
+export const useTable = (searchForm, selectPageReq) => {
   /*define ref*/
   const tableListData = ref([])
   const totalPage = ref(0)
@@ -10,33 +9,31 @@ const useTableExample = (searchForm, selectPageReq) => {
   const pageSize = ref(10)
 
   //列表请求
-  const tableListReq = ({ url, method, isParams }: AxiosReqTy) => {
-    const data = Object.assign(JSON.parse(JSON.stringify(searchForm)), {
-      pageNum: pageNum.value,
-      pageSize: pageSize.value
-    })
+  const tableListReq = (config) => {
+    const data = Object.assign(
+      {
+        pageNum: pageNum.value,
+        pageSize: pageSize.value
+      },
+      JSON.parse(JSON.stringify(searchForm))
+    )
     Object.keys(data).forEach((fItem) => {
-      if (['', null, undefined, NaN].includes(data[fItem])) delete data[fItem]
-      if (method === 'get') {
-        if (data[fItem] instanceof Array) delete data[fItem]
+      if (['', null, undefined, Number.NaN].includes(data[fItem])) delete data[fItem]
+      if (config.method === 'get') {
+        if (Array.isArray(data[fItem])) delete data[fItem]
         if (data[fItem] instanceof Object) delete data[fItem]
       }
     })
     const reqConfig = {
-      url,
-      method,
       data,
-      isParams
+      ...config
     }
-    axiosReq(reqConfig).then(({ data }) => {
-      tableListData.value = data?.records
-      totalPage.value = data?.total
-    })
+    return axiosReq(reqConfig)
   }
+
   /**
-   * time range dill
+   * 日期范围选择处理
    * @param timeArr choose the time
-   * @param searchForm
    * @author 熊猫哥
    * @date 2022/9/25 14:02
    */
@@ -50,7 +47,7 @@ const useTableExample = (searchForm, selectPageReq) => {
       searchForm.endTime = ''
     }
   }
-
+  //当前页
   const handleCurrentChange = (val) => {
     pageNum.value = val
     selectPageReq()
@@ -70,12 +67,12 @@ const useTableExample = (searchForm, selectPageReq) => {
     multipleSelection.value = val
   }
   /*批量删除*/
-  const { elMessage, elConfirm } = useElement()
+  import { elConfirm, elMessage } from './use-element'
   const multiDelBtnDill = (reqConfig) => {
     let rowDeleteIdArr = []
     let deleteNameTitle = ''
-    rowDeleteIdArr = multipleSelection.value.map((mItem: { name: string, id: string }) => {
-      deleteNameTitle = deleteNameTitle + mItem.name + ','
+    rowDeleteIdArr = multipleSelection.value.map((mItem) => {
+      deleteNameTitle = `${deleteNameTitle + mItem.name},`
       return mItem.id
     })
     if (rowDeleteIdArr.length === 0) {
@@ -122,7 +119,3 @@ const useTableExample = (searchForm, selectPageReq) => {
     tableDelDill
   }
 }
-
-export const useTable = useTableExample
-
-export default useTableExample
