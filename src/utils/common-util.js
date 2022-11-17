@@ -1,6 +1,6 @@
 export default {
   getWeek() {
-    return `星期${  '日一二三四五六'.charAt(new Date().getDay())}`
+    return `星期${'日一二三四五六'.charAt(new Date().getDay())}`
     // this.showDate=this.$momentMini(new Date()).format('YYYY年MM月DD日，')+str
   },
   /* 表单验证*/
@@ -22,51 +22,13 @@ export default {
   },
   // 邮箱
   regEmail(str) {
-    const reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
+    const reg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
     return reg.test(str)
   },
   // 省份证
   idCardNumber(str) {
     const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
     return reg.test(str)
-  },
-  /* 价格精度转换*/
-  // 乘法
-  mul(arg1, arg2) {
-    const r1 = arg1.toString()
-    const r2 = arg2.toString()
-    let m
-    let resultVal
-    const d = arguments[2]
-    m = (r1.split('.')[1] ? r1.split('.')[1].length : 0) + (r2.split('.')[1] ? r2.split('.')[1].length : 0)
-    resultVal = (Number(r1.replace('.', '')) * Number(r2.replace('.', ''))) / 10**m
-    return typeof d !== 'number' ? Number(resultVal) : Number(resultVal.toFixed(Number.parseInt(d)))
-  },
-  div (arg1, arg2) {
-    const r1 = arg1.toString()
-    const r2 = arg2.toString()
-    let m
-    let resultVal
-    const d = arguments[2] || 2
-    m = (r2.split('.')[1] ? r2.split('.')[1].length : 0) - (r1.split('.')[1] ? r1.split('.')[1].length : 0)
-    resultVal = (Number(r1.replace('.', '')) / Number(r2.replace('.', ''))) * 10**m
-    return typeof d !== 'number' ? Number(resultVal) : Number(resultVal.toFixed(Number.parseInt(d)))
-  },
-  add (arg1, arg2) {
-    arg1 = arg1.toString()
-    arg2 = arg2.toString()
-    const arg1Arr = arg1.split('.')
-    const arg2Arr = arg2.split('.')
-    const d1 = arg1Arr.length === 2 ? arg1Arr[1] : ''
-    const d2 = arg2Arr.length === 2 ? arg2Arr[1] : ''
-    const maxLen = Math.max(d1.length, d2.length)
-    const m = 10**maxLen
-    const result = Number(((arg1 * m + arg2 * m) / m).toFixed(maxLen))
-    const d = arguments[2]
-    return typeof d === 'number' ? Number(result.toFixed(d)) : result
-  },
-  sub (arg1, arg2) {
-    return this.add(arg1, -Number(arg2), arguments[2])
   },
   /* 常用数组操作*/
   /*
@@ -75,10 +37,7 @@ export default {
    * return 删除后的数组
    * */
   deleteArrItem(arr, arrItem) {
-    arr.splice(
-      arr.indexOf(arrItem),
-      1
-    )
+    arr.splice(arr.indexOf(arrItem), 1)
   },
   /*
    *  数组去重

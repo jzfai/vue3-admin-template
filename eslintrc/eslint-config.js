@@ -73,7 +73,6 @@ module.exports = defineConfig({
 
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': 'error',
-
     // best-practice
     'array-callback-return': 'error',
     'block-scoped-var': 'error',
