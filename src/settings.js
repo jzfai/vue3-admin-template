@@ -58,7 +58,7 @@ const setting = {
    */
   isNeedLogin: true,
   /**
-   * @type {string} 'roles' | 'code'
+   * @type {string} 'rbac'| 'roles' | 'code'
    */
   permissionMode: 'roles',
   /**
@@ -84,7 +84,6 @@ const setting = {
 
   /*
    * vite.config.js base config
-   * such as
    * */
   viteBasePath: './'
 }

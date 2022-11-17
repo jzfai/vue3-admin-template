@@ -1,3 +1,4 @@
+import { defineComponent } from 'vue'
 export default defineComponent({
   setup() {
     const route = useRoute()
@@ -5,7 +6,7 @@ export default defineComponent({
     onBeforeMount(() => {
       const { params, query } = route
       const { path } = params
-      router.replace({ path: '/' + path, query })
+      router.replace({ path: `/${path}`, query })
     })
     return () => <div> </div>
   }
