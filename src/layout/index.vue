@@ -18,9 +18,7 @@ import Navbar from './app-main/Navbar.vue'
 import TagsView from './app-main/TagsView.vue'
 import { useBasicStore } from '@/store/basic'
 import { resizeHandler } from '@/hooks/use-layout'
-
 const { sidebar, settings } = useBasicStore()
-
 const classObj = computed(() => {
   return {
     closeSidebar: !sidebar.opened,
@@ -33,12 +31,12 @@ resizeHandler()
 <style lang="scss" scoped>
 .main-container {
   min-height: 100%;
-  transition: margin-left 0.28s;
+  transition: margin-left var(--sideBar-switch-duration);
   margin-left: var(--side-bar-width);
   position: relative;
 }
 .sidebar-container {
-  transition: width 0.28s;
+  transition: width var(--sideBar-switch-duration);
   width: var(--side-bar-width) !important;
   background-color: var(--el-menu-bg-color);
   height: 100%;

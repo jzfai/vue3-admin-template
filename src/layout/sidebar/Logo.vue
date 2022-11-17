@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-logo-container" :class="{ collapse: collapse }">
-    <transition name="sidebarLogoFade">
+    <transition name="sidebar-logo-fade">
       <!--  折叠显示   -->
       <router-link v-if="collapse" class="sidebar-logo-link" to="/">
         <svg-icon v-if="logo" :icon-class="logo" class="sidebar-logo" />
@@ -38,13 +38,6 @@ const { title, logo } = toRefs(state)
 
 <style lang="scss">
 //vue3.0 过度效果更改  enter-> enter-from   leave-> leave-from
-.sidebarLogoFade-enter-active {
-  transition: opacity 2s;
-}
-.sidebarLogoFade-enter-from,
-.sidebarLogoFade-leave-to {
-  opacity: 0;
-}
 .sidebar-logo-container {
   position: relative;
   width: 100%;

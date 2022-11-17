@@ -1,4 +1,5 @@
 import path from 'path'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
@@ -13,30 +14,24 @@ import AutoImport from 'unplugin-auto-import/vite'
 import setting from './src/settings'
 const prodMock = setting.openProdMock
 import { visualizer } from 'rollup-plugin-visualizer'
-// import packageJson from './package.json'
-// import { loadEnv } from 'vite'
-// import { optimizeDependencies, optimizeElementPlus } from './optimize-include'
 const pathSrc = path.resolve(__dirname, 'src')
-export default ({ command }) => {
+
+export default defineConfig(({ command, mode }) => {
+  const env = loadEnv(mode, process.cwd(), '') //获取环境变量
   return {
-    //detail to look https://vitejs.cn/config/#base
     base: setting.viteBasePath,
-    //define global var
+
     define: {
-      //fix "path" module issue
-      'process.platform': null,
-      'process.version': null,
+      //define global var
+      __APP_ENV__: env.APP_ENV,
       GLOBAL_STRING: JSON.stringify('i am global var from vite.config.js define'),
-      GLOBAL_VAR: {
-        test: 'i am global var from vite.config.js define'
-      }
+      GLOBAL_VAR: { test: 'i am global var from vite.config.js define' }
     },
-    clearScreen: false,
+    clearScreen: false, //设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     server: {
-      hmr: { overlay: false }, // 禁用或配置 HMR 连接 设置 server.hmr.overlay 为 false 可以禁用服务器错误遮罩层
+      hmr: { overlay: false }, //设置 server.hmr.overlay 为 false 可以禁用开发服务器错误的屏蔽。方便错误查看
       port: 5003, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
-      cors: true, // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
       host: true,
       https: false
     },
@@ -102,30 +97,16 @@ export default ({ command }) => {
       // auto config of index.html title
       createHtmlPlugin({
         inject: { data: { title: setting.title } }
-      }),
-      //依赖分析插件
-      visualizer({
-        open: true,
-        gzipSize: true,
-        brotliSize: true
       })
+      //依赖分析插件
+      // visualizer({
+      //   open: true,
+      //   gzipSize: true,
+      //   brotliSize: true
+      // })
     ],
-    // logLevel: 'error',
     build: {
-      minify: 'terser',
-      brotliSize: false,
-      // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 10000,
-      //remote console.log in prod
-      terserOptions: {
-        //detail to look https://terser.org/docs/api-reference#compress-options
-        compress: {
-          drop_console: false,
-          pure_funcs: ['console.log', 'console.info'],
-          drop_debugger: true
-        }
-      },
-      //build assets Separate
+      chunkSizeWarningLimit: 10000, //消除触发警告的 chunk, 默认500k
       assetsDir: 'static/assets',
       rollupOptions: {
         output: {
@@ -136,13 +117,11 @@ export default ({ command }) => {
       }
     },
     resolve: {
-      alias: {
-        '@/': `${pathSrc}/`
-      }
+      alias: { '@/': `${pathSrc}/` }
     },
     optimizeDeps: {
       //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
       include: ['moment-mini']
     }
   }
-}
+})

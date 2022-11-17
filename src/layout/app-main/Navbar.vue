@@ -63,10 +63,6 @@ const loginOut = () => {
   nextTick(() => {
     resetState()
   })
-
-  // loginOutReq().then(() => {
-
-  // })
 }
 </script>
 
@@ -77,6 +73,7 @@ const loginOut = () => {
   position: relative;
   background: var(--nav-bar-background);
   box-shadow: var(--nav-bar-box-shadow);
+  z-index: 1;
 }
 
 //logo

@@ -20,6 +20,7 @@ import { computed, watch } from 'vue'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
+import { cloneDeep } from '@/hooks/use-common'
 const { settings, cachedViews } = storeToRefs(useBasicStore())
 const route = useRoute()
 const key = computed(() => route.path)
@@ -82,7 +83,6 @@ watch(
           }
         }
       }
-
       //取的是第二级的name
       if (parentRoute.name && parentRoute.meta?.cachePage) {
         deepOldRouter = parentRoute
@@ -95,7 +95,7 @@ watch(
         }
       }
     }
-    oldRoute = JSON.parse(JSON.stringify({ name: route.name, meta: route.meta }))
+    oldRoute = cloneDeep({ name: route.name, meta: route.meta })
   },
   { immediate: true }
 )

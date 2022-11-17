@@ -57,7 +57,7 @@ export const constantRoutes = [
   {
     path: '/error-collection',
     component: Layout,
-    meta: { title: 'Error Collection', elSvgIcon: 'Fold' },
+    meta: { title: 'Error Collection', icon: 'eye' },
     alwaysShow: true,
     children: [
       {

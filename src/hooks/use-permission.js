@@ -5,7 +5,6 @@
  */
 import NProgress from 'nprogress'
 import Layout from '@/layout/index.vue'
-
 /*
  * 路由操作
  * */
@@ -14,6 +13,7 @@ import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
 //进度条
 import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
+import { cloneDeep } from '@/hooks/use-common'
 const buttonCodes = [] //按钮权限
 export const filterAsyncRoutesByMenuList = (menuList) => {
   const filterRouter = []
@@ -166,25 +166,6 @@ export function freshRouter(data) {
   // location.reload()
 }
 
-//深拷贝
-export function cloneDeep(source, hash = new WeakMap()) {
-  if (typeof source !== 'object' || source === null) {
-    return source
-  }
-  if (hash.has(source)) {
-    return hash.get(source)
-  }
-  const target = Array.isArray(source) ? [] : {}
-  Reflect.ownKeys(source).forEach((key) => {
-    const val = source[key]
-    if (typeof val === 'object' && val != null) {
-      target[key] = cloneDeep(val, hash)
-    } else {
-      target[key] = val
-    }
-  })
-  return target
-}
 NProgress.configure({ showSpinner: false })
 //开始进度条
 export const progressStart = () => {

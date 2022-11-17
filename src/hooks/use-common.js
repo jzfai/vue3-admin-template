@@ -25,6 +25,27 @@ export const useCommon = () => {
     ...toRefs(state)
   }
 }
+
+//深拷贝
+export function cloneDeep(source, hash = new WeakMap()) {
+  if (typeof source !== 'object' || source === null) {
+    return source
+  }
+  if (hash.has(source)) {
+    return hash.get(source)
+  }
+  const target = Array.isArray(source) ? [] : {}
+  Reflect.ownKeys(source).forEach((key) => {
+    const val = source[key]
+    if (typeof val === 'object' && val != null) {
+      target[key] = cloneDeep(val, hash)
+    } else {
+      target[key] = val
+    }
+  })
+  return target
+}
+
 const { toClipboard } = useClipboard()
 export const copyValueToClipboard = (value) => {
   toClipboard(JSON.stringify(value))
