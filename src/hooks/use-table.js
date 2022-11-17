@@ -73,7 +73,7 @@ export const useTable = (searchForm, selectPageReq) => {
     let rowDeleteIdArr = []
     let deleteNameTitle = ''
     rowDeleteIdArr = multipleSelection.value.map((mItem) => {
-      deleteNameTitle = `${deleteNameTitle + mItem.name},`
+      deleteNameTitle = `${deleteNameTitle + mItem.id},`
       return mItem.id
     })
     if (rowDeleteIdArr.length === 0) {
@@ -96,10 +96,10 @@ export const useTable = (searchForm, selectPageReq) => {
   }
   //单个删除
   const tableDelDill = (row, reqConfig) => {
-    elConfirm('确定', `您确定要删除【${row.name}】吗？`).then(() => {
+    elConfirm('确定', `您确定要删除【${row.id}】吗？`).then(() => {
       axiosReq(reqConfig).then(() => {
         resetPageReq()
-        elMessage(`【${row.name}】删除成功`)
+        elMessage(`【${row.id}】删除成功`)
       })
     })
   }
