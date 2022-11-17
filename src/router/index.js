@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Layout from '@/layout'
+import Layout from '@/layout/index.vue'
 
 export const constantRoutes = [
   {
@@ -15,7 +15,7 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login/Login.vue'),
+    component: () => import('@/views/login/index.vue'),
     hidden: true
   },
   {
@@ -50,131 +50,27 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/setting-switch'),
         name: 'SettingSwitch',
-        meta: { title: 'Setting Switch', icon: 'example' }
+        meta: { title: 'Setting Switch', icon: 'example', affix: true }
       }
     ]
   },
   {
-    path: '/error-log',
+    path: '/error-collection',
     component: Layout,
-    redirect: '/error-log/list',
-    meta: { title: 'ErrorLog', icon: 'bug' },
+    meta: { title: 'Error Collection', icon: 'eye' },
+    alwaysShow: true,
     children: [
       {
-        path: 'list',
-        component: () => import('@/views/error-log'),
-        name: 'ErrorLog',
-        meta: { title: 'Error Log' }
+        path: 'error-collection-table-query',
+        component: () => import('@/views/error-collection/ErrorCollectionTableQuery.vue'),
+        name: 'ErrorCollectionTableQuery',
+        meta: { title: 'Index' }
       },
       {
         path: 'error-log-test',
         component: () => import('@/views/error-log/ErrorLogTest.vue'),
         name: 'ErrorLogTest',
         meta: { title: 'ErrorLog Test' }
-      }
-    ]
-  },
-  {
-    path: '/writing-demo',
-    component: Layout,
-    meta: { title: 'Writing Demo', icon: 'eye-open' },
-    alwaysShow: true,
-    children: [
-      {
-        path: 'hook',
-        component: () => import('@/views/example/hook/Hook.vue'),
-        name: 'Hook',
-        meta: { title: 'Hook-Demo' }
-      },
-      {
-        path: 'vuex-use',
-        component: () => import('@/views/example/vuex-use/VuexUse.vue'),
-        name: 'VuexUse',
-        meta: { title: 'Vuex-Demo' }
-      },
-      {
-        path: 'mock-test',
-        component: () => import('@/views/example/mock-test/MockTest.vue'),
-        name: 'MockTest',
-        meta: { title: 'Mock-Demo' }
-      },
-      {
-        path: 'svg-icon',
-        component: () => import('@/views/example/svg-icon/SvgIcon.vue'),
-        name: 'SvgIcon',
-        meta: { title: 'Svg-Demo' }
-      },
-      {
-        path: 'parent-children',
-        component: () => import('@/views/example/parent-children/Parent.vue'),
-        name: 'Parent',
-        meta: { title: 'Parent-Children' }
-      },
-      {
-        path: 'keep-alive',
-        component: () => import('@/views/example/keep-alive'),
-        name: 'KeepAlive',
-        //cachePage: cachePage when page enter, default false
-        //leaveRmCachePage: remove cachePage when page leave, default false
-        meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
-      },
-      {
-        path: 'tab-keep-alive',
-        component: () => import('@/views/example/keep-alive/TabKeepAlive.vue'),
-        name: 'TabKeepAlive',
-        //closeTabRmCache: remove cachePage when tabs close, default false
-        meta: { title: 'Tab-Keep-Alive', cachePage: true, closeTabRmCache: true }
-      },
-      {
-        path: 'router-demo-f',
-        name: 'routerDemoF',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
-        meta: { title: 'RouterDemo-F', activeMenu: '/writing-demo/keep-alive' }
-      },
-      {
-        path: 'router-demo-s',
-        name: 'routerDemoS',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
-        meta: { title: 'RouterDemo-S', activeMenu: '/writing-demo/keep-alive' }
-      },
-      {
-        path: 'deep-router-keep-alive',
-        name: 'DeepRouterKeepAlive',
-        component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
-        //注：移除父容器页面缓存会把子页面一起移除了
-        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: true },
-        alwaysShow: true,
-        children: [
-          {
-            path: 'deep-children',
-            name: 'DeepChildren',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildren.vue'),
-            meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: false }
-          },
-          {
-            path: 'deep-children-sd',
-            name: 'DeepChildrenSd',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildrenSd.vue'),
-            meta: { title: 'DeepChildrenSd', cachePage: true, leaveRmCachePage: false }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'worker-Demo',
-        name: 'WorkerDemo',
-        component: () => import('@/views/example/worker'),
-        meta: { title: 'Worker Demo', icon: 'nested' }
       }
     ]
   },
@@ -243,21 +139,19 @@ export const constantRoutes = [
     children: [
       {
         component: () => {},
-        path: 'https://github.com/jzfai/vue3-admin-ts.git',
+        path: 'https://github.com/jzfai/vue3-admin-template.git',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
   }
 ]
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
+
+//角色和code数组动态路由
+export const roleCodeRoutes = [
   {
-    path: '/permission',
+    path: '/roles-codes',
     component: Layout,
-    redirect: '/permission/page',
+    redirect: '/roles-codes/page',
     alwaysShow: true, // will always show the root menu
     name: 'Permission',
     meta: {
@@ -267,54 +161,49 @@ export const asyncRoutes = [
     },
     children: [
       {
+        path: 'index',
+        component: () => import('@/views/roles-codes/index.vue'),
+        name: 'RolesCodes',
+        meta: {
+          title: 'index'
+        }
+      },
+      {
         path: 'roleIndex',
-        component: () => import('@/views/permission'),
-        name: 'Permission',
+        component: () => import('@/views/roles-codes/role-index.vue'),
+        name: 'RoleIndex',
         meta: {
-          title: 'role Index'
-          //roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'page',
-        component: () => import('@/views/permission/page.vue'),
-        name: 'PagePermission',
-        meta: {
-          title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import('@/views/permission/directive.vue'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'Directive Permission'
-          // if do not set roles, means: this page does not require permission
+          title: 'Role Index',
+          roles: ['admin']
         }
       },
       {
         path: 'code-index',
-        component: () => import('@/views/permission/CodePermission.vue'),
-        name: 'CodePermission',
+        component: () => import('@/views/roles-codes/code-index.vue'),
+        name: 'CodeIndex',
         meta: {
-          title: 'Code Index'
+          title: 'Code Index',
+          code: 16
         }
       },
       {
-        path: 'code-page',
-        component: () => import('@/views/permission/CodePage.vue'),
-        name: 'CodePage',
+        path: 'button-permission',
+        component: () => import('@/views/roles-codes/button-permission.vue'),
+        name: 'ButtonPermission',
         meta: {
-          title: 'Code Page',
-          code: 1
+          title: 'Button Permission'
         }
       }
     ]
-  },
+  }
+]
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
   // 404 page must be placed at the end !!!
-  // using pathMatch install of "*" in vue-router 4.0
-  { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
+  { path: '/:catchAll(.*)', name: 'CatchAll', redirect: '/404', hidden: true }
 ]
 
 const router = createRouter({

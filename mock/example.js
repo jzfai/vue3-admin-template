@@ -4,7 +4,7 @@ export default [
     method: 'get',
     response: () => {
       return {
-        code: 0,
+        code: 200,
         title: 'mock请求测试'
       }
     }
