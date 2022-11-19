@@ -1,4 +1,4 @@
-# vue3-admin-template
+# vue3-admin-ts
 
 **中文** | [English](./README.md)
 
@@ -20,13 +20,13 @@
 
 ## 线上体验
 
-[github address](https://github.com/jzfai/vue3-admin-template.git)
+[github address](https://github.com/jzfai/vue3-admin-ts.git)
 
-[Access address](https://github.jzfai.top/vue3-admin-template)
+[Access address](https://github.jzfai.top/vue3-admin-ts)
 
-github 地址：  https://github.com/jzfai/vue3-admin-template.git
+github 地址：  https://github.com/jzfai/vue3-admin-ts.git
 
-国内体验地址：https://github.jzfai.top/vue3-admin-template
+国内体验地址：https://github.jzfai.top/vue3-admin-ts
 
 
 
@@ -35,7 +35,7 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
 框架有js，ts，plus和electron版本
 
-- js版本：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
+- js版本：[vue3-admin-template](https://github.com/jzfai/vue3-admin-template.git)
 - ts版本：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - js实例参考plus版本：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
 - electron版本：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
@@ -50,10 +50,10 @@ github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
 ```bash
 # 克隆项目
-git clone https://github.com/jzfai/vue3-admin-template.git
+git clone https://github.com/jzfai/vue3-admin-ts.git
 
 # 进入项目目录
-cd  vue3-admin-template
+cd  vue3-admin-ts
 
 # pnpm address https://pnpm.io/zh/motivation
 # 安装依赖(建议用pnpm)

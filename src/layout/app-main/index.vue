@@ -15,10 +15,11 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, watch } from 'vue'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
+import type { RouteLocationMatched } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { cloneDeep } from '@/hooks/use-common'
 const { settings, cachedViews } = storeToRefs(useBasicStore())
@@ -28,7 +29,7 @@ const key = computed(() => route.path)
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
 let oldRoute = {}
-let deepOldRouter = null
+let deepOldRouter: RouteLocationMatched | null = null
 const basicStore = useBasicStore()
 const removeDeepChildren = (deepOldRouter) => {
   deepOldRouter.children?.forEach((fItem) => {

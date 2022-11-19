@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import SvgIcon from '@/icons/SvgIcon.vue'
 defineProps({
   isActive: {

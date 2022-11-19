@@ -2,7 +2,7 @@
   //设置files为空,则不会自动扫描默认目录，也就是只会扫描include配置的目录
   "files": [],
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "module": "esnext",
     //启用所有严格类型检查选项。
     //启用 --strict相当于启用 --noImplicitAny, --noImplicitThis, --alwaysStrict， --strictNullChecks和 --strictFunctionTypes和--strictPropertyInitialization。

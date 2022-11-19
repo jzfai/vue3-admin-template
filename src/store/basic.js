@@ -8,10 +8,7 @@ export const useBasicStore = defineStore('basic', {
       //user info
       token: '',
       getUserInfo: false,
-      userInfo: {
-        username: '',
-        avatar: ''
-      },
+      userInfo: { username: '', avatar: '' },
       //router
       allRoutes: [],
       buttonCodes: [],
@@ -23,6 +20,8 @@ export const useBasicStore = defineStore('basic', {
       cachedViewsDeep: [],
       //other
       sidebar: { opened: true },
+      //axios req collection
+      axiosPromiseArr: [],
       settings: defaultSettings
     }
   },
@@ -71,12 +70,6 @@ export const useBasicStore = defineStore('basic', {
         router.push({ path: '/login' })
       })
     },
-
-    M_settings(data) {
-      this.$patch((state) => {
-        state.settings = { ...state.settings, ...data }
-      })
-    },
     setSidebarOpen(data) {
       this.$patch((state) => {
         state.sidebar.opened = data
@@ -102,11 +95,6 @@ export const useBasicStore = defineStore('basic', {
         index > -1 && state.cachedViews.splice(index, 1)
       })
     },
-    M_RESET_CACHED_VIEW() {
-      this.$patch((state) => {
-        state.cachedViews = []
-      })
-    },
     /*third  keepAlive*/
     addCachedViewDeep(view) {
       this.$patch((state) => {
@@ -119,15 +107,6 @@ export const useBasicStore = defineStore('basic', {
         const index = state.cachedViewsDeep.indexOf(view)
         index > -1 && state.cachedViewsDeep.splice(index, 1)
       })
-    },
-    M_RESET_CACHED_VIEW_DEEP() {
-      this.$patch((state) => {
-        state.cachedViewsDeep = []
-      })
-    },
-
-    A_sidebar_opened(data) {
-      this.setSidebarOpen(data)
     }
   }
 })

@@ -140,15 +140,15 @@ export const elMessage = (message, type) => {
  * 调用后通过 loadingId.close() 进行关闭
  * */
 let loadingId = null
-export const elLoading = () => {
+export const elLoading = (msg) => {
   loadingId = ElLoading.service({
     lock: true,
-    text: '数据载入中',
-    spinner: 'el-icon-loading',
+    text: msg || '数据载入中',
+    // spinner: 'el-icon-loading',
     background: 'rgba(0, 0, 0, 0.1)'
   })
 }
-export const closeLoading = () => {
+export const closeElLoading = () => {
   loadingId.close()
 }
 /*
@@ -201,7 +201,7 @@ export const elConfirm = (title, message) => {
 }
 
 /* 级联*/
-const cascaderKey = ref(null)
+const cascaderKey = ref()
 export const casHandleChange = () => {
   // 解决目前级联选择器搜索输入报错问题
   cascaderKey.value += cascaderKey.value

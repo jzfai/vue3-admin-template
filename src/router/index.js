@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
-
+import basicDemo from './modules/basic-demo'
 export const constantRoutes = [
   {
     path: '/redirect',
@@ -48,29 +48,29 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/setting-switch'),
+        component: () => import('@/views/setting-switch/index.vue'),
         name: 'SettingSwitch',
         meta: { title: 'Setting Switch', icon: 'example', affix: true }
       }
     ]
   },
   {
-    path: '/error-collection',
+    path: '/error-log',
     component: Layout,
-    meta: { title: 'Error Collection', icon: 'eye' },
+    meta: { title: 'Error Log', icon: 'eye' },
     alwaysShow: true,
     children: [
       {
-        path: 'error-collection-table-query',
-        component: () => import('@/views/error-collection/ErrorCollectionTableQuery.vue'),
-        name: 'ErrorCollectionTableQuery',
+        path: 'error-log',
+        component: () => import('@/views/error-log/index.vue'),
+        name: 'ErrorLog',
         meta: { title: 'Index' }
       },
       {
-        path: 'error-log-test',
-        component: () => import('@/views/error-log/ErrorLogTest.vue'),
-        name: 'ErrorLogTest',
-        meta: { title: 'ErrorLog Test' }
+        path: 'error-generator',
+        component: () => import('@/views/error-log/error-generator.vue'),
+        name: 'ErrorGenerator',
+        meta: { title: 'Error Generator' }
       }
     ]
   },
@@ -139,11 +139,12 @@ export const constantRoutes = [
     children: [
       {
         component: () => {},
-        path: 'https://github.com/jzfai/vue3-admin-template.git',
+        path: 'https://github.com/jzfai/vue3-admin-ts.git',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
-  }
+  },
+  basicDemo
 ]
 
 //角色和code数组动态路由

@@ -6,9 +6,8 @@
     <el-scrollbar>
       <el-menu
         class="el-menu-vertical"
-        :default-active="activeMenu"
         :collapse="!sidebar.opened"
-        :unique-opened="false"
+        :default-active="activeMenu"
         :collapse-transition="false"
         mode="vertical"
       >
@@ -18,7 +17,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
@@ -29,7 +28,9 @@ const { settings, allRoutes, sidebar } = storeToRefs(useBasicStore())
 const { meta, path } = useRoute()
 const activeMenu = computed(() => {
   // if set path, the sidebar will highlight the path you set
-  if (meta.activeMenu) meta.activeMenu
+  if (meta.activeMenu) {
+    return meta.activeMenu
+  }
   return path
 })
 </script>

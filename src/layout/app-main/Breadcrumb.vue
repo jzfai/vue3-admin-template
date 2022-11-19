@@ -22,12 +22,12 @@
   </el-breadcrumb>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import { compile } from 'path-to-regexp'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
-const levelList = ref(null)
+const levelList = ref()
 const { settings } = useBasicStore()
 const route = useRoute()
 const getBreadcrumb = () => {

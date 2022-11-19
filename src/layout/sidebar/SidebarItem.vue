@@ -4,14 +4,14 @@
       <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
           <MenuIcon :meta="onlyOneChild.meta || item.meta" />
-          <template #title>{{ onlyOneChild.meta?.title }}</template>
+          <template #title>{{ langTitle(onlyOneChild.meta?.title) }}</template>
         </el-menu-item>
       </Link>
     </template>
-    <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
+    <el-sub-menu v-else :index="resolvePath(item.path)">
       <template v-if="item.meta" #title>
         <MenuIcon :meta="item.meta" />
-        <span>{{ item.meta.title }}</span>
+        <span>{{ langTitle(item.meta.title) }}</span>
       </template>
       <SidebarItem
         v-for="child in item.children"
@@ -24,12 +24,14 @@
   </template>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { resolve } from 'path-browserify'
 import Link from './Link.vue'
 import MenuIcon from './MenuIcon.vue'
 import { isExternal } from '@/hooks/use-layout'
+import { langTitle } from '@/hooks/use-common'
+
 const props = defineProps({
   //每一个router Item
   item: {
@@ -48,7 +50,7 @@ const props = defineProps({
   }
 })
 //显示sidebarItem 的情况
-const onlyOneChild = ref(null)
+const onlyOneChild = ref()
 const showSidebarItem = (children = [], parent) => {
   const showingChildren = children.filter((item) => {
     if (item.hidden) {

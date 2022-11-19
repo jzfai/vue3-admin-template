@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { getCurrentInstance, nextTick, onMounted, reactive, toRefs, watch } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 
@@ -38,7 +38,7 @@ import { resolve } from 'path-browserify'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useBasicStore } from '@/store/basic'
-import { useTagsViewStore } from '@/store/tagsView'
+import { useTagsViewStore } from '@/store/tags-view'
 const route = useRoute()
 const router = useRouter()
 const state = reactive({
@@ -125,12 +125,12 @@ const addTags = () => {
 }
 
 /*右键菜单部分*/
-const { proxy } = getCurrentInstance()
+const vm = getCurrentInstance()?.proxy
 //右键打开菜单
 const openMenu = (tag, e) => {
   const menuMinWidth = 105
-  const offsetLeft = proxy.$el.getBoundingClientRect().left // container margin left
-  const offsetWidth = proxy.$el.offsetWidth // container width
+  const offsetLeft = vm?.$el.getBoundingClientRect().left // container margin left
+  const offsetWidth = vm?.$el.offsetWidth // container width
   const maxLeft = offsetWidth - menuMinWidth // left boundary
   const left = e.clientX - offsetLeft + 15 // 15: margin right
 

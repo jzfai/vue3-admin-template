@@ -8,18 +8,18 @@ const service = axios.create()
 //请求前拦截
 service.interceptors.request.use(
   (req) => {
-    //收集请求
+    const { token, axiosPromiseArr } = useBasicStore()
+    //axiosPromiseArr收集请求地址,用于取消请求
     req.cancelToken = new axios.CancelToken((cancel) => {
-      //__axiosPromiseArr收集请求地址
-      window.__axiosPromiseArr.push({
+      axiosPromiseArr.push({
         url: req.url,
         cancel
       })
     })
     //设置token到header
-    req.headers['AUTHORIZE_TOKEN'] = useBasicStore().token
+    req.headers['AUTHORIZE_TOKEN'] = token
     //如果req.method给get 请求参数设置为 ?name=xxx
-    if ('get'.includes(req.method.toLowerCase())) req.params = req.data
+    if ('get'.includes(req.method?.toLowerCase())) req.params = req.data
     return req
   },
   (err) => {
