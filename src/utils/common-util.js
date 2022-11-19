@@ -109,8 +109,8 @@ export default {
    * objKey： arrObj中对象的某一个key名称
    * return: arrObj2删除过后的数组
    * */
-  byArrObjFindArrObj2(arrObj, arrObj2, objKey, value) {
-    const arrObj3 = []
+  byArrObjFindArrObj2(arrObj, arrObj2, objKey) {
+    const arrObj3: Array<any> = []
     arrObj
       .map((value) => {
         return value[objKey]

@@ -1,8 +1,6 @@
 <template>
   <div class="mt-10px">
-    <div class="mt-20px mb-20px text-20px font-light">
-      notice: setting the permissionMode of settings file before you test
-    </div>
+    <div class="mb-20px text-20px font-bold">notice: setting the permissionMode of settings file before you test</div>
 
     <div class="mb-20px">roles 页面权限控制</div>
     <div>{{ roles }}</div>
@@ -16,14 +14,14 @@
   </div>
 </template>
 
-<script setup>
-const { codes, roles } = useBasicStore()
+<script setup lang="ts">
+let { codes, roles } = storeToRefs(useBasicStore())
 const freshRoles = (rolesArr) => {
-  roles.value = rolesArr
+  roles = rolesArr
   freshRouter({ roles: rolesArr })
 }
 const freshCodes = (codesArr) => {
-  codes.value = codesArr
+  codes = codesArr
   freshRouter({ codes: codesArr })
 }
 </script>

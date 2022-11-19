@@ -4,7 +4,7 @@
   </el-icon>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import * as ElSvg from '@element-plus/icons-vue'
 const props = defineProps({
   name: {

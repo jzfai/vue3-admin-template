@@ -40,7 +40,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { nextTick } from 'vue'
 import { CaretBottom } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'

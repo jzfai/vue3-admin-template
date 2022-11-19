@@ -3,18 +3,19 @@
  * @param:menuList 异步路由数组
  * return 过滤后的异步路由
  */
+// @ts-ignore
 import NProgress from 'nprogress'
 import Layout from '@/layout/index.vue'
 /*
  * 路由操作
  * */
 import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
-
 //进度条
 import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
-import { cloneDeep } from '@/hooks/use-common'
+
 const buttonCodes = [] //按钮权限
+
 export const filterAsyncRoutesByMenuList = (menuList) => {
   const filterRouter = []
   menuList.forEach((route) => {
@@ -34,9 +35,10 @@ export const filterAsyncRoutesByMenuList = (menuList) => {
   return filterRouter
 }
 const getRouteItemFromReqRouter = (route) => {
-  const tmp = { meta: {} }
+  const tmp = { meta: { title: '' } }
   const routeKeyArr = ['path', 'component', 'redirect', 'alwaysShow', 'name', 'hidden']
   const metaKeyArr = ['title', 'activeMenu', 'elSvgIcon', 'icon']
+  // @ts-ignore
   const modules = import.meta.glob('../views/**/**.vue')
   //generator routeKey
   routeKeyArr.forEach((fItem) => {
@@ -60,12 +62,12 @@ const getRouteItemFromReqRouter = (route) => {
   })
   //generator metaKey
   metaKeyArr.forEach((fItem) => {
-    if (route[fItem]) tmp.meta[fItem] = route[fItem]
+    if (route[fItem] && tmp.meta) tmp.meta[fItem] = route[fItem]
   })
   //route extra insert
   if (route.extra) {
     Object.entries(route.extra.parse(route.extra)).forEach(([key, value]) => {
-      if (key === 'meta') {
+      if (key === 'meta' && tmp.meta) {
         tmp.meta[key] = value
       } else {
         tmp[key] = value
@@ -127,16 +129,15 @@ function hasCodePermission(codes, routeItem) {
 }
 //过滤异步路由
 export function filterAsyncRouter({ menuList, roles, codes }) {
-  const routerParams = cloneDeep(roleCodeRoutes)
   const basicStore = useBasicStore()
   let accessRoutes = []
   const permissionMode = basicStore.settings?.permissionMode
   if (permissionMode === 'rbac') {
     accessRoutes = filterAsyncRoutesByMenuList(menuList) //by menuList
   } else if (permissionMode === 'roles') {
-    accessRoutes = filterAsyncRoutesByRoles(routerParams, roles) //by roles
+    accessRoutes = filterAsyncRoutesByRoles(roleCodeRoutes, roles) //by roles
   } else {
-    accessRoutes = filterAsyncRouterByCodes(routerParams, codes) //by codes
+    accessRoutes = filterAsyncRouterByCodes(roleCodeRoutes, codes) //by codes
   }
   accessRoutes.forEach((route) => router.addRoute(route))
   asyncRoutes.forEach((item) => router.addRoute(item))

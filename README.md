@@ -1,4 +1,4 @@
-# vue3-admin-template
+# vue3-admin-ts
 
 **English** | [中文](./README-zh_CN.md)
 
@@ -19,25 +19,23 @@ suggestion the Node.js >= 16.0.0。
 
 ## Online experience
 
-[github address](https://github.com/jzfai/vue3-admin-template.git)
+[github address](https://github.com/jzfai/vue3-admin-ts.git)
 
-[Access address](https://github.jzfai.top/vue3-admin-template)
+[Access address](https://github.jzfai.top/vue3-admin-ts)
 
 
-国内体验地址：https://github.jzfai.top/vue3-admin-template
+国内体验地址：https://github.jzfai.top/vue3-admin-ts
 
-github 地址：https://github.com/jzfai/vue3-admin-template.git
+github 地址：https://github.com/jzfai/vue3-admin-ts.git
 
 
 
 ## Related items
 
 The framework is available in js, ts , plus and electron versions
-- js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
+- js version：[vue3-admin-template](https://github.com/jzfai/vue3-admin-template.git) -- basic version
 - ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
-- js version for electron：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
-- react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
 - java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 > development and  experience：two words  Really fragrant！！！！！
 
@@ -45,10 +43,10 @@ The framework is available in js, ts , plus and electron versions
 
 ```bash
 # clone the project
-git clone https://github.com/jzfai/vue3-admin-template.git
+git clone https://github.com/jzfai/vue3-admin-ts.git
 
 # enter the project directory
-cd vue3-admin-template
+cd vue3-admin-ts
 
 # pnpm address https://pnpm.io/zh/motivation
 # install dependency(Recommend use pnpm)

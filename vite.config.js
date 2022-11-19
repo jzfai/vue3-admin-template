@@ -13,17 +13,15 @@ import DefineOptions from 'unplugin-vue-define-options/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import setting from './src/settings'
 const prodMock = setting.openProdMock
-import { visualizer } from 'rollup-plugin-visualizer'
+// import { visualizer } from 'rollup-plugin-visualizer'
 const pathSrc = path.resolve(__dirname, 'src')
 
 export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '') //获取环境变量
+  //const env = loadEnv(mode, process.cwd(), '') //获取环境变量
   return {
     base: setting.viteBasePath,
-
     define: {
       //define global var
-      __APP_ENV__: env.APP_ENV,
       GLOBAL_STRING: JSON.stringify('i am global var from vite.config.js define'),
       GLOBAL_VAR: { test: 'i am global var from vite.config.js define' }
     },
@@ -72,7 +70,7 @@ export default defineConfig(({ command, mode }) => {
       // VueSetupExtend(),using  DefineOptions instant of it
       //https://github.com/antfu/unplugin-auto-import/blob/HEAD/src/types.ts
       Components({
-        // dirs: ['src/components', 'src/icons'],
+        dirs: ['src/components', 'src/icons'],
         extensions: ['vue'],
         deep: true,
         dts: './typings/components.d.ts'
@@ -117,7 +115,10 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     resolve: {
-      alias: { '@/': `${pathSrc}/` }
+      alias: {
+        '@/': `${pathSrc}/`,
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js' //remove i18n waring
+      }
     },
     optimizeDeps: {
       //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this

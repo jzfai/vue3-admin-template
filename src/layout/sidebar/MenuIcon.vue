@@ -6,7 +6,7 @@
   <svg-icon v-else-if="meta?.icon" :icon-class="meta?.icon" class="nav-icon" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import * as ElSvg from '@element-plus/icons-vue'
 defineProps({
   meta: { type: Object, default: null }

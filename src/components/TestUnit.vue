@@ -2,7 +2,7 @@
   <div>TestUnit.vue</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   msg: {
     require: true,

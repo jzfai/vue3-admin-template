@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, toRefs } from 'vue'
 import { useBasicStore } from '@/store/basic'
 import SvgIcon from '@/icons/SvgIcon.vue'

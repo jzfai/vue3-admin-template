@@ -1,4 +1,4 @@
-const setting = {
+export const settings = {
   title: 'Vue3 Admin Template',
   /**
    * @type {boolean} true | false
@@ -44,7 +44,7 @@ const setting = {
    * @type {boolean} true | false
    * @description Whether need animation of main area
    */
-  mainNeedAnimation: true,
+  mainNeedAnimation: false,
   /**
    * @type {boolean} true | false
    * @description Whether need nprogress
@@ -85,7 +85,29 @@ const setting = {
   /*
    * vite.config.js base config
    * */
-  viteBasePath: './'
+  viteBasePath: './',
+
+  /*
+   * i18n setting default language
+   * en/zh
+   * */
+  defaultLanguage: 'zh',
+  /*
+   *  default theme
+   * base-theme/lighting-theme/dark-theme
+   * */
+  defaultTheme: 'base-theme',
+  /*
+   * setting default defaultSize
+   * large / default /small
+   * */
+  defaultSize: 'small',
+  /*
+   * vite.config.js base config
+   * such as
+   * */
+  //平台id  2->vue3-admin-plus
+  plateFormId: 2
 }
 
-export default setting
+export default settings
