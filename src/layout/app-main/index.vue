@@ -22,13 +22,14 @@ import { useRoute } from 'vue-router'
 import type { RouteLocationMatched } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { cloneDeep } from '@/hooks/use-common'
+import type { rawConfig } from '~/basic'
 const { settings, cachedViews } = storeToRefs(useBasicStore())
 const route = useRoute()
 const key = computed(() => route.path)
 /*listen the component name changing, then to keep-alive the page*/
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
-let oldRoute = {}
+let oldRoute: rawConfig = {}
 let deepOldRouter: RouteLocationMatched | null = null
 const basicStore = useBasicStore()
 const removeDeepChildren = (deepOldRouter) => {

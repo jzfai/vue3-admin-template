@@ -49,7 +49,7 @@ const childMethod = () => {
   return 'childMethod'
 }
 
-const vm = getCurrentInstance()?.proxy
+const vm: any = getCurrentInstance()?.proxy
 const getFatherMethod = () => {
   vm?.$parent?.fartherMethod()
 }

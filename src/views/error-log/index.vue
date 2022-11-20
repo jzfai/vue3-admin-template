@@ -3,10 +3,10 @@
     <!--条件搜索-->
     <el-form ref="refSearchForm" :inline="true" :model="searchForm">
       <el-form-item prop="log">
-        <el-input v-model="searchForm.log" class="w-150px" placeholder="错误日志" />
+        <el-input v-model="searchForm.log" class="w-150px" placeholder="log" />
       </el-form-item>
       <el-form-item prop="pageUrl">
-        <el-input v-model="searchForm.pageUrl" class="w-200px" placeholder="页面路径" />
+        <el-input v-model="searchForm.pageUrl" class="w-200px" placeholder="pageUrl" />
       </el-form-item>
       <el-form-item prop="startEndArr">
         <el-date-picker
@@ -16,15 +16,14 @@
           value-format="YYYY-MM-DD HH:mm:ss"
           class="w-250px"
           range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+          start-placeholder="startDate"
+          end-placeholder="endDate"
           @change="dateRangePacking"
         />
       </el-form-item>
       <el-form-item>
-        <!--查询按钮-->
-        <el-button type="primary" @click="resetPageReq">查询</el-button>
-        <el-button type="primary" @click="resetForm">重置</el-button>
+        <el-button type="primary" @click="resetPageReq">search</el-button>
+        <el-button type="primary" @click="resetForm">reset</el-button>
       </el-form-item>
     </el-form>
     <div class="rowES mb-10px">
@@ -32,7 +31,7 @@
         <!--        <el-icon style="vertical-align: middle">-->
         <!--          <Delete />-->
         <!--        </el-icon>-->
-        <span style="vertical-align: middle">批量删除</span>
+        <span style="vertical-align: middle">multiDel</span>
       </el-button>
     </div>
     <!--表格和分页-->

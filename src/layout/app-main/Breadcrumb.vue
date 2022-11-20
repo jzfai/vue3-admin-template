@@ -5,34 +5,36 @@
       <!--  根据过滤后的数组生成面包屑  -->
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
         <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
-          {{ item.meta?.title }}
+          {{ langTitle(item.meta?.title) }}
         </span>
-        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+        <a v-else @click.prevent="handleLink(item)">{{ langTitle(item.meta?.title) }}</a>
       </el-breadcrumb-item>
     </transition-group>
     <!--no transition-->
     <template v-else>
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
         <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
-          {{ item.meta?.title }}
+          {{ langTitle(item.meta?.title) }}
         </span>
-        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+        <a v-else @click.prevent="handleLink(item)">{{ langTitle(item.meta?.title) }}</a>
       </el-breadcrumb-item>
     </template>
   </el-breadcrumb>
 </template>
 
 <script setup lang="ts">
+import { langTitle } from '@/hooks/use-common'
 import { ref, watch } from 'vue'
 import { compile } from 'path-to-regexp'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
+import type { RouterTypes } from '~/basic'
 const levelList = ref()
 const { settings } = useBasicStore()
 const route = useRoute()
 const getBreadcrumb = () => {
   // only show routes with has  meta.title
-  let matched = route.matched.filter((item) => item.meta?.title)
+  let matched: RouterTypes = route.matched.filter((item) => item.meta?.title)
   //如果首页Dashboard,如果没有，添加Dashboard路由到第一个路由
   const isHasDashboard = matched[0]?.name?.toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
   if (!isHasDashboard) {

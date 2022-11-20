@@ -1,10 +1,10 @@
 export default {
   router: {
     Dashboard: '首页',
-    'Setting Switch': '设置文件测试',
-    Guide: '引导页',
-    ErrorLog: '错误日志',
-    'ErrorLog Test': '错误日志测试',
+    'Setting Switch': '配置文件',
+    'Error Log': '错误日志',
+    'Error Index': '错误日志列表',
+    'Error Generator': '错误日志生成',
 
     Nested: '路由嵌套',
     Menu1: '菜单1',
@@ -14,64 +14,57 @@ export default {
     'Menu1-2-2': '菜单 1-2-2',
     'Menu1-3': '菜单 1-3',
     menu2: '菜单 2',
-    Table: '表格',
-    exportExcel: '导出Excel',
-    importExcel: '导入Excel',
-    LowCodePlatform: '低代码平台',
-    RBACMenu: '菜单按钮测试',
-    RBAC: '菜单按钮权限中心',
-    Charts: '图表',
-    'Keyboard Chart': '键盘图表',
-    'Line Chart': '折线图',
-    'Mix Chart': '混合图表',
-    'Echarts Demo': '综合实例',
 
-    CRUD: '增删改查',
-    'CRUD-Demo': '增删改查例子',
-    'Import Export': '导入导出文件',
-    'ImgAdd Pack': '图片上传',
-    'Writing Demo': '写法案例',
-    'Hook-Demo': 'hooks例子',
-    'Vuex-Demo': 'Vuex例子',
-    'Mock-Demo': 'Mock例子',
-    'Svg-Demo': 'Svg例子',
-    'Parent-Children': '父子通信例子',
-    'Keep-Alive': 'Keep-Alive',
-    'RouterDemo-F': '路由跳转页面1',
-    'RouterDemo-S': '路由跳转页面2',
-    'Use Example': '使用例子',
-    Directive: '自定义指令',
-    Tinymce: 'Tinymce富文本',
-    'I18n-Demo': 'i18n例子',
-    dragPane: '拖拽面板',
-    countTo: '数字动画',
-    Permission: '权限',
+    'External Link': '外链',
+
+    'Basic Demo': '基础例子',
+    Hook: 'hook',
+    Pinia: 'pinia',
+    Mock: 'mock',
+    'Svg Icon': 'svg使用',
+    'Parent Children': '父子组件通信',
+    'Second KeepAlive': '二级路由缓存',
+    'Tab KeepAlive': 'tab缓存',
+    'Third KeepAlive': '三级路由缓存',
+    SecondChild: '三级路由示例1',
+    ThirdChild: '三级路由示例2',
+
+    Worker: '多线程',
+
+    Permission: '权限路由',
+
+    'Permission Switch': '权限切换',
     'Role Index': '角色权限',
-    'Page Permission': '角色权限页面',
-    'Directive Permission': '角色指令权限',
-    'Code Index': 'codeArr权限',
-    'Code Page': 'codeArr权限页面'
+    'Code Index': 'Code权限',
+    'Button Permission': '按钮权限'
   },
   navbar: {
-    dashboard: '首页',
-    github: '项目地址',
-    logOut: '退出登录',
-    profile: '个人中心',
-    theme: '换肤',
-    size: '布局大小'
+    Home: '首页',
+    Github: '项目git地址',
+    Docs: '官方文档',
+    'login out': '退出登录'
   },
-  login: {
-    title: '系统登录',
-    logIn: '登录',
-    username: '账号',
-    password: '密码',
-    any: '随便填',
-    thirdparty: '第三方登录',
-    thirdpartyTips: '本地不能模拟，请结合自己业务进行模拟！！！'
+
+  //page
+  dashboard: {
+    'switch theme': '切换主题色',
+    'switch size': '切换尺寸',
+    'switch language': '切换语言',
+    en: 'English',
+    zh: '中文',
+    'Button Group': '按钮组',
+    'unocss using': 'unocss使用',
+    'global var': '全局静态变量'
   },
-  documentation: {
-    documentation: '文档',
-    github: 'Github 地址'
+  'error-log': {
+    log: '错误日志',
+    pageUrl: '页面路径',
+    startDate: '开始日期',
+    endDate: '结束日期',
+    github: 'Github 地址',
+    search: '查询',
+    reset: '重置',
+    multiDel: '批量删除'
   },
   permission: {
     addRole: '新增角色',
