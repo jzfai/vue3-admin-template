@@ -30,7 +30,7 @@ onActivated(() => {
 onDeactivated(() => {
   console.log('onDeactivated')
 })
-const route = useRoute()
+const route: any = useRoute()
 // cacheGroup为缓存分组  SecondKeepAlive->SecondChild->ThirdChild
 const cacheGroup = ['SecondKeepAlive', 'SecondChild', 'ThirdChild']
 const { delCachedView } = useBasicStore()

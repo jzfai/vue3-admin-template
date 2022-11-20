@@ -28,7 +28,7 @@ const { t, te } = i18n.global
 import langEn from '@/lang/en'
 export const langTitle = (title) => {
   for (const key of Object.keys(langEn)) {
-    if (te(`${key}.${title}`)) {
+    if (te(`${key}.${title}`) && t(`${key}.${title}`)) {
       return t(`${key}.${title}`)
     }
   }
