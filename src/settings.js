@@ -1,5 +1,6 @@
+import packageJson from '../package.json'
 export const settings = {
-  title: 'Vue3 Admin Template',
+  title: packageJson.name,
   /**
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar

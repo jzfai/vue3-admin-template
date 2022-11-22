@@ -1,10 +1,10 @@
+import NProgress from 'nprogress'
 /**
  * 根据请求，过滤异步路由
  * @param:menuList 异步路由数组
  * return 过滤后的异步路由
  */
 // @ts-ignore
-import NProgress from 'nprogress'
 import Layout from '@/layout/index.vue'
 /*
  * 路由操作
@@ -15,7 +15,6 @@ import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
 
 const buttonCodes = [] //按钮权限
-
 export const filterAsyncRoutesByMenuList = (menuList) => {
   const filterRouter = []
   menuList.forEach((route) => {
