@@ -23,18 +23,18 @@
 </template>
 
 <script setup lang="ts">
-import { langTitle } from '@/hooks/use-common'
 import { ref, watch } from 'vue'
 import { compile } from 'path-to-regexp'
 import { useRoute, useRouter } from 'vue-router'
-import { useBasicStore } from '@/store/basic'
 import type { RouterTypes } from '~/basic'
+import { useBasicStore } from '@/store/basic'
+import { langTitle } from '@/hooks/use-common'
 const levelList = ref()
 const { settings } = useBasicStore()
 const route = useRoute()
 const getBreadcrumb = () => {
   // only show routes with has  meta.title
-  let matched: RouterTypes = route.matched.filter((item) => item.meta?.title)
+  let matched = route.matched.filter((item) => item.meta?.title)
   //如果首页Dashboard,如果没有，添加Dashboard路由到第一个路由
   const isHasDashboard = matched[0]?.name?.toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
   if (!isHasDashboard) {

@@ -14,7 +14,7 @@
     <!--导航标题-->
     <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.title }}</div>
     <!-- 下拉操作菜单 -->
-    <div v-if="settings.ShowDropDown" class="right-menu">
+    <div v-if="settings.ShowDropDown" class="right-menu rowSC">
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
           <img src="https://github.jzfai.top/file/images/nav-right-logo.gif" class="user-avatar" />
@@ -25,11 +25,11 @@
             <router-link to="/">
               <el-dropdown-item>{{ langTitle('Home') }}</el-dropdown-item>
             </router-link>
-            <a target="_blank" href="https://github.com/jzfai/vue3-admin-ts">
+            <a target="_blank" href="https://github.com/jzfai/vue3-admin-plus">
               <el-dropdown-item>{{ langTitle('Github') }}</el-dropdown-item>
             </a>
-            <a target="_blank" href="https://juejin.cn/post/7036302298435289095">
-              <el-dropdown-item>{{ langTitle('Docs') }}</el-dropdown-item>
+            <a target="_blank" href="https://github.jzfai.top/low-code-platform">
+              <el-dropdown-item>{{ langTitle('LowCodePlatFrom') }}</el-dropdown-item>
             </a>
             <!--<el-dropdown-item>修改密码</el-dropdown-item>-->
             <el-dropdown-item divided @click="loginOut">{{ langTitle('login out') }}</el-dropdown-item>
@@ -41,15 +41,16 @@
 </template>
 
 <script setup lang="ts">
-import { langTitle } from '@/hooks/use-common'
 import { nextTick } from 'vue'
 import { CaretBottom } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import Breadcrumb from './Breadcrumb.vue'
 import Hamburger from './Hamburger.vue'
-import { useBasicStore } from '@/store/basic'
-import { elMessage } from '@/hooks/use-element'
 import { resetState } from '@/hooks/use-permission'
+import { elMessage } from '@/hooks/use-element'
+import { useBasicStore } from '@/store/basic'
+import { langTitle } from '@/hooks/use-common'
+
 const basicStore = useBasicStore()
 const { settings, sidebar, setToggleSideBar } = basicStore
 const toggleSideBar = () => {
