@@ -24,6 +24,12 @@ const BasicDemo = {
       meta: { title: 'Mock' }
     },
     {
+      path: 'proxy',
+      component: () => import('@/views/basic-demo/proxy/index.vue'),
+      name: 'Proxy',
+      meta: { title: 'Proxy' }
+    },
+    {
       path: 'svg-icon',
       component: () => import('@/views/basic-demo/svg-icon/index.vue'),
       name: 'SvgIcon',
