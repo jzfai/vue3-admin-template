@@ -8,17 +8,17 @@ suggestion the Node.js >= 16.0.0。
 
 ## Documents
 
-- [Official Documentation](https://github.jzfai.top/vue3-admin-doc/)
+- [Official Documentation](https://github.jzfai.top/vue3-admin-en-doc/)
 
-- [中文官网](https://github.jzfai.top/vue3-admin-doc/zh/)
+- [中文官网](https://github.jzfai.top/vue3-admin-cn-doc/)
 
 
 
 ## Online experience
 
-[Access address](https://github.jzfai.top/vue3-admin-plus)
+[Access address](https://github.jzfai.top/vue3-admin-template)
 
-[国内体验地址](https://github.jzfai.top/vue3-admin-plus)
+[国内体验地址](https://github.jzfai.top/vue3-admin-template)
 
 
 
@@ -50,7 +50,6 @@ pnpm i
 pnpm run dev
 ```
 
-using the browser to open http://localhost:5001
 
 ## Build
 
