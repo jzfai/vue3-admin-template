@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import basicDemo from './modules/basic-demo'
+
 import Layout from '@/layout/index.vue'
 
 export const constantRoutes = [
@@ -14,6 +15,7 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
@@ -39,7 +41,17 @@ export const constantRoutes = [
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'Dashboard', elSvgIcon: 'Fold' }
+        meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/RBAC',
+    component: Layout,
+    children: [
+      {
+        path: 'https://github.jzfai.top/low-code-platform/#/permission-center/user-table-query',
+        meta: { title: 'RBAC', icon: 'skill' }
       }
     ]
   },
@@ -51,10 +63,11 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/setting-switch/index.vue'),
         name: 'SettingSwitch',
-        meta: { title: 'Setting Switch', icon: 'example', affix: true }
+        meta: { title: 'Setting Switch', icon: 'example' }
       }
     ]
   },
+
   {
     path: '/error-log',
     component: Layout,
@@ -75,7 +88,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: '/nested',
     component: Layout,
@@ -131,17 +143,6 @@ export const constantRoutes = [
         component: () => import('@/views/nested/menu2/index.vue'),
         name: 'Menu2',
         meta: { title: 'menu2' }
-      }
-    ]
-  },
-  {
-    path: '/external-link',
-    component: Layout,
-    children: [
-      {
-        component: () => {},
-        path: 'https://github.com/jzfai/vue3-admin-ts.git',
-        meta: { title: 'External Link', icon: 'link' }
       }
     ]
   },
