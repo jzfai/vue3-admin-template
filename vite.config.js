@@ -17,7 +17,8 @@ const prodMock = setting.openProdMock
 const pathSrc = path.resolve(__dirname, 'src')
 
 export default defineConfig(({ command, mode }) => {
-  //const env = loadEnv(mode, process.cwd(), '') //获取环境变量
+  const env = loadEnv(mode, process.cwd(), '') //获取环境变量
+
   return {
     base: setting.viteBasePath,
     define: {
@@ -31,7 +32,19 @@ export default defineConfig(({ command, mode }) => {
       port: 5003, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       host: true,
-      https: false
+      https: false,
+      //https://cn.vitejs.dev/config/server-options.html#server-proxy
+      proxy: {
+        [env.VITE_PROXY_BASE_URL]: {
+          target: env.VITE_PROXY_URL,
+          changeOrigin: true,
+          rewrite: (path) => {
+            const reg = new RegExp(`^${env.VITE_PROXY_BASE_URL}`)
+            const newPath = path.replace(reg, '')
+            return newPath
+          }
+        }
+      }
     },
     preview: {
       port: 5006,
