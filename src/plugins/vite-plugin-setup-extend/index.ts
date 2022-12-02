@@ -4,7 +4,7 @@ import { render } from 'ejs'
 export default ({ inject }): Plugin => {
   // let viteConfig
   return {
-    name: 'html-transform',
+    name: 'vite-plugin-setup-extend',
     enforce: 'pre',
     // configResolved(resolvedConfig) {
     //   viteConfig = resolvedConfig
