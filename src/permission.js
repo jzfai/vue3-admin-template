@@ -9,7 +9,7 @@ import { langTitle } from '@/hooks/use-common'
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to) => {
   progressStart()
-  //document.title = langTitle(to.meta?.title) // i18 page title
+  document.title = langTitle(to.meta?.title) // i18 page title
   const basicStore = useBasicStore()
   //1.判断token
   if (basicStore.token) {
