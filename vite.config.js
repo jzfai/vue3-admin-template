@@ -4,17 +4,18 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
-import { createHtmlPlugin } from 'vite-plugin-html'
 import Components from 'unplugin-vue-components/vite'
 import UnoCSS from 'unocss/vite'
 import { presetAttributify, presetIcons, presetUno } from 'unocss'
 import mkcert from 'vite-plugin-mkcert'
-import DefineOptions from 'unplugin-vue-define-options/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import setting from './src/settings'
 const prodMock = setting.openProdMock
 // import { visualizer } from 'rollup-plugin-visualizer'
 const pathSrc = path.resolve(__dirname, 'src')
+
+//插件测试
+import vitePluginSetupExtend from './src/plugins/vite-plugin-setup-extend/index'
 
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '') //获取环境变量
@@ -38,11 +39,7 @@ export default defineConfig(({ command, mode }) => {
         [env.VITE_PROXY_BASE_URL]: {
           target: env.VITE_PROXY_URL,
           changeOrigin: true,
-          rewrite: (path) => {
-            const reg = new RegExp(`^${env.VITE_PROXY_BASE_URL}`)
-            const newPath = path.replace(reg, '')
-            return newPath
-          }
+          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_PROXY_BASE_URL}`), '')
         }
       }
     },
@@ -57,7 +54,6 @@ export default defineConfig(({ command, mode }) => {
       UnoCSS({
         presets: [presetUno(), presetAttributify(), presetIcons()]
       }),
-      DefineOptions(),
       mkcert(),
       //compatible with old browsers
       // legacy({
@@ -75,7 +71,7 @@ export default defineConfig(({ command, mode }) => {
         localEnabled: command === 'serve',
         prodEnabled: prodMock,
         injectCode: `
-          import { setupProdMockServer } from '../mock-prod-server';
+          import { setupProdMockServer } from './mock-prod-server';
           setupProdMockServer();
         `,
         logger: true
@@ -106,9 +102,10 @@ export default defineConfig(({ command, mode }) => {
         dts: './typings/auto-imports.d.ts'
       }),
       // auto config of index.html title
-      createHtmlPlugin({
-        inject: { data: { title: setting.title } }
-      })
+      // createHtmlPlugin({
+      //   inject: { data: { title: setting.title } }
+      // }),
+      vitePluginSetupExtend({ inject: { title: setting.title } })
       //依赖分析插件
       // visualizer({
       //   open: true,

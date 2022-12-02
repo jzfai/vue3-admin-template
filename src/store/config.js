@@ -29,7 +29,7 @@ export const useConfigStore = defineStore('config', {
       this.language = lang
       locale.value = lang
       const route = router.currentRoute
-      document.title = langTitle(route.value.meta?.title) // i18 page title
+      //document.title = langTitle(route.value.meta?.title) // i18 page title
     }
   }
 })
