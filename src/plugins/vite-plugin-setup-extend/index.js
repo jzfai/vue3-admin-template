@@ -1,7 +1,6 @@
 import { parse } from '@vue/compiler-sfc'
-import type { Plugin } from 'vite'
 import { render } from 'ejs'
-export default ({ inject }): Plugin => {
+export default ({ inject }) => {
   // let viteConfig
   return {
     name: 'vite-plugin-setup-extend',
