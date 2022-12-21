@@ -29,6 +29,7 @@ import { ref } from 'vue'
 import { resolve } from 'path-browserify'
 import Link from './Link.vue'
 import MenuIcon from './MenuIcon.vue'
+import type { RouteRawConfig } from '~/basic'
 import { isExternal } from '@/hooks/use-layout'
 import { langTitle } from '@/hooks/use-common'
 
@@ -52,7 +53,7 @@ const props = defineProps({
 //显示sidebarItem 的情况
 const onlyOneChild = ref()
 const showSidebarItem = (children = [], parent) => {
-  const showingChildren = children.filter((item: any) => {
+  const showingChildren = children.filter((item: RouteRawConfig) => {
     if (item.hidden) {
       return false
     } else {

@@ -34,7 +34,7 @@ const { settings } = useBasicStore()
 const route = useRoute()
 const getBreadcrumb = () => {
   // only show routes with has  meta.title
-  let matched = route.matched.filter((item) => item.meta?.title)
+  let matched: RouterTypes = route.matched.filter((item) => item.meta?.title)
   //如果首页Dashboard,如果没有，添加Dashboard路由到第一个路由
   const isHasDashboard = matched[0]?.name?.toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
   if (!isHasDashboard) {

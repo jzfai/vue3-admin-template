@@ -29,7 +29,7 @@ const key = computed(() => route.path)
 /*listen the component name changing, then to keep-alive the page*/
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
-let oldRoute = {}
+let oldRoute: rawConfig = {}
 let deepOldRouter: RouteLocationMatched | null = null
 const basicStore = useBasicStore()
 const removeDeepChildren = (deepOldRouter) => {
