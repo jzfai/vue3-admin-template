@@ -15,12 +15,11 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { computed, watch } from 'vue'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
-import type { RouteLocationMatched } from 'vue-router'
-import type { rawConfig } from '~/basic'
+
 import { useBasicStore } from '@/store/basic'
 import { cloneDeep } from '@/hooks/use-common'
 const { settings, cachedViews } = storeToRefs(useBasicStore())
@@ -29,18 +28,36 @@ const key = computed(() => route.path)
 /*listen the component name changing, then to keep-alive the page*/
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
-let oldRoute: rawConfig = {}
-let deepOldRouter: RouteLocationMatched | null = null
+let oldRoute = {}
+let cacheGroup = []
+let deepOldRouter = null
 const basicStore = useBasicStore()
 const removeDeepChildren = (deepOldRouter) => {
   deepOldRouter.children?.forEach((fItem) => {
-    basicStore.setCacheViewDeep(fItem.name)
+    basicStore.delCacheViewDeep(fItem.name)
   })
 }
 watch(
   () => route.name,
   () => {
     const routerLevel = route.matched.length
+    //缓存组处理
+    //first judge cacheGroup and then  remove
+    if (cacheGroup.length) {
+      if (!cacheGroup.includes(route.name)) {
+        cacheGroup.forEach((item) => {
+          basicStore.delCachedView(item)
+        })
+      }
+    }
+    //and then cache the current router config page
+    if (route.meta?.cacheGroup) {
+      cacheGroup = route.meta?.cacheGroup || []
+      cacheGroup.forEach((fItem) => {
+        basicStore.addCachedView(fItem)
+      })
+    }
+
     //二级路由处理
     if (routerLevel === 2) {
       if (deepOldRouter?.name) {
@@ -81,7 +98,7 @@ watch(
         //否则走正常两级路由处理流程
         if (oldRoute?.name) {
           if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
-            basicStore.setCacheViewDeep(oldRoute.name)
+            basicStore.delCacheViewDeep(oldRoute.name)
           }
         }
       }
