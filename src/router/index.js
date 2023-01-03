@@ -45,16 +45,16 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/RBAC',
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.jzfai.top/low-code-platform/#/permission-center/user-table-query',
-        meta: { title: 'RBAC', icon: 'skill' }
-      }
-    ]
-  },
+  // {
+  //   path: '/RBAC',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://github.jzfai.top/low-code-platform/#/permission-center/user-table-query',
+  //       meta: { title: 'RBAC', icon: 'skill' }
+  //     }
+  //   ]
+  // },
   {
     path: '/setting-switch',
     component: Layout,

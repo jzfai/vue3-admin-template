@@ -36,10 +36,12 @@ service.interceptors.response.use(
     if (successCode.includes(code)) {
       return res.data
     } else {
-      if (noAuthCode.includes(code) && !location.href.includes('/login')) {
+      if (noAuthCode.includes(code)) {
         ElMessageBox.confirm('请重新登录', {
           confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
+          closeOnClickModal: false,
+          showCancelButton: false,
+          showClose: false,
           type: 'warning'
         }).then(() => {
           useBasicStore().resetStateAndToLogin()
