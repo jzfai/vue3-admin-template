@@ -34,6 +34,11 @@
 
     <div v-lang class="mt-30px font-bold mb-10px">global var</div>
     {{ showObj }}
+
+    <div class="mt-20px">
+      <el-button @click="sendReq">发送请求测试(network->slow 3g)</el-button>
+      <el-button @click="cancelReq">cancelReq</el-button>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -48,4 +53,25 @@ const changeLanguage = (langParam) => {
 }
 const count = ref(0)
 const showObj = ref(GLOBAL_VAR)
+
+//send req test
+const sendReq = () => {
+  const reqConfig = {
+    url: '/integration-front/errorCollection/selectPage',
+    method: 'get',
+    reqLoading: false
+  }
+  axiosReq(reqConfig)
+}
+//cancel req
+const { axiosPromiseArr } = useBasicStore()
+const cancelReq = () => {
+  //cancel all req when page switch
+  if (axiosPromiseArr.length) {
+    axiosPromiseArr.forEach((ele, ind) => {
+      ele.cancel()
+      axiosPromiseArr.splice(ind, 1)
+    })
+  }
+}
 </script>

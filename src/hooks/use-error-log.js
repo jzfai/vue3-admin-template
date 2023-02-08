@@ -9,9 +9,9 @@ let repeatErrorLogJudge = ''
 
 const errorLogReq = (errLog) => {
   axiosReq({
-    url: import.meta.env.VITE_APP_BASE_URL+reqUrl,
+    url: import.meta.env.VITE_APP_BASE_URL + reqUrl,
     data: {
-      pageUrl:   window.location.href,
+      pageUrl: window.location.href,
       errorLog: errLog,
       browserType: navigator.userAgent,
       version: pack.version
