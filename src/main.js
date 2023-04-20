@@ -28,6 +28,10 @@ import './permission'
 import 'element-plus/dist/index.css'
 const app = createApp(App)
 
+
+//import element-plus svg icon
+import ElSvgIcon from "@/lib/el-svg-icon"
+app.use(ElSvgIcon)
 //router
 app.use(router)
 

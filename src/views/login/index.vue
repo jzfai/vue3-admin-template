@@ -1,4 +1,3 @@
-<!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
     <el-form ref="refLoginForm" class="login-form" :model="subForm" :rules="formRules">
@@ -22,13 +21,13 @@
             <svg-icon icon-class="password" />
           </span>
           <el-input
-            :key="passwordType"
-            ref="refPassword"
-            v-model="subForm.password"
-            :type="passwordType"
-            name="password"
-            placeholder="password(123456)"
-            @keyup.enter="handleLogin"
+              :key="passwordType"
+              ref="refPassword"
+              v-model="subForm.password"
+              :type="passwordType"
+              name="password"
+              placeholder="password(123456)"
+              @keyup.enter="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -48,7 +47,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
-import { loginReq } from '@/api/user'
+import { loginReq } from '@/api/system'
 
 /* listen router change and set the query  */
 const { settings } = useBasicStore()
@@ -73,27 +72,27 @@ const getOtherQuery = (query) => {
   }, {})
 }
 watch(
-  () => route.query,
-  (query) => {
-    if (query) {
-      state.redirect = query.redirect
-      state.otherQuery = getOtherQuery(query)
-    }
-  },
-  { immediate: true }
+    () => route.query,
+    (query) => {
+      if (query) {
+        state.redirect = query.redirect
+        state.otherQuery = getOtherQuery(query)
+      }
+    },
+    { immediate: true }
 )
 
 /*
  *  login relative
  * */
-let subLoading = $ref(false)
+const subLoading = ref(false)
 //tip message
-let tipMessage = $ref('')
+const tipMessage = ref('')
 //sub form
-const refLoginForm = $ref(null)
+const refLoginForm = ref(null)
 const handleLogin = () => {
-  refLoginForm.validate((valid) => {
-    subLoading = true
+  refLoginForm.value.validate((valid) => {
+    subLoading.value = true
     if (valid) loginFunc()
   })
 }
@@ -102,17 +101,17 @@ const basicStore = useBasicStore()
 
 const loginFunc = () => {
   loginReq(subForm)
-    .then(({ data }) => {
-      elMessage('登录成功')
-      basicStore.setToken(data?.jwtToken)
-      router.push('/')
-    })
-    .catch((err) => {
-      tipMessage = err?.msg
-    })
-    .finally(() => {
-      subLoading = false
-    })
+      .then(({ data }) => {
+        elMessage('登录成功')
+        basicStore.setToken(data?.jwtToken)
+        router.push('/')
+      })
+      .catch((err) => {
+        tipMessage.value = err?.msg
+      })
+      .finally(() => {
+        subLoading.value = false
+      })
 }
 /*
  *  password show or hidden

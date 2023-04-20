@@ -1,6 +1,6 @@
 <template>
   <svg :class="svgClass" aria-hidden="true">
-    <use :xlink:href="iconName" />
+    <use :xlink:href="iconName" :fill="color" />
   </svg>
 </template>
 
@@ -14,7 +14,11 @@ const props = defineProps({
   className: {
     type: String,
     default: ''
-  }
+  },
+  color: {
+    type: String,
+    default: ''
+  },
 })
 
 const iconName = computed(() => `#icon-${props.iconClass}`)
@@ -27,14 +31,6 @@ const svgClass = computed(() => {
 </script>
 
 <style scoped lang="scss">
-.sub-el-icon,
-.nav-icon {
-  display: inline-block;
-  font-size: 15px;
-  margin-right: 12px;
-  position: relative;
-}
-
 .svg-icon {
   width: 1em;
   height: 1em;

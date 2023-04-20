@@ -49,7 +49,7 @@ export default defineConfig(({ command, mode }) => {
       strictPort: true
     },
     plugins: [
-      vue({ reactivityTransform: true }),
+      vue(),
       vueJsx(),
       UnoCSS({
         presets: [presetUno(), presetAttributify(), presetIcons()]
@@ -93,7 +93,7 @@ export default defineConfig(({ command, mode }) => {
           }
         ],
         //配置后会自动扫描目录下的文件
-        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/api/**'],
+        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**',],
         eslintrc: {
           enabled: true, // Default `false`
           filepath: './eslintrc/.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`

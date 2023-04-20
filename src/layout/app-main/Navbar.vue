@@ -37,7 +37,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup >
 import { nextTick } from 'vue'
 import { CaretBottom } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
@@ -47,6 +47,7 @@ import { resetState } from '@/hooks/use-permission'
 import { elMessage } from '@/hooks/use-element'
 import { useBasicStore } from '@/store/basic'
 import { langTitle } from '@/hooks/use-common'
+import {loginOutReq} from "@/api/system";
 
 const basicStore = useBasicStore()
 const { settings, sidebar, setToggleSideBar } = basicStore
@@ -56,10 +57,12 @@ const toggleSideBar = () => {
 //退出登录
 const router = useRouter()
 const loginOut = () => {
-  elMessage('退出登录成功')
-  router.push(`/login?redirect=/`)
-  nextTick(() => {
-    resetState()
+  loginOutReq().then(()=>{
+    elMessage('退出登录成功')
+    router.push(`/login?redirect=/`)
+    nextTick(() => {
+      resetState()
+    })
   })
 }
 </script>

@@ -218,6 +218,8 @@ const { visible, top, left, selectedTag } = toRefs(state)
 .tags-view-container {
   height: var(--tag-view-height);
   width: 100%;
+  position: relative;
+  z-index: 10;
   background: var(--tags-view-background);
   border-bottom: 1px solid var(--tags-view-border-bottom);
   box-shadow: var(--tags-view-box-shadow);
