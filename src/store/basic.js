@@ -39,6 +39,11 @@ export const useBasicStore = defineStore('basic', {
         })
       })
     },
+    clearPromiseArr() {
+      this.$patch((state) => {
+        state.axiosPromiseArr=[]
+      })
+    },
     setToken(data) {
       this.token = data
     },

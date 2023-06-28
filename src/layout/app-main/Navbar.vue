@@ -47,7 +47,7 @@ import { resetState } from '@/hooks/use-permission'
 import { elMessage } from '@/hooks/use-element'
 import { useBasicStore } from '@/store/basic'
 import { langTitle } from '@/hooks/use-common'
-import {loginOutReq} from "@/api/system";
+import {loginOutReq} from "@/api/user";
 
 const basicStore = useBasicStore()
 const { settings, sidebar, setToggleSideBar } = basicStore

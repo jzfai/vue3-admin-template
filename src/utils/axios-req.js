@@ -34,7 +34,6 @@ service.interceptors.request.use(
         background: 'rgba(0, 0, 0, 0.3)'
       })
     }
-
     return req
   },
   (err) => {
@@ -45,9 +44,7 @@ service.interceptors.request.use(
 //请求后拦截
 service.interceptors.response.use(
   (res) => {
-    //取消请求
-    useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)
-
+    useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave) //从请求集合中移除
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }
@@ -84,8 +81,7 @@ service.interceptors.response.use(
   },
   //响应报错
   (err) => {
-    //取消请求
-    useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)
+    useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)  //从请求集合中移除
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }

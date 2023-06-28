@@ -36,6 +36,14 @@ const BasicDemo = {
       meta: { title: 'Parent Children' }
     },
     {
+      path: 'second-keep-alive',
+      component: () => import('@/views/basic-demo/keep-alive/second-keep-alive.vue'),
+      name: 'SecondKeepAlive',
+      //cachePage: cachePage when page enter, default false
+      //leaveRmCachePage: remove cachePage when page leave, default false
+      meta: { title: 'Send KeepAlive', cachePage: true, closeTabRmCache: false }
+    },
+    {
       path: 'keep-alive-group',
       component: () => import('@/views/basic-demo/keep-alive/index.vue'),
       name: 'KeepAliveGroup',
@@ -65,29 +73,29 @@ const BasicDemo = {
       //closeTabRmCache: remove cachePage when tabs close, default false
       meta: { title: 'Tab KeepAlive', cachePage: true, closeTabRmCache: true }
     },
-    //third-keep-alive
-    {
-      path: 'third-keep-alive',
-      name: 'ThirdKeepAlive',
-      component: () => import('@/views/basic-demo/keep-alive/third-keep-alive.vue'),
-      //注：移除父容器页面缓存会把子页面一起移除了
-      meta: { title: 'Third KeepAlive', cachePage: true, leaveRmCachePage: false },
-      alwaysShow: true,
-      children: [
-        {
-          path: 'second-children',
-          name: 'SecondChildren',
-          component: () => import('@/views/basic-demo/keep-alive/third-children/SecondChildren.vue'),
-          meta: { title: 'SecondChildren', cachePage: true, leaveRmCachePage: true }
-        },
-        {
-          path: 'third-children',
-          name: 'ThirdChildren',
-          component: () => import('@/views/basic-demo/keep-alive/third-children/ThirdChildren.vue'),
-          meta: { title: 'ThirdChildren', cachePage: true, leaveRmCachePage: false }
-        }
-      ]
-    },
+    //third-keep-alive(已作废)
+    // {
+    //   path: 'third-keep-alive',
+    //   name: 'ThirdKeepAlive',
+    //   component: () => import('@/views/basic-demo/keep-alive/third-keep-alive.vue'),
+    //   //注：移除父容器页面缓存会把子页面一起移除了
+    //   meta: { title: 'Third KeepAlive', cachePage: true, leaveRmCachePage: false },
+    //   alwaysShow: true,
+    //   children: [
+    //     {
+    //       path: 'second-children',
+    //       name: 'SecondChildren',
+    //       component: () => import('@/views/basic-demo/keep-alive/third-children/SecondChildren.vue'),
+    //       meta: { title: 'SecondChildren', cachePage: true, leaveRmCachePage: true }
+    //     },
+    //     {
+    //       path: 'third-children',
+    //       name: 'ThirdChildren',
+    //       component: () => import('@/views/basic-demo/keep-alive/third-children/ThirdChildren.vue'),
+    //       meta: { title: 'ThirdChildren', cachePage: true, leaveRmCachePage: false }
+    //     }
+    //   ]
+    // },
     {
       path: 'worker',
       component: () => import('@/views/basic-demo/worker/index.vue'),

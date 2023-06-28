@@ -46,14 +46,14 @@ export const constantRoutes = [
   {
     path: '/setting-switch',
     component: Layout,
-    alwaysShow:true,
-    meta: { title: 'Setting Switch', elSvgIcon: 'Fold' },
+    alwaysShow:false,
+    meta: { title: 'Setting Switch', elSvgIcon: 'Setting' },
     children: [
       {
         path: 'index',
         component: () => import('@/views/setting-switch/index.vue'),
         name: 'SettingSwitch',
-        meta: { title: 'Setting Switch', elSvgIcon: 'example' }
+        meta: { title: 'Setting Switch', elSvgIcon: 'Setting' }
       }
     ]
   },
@@ -116,6 +116,7 @@ export const constantRoutes = [
     ]
   },
   basicDemo,
+  { path: "/:pathMatch(.*)", redirect: "/404", hidden: true }
 ]
 
 //角色和code数组动态路由
@@ -128,8 +129,9 @@ export const roleCodeRoutes = [
  */
 export const asyncRoutes = [
   // 404 page must be placed at the end !!!
-  { path: '/:catchAll(.*)', name: 'CatchAll', redirect: '/404', hidden: true }
+  { path: "/:pathMatch(.*)", redirect: "/404", hidden: true },
 ]
+
 
 const router = createRouter({
   history: createWebHashHistory(),

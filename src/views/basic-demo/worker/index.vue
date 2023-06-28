@@ -2,6 +2,9 @@
   <div>
     <div>the recommend using way of worker</div>
     <div>计算结果：{{ showPageRef }}</div>
+    <el-icon class="is-loading" v-if="!showPageRef">
+      <Loading />
+    </el-icon>
   </div>
 </template>
 <script setup lang="ts">
@@ -34,12 +37,10 @@ const changeFuncToUrl = (func) => {
 const worker = changeFuncToUrl(workerCode)
 worker.postMessage(30000000)
 const showPageRef = ref()
-elLoading('数据计算中')
 worker.onmessage = (e) => {
   console.log(`主进程收到了子进程发出的信息：${e.data}`)
   showPageRef.value = e.data
   //停止线程（注:用完后一定要停止）
-  closeElLoading()
   worker.terminate()
 }
 </script>
