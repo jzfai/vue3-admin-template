@@ -25,7 +25,7 @@
     "@element-plus/icons-vue": "^2.0.4",
     "axios": "0.21.3",
     "echarts": "5.3.2",
-    "element-plus": "^2.2.9",
+    "element-plus": "2.3.6",
     "js-error-collection": "^1.0.7",
     "mitt": "3.0.0",
     "moment-mini": "2.22.1",
