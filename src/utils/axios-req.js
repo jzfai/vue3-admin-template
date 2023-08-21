@@ -71,8 +71,8 @@ service.interceptors.response.use(
       return res
     }
     const { code, msg } = res.data
-    const successCode = '0,200,20000'
-    const noAuthCode = '401,403'
+    const successCode = [0,200,20000]
+    const noAuthCode = [401,403]
     if (successCode.includes(code)) {
       return res.data
     } else {

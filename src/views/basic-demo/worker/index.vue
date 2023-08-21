@@ -2,7 +2,7 @@
   <div>
     <div>the recommend using way of worker</div>
     <div>计算结果：{{ showPageRef }}</div>
-    <el-icon class="is-loading" v-if="!showPageRef">
+    <el-icon v-if="!showPageRef" class="is-loading">
       <Loading />
     </el-icon>
   </div>
