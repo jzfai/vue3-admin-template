@@ -2,41 +2,45 @@
   <div id="tags-view-container" class="tags-view-container">
     <div class="tags-view-wrapper">
       <router-link
-        v-for="tag in visitedViews"
-        ref="refTag"
-        :key="tag.path"
-        v-slot="{ navigate }"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
-        custom
+          v-for="tag in visitedViews"
+          ref="refTag"
+          :key="tag.path"
+          v-slot="{ navigate }"
+          :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
+          custom
       >
         <div
-          class="tags-view-item"
-          :class="isActive(tag) ? 'active' : ''"
-          @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-          @contextmenu.prevent="openMenu(tag, $event)"
-          @click="navigate"
+            class="tags-view-item"
+            :class="isActive(tag) ? 'active' : ''"
+            @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
+            @contextmenu.prevent="openMenu(tag, $event)"
+            @click="navigate"
         >
           {{ langTitle(tag.title) }}
           <Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
         </div>
       </router-link>
     </div>
-    <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)">{{ langTitle('Refresh') }}</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">{{ langTitle('Close') }}</li>
-      <li @click="closeOthersTags">{{ langTitle('Close Others') }}</li>
-      <li @click="closeAllTags(selectedTag)">{{ langTitle('Close All') }}</li>
-    </ul>
+    <div style="position:relative;top:-6px">
+      <div v-show="visible" class="triangle" :style="{left: left + 'px'}"/>
+      <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
+
+        <li @click="refreshSelectedTag(selectedTag)">{{ langTitle('Refresh') }}</li>
+        <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">{{ langTitle('Close') }}</li>
+        <li @click="closeOthersTags">{{ langTitle('Close Others') }}</li>
+        <li @click="closeAllTags(selectedTag)">{{ langTitle('Close All') }}</li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { getCurrentInstance, nextTick, onMounted, reactive, toRefs, watch } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { resolve } from 'path-browserify'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia/dist/pinia'
-import type { RouterTypes } from '~/basic'
 import { useBasicStore } from '@/store/basic'
 import { useTagsViewStore } from '@/store/tags-view'
 import { langTitle } from '@/hooks/use-common'
@@ -47,27 +51,27 @@ const state = reactive({
   top: 0,
   left: 0,
   selectedTag: {},
-  affixTags: [] as RouterTypes
+  affixTags: []
 })
 
 const { visitedViews } = storeToRefs(useTagsViewStore())
 
 watch(
-  () => route.path,
-  () => {
-    addTags()
-  }
+    () => route.path,
+    () => {
+      addTags()
+    }
 )
 
 watch(
-  () => state.visible,
-  (value) => {
-    if (value) {
-      document.body.addEventListener('click', closeMenu)
-    } else {
-      document.body.removeEventListener('click', closeMenu)
+    () => state.visible,
+    (value) => {
+      if (value) {
+        document.body.addEventListener('click', closeMenu)
+      } else {
+        document.body.removeEventListener('click', closeMenu)
+      }
     }
-  }
 )
 onMounted(() => {
   initTags()
@@ -84,7 +88,7 @@ const isAffix = (tag) => {
 }
 
 const filterAffixTags = (routes, basePath = '/') => {
-  let tags: RouterTypes = []
+  let tags = []
   routes.forEach((route) => {
     if (route.meta && route.meta.affix) {
       const tagPath = resolve(basePath, route.path)
@@ -140,7 +144,7 @@ const openMenu = (tag, e) => {
   } else {
     state.left = left
   }
-  state.top = e.clientY
+  state.top =16
   state.visible = true
   state.selectedTag = tag
 }
@@ -160,7 +164,7 @@ const closeSelectedTag = (view) => {
         basicStore.delCachedView(view.name)
       }
       if (routerLevel === 3) {
-        basicStore.setCacheViewDeep(view.name)
+        basicStore.delCacheViewDeep(view.name)
       }
     }
   })
@@ -215,6 +219,16 @@ const { visible, top, left, selectedTag } = toRefs(state)
 </script>
 
 <style lang="scss" scoped>
+//三角形汽包
+.triangle {
+  position: relative;
+  width: 0;
+  height: 0;
+  left: 10px;
+  border: 8px solid transparent;
+  border-bottom-color: #eee;
+  opacity:0.4;
+}
 .tags-view-container {
   height: var(--tag-view-height);
   width: 100%;
@@ -285,6 +299,8 @@ const { visible, top, left, selectedTag } = toRefs(state)
 </style>
 
 <style lang="scss">
+
+
 //reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
