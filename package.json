@@ -79,7 +79,7 @@
     "unocss": "^0.33.5",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.8",
-    "vite": "^4.0.2",
+    "vite": "^5.0.4",
     "vite-plugin-mkcert": "^1.7.2",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-svg-icons": "^2.0.1",
@@ -116,7 +116,7 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">= 16 <18",
-    "pnpm": ">= 6 <8"
+    "node": ">= 18 <19",
+    "pnpm": ">= 6 <9"
   }
 }
