@@ -3,8 +3,9 @@
 
 A new generation vue3 admin template, It's easy and fast!
 
-suggestion the Node.js >= 16.0.0
+suggestion the Node.js >= v16.20
 
+[Recommended node](https://nodejs.org/download/release/v16.20.2/)
 
 ## Documents
 
@@ -42,7 +43,7 @@ cd vue3-admin-template
 
 # pnpm address https://pnpm.io/zh/motivation
 # install dependency(Recommend use pnpm)
-# you can  use "npm -g i pnpm@7.9.0" to install pnpm 
+# you can  use "npm -g i pnpm" to install pnpm 
 pnpm i
 
 # develop
