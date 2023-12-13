@@ -3,7 +3,7 @@
 
 A new generation vue3 admin template, It's easy and fast!
 
-suggestion the Node.js >= 18.0.0
+suggestion the Node.js >= 16.0.0
 
 
 ## Documents

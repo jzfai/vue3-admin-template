@@ -116,7 +116,7 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">= 18 <19",
+    "node": ">= 16 <19",
     "pnpm": ">= 6 <9"
   }
 }
