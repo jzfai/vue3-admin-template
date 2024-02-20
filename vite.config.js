@@ -1,4 +1,4 @@
-import path from 'path'
+import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -10,16 +10,12 @@ import { presetAttributify, presetIcons, presetUno } from 'unocss'
 import mkcert from 'vite-plugin-mkcert'
 import AutoImport from 'unplugin-auto-import/vite'
 import setting from './src/settings'
+import vitePluginSetupExtend from './src/plugins/vite-plugin-setup-extend'
 const prodMock = setting.openProdMock
-// import { visualizer } from 'rollup-plugin-visualizer'
-const pathSrc = path.resolve(__dirname, 'src')
-
-//插件测试
-import vitePluginSetupExtend from './src/plugins/vite-plugin-setup-extend/index'
-
+const pathSrc = resolve(__dirname, 'src')
+// @ts-ignore
 export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '') //获取环境变量
-
+  //const env = loadEnv(mode, process.cwd(), '') //获取环境变量
   return {
     base: setting.viteBasePath,
     define: {
@@ -30,18 +26,10 @@ export default defineConfig(({ command, mode }) => {
     clearScreen: false, //设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     server: {
       hmr: { overlay: false }, //设置 server.hmr.overlay 为 false 可以禁用开发服务器错误的屏蔽。方便错误查看
-      port: 5003, // 类型： number 指定服务器端口;
+      port: 5002, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       host: true,
-      https: false,
-      //https://cn.vitejs.dev/config/server-options.html#server-proxy
-      proxy: {
-        [env.VITE_PROXY_BASE_URL]: {
-          target: env.VITE_PROXY_URL,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_PROXY_BASE_URL}`), '')
-        }
-      }
+      https: false
     },
     preview: {
       port: 5006,
@@ -52,7 +40,21 @@ export default defineConfig(({ command, mode }) => {
       vue(),
       vueJsx(),
       UnoCSS({
-        presets: [presetUno(), presetAttributify(), presetIcons()]
+        presets: [presetUno(), presetAttributify(), presetIcons()],
+        rules: [
+          // 在这个可以增加预设规则, 也可以使用正则表达式
+          [
+            'p-c',
+            {
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: `translate(-50%, -50%)`
+            }
+          ],
+          [/^wi-(\d+)px$/, ([, d]) => ({ width: `${d}px!important` })],
+          [/^hi-(\d+)px$/, ([, d]) => ({ height: `${d}px!important` })]
+        ]
       }),
       mkcert(),
       //compatible with old browsers
@@ -61,19 +63,17 @@ export default defineConfig(({ command, mode }) => {
       //   additionalLegacyPolyfills: ['regenerator-runtime/runtime']
       // }),
       createSvgIconsPlugin({
-        iconDirs: [path.resolve(process.cwd(), 'src/icons/common'), path.resolve(process.cwd(), 'src/icons/nav-bar')],
+        iconDirs: [resolve(process.cwd(), 'src/icons/common'), resolve(process.cwd(), 'src/icons/nav-bar')],
         symbolId: 'icon-[dir]-[name]'
       }),
       //https://github.com/anncwb/vite-plugin-mock/blob/HEAD/README.zh_CN.md
       viteMockServe({
-        supportTs: true,
         mockPath: 'mock',
-        localEnabled: command === 'serve',
-        prodEnabled: prodMock,
-        injectCode: `
-          import { setupProdMockServer } from './mock-prod-server';
-          setupProdMockServer();
-        `,
+        enable: true,
+        // injectCode: `
+        //   import { setupProdMockServer } from './mock-prod-server';
+        //   setupProdMockServer();
+        // `,
         logger: true
       }),
       // VueSetupExtend(),using  DefineOptions instant of it
@@ -93,7 +93,7 @@ export default defineConfig(({ command, mode }) => {
           }
         ],
         //配置后会自动扫描目录下的文件
-        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**',],
+        dirs: ['src/utils/**','src/hooks/**','src/store/**', 'src/directives/**'],
         eslintrc: {
           enabled: true, // Default `false`
           filepath: './eslintrc/.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
@@ -102,16 +102,13 @@ export default defineConfig(({ command, mode }) => {
         dts: './typings/auto-imports.d.ts'
       }),
       // auto config of index.html title
-      // createHtmlPlugin({
-      //   inject: { data: { title: setting.title } }
-      // }),
-      vitePluginSetupExtend({ inject: { title: setting.title } })
       //依赖分析插件
       // visualizer({
       //   open: true,
       //   gzipSize: true,
       //   brotliSize: true
       // })
+      vitePluginSetupExtend({ inject: { title: setting.title } })
     ],
     build: {
       chunkSizeWarningLimit: 10000, //消除触发警告的 chunk, 默认500k
@@ -132,7 +129,7 @@ export default defineConfig(({ command, mode }) => {
     },
     optimizeDeps: {
       //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
-      include: ['moment-mini']
+      include: ['moment-mini', 'sortablejs']
     }
   }
 })

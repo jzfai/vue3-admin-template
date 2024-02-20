@@ -4,11 +4,11 @@
   </el-config-provider>
 </template>
 
-<script setup lang="ts" name="App">
+<script setup  name="App">
 import { onBeforeMount, onMounted } from 'vue'
 //element-plus lang
-import zh from 'element-plus/lib/locale/lang/zh-cn'
-import en from 'element-plus/es/locale/lang/en'
+import zh from 'element-plus/dist/locale/zh-cn.mjs'
+import en from 'element-plus/dist/locale/en.mjs'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
 import { useBasicStore } from '@/store/basic'

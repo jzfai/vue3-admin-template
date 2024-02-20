@@ -6,9 +6,6 @@ module.exports = defineConfig({
     browser: true,
     node: true
   },
-  globals: {
-    defineOptions: true
-  },
   plugins: ['@typescript-eslint', 'prettier', 'unicorn'],
   extends: [
     'eslint:recommended',
@@ -73,7 +70,6 @@ module.exports = defineConfig({
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'prefer-template': 'error',
-
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': 'error',
     // best-practice
@@ -84,7 +80,6 @@ module.exports = defineConfig({
     'no-multi-str': 'error',
     'no-with': 'error',
     'no-void': 'error',
-
     'sort-imports': [
       'warn',
       {
@@ -130,23 +125,23 @@ module.exports = defineConfig({
     //fix lf error
     'prettier/prettier': 'off',
     // import
-    // 'import/first': 'error',
-    // 'import/no-duplicates': 'error',
-    // 'import/order': [
-    //   'error',
-    //   {
-    //     groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
-    //
-    //     pathGroups: [
-    //       {
-    //         pattern: 'vue',
-    //         group: 'external',
-    //         position: 'before'
-    //       }
-    //     ],
-    //     pathGroupsExcludedImportTypes: ['type']
-    //   }
-    // ],
+    'import/first': 'warn',
+    'import/no-duplicates': 'error',
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+
+        pathGroups: [
+          {
+            pattern: 'vue',
+            group: 'external',
+            position: 'before'
+          }
+        ],
+        pathGroupsExcludedImportTypes: ['type']
+      }
+    ],
     'import/no-unresolved': 'off',
     'import/namespace': 'off',
     'import/default': 'off',
