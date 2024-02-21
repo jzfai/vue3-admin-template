@@ -21,13 +21,13 @@
             <svg-icon icon-class="password" />
           </span>
           <el-input
-              :key="passwordType"
-              ref="refPassword"
-              v-model="subForm.password"
-              :type="passwordType"
-              name="password"
-              placeholder="password(123456)"
-              @keyup.enter="handleLogin"
+            :key="passwordType"
+            ref="refPassword"
+            v-model="subForm.password"
+            :type="passwordType"
+            name="password"
+            placeholder="password(123456)"
+            @keyup.enter="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -42,8 +42,8 @@
   </div>
 </template>
 
-<script setup>
-import { reactive, ref, watch } from 'vue'
+<script setup lang="ts">
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
@@ -58,9 +58,9 @@ const subForm = reactive({
   keyword: 'panda',
   password: '123456'
 })
-const state = reactive({
+const state:any = reactive({
   otherQuery: {},
-  redirect: undefined
+  redirect: ""
 })
 const route = useRoute()
 const getOtherQuery = (query) => {
@@ -72,14 +72,14 @@ const getOtherQuery = (query) => {
   }, {})
 }
 watch(
-    () => route.query,
-    (query) => {
-      if (query) {
-        state.redirect = query.redirect
-        state.otherQuery = getOtherQuery(query)
-      }
-    },
-    { immediate: true }
+  () => route.query,
+  (query) => {
+    if (query) {
+      state.redirect = query.redirect
+      state.otherQuery = getOtherQuery(query)
+    }
+  },
+  { immediate: true }
 )
 
 /*
@@ -87,9 +87,9 @@ watch(
  * */
 const subLoading = ref(false)
 //tip message
-const tipMessage = ref('')
+const tipMessage = ref()
 //sub form
-const refLoginForm = ref(null)
+const refLoginForm = ref()
 const handleLogin = () => {
   refLoginForm.value.validate((valid) => {
     subLoading.value = true
@@ -101,23 +101,23 @@ const basicStore = useBasicStore()
 
 const loginFunc = () => {
   loginReq(subForm)
-      .then(({ data }) => {
-        elMessage('登录成功')
-        basicStore.setToken(data?.jwtToken)
-        router.push('/')
-      })
-      .catch((err) => {
-        tipMessage.value = err?.msg
-      })
-      .finally(() => {
-        subLoading.value = false
-      })
+    .then(({ data }) => {
+      elMessage('登录成功')
+      basicStore.setToken(data?.jwtToken)
+      router.push('/')
+    })
+    .catch((err) => {
+      tipMessage.value = err?.msg
+    })
+    .finally(() => {
+      subLoading.value = false
+    })
 }
 /*
  *  password show or hidden
  * */
 const passwordType = ref('password')
-const refPassword = ref(null)
+const refPassword:any = ref(null)
 const showPwd = () => {
   if (passwordType.value === 'password') {
     passwordType.value = ''
@@ -146,7 +146,7 @@ $light_gray: #eee;
     .title {
       font-size: 22px;
       color: #eee;
-      margin: 0px auto 25px auto;
+      margin: 0 auto 25px auto;
       text-align: center;
       font-weight: bold;
     }
@@ -167,7 +167,6 @@ $light_gray: #eee;
   margin-top: -12px;
   font-size: 12px;
 }
-
 //登录按钮
 .login-btn {
   width: 100%;

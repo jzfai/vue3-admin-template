@@ -64,13 +64,13 @@ export const useTable = (searchForm, selectPageReq) => {
   }
 
   /*多选*/
-  const multipleSelection = ref([])
+  const multipleSelection = ref<Array<ObjKeys>>([])
   const handleSelectionChange = (val) => {
     multipleSelection.value = val
   }
   /*批量删除*/
   const multiDelBtnDill = (reqConfig) => {
-    let rowDeleteIdArr = []
+    let rowDeleteIdArr: Array<string> = []
     let deleteNameTitle = ''
     rowDeleteIdArr = multipleSelection.value.map((mItem) => {
       deleteNameTitle = `${deleteNameTitle + mItem.id},`

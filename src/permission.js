@@ -2,7 +2,7 @@ import router from '@/router'
 import {progressClose, progressStart } from '@/hooks/use-permission'
 import { useBasicStore } from '@/store/basic'
 import { langTitle } from '@/hooks/use-common'
-import settings from "@/settings";
+import settings from "@/settings.js";
 
 //路由进入前拦截
 //to:将要进入的页面 vue-router4.0 不推荐使用next()

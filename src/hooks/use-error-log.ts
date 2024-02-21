@@ -1,15 +1,15 @@
 /*js 错误日志收集*/
 import { jsErrorCollection } from 'js-error-collection'
-import pack from '../../package.json'
-import settings from '@/settings'
-import bus from '@/utils/bus'
 import axiosReq from 'axios'
+import pack from '../../package.json'
+import settings from '@/settings.js'
+import bus from '@/utils/bus'
+//此处不要使用utils下的axios
 const reqUrl = '/integration-front/errorCollection/insert'
 let repeatErrorLogJudge = ''
-
-const errorLogReq = (errLog) => {
+const errorLogReq = (errLog: string) => {
   axiosReq({
-    url: import.meta.env.VITE_APP_BASE_URL + reqUrl,
+    url: import.meta.env.VITE_APP_BASE_URL+reqUrl,
     data: {
       pageUrl: window.location.href,
       errorLog: errLog,

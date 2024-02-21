@@ -12,6 +12,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import setting from './src/settings'
 import vitePluginSetupExtend from './src/plugins/vite-plugin-setup-extend'
 const prodMock = setting.openProdMock
+// import { visualizer } from 'rollup-plugin-visualizer'
 const pathSrc = resolve(__dirname, 'src')
 // @ts-ignore
 export default defineConfig(({ command, mode }) => {
@@ -26,7 +27,7 @@ export default defineConfig(({ command, mode }) => {
     clearScreen: false, //设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     server: {
       hmr: { overlay: false }, //设置 server.hmr.overlay 为 false 可以禁用开发服务器错误的屏蔽。方便错误查看
-      port: 5002, // 类型： number 指定服务器端口;
+      port: 5003, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       host: true,
       https: false
@@ -40,21 +41,7 @@ export default defineConfig(({ command, mode }) => {
       vue(),
       vueJsx(),
       UnoCSS({
-        presets: [presetUno(), presetAttributify(), presetIcons()],
-        rules: [
-          // 在这个可以增加预设规则, 也可以使用正则表达式
-          [
-            'p-c',
-            {
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: `translate(-50%, -50%)`
-            }
-          ],
-          [/^wi-(\d+)px$/, ([, d]) => ({ width: `${d}px!important` })],
-          [/^hi-(\d+)px$/, ([, d]) => ({ height: `${d}px!important` })]
-        ]
+        presets: [presetUno(), presetAttributify(), presetIcons()]
       }),
       mkcert(),
       //compatible with old browsers
@@ -68,8 +55,9 @@ export default defineConfig(({ command, mode }) => {
       }),
       //https://github.com/anncwb/vite-plugin-mock/blob/HEAD/README.zh_CN.md
       viteMockServe({
+        enable:true,
         mockPath: 'mock',
-        enable: true,
+        // prodEnabled: prodMock,
         // injectCode: `
         //   import { setupProdMockServer } from './mock-prod-server';
         //   setupProdMockServer();
@@ -93,7 +81,7 @@ export default defineConfig(({ command, mode }) => {
           }
         ],
         //配置后会自动扫描目录下的文件
-        dirs: ['src/utils/**','src/hooks/**','src/store/**', 'src/directives/**'],
+        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/directives/**'],
         eslintrc: {
           enabled: true, // Default `false`
           filepath: './eslintrc/.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
@@ -105,6 +93,7 @@ export default defineConfig(({ command, mode }) => {
       //依赖分析插件
       // visualizer({
       //   open: true,
+
       //   gzipSize: true,
       //   brotliSize: true
       // })
@@ -129,7 +118,7 @@ export default defineConfig(({ command, mode }) => {
     },
     optimizeDeps: {
       //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
-      include: ['moment-mini', 'sortablejs']
+      include: ['moment-mini']
     }
   }
 })

@@ -3,8 +3,7 @@
     <router-view />
   </el-config-provider>
 </template>
-
-<script setup  name="App">
+<script setup lang="ts">
 import { onBeforeMount, onMounted } from 'vue'
 //element-plus lang
 import zh from 'element-plus/dist/locale/zh-cn.mjs'

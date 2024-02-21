@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import setting from '@/settings'
+import setting from '@/settings.js'
 export const useTagsViewStore = defineStore('tagsView', {
   state: () => {
     return {
@@ -8,7 +8,7 @@ export const useTagsViewStore = defineStore('tagsView', {
   },
   actions: {
     addVisitedView(view) {
-      this.$patch((state) => {
+      this.$patch((state: any) => {
         //判断添加的标签存在直接返回
         if (state.visitedViews.some((v) => v.path === view.path)) return
         //添加的数量如果大于 setting.tagsViewNum,则替换最后一个元素，否则在visitedViews数组后插入一个元素
@@ -30,7 +30,7 @@ export const useTagsViewStore = defineStore('tagsView', {
     },
     delVisitedView(view) {
       return new Promise((resolve) => {
-        this.$patch((state) => {
+        this.$patch((state: any) => {
           //匹配view.path元素将其删除
           for (const [i, v] of state.visitedViews.entries()) {
             if (v.path === view.path) {
@@ -45,7 +45,7 @@ export const useTagsViewStore = defineStore('tagsView', {
     delOthersVisitedViews(view) {
       return new Promise((resolve) => {
         this.$patch((state) => {
-          state.visitedViews = state.visitedViews.filter((v) => {
+          state.visitedViews = state.visitedViews.filter((v: ObjKeys) => {
             return v.meta.affix || v.path === view.path
           })
           resolve([...state.visitedViews])
@@ -56,7 +56,7 @@ export const useTagsViewStore = defineStore('tagsView', {
       return new Promise((resolve) => {
         this.$patch((state) => {
           // keep affix tags
-          state.visitedViews = state.visitedViews.filter((tag) => tag.meta?.affix)
+          state.visitedViews = state.visitedViews.filter((tag: ObjKeys) => tag.meta?.affix)
           resolve([...state.visitedViews])
         })
       })

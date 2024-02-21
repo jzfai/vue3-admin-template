@@ -6,9 +6,9 @@ import { ElMessage } from 'element-plus'
 import { i18n } from '@/lang'
 // the keys using  zh file
 import langEn from '@/lang/zh'
-import settings from '@/settings'
+import settings from '@/settings.js'
 
-export const sleepTimeout = (time) => {
+export const sleepTimeout = (time: number) => {
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
       clearTimeout(timer)
@@ -24,7 +24,7 @@ export function cloneDeep(value) {
 
 //copyValueToClipboard
 const { toClipboard } = useClipboard()
-export const copyValueToClipboard = (value) => {
+export const copyValueToClipboard = (value: any) => {
   toClipboard(JSON.stringify(value))
   ElMessage.success('复制成功')
 }
@@ -38,11 +38,10 @@ export const langTitle = (title) => {
       return t(`${key}.${title}`)
     }
   }
-
   return title
 }
 
 //get i18n instance
 export const getLangInstance = () => {
-  return i18n.global
+  return i18n.global as ObjKeys
 }

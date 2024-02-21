@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
@@ -40,7 +40,7 @@ const activeMenu = computed(() => {
 .el-menu-vertical {
   width: var(--side-bar-width);
 }
-.reset-menu-style {
+.reset-menu-style{
   border-right: 1px solid var(--side-bar-border-right-color);
 }
 </style>

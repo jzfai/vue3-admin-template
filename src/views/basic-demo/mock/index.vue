@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import axios from 'axios'
 const listReq = () => {
-  axios.get('/getMapInfo').then(({ data }) => {
+  axios.post('/mock/login').then(({ data }) => {
     elMessage(data)
   })
 }

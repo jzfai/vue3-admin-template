@@ -3,7 +3,7 @@
   <el-icon v-if="meta?.elSvgIcon" >
     <component :is="meta.elSvgIcon" />
   </el-icon>
-  <div v-else-if="meta?.icon"  class="menu-svg-class"><svg-icon :icon-class="meta?.icon"/></div>
+  <div v-else-if="meta?.icon"  class="menu-svg-class"><svg-icon :icon-class="meta?.icon"   /></div>
 </template>
 
 <script setup lang="ts">

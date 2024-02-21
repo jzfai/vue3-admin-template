@@ -1,3 +1,4 @@
+//获取用户信息
 import axiosReq from 'axios'
 // export const userInfoReq = (): Promise<any> => {
 //   return new Promise((resolve) => {

@@ -22,16 +22,17 @@ import svgIcon from '@/icons/SvgIcon.vue'
 import directive from '@/directives'
 
 //import router intercept
-import './permission'
+import './permission.js'
 
 //import element-plus
 import 'element-plus/dist/index.css'
-const app = createApp(App)
-
 
 //import element-plus svg icon
 import ElSvgIcon from "@/lib/el-svg-icon"
+const app = createApp(App)
 app.use(ElSvgIcon)
+
+
 //router
 app.use(router)
 

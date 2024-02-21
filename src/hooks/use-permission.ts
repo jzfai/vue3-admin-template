@@ -1,4 +1,6 @@
 import NProgress from 'nprogress'
+import type { RouteRawConfig, RouterTypes, rawConfig } from '~/basic'
+import type { RouteRecordName } from 'vue-router'
 /**
  * 根据请求，过滤异步路由
  * @param:menuList 异步路由数组
@@ -14,10 +16,15 @@ import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
 import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
 
-const buttonCodes = [] //按钮权限
+const buttonCodes: Array<Number> = [] //按钮权限
+interface menuRow {
+  category: number
+  code: number
+  children: RouterTypes
+}
 export const filterAsyncRoutesByMenuList = (menuList) => {
-  const filterRouter = []
-  menuList.forEach((route) => {
+  const filterRouter: RouterTypes = []
+  menuList.forEach((route: menuRow) => {
     //button permission
     if (route.category === 3) {
       buttonCodes.push(route.code)
@@ -33,8 +40,8 @@ export const filterAsyncRoutesByMenuList = (menuList) => {
   })
   return filterRouter
 }
-const getRouteItemFromReqRouter = (route) => {
-  const tmp = { meta: { title: '' } }
+const getRouteItemFromReqRouter = (route): RouteRawConfig => {
+  const tmp: rawConfig = { meta: { title: '' } }
   const routeKeyArr = ['path', 'component', 'redirect', 'alwaysShow', 'name', 'hidden']
   const metaKeyArr = ['title', 'activeMenu', 'elSvgIcon', 'icon']
   // @ts-ignore
@@ -73,7 +80,7 @@ const getRouteItemFromReqRouter = (route) => {
       }
     })
   }
-  return tmp
+  return tmp as RouteRawConfig
 }
 
 /**
@@ -83,9 +90,9 @@ const getRouteItemFromReqRouter = (route) => {
  * return 过滤后的异步路由
  */
 export function filterAsyncRoutesByRoles(routes, roles) {
-  const res = []
+  const res: RouterTypes = []
   routes.forEach((route) => {
-    const tmp = { ...route }
+    const tmp: RouteRawConfig = { ...route }
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutesByRoles(tmp.children, roles)
@@ -110,8 +117,8 @@ function hasPermission(roles, route) {
  * return 过滤后的异步路由
  */
 export function filterAsyncRouterByCodes(codesRoutes, codes) {
-  const filterRouter = []
-  codesRoutes.forEach((routeItem) => {
+  const filterRouter: RouterTypes = []
+  codesRoutes.forEach((routeItem: RouteRawConfig) => {
     if (hasCodePermission(codes, routeItem)) {
       if (routeItem.children) routeItem.children = filterAsyncRouterByCodes(routeItem.children, codes)
       filterRouter.push(routeItem)
@@ -129,7 +136,7 @@ function hasCodePermission(codes, routeItem) {
 //过滤异步路由
 export function filterAsyncRouter({ menuList, roles, codes }) {
   const basicStore = useBasicStore()
-  let accessRoutes = []
+  let accessRoutes: RouterTypes = []
   const permissionMode = basicStore.settings?.permissionMode
   if (permissionMode === 'rbac') {
     accessRoutes = filterAsyncRoutesByMenuList(menuList) //by menuList
@@ -145,7 +152,7 @@ export function filterAsyncRouter({ menuList, roles, codes }) {
 //重置路由
 export function resetRouter() {
   //移除之前存在的路由
-  const routeNameSet = new Set()
+  const routeNameSet: Set<RouteRecordName> = new Set()
   router.getRoutes().forEach((fItem) => {
     if (fItem.name) routeNameSet.add(fItem.name)
   })

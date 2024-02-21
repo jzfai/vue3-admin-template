@@ -45,7 +45,7 @@ export const settings = {
    * @type {boolean} true | false
    * @description Whether need animation of main area
    */
-  mainNeedAnimation: true,
+  mainNeedAnimation: false,
   /**
    * @type {boolean} true | false
    * @description Whether need nprogress
@@ -92,7 +92,7 @@ export const settings = {
    * i18n setting default language
    * en/zh
    * */
-  defaultLanguage: 'zh',
+  defaultLanguage: 'en',
   /*
    *  default theme
    * base-theme/lighting-theme/dark-theme

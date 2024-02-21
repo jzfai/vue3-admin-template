@@ -1,17 +1,18 @@
-
 # vue3-admin-template
 
-A new generation vue3 admin template, It's easy and fast!
-
+the typescript version of  vue3 admin template 
+ 
 suggestion the Node.js >= v16.20
 
 [Recommended node](https://nodejs.org/download/release/v16.20.2/)
+
 
 ## Documents
 
 - [Official Documentation](https://github.jzfai.top/vue3-admin-doc/)
 
 - [中文官网](https://github.jzfai.top/vue3-admin-cn-doc/)
+
 
 
 ## Online experience
@@ -29,7 +30,7 @@ The framework is available in js,ts, plus and electron versions
 - ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - ts version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
 - ts version for electron：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
-- java Micro-service background data：[micro-service-single](https://github.com/jzfai/micro-service-single)
+- java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 
 
 ## Build Setup
@@ -43,12 +44,13 @@ cd vue3-admin-template
 
 # pnpm address https://pnpm.io/zh/motivation
 # install dependency(Recommend use pnpm)
-# you can  use "npm -g i pnpm" to install pnpm 
+# you can  use "npm -g i pnpm@7.9.0" to install pnpm 
 pnpm i
 
 # develop
 pnpm run dev
 ```
+
 
 ## Build
 

@@ -1,6 +1,6 @@
 import router from '@/router'
 export const getQueryParam = () => {
-  const route = router.currentRoute
+  const route: any = router.currentRoute
   if (route.value?.query.params) {
     return JSON.parse(route.value.query.params)
   }

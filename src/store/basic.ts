@@ -1,27 +1,27 @@
 import { nextTick } from 'vue'
 import { defineStore } from 'pinia'
-import defaultSettings from '@/settings'
+import type { RouterTypes } from '~/basic'
+import defaultSettings from '@/settings.js'
 import router, { constantRoutes } from '@/router'
 export const useBasicStore = defineStore('basic', {
   state: () => {
     return {
-      //user info
       token: '',
       getUserInfo: false,
-      userInfo: { username: '', avatar: '' },
+      userInfo: { username: '', avatar: '' }, //user info
       //router
-      allRoutes: [],
+      allRoutes: [] as RouterTypes,
       buttonCodes: [],
       filterAsyncRoutes: [],
-      roles: [],
-      codes: [],
+      roles: [] as Array<string>,
+      codes: [] as Array<number>,
       //keep-alive
-      cachedViews: [],
-      cachedViewsDeep: [],
+      cachedViews: [] as Array<string>,
+      cachedViewsDeep: [] as Array<string>,
       //other
       sidebar: { opened: true },
       //axios req collection
-      axiosPromiseArr: [],
+      axiosPromiseArr: [] as Array<ObjKeys>,
       settings: defaultSettings
     }
   },
@@ -63,6 +63,7 @@ export const useBasicStore = defineStore('basic', {
         state.userInfo.avatar = avatar
       })
     },
+
     resetState() {
       this.$patch((state) => {
         state.token = '' //reset token

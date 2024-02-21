@@ -26,10 +26,9 @@ export default {
     'KeepAlive Group': '',
     'Tab KeepAlive': '',
     'Third KeepAlive': '',
-    SecondChild: '',
-    ThirdChild: '',
     SecondChildren: '',
     ThirdChildren: '',
+
     Worker: '',
 
     Permission: '',

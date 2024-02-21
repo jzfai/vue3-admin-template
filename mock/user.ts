@@ -1,4 +1,4 @@
-const system = {
+const user = {
   url: '/mock/login',
   method: 'post',
   response: () => {
@@ -21,5 +21,5 @@ const loginOut = {
 }
 
 export default [
-  system,loginOut
+  user,loginOut
 ]

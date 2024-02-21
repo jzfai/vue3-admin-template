@@ -35,12 +35,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { getCurrentInstance, nextTick, onMounted, reactive, toRefs, watch } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { resolve } from 'path-browserify'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia/dist/pinia'
+import type { RouterTypes } from '~/basic'
 import { useBasicStore } from '@/store/basic'
 import { useTagsViewStore } from '@/store/tags-view'
 import { langTitle } from '@/hooks/use-common'
@@ -51,7 +52,7 @@ const state = reactive({
   top: 0,
   left: 0,
   selectedTag: {},
-  affixTags: []
+  affixTags: [] as RouterTypes
 })
 
 const { visitedViews } = storeToRefs(useTagsViewStore())
@@ -88,7 +89,7 @@ const isAffix = (tag) => {
 }
 
 const filterAffixTags = (routes, basePath = '/') => {
-  let tags = []
+  let tags: RouterTypes = []
   routes.forEach((route) => {
     if (route.meta && route.meta.affix) {
       const tagPath = resolve(basePath, route.path)
@@ -225,6 +226,7 @@ const { visible, top, left, selectedTag } = toRefs(state)
   width: 0;
   height: 0;
   left: 10px;
+  z-index: 100;
   border: 8px solid transparent;
   border-bottom-color: #eee;
   opacity:0.4;
@@ -233,7 +235,6 @@ const { visible, top, left, selectedTag } = toRefs(state)
   height: var(--tag-view-height);
   width: 100%;
   position: relative;
-  z-index: 10;
   background: var(--tags-view-background);
   border-bottom: 1px solid var(--tags-view-border-bottom);
   box-shadow: var(--tags-view-box-shadow);
@@ -275,9 +276,9 @@ const { visible, top, left, selectedTag } = toRefs(state)
     }
   }
   .contextmenu {
+    z-index: 100;
     margin: 0;
     background: var(--tags-view-contextmenu-background);
-    z-index: 3000;
     position: absolute;
     list-style-type: none;
     padding: 5px 0;

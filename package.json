@@ -1,11 +1,14 @@
 {
-    "name": "vue3-admin-template",
+    "name": "vue3-admin-ts",
     "version": "2.2.0",
     "license": "MIT",
-    "author": "kuanghua",
-    "packageManager": "pnpm@8.12.0",
+    "author": "kuanghua(869653722@qq.com)",
+    "packageManager": "pnpm@7.9.0",
+    "type": "module",
     "scripts": {
         "dev": "vite --mode serve-dev",
+        "local": "vite --mode serve-local",
+        "debug": "vite --mode serve-dev --debug",
         "test": "vite --mode serve-test",
         "build:test": "vite build --mode  build-test",
         "build": "vite build --mode build",
@@ -13,13 +16,12 @@
         "preview": "vite preview ",
         "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
         "prepare": "husky install",
-        "test:unit": "vue-cli-service test:unit",
-        "test:watchAll": "vue-cli-service test:unit --watchAll",
-        "test:cov": "vue-cli-service test:unit --coverage",
-        "test:majestic": "majestic",
-        "vitest": "vitest --ui",
         "tsc-check": "tsc",
+        "vitest": "vitest --ui",
         "coverage": "vitest run --coverage"
+    },
+    "peerDependencies": {
+        "vue": "^3.4.14"
     },
     "dependencies": {
         "@element-plus/icons-vue": "^2.0.4",
@@ -130,7 +132,7 @@
         "not op_mini all"
     ],
     "engines": {
-        "node": ">= v16.20 <19",
-        "pnpm": ">= 7 <10"
+        "node": ">= 16 <20",
+        "pnpm": ">= 6 <9"
     }
 }

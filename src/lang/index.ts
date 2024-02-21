@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import en from './en'
 import zh from './zh'
-import settings from '@/settings'
+import settings from '@/settings.js'
 const messages = { en, zh }
 
 const localeData = {

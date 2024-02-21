@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import basicDemo from './modules/basic-demo'
+import type { RouterTypes } from '~/basic'
 import Layout from '@/layout/index.vue'
 
-export const constantRoutes = [
+export const constantRoutes: RouterTypes = [
   {
     path: '/redirect',
     component: Layout,
@@ -46,7 +47,7 @@ export const constantRoutes = [
   {
     path: '/setting-switch',
     component: Layout,
-    alwaysShow:false,
+    alwaysShow:true,
     meta: { title: 'Setting Switch', elSvgIcon: 'Setting' },
     children: [
       {
@@ -120,18 +121,16 @@ export const constantRoutes = [
 ]
 
 //角色和code数组动态路由
-export const roleCodeRoutes = [
+export const roleCodeRoutes: RouterTypes = [
 
 ]
 /**
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
-export const asyncRoutes = [
+export const asyncRoutes: RouterTypes = [
   // 404 page must be placed at the end !!!
-  { path: "/:pathMatch(.*)", redirect: "/404", hidden: true },
 ]
-
 
 const router = createRouter({
   history: createWebHashHistory(),

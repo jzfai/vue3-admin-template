@@ -1,7 +1,7 @@
 import router from '@/router';
 import { filterAsyncRouter, progressClose, progressStart } from '@/hooks/use-permission';
 import { useBasicStore } from '@/store/basic';
-import { userInfoReq } from '@/api/user';
+import { userInfoReq } from '@/api/system.ts';
 const whiteList = ['/login', '/404', '/401'];
 router.beforeEach(async (to) => {
     progressStart();
