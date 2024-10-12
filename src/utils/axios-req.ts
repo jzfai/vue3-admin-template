@@ -17,6 +17,7 @@ const noAuthDill = () => {
     showClose: false,
     type: 'warning'
   }).then(() => {
+    // @ts-ignore
     useBasicStore().resetStateAndToLogin()
     authorTipDoor = true
   })
@@ -62,6 +63,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (res: any) => {
     //取消请求
+    // @ts-ignore
     useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
@@ -70,34 +72,15 @@ service.interceptors.response.use(
     if (res.data?.type?.includes("sheet")) {
       return res
     }
-    const { code, msg } = res.data
-    const successCode = [0,200,20000]
-    const noAuthCode = [401,403]
-    if (successCode.includes(code)) {
-      return res.data
-    } else {
-      //authorTipDoor 防止多个请求 多次alter
-      if (authorTipDoor) {
-        if (noAuthCode.includes(code)) {
-          noAuthDill()
-        } else {
-          // @ts-ignore
-          if (!res.config?.isNotTipErrorMsg) {
-            ElMessage.error({
-              message: msg,
-              duration: 2 * 1000
-            })
-          } else {
-            return res
-          }
-          return Promise.reject(msg)
-        }
-      }
-    }
+    // const { code, msg } = res.data
+    // const successCode = [0,200,20000]
+    // const noAuthCode = [401,403]
+    return res.data
   },
   //响应报错
   (err) => {
     //取消请求
+    // @ts-ignore
     useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
