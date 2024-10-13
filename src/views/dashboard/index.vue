@@ -1,7 +1,8 @@
 <template>
-  <div class="scroll-y">
+  <div class="index-container">
     <el-date-picker
       v-model="chooseData"
+      size="small"
       format="YYYY-MM-DD"
       value-format="YYYY-MM-DD"
       type="date"
@@ -11,66 +12,74 @@
     <!--    <el-input v-model="beforeData" class="wi-100" />-->
 
     <!--    <div>集合竞价</div>-->
-    <div class="rowSS mt-5 mb-2">
-      <div>定时时长：</div>
-      <el-input style="width: 100px" v-model="firstOpenTime"></el-input>
-    </div>
-    <div class="mb-1 rowSS">
-      <el-button @click="jhjjAnalaysFisrst">jhjjAnalaysFisrst</el-button>
-
-      <el-button type="success" @click="jhjjAnalaysFisrstOpen" :disabled="firstOpenId !== null">开启定时</el-button>
-      <el-button type="success" @click="jhjjAnalaysFisrstStop">停止定时</el-button>
-    </div>
-
-    <div class="mb-3">首版一字(机会)</div>
-    <div>
-      <div class="mb-1" v-for="(item, index) in gpArrFirst" :key="index">
-        {{ `${item[0]}(${item[1]})-未匹配值：${item[8]}(${item[8] < item[7] * 0.8})}-----${item[9]}` }}
+    <div class="mt-5 mb-2">
+      <div class="mb-2">
+        <el-button type="warning" :disabled="firstOpenId !== null" @click="jhjjAnalaysFisrstOpen">开启定时</el-button>
+        <el-button type="warning" @click="jhjjAnalaysFisrstStop">停止定时</el-button>
+      </div>
+      <div>
+        定时时长：
+        <el-input v-model="firstOpenTime" style="width: 50px" />
       </div>
     </div>
-    <div class="mt-10">二版一字(机会)</div>
+    <div class="mb-1 rowSS">
+      <el-button type="success" @click="jhjjAnalaysFisrst">jhjjAnalaysFisrst</el-button>
+    </div>
+
+    <div class="mt-4">首版一字(机会)</div>
     <div>
-      <div class="mb-1" v-for="(item, index) in gpArrSecond" :key="index">
-        {{ `${item[0]}(${item[1]})-未匹配值：${item[8]}(${item[8] < item[7] * 0.8})}-----${item[9]}` }}
+      <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
+        {{ `${item[0]}(${item[1]}))：${item[8]}(${item[8] < item[7] * 0.8})--${item[9]}` }}
+      </div>
+    </div>
+    <div class="mt-4">二版一字(机会)</div>
+    <div>
+      <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
+        {{ `${item[0]}(${item[1]})：${item[8]}(${item[8] < item[7] * 0.8})--${item[9]}` }}
       </div>
     </div>
 
-    <div class="rowSS mt-5 mb-2">
-      <div>定时时长：</div>
-      <el-input style="width: 100px" v-model="firstOpenTimeS"></el-input>
+    <div class="mt-5" style="font-weight：bold; font-size: 16px">上车机会</div>
+    <div class="mt-5 mb-2">
+      <div class="mb-2">
+        <el-button type="warning" :disabled="firstOpenIdS !== null" @click="jhjjAnalaysFisrstOpenS">开启定时</el-button>
+        <el-button type="warning" @click="jhjjAnalaysFisrstStopS">停止定时</el-button>
+      </div>
+      <div>
+        定时时长：
+        <el-input v-model="firstOpenTimeS" style="width: 50px" />
+      </div>
     </div>
     <div class="mb-1 rowSS">
-      <el-button @click="jhjjAnalays">jhjjAnalays</el-button>
-
-      <el-button type="success" @click="jhjjAnalaysFisrstOpenS" :disabled="firstOpenIdS !== null">开启定时</el-button>
-      <el-button type="success" @click="jhjjAnalaysFisrstStopS">停止定时</el-button>
+      <el-button type="success" @click="jhjjAnalays">jhjjAnalays</el-button>
     </div>
 
-    <div>首版一字(上车)</div>
+    <div class="mt-4">首版一字(上车)</div>
     <div class="mt-1">
-      <div class="mb-1" v-for="(item, index) in gpArr" :key="index">
+      <div v-for="(item, index) in gpArr" :key="index" class="mb-1">
         {{
-          `${item[0]}(${item[1]})-未匹配值：${item[8]}(${
-            item[8] > 0 && item[8] < item[7] * 0.8 && item[8] > item[7] * 0.2
-          })}-----${item[9]}`
+          `${item[0]}(${item[1]})：${item[8]}(${item[8] > 0 && item[8] < item[7] * 0.8 && item[8] > item[7] * 0.2})--${
+            item[9]
+          }`
         }}
       </div>
     </div>
-    <div>二版一字(上车)</div>
+    <div class="mt-4">二版一字(上车)</div>
     <div class="mt-1">
-      <div class="mb-1" v-for="(item, index) in gpArrS" :key="index">
+      <div v-for="(item, index) in gpArrS" :key="index" class="mb-1">
         {{
-          `${item[0]}(${item[1]})-未匹配值：${item[8]}(${
-            item[8] > 0 && item[8] < item[7] * 0.8 && item[8] > item[7] * 0.2
-          })}-----${item[9]}`
+          `${item[0]}(${item[1]})：${item[8]}(${item[8] > 0 && item[8] < item[7] * 0.8 && item[8] > item[7] * 0.2})--${
+            item[9]
+          }`
         }}
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import axiosReq from '@/utils/axios-req'
 import momentMini from 'moment-mini'
+import axiosReq from '@/utils/axios-req'
+import { ElMessage } from 'element-plus'
 
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 //页面挂载后触发
@@ -78,8 +87,8 @@ onMounted(() => {
   //judgeFisrt()
 })
 //
-let firstOpenTime = ref(10)
-let firstOpenId = ref(null)
+const firstOpenTime = ref(20)
+const firstOpenId = ref(null)
 function jhjjAnalaysFisrstOpen() {
   jhjjAnalaysFisrst()
   firstOpenId.value = setInterval(() => {
@@ -99,7 +108,7 @@ onUnmounted(() => {
   clearInterval(firstOpenIdS.value)
 })
 
-let firstOpenTimeS = ref(10)
+const firstOpenTimeS = ref(20)
 let firstOpenIdS = ref(null)
 function jhjjAnalaysFisrstOpenS() {
   jhjjAnalays()
@@ -262,8 +271,8 @@ function filterVolumn(data) {
 }
 //判断该票是否是首版
 const judgeFisrt = async (f) => {
-  gpArrS.value = []
-  gpArr.value = []
+  // gpArrS.value = []
+  // gpArr.value = []
   const code = f[1]
   const { Result } = await getFsjy(code)
   const resultData = filterVolumn(Result)
@@ -304,7 +313,7 @@ const jhjjAnalaysFisrst = async () => {
   //调用集合竞价接口
   const { data } = await getlimitBoard()
   if (!data) {
-    elMessage('集合数据为空')
+    ElMessage.warning('集合数据为空')
     return
   }
 
@@ -368,7 +377,7 @@ const jhjjAnalays = async () => {
   //调用集合竞价接口
   const { data } = await getlimitBoard()
   if (!data) {
-    elMessage('集合数据为空')
+    ElMessage.warning('集合数据为空')
     return
   }
   console.log('limitBoardData', data.data_list)
@@ -397,3 +406,13 @@ const jhjjAnalays = async () => {
 //分析首版
 const jhjjFirst = () => {}
 </script>
+
+<style lang="scss" scoped>
+//修改进度条样式
+.index-container {
+  font-size: 12px;
+  overflow-y: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+</style>
