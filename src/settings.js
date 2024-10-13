@@ -5,7 +5,7 @@ export const settings = {
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar
    */
-  sidebarLogo: true,
+  sidebarLogo: false,
   /**
    * @type {boolean} true | false
    * @description Whether show the title in Navbar
@@ -15,22 +15,22 @@ export const settings = {
    * @type {boolean} true | false
    * @description Whether show the drop-down
    */
-  ShowDropDown: true,
+  ShowDropDown: false,
   /**
    * @type {boolean} true | false
    * @description Whether show Hamburger
    */
-  showHamburger: true,
+  showHamburger: false,
   /**
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
    */
-  showLeftMenu: true,
+  showLeftMenu: false,
   /**
    * @type {boolean} true | false
    * @description Whether show TagsView
    */
-  showTagsView: true,
+  showTagsView: false,
   /**
    * @description TagsView show number
    */
@@ -39,7 +39,7 @@ export const settings = {
    * @type {boolean} true | false
    * @description Whether show the top Navbar
    */
-  showTopNavbar: true,
+  showTopNavbar: false,
   /* page  animation related*/
   /**
    * @type {boolean} true | false
@@ -50,14 +50,14 @@ export const settings = {
    * @type {boolean} true | false
    * @description Whether need nprogress
    */
-  isNeedNprogress: true,
+  isNeedNprogress: false,
 
   /*page login or other*/
   /**
    * @type {boolean} true | false
    * @description Whether need login
    */
-  isNeedLogin: true,
+  isNeedLogin: false,
   /**
    * @type {string} 'rbac'| 'roles' | 'code'
    */
@@ -66,7 +66,7 @@ export const settings = {
    * @type {boolean} true | false
    * @description Whether  open prod mock
    */
-  openProdMock: true,
+  openProdMock: false,
   /**
    * @type {string | array} 'dev' | ['prod','test','dev'] according to the .env file props of VITE_APP_ENV
    * @description Need show err logs component.
@@ -92,7 +92,7 @@ export const settings = {
    * i18n setting default language
    * en/zh
    * */
-  defaultLanguage: 'en',
+  defaultLanguage: 'zh',
   /*
    *  default theme
    * base-theme/lighting-theme/dark-theme

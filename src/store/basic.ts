@@ -30,7 +30,7 @@ export const useBasicStore = defineStore('basic', {
     paths: ['token']
   },
   actions: {
-    remotePromiseArrByReqUrl(reqUrl) {
+    remotePromiseArrByReqUrl(reqUrl: string) {
       this.$patch((state) => {
         state.axiosPromiseArr.forEach((fItem, index) => {
           if (fItem.url === reqUrl) {
@@ -41,7 +41,7 @@ export const useBasicStore = defineStore('basic', {
     },
     clearPromiseArr() {
       this.$patch((state) => {
-        state.axiosPromiseArr=[]
+        state.axiosPromiseArr = []
       })
     },
     setToken(data) {

@@ -69,13 +69,34 @@ service.interceptors.response.use(
       loadingInstance && loadingInstance.close()
     }
     //download file
-    if (res.data?.type?.includes("sheet")) {
+    if (res.data?.type?.includes('sheet')) {
       return res
     }
-    // const { code, msg } = res.data
-    // const successCode = [0,200,20000]
-    // const noAuthCode = [401,403]
     return res.data
+    // const { code, msg } = res.data
+    // const successCode = '0,200,20000'
+    // const noAuthCode = '401,403'
+    // if (successCode.includes(code)) {
+    //   return res.data
+    // } else {
+    //   //authorTipDoor 防止多个请求 多次alter
+    //   if (authorTipDoor) {
+    //     if (noAuthCode.includes(code)) {
+    //       noAuthDill()
+    //     } else {
+    //       // @ts-ignore
+    //       if (!res.config?.isNotTipErrorMsg) {
+    //         ElMessage.error({
+    //           message: msg,
+    //           duration: 2 * 1000
+    //         })
+    //       } else {
+    //         return res
+    //       }
+    //       return Promise.reject(msg)
+    //     }
+    //   }
+    // }
   },
   //响应报错
   (err) => {
@@ -96,7 +117,7 @@ service.interceptors.response.use(
 export default function axiosReq(config) {
   return service({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
-    timeout: 8000,
+    timeout: 30000,
     ...config
   })
 }
