@@ -6,6 +6,7 @@
       format="YYYY-MM-DD"
       value-format="YYYY-MM-DD"
       type="date"
+      @change="chooseDataPick"
       placeholder="Pick a day"
     />
     <!--    <div class="mb-3">日期:{{ chooseData }}</div>-->
@@ -23,23 +24,35 @@
       </div>
     </div>
     <div class="mb-1 rowSS">
-      <el-button type="success" @click="jhjjAnalaysFisrst">jhjjAnalaysFisrst</el-button>
+      <el-button type="success" @click="jhjjAnalaysFisrst">执行</el-button>
     </div>
 
     <div class="mt-4">首版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        {{ `${item[0]}(${item[1]}))：${item[8]}(${item[8] < item[7] * 0.8})--${item[9]}` }}
+        <div style="color: red; font-weight: bold" v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2">
+          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        </div>
+        <div style="color: #b88230; font-weight: bold" v-else-if="item[8] < item[7] * 0.7">
+          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        </div>
+        <div v-else>{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
     <div class="mt-4">二版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        {{ `${item[0]}(${item[1]})：${item[8]}(${item[8] < item[7] * 0.8})--${item[9]}` }}
+        <div style="color: red; font-weight: bold" v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2">
+          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        </div>
+        <div style="color: #b88230; font-weight: bold" v-else-if="item[8] < item[7] * 0.7">
+          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        </div>
+        <div v-else>{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
 
-    <div class="mt-5" style="font-weight：bold; font-size: 16px">上车机会</div>
+    <div class="mt-8" style="font-weight：bold; font-size: 16px">---可以考虑上车---</div>
     <div class="mt-5 mb-2">
       <div class="mb-2">
         <el-button type="warning" :disabled="firstOpenIdS !== null" @click="jhjjAnalaysFisrstOpenS">开启定时</el-button>
@@ -51,51 +64,58 @@
       </div>
     </div>
     <div class="mb-1 rowSS">
-      <el-button type="success" @click="jhjjAnalays">jhjjAnalays</el-button>
+      <el-button type="success" @click="collectData">执行</el-button>
+      <el-button type="success" @click="resultKeys = []">清空</el-button>
     </div>
 
-    <div class="mt-4">首版一字(上车)</div>
+    <div class="mt-4 mb-2">特别关注(很有机会的票)</div>
     <div class="mt-1">
-      <div v-for="(item, index) in gpArr" :key="index" class="mb-1">
-        {{
-          `${item[0]}(${item[1]})：${item[8]}(${item[8] > 0 && item[8] < item[7] * 0.8 && item[8] > item[7] * 0.2})--${
-            item[9]
-          }`
-        }}
+      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
+        <div class="ml-2" v-if="item.includes('-1')" style="color: red">{{ item }}</div>
+        <div class="ml-2" v-else>{{ item }}</div>
       </div>
     </div>
-    <div class="mt-4">二版一字(上车)</div>
-    <div class="mt-1">
-      <div v-for="(item, index) in gpArrS" :key="index" class="mb-1">
-        {{
-          `${item[0]}(${item[1]})：${item[8]}(${item[8] > 0 && item[8] < item[7] * 0.8 && item[8] > item[7] * 0.2})--${
-            item[9]
-          }`
-        }}
-      </div>
-    </div>
+    <!--    <div class="mt-4">二版一字(上车)</div>-->
+    <!--    <div class="mt-1">-->
+    <!--      <div v-for="(item, index) in gpArrS" :key="index" class="mb-1">-->
+    <!--        &lt;!&ndash;        <div v-if="${item[8] > 0 && item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2}"></div>&ndash;&gt;-->
+    <!--        &lt;!&ndash;        <div v-if="${item[8] > 0 && item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2}"></div>&ndash;&gt;-->
+    <!--        {{ `${item[0]}(${item[1]})：${item[8]}-&#45;&#45;${item[9]}` }}-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
 </template>
 <script setup>
 import momentMini from 'moment-mini'
-import axiosReq from '@/utils/axios-req'
 import { ElMessage } from 'element-plus'
+import axiosReq from '@/utils/axios-req'
 
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 //页面挂载后触发
 onMounted(() => {
   //judgeFisrt()
 })
+function chooseDataPick() {
+  resetData()
+}
+
+function resetData() {
+  // gpArr.value = []
+  // gpArrS.value = []
+  gpArrSecond.value = []
+  gpArrFirst.value = []
+  codeData = {}
+  clearInterval(firstOpenId.value)
+  clearInterval(firstOpenIdS.value)
+}
 //
-const firstOpenTime = ref(20)
+const firstOpenTime = ref(5)
 const firstOpenId = ref(null)
 function jhjjAnalaysFisrstOpen() {
   jhjjAnalaysFisrst()
   firstOpenId.value = setInterval(() => {
     jhjjAnalaysFisrst()
   }, firstOpenTime.value * 1000)
-
-  console.log('firstOpenId', firstOpenId)
 }
 //停止定时
 function jhjjAnalaysFisrstStop() {
@@ -104,25 +124,9 @@ function jhjjAnalaysFisrstStop() {
 }
 
 onUnmounted(() => {
-  clearInterval(firstOpenId.value)
-  clearInterval(firstOpenIdS.value)
+  resetData()
 })
-
-const firstOpenTimeS = ref(20)
-let firstOpenIdS = ref(null)
-function jhjjAnalaysFisrstOpenS() {
-  jhjjAnalays()
-  firstOpenIdS.value = setInterval(() => {
-    jhjjAnalays()
-  }, firstOpenTimeS.value * 1000)
-
-  console.log('firstOpenIdS', firstOpenIdS.value)
-}
-//停止定时
-function jhjjAnalaysFisrstStopS() {
-  clearInterval(firstOpenIdS.value)
-  firstOpenIdS.value = null
-}
+//
 
 function countDateCurrentNum() {
   const today = momentMini().format('YYYY-MM-DD')
@@ -134,7 +138,7 @@ function getlimitBoard() {
     url: 'https://eq.10jqka.com.cn/call_auction_v2/stock_chance/v1/history_list/limit_board',
     baseURL: '',
     method: 'post',
-    bfLoading: true,
+    //reqLoading: false,
     data: { date: chooseData.value, page_num: 1, page_size: 300, sort: 0, sort_field: 'imbalance' }
   }
   return axiosReq(reqConfig)
@@ -146,7 +150,7 @@ function getCallWarn() {
     url: 'https://eq.10jqka.com.cn/call_auction_v2/stock_chance/v1/history_list/call_warn',
     baseURL: '',
     method: 'post',
-    bfLoading: true,
+    reqLoading: false,
     data: {
       date: '2024-10-11',
       page_num: 1,
@@ -269,47 +273,63 @@ function filterVolumn(data) {
   })
   return result
 }
+
+let codeData = {}
+
+// function judgeFisrt(f) {
+//   gpArrS.value = []
+//   gpArr.value = []
+//   sleepTimeout().then(() => {
+//     getUpCart(f)
+//   })
+// }
 //判断该票是否是首版
-const judgeFisrt = async (f) => {
-  // gpArrS.value = []
-  // gpArr.value = []
-  const code = f[1]
-  const { Result } = await getFsjy(code)
-  const resultData = filterVolumn(Result)
+// const getUpCart = async (f) => {
+//   const code = f[1]
+//   let Result = {}
+//   if (codeData[code]) {
+//     Result = codeData[code]
+//   } else {
+//     const resData = await getFsjy(code)
+//     codeData[code] = resData.Result
+//     Result = resData.Result
+//   }
+//   const resultData = filterVolumn(Result)
+//
+//   //找到日期为chooseData的数据
+//   const dataIndex = resultData.findIndex((f) => f.time === chooseData.value)
+//   const data = resultData.slice(dataIndex - 2, dataIndex)
+//   let bIndex = 0
+//   data.forEach((value) => {
+//     const zd = value.ratio
+//     if (code.startsWith('30')) {
+//       if (zd > 19.5 && zd < 20.5) {
+//         bIndex++
+//       }
+//     } else if (code.startsWith('60') || code.startsWith('00')) {
+//       if (zd > 9.5 && zd < 10.5) {
+//         bIndex++
+//       }
+//     } else {
+//       bIndex = 2
+//     }
+//   })
+//
+//   if (bIndex === 1) {
+//     gpArrS.value.push(f)
+//     console.log(gpArrS.value)
+//   }
+//   if (bIndex === 0) {
+//     gpArr.value.push(f)
+//     console.log(gpArr.value)
+//   }
+// }
 
-  //找到日期为chooseData的数据
-  const dataIndex = resultData.findIndex((f) => f.time === chooseData.value)
-  const data = resultData.slice(dataIndex - 2, dataIndex)
-  let bIndex = 0
-  data.forEach((value) => {
-    const zd = value.ratio
-    if (code.startsWith('30')) {
-      if (zd > 19.5 && zd < 20.5) {
-        bIndex++
-      }
-    } else if (code.startsWith('60') || code.startsWith('00')) {
-      if (zd > 9.5 && zd < 10.5) {
-        bIndex++
-      }
-    } else {
-      bIndex = 2
-    }
-  })
-
-  if (bIndex === 1) {
-    gpArrS.value.push(f)
-    console.log(gpArrS.value)
-  }
-  if (bIndex === 0) {
-    gpArr.value.push(f)
-    console.log(gpArr.value)
-  }
-}
-
+let analyisData = {}
 //首版涨停票
 const jhjjAnalaysFisrst = async () => {
-  gpArrFirst.value = []
-  gpArrSecond.value = []
+  // gpArrFirst.value = []
+  // gpArrSecond.value = []
   //调用集合竞价接口
   const { data } = await getlimitBoard()
   if (!data) {
@@ -317,18 +337,19 @@ const jhjjAnalaysFisrst = async () => {
     return
   }
 
-  console.log('limitBoardData', data.data_list)
   //1.过滤st票
   data.data_list.forEach(async (f) => {
     //1.过滤st票
+    const code = f[1]
     if (!f[0].includes('ST')) {
-      // //2.未匹配额
-      // if (f[8] > 0 && f[8] < f[7] * 0.8 && f[8] > f[7] * 0.2) {
-      //   //判断是不是首版或者二板票
-      //   judgeFisrt(f)
-      // }
-      const code = f[1]
-      const { Result } = await getFsjy(code)
+      let Result = {}
+      if (codeData[code]) {
+        Result = codeData[code]
+      } else {
+        const resData = await getFsjy(code)
+        codeData[code] = resData.Result
+        Result = resData.Result
+      }
       const resultData = filterVolumn(Result)
       const dataIndex = resultData.findIndex((f) => f.time === chooseData.value)
       const data = resultData.slice(dataIndex - 2, dataIndex)
@@ -348,12 +369,17 @@ const jhjjAnalaysFisrst = async () => {
         }
       })
       if (bIndex === 0) {
-        gpArrFirst.value.push(f)
-        console.log(gpArrFirst.value)
+        const fArr = gpArrFirst.value.map((m) => m[1])
+        if (!fArr.includes(f[1])) {
+          gpArrFirst.value.push(f)
+        }
+        // console.log(gpArrFirst.value)
       }
       if (bIndex === 1) {
-        gpArrSecond.value.push(f)
-        console.log(gpArrSecond.value)
+        const sArr = gpArrSecond.value.map((m) => m[1])
+        if (!sArr.includes(f[1])) {
+          gpArrSecond.value.push(f)
+        }
       }
     }
   })
@@ -369,42 +395,149 @@ const jhjjAnalaysFisrst = async () => {
 }
 
 //分析集合竞价(找出满足竞价要求的票)
-const gpArr = ref([])
-const gpArrS = ref([])
+// const gpArr = ref([])
+// const gpArrS = ref([])
 const gpArrSecond = ref([])
 const gpArrFirst = ref([])
-const jhjjAnalays = async () => {
-  //调用集合竞价接口
+// const jhjjAnalays = async () => {
+//   //调用集合竞价接口
+//   const { data } = await getlimitBoard()
+//   if (!data) {
+//     ElMessage.warning('集合数据为空')
+//     return
+//   }
+//   //1.过滤st票
+//   data.data_list.forEach((f) => {
+//     //1.过滤st票
+//     if (!f[0].includes('ST')) {
+//       //2.未匹配额
+//       if (f[8] > 0 && f[8] < f[7] * 0.7 && f[8] > f[7] * 0.2) {
+//         //判断是不是首版或者二板票
+//         judgeFisrt(f)
+//       }
+//     }
+//   })
+//
+//   //3.根据成交额筛选出有概率买进的票
+//
+//   //4.计算出未匹配成交额上涨的票
+//
+//   //2.只做首版或者2版本票
+//   // const { Result } = await getFsjy()
+//   // const volumnData=filterVolumn(Result).slice(-2)
+//   // console.log(data.slice(-2))
+// }
+
+const firstOpenTimeS = ref(2)
+let firstOpenIdS = ref(null)
+function jhjjAnalaysFisrstOpenS() {
+  firstOpenIdS.value = setInterval(() => {
+    collectData()
+  }, firstOpenTimeS.value * 1000)
+}
+//停止定时
+function jhjjAnalaysFisrstStopS() {
+  clearInterval(firstOpenIdS.value)
+  firstOpenIdS.value = null
+}
+
+async function collectData() {
   const { data } = await getlimitBoard()
-  if (!data) {
-    ElMessage.warning('集合数据为空')
-    return
-  }
-  console.log('limitBoardData', data.data_list)
-  //1.过滤st票
-  data.data_list.forEach((f) => {
-    //1.过滤st票
+  data.data_list.forEach(async (f) => {
+    const code = f[1]
     if (!f[0].includes('ST')) {
-      //2.未匹配额
-      if (f[8] > 0 && f[8] < f[7] * 0.8 && f[8] > f[7] * 0.2) {
-        //判断是不是首版或者二板票
-        judgeFisrt(f)
+      let Result = {}
+      if (codeData[code]) {
+        Result = codeData[code]
+      } else {
+        const resData = await getFsjy(code)
+        codeData[code] = resData.Result
+        Result = resData.Result
+      }
+      const resultData = filterVolumn(Result)
+      const dataIndex = resultData.findIndex((f) => f.time === chooseData.value)
+      const data = resultData.slice(dataIndex - 2, dataIndex)
+      let bIndex = 0
+      data.forEach((value) => {
+        const zd = value.ratio
+        if (code.startsWith('30')) {
+          if (zd > 19.5 && zd < 20.5) {
+            bIndex++
+          }
+        } else if (code.startsWith('60') || code.startsWith('00')) {
+          if (zd > 9.5 && zd < 10.5) {
+            bIndex++
+          }
+        } else {
+          bIndex = 2
+        }
+      })
+      if (bIndex === 0) {
+        if (f[8] < f[7] * 0.7) {
+          const mapkey = `${f[0]}(${f[1]})-1`
+          //判断是不是首版或者二板票
+          if (analyisData[mapkey]) {
+            if (analyisData[mapkey].length >= 3) {
+              analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
+            }
+            analyisData[mapkey].push(f[8])
+          } else {
+            analyisData[mapkey] = [f[8]]
+          }
+        }
+        // gpArrFirst.value.push(f)
+        // console.log(gpArrFirst.value)
+      }
+      if (bIndex === 1) {
+        if (f[8] < f[7] * 0.7) {
+          //判断是不是首版或者二板票
+          const mapkey = `${f[0]}(${f[1]})-2`
+          if (analyisData[mapkey]) {
+            if (analyisData[mapkey].length >= 3) {
+              analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
+            }
+            analyisData[mapkey].push(f[8])
+          } else {
+            analyisData[mapkey] = [f[8]]
+          }
+        }
       }
     }
   })
-
-  //3.根据成交额筛选出有概率买进的票
-
-  //4.计算出未匹配成交额上涨的票
-
-  //2.只做首版或者2版本票
-  // const { Result } = await getFsjy()
-  // const volumnData=filterVolumn(Result).slice(-2)
-  // console.log(data.slice(-2))
+  console.log('analyisData', analyisData)
+  countIncreat(analyisData)
 }
 
-//分析首版
-const jhjjFirst = () => {}
+function checkIncrement(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    const previous = arr[i - 1]
+    const current = arr[i]
+
+    // 检查是否连续递增5%以上
+    if (previous > 0 && current > 0 && current / previous - 1 > 0.05) {
+      return true
+    }
+
+    // 检查是否一次递增10%以上
+    if (previous !== 0 && current !== 0 && Math.abs(current - previous) / Math.abs(previous) > 0.1) {
+      return true
+    }
+  }
+  return false
+}
+
+const resultKeys = ref([])
+
+function countIncreat(data) {
+  for (const key in data) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (data.hasOwnProperty(key)) {
+      if (checkIncrement(data[key]) && !resultKeys.value.includes(key)) {
+        resultKeys.value.push(key)
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
