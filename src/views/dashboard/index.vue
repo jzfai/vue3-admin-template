@@ -6,8 +6,8 @@
       format="YYYY-MM-DD"
       value-format="YYYY-MM-DD"
       type="date"
-      @change="chooseDataPick"
       placeholder="Pick a day"
+      @change="chooseDataPick"
     />
     <!--    <div class="mb-3">日期:{{ chooseData }}</div>-->
     <!--    <el-input v-model="beforeData" class="wi-100" />-->
@@ -25,15 +25,16 @@
     </div>
     <div class="mb-1 rowSS">
       <el-button type="success" @click="jhjjAnalaysFisrst">执行</el-button>
+      <el-button type="success" @click="clearDataFirst">清空</el-button>
     </div>
 
     <div class="mt-4">首版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div style="color: red; font-weight: bold" v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2">
+        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
           {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
         </div>
-        <div style="color: #b88230; font-weight: bold" v-else-if="item[8] < item[7] * 0.7">
+        <div v-else-if="item[8] < item[7] * 0.7" style="color: #b88230; font-weight: bold">
           {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
         </div>
         <div v-else>{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
@@ -42,10 +43,10 @@
     <div class="mt-4">二版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        <div style="color: red; font-weight: bold" v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2">
+        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
           {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
         </div>
-        <div style="color: #b88230; font-weight: bold" v-else-if="item[8] < item[7] * 0.7">
+        <div v-else-if="item[8] < item[7] * 0.7" style="color: #b88230; font-weight: bold">
           {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
         </div>
         <div v-else>{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
@@ -71,8 +72,8 @@
     <div class="mt-4 mb-2">特别关注(很有机会的票)</div>
     <div class="mt-1">
       <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
-        <div class="ml-2" v-if="item.includes('-1')" style="color: red">{{ item }}</div>
-        <div class="ml-2" v-else>{{ item }}</div>
+        <div v-if="item.includes('-1')" class="ml-2" style="color: red">{{ item }}</div>
+        <div v-else class="ml-2">{{ item }}</div>
       </div>
     </div>
     <!--    <div class="mt-4">二版一字(上车)</div>-->
@@ -171,6 +172,10 @@ function getlimitUp() {
     method: 'post'
   }
   axiosReq(reqConfig).then(({ data }) => {})
+}
+function clearDataFirst() {
+  gpArrFirst.value = []
+  gpArrSecond.value = []
 }
 
 //涨停池
@@ -325,7 +330,7 @@ let codeData = {}
 //   }
 // }
 
-let analyisData = {}
+const analyisData = {}
 //首版涨停票
 const jhjjAnalaysFisrst = async () => {
   // gpArrFirst.value = []
