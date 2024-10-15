@@ -77,10 +77,9 @@
     <div class="mt-1">
       <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
         <div v-if="item.includes('-1')" class="ml-2" style="color: red">{{ item }}</div>
-        <div v-else class="ml-2">{{ item }}</div>
       </div>
       <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
-        <div v-if="!item.includes('-1')" class="ml-2" style="color: #b88230;">{{ item }}</div>
+        <div v-if="item.includes('-2')" class="ml-2" style="color: #b88230;">{{ item }}</div>
       </div>
     </div>
   </div>
@@ -89,6 +88,7 @@
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
 import {getFsjy, getlimitBoard} from "./reqApi.ts";
+import analyData from "./analyData.js";
 
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 //页面挂载后触发
@@ -112,7 +112,7 @@ function resetData() {
   clearBtnData()
 }
 //
-const firstOpenTime = ref(5)
+const firstOpenTime = ref(10)
 const firstOpenId = ref(null)
 function jhjjAnalaysFisrstOpen() {
   jhjjAnalaysFisrst()
@@ -228,7 +228,7 @@ const jhjjAnalaysFisrst = async () => {
 // const gpArrS = ref([])
 const gpArrSecond = ref([])
 const gpArrFirst = ref([])
-const firstOpenTimeS = ref(2)
+const firstOpenTimeS = ref(3)
 let firstOpenIdS = ref(null)
 function jhjjAnalaysFisrstOpenS() {
   firstOpenIdS.value = setInterval(() => {
@@ -273,12 +273,12 @@ async function collectData() {
         }
       })
       if (bIndex === 0) {
-        if (f[8] < f[7] * 0.7) {
+        if (f[8] < f[7] * 0.7&& item[8] > item[7] * 0.1) {
           const mapkey = `${f[0]}(${f[1]})-1`
           //判断是不是首版或者二板票
           if (analyisData[mapkey]) {
-            if (analyisData[mapkey].length >= 5) {
-              analyisData[mapkey].splice(0, analyisData[mapkey].length - 5)
+            if (analyisData[mapkey].length >= 3) {
+              analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
             }
             analyisData[mapkey].push(f[8])
           } else {
@@ -289,12 +289,12 @@ async function collectData() {
         // console.log(gpArrFirst.value)
       }
       if (bIndex === 1) {
-        if (f[8] < f[7] * 0.7) {
+        if (f[8] < f[7] * 0.7&& item[8] > item[7] * 0.1) {
           //判断是不是首版或者二板票
           const mapkey = `${f[0]}(${f[1]})-2`
           if (analyisData[mapkey]) {
-            if (analyisData[mapkey].length >= 5) {
-              analyisData[mapkey].splice(0, analyisData[mapkey].length - 5)
+            if (analyisData[mapkey].length >= 3) {
+              analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
             }
             analyisData[mapkey].push(f[8])
           } else {
@@ -304,38 +304,28 @@ async function collectData() {
       }
     }
   })
-  console.log(analyisData);
   //收集数据
-  countIncreat(analyisData)
+  countIncreat(analyData)
 }
 function clearBtnData(){
   analyisData={}
   codeData={}
-
 }
-function checkIncrement(arr) {
+
+function isArrayIncreasing(arr) {
   for (let i = 1; i < arr.length; i++) {
-    const previous = arr[i - 1]
-    const current = arr[i]
-    // 检查是否连续递增20%以上
-    if (previous > 0 && current > 0 && current / previous - 1 > 0.2) {
-      return true
-    }
-    // 检查是否一次递增50%以上
-    if (previous !== 0 && current !== 0 && Math.abs(current - previous) / Math.abs(previous) > 0.5) {
-      return true
+    //此处可以相等
+    if (arr[i] < arr[i - 1]) {
+      return false;
     }
   }
-  return false
+  return true;
 }
-
 const resultKeys = ref([])
-
 function countIncreat(data) {
   for (const key in data) {
-    // eslint-disable-next-line no-prototype-builtins
-    if (data.hasOwnProperty(key)) {
-      if (checkIncrement(data[key]) && !resultKeys.value.includes(key)) {
+    if (isArrayIncreasing(data[key])) {
+      if (!resultKeys.value.includes(key)) {
         resultKeys.value.push(key)
       }
     }
