@@ -273,7 +273,7 @@ async function collectData() {
         }
       })
       if (bIndex === 0) {
-        if (f[8] < f[7] * 0.7&& item[8] > item[7] * 0.1) {
+        if (f[8] < f[7] * 0.7&& f[8] > f[7] * 0.1) {
           const mapkey = `${f[0]}(${f[1]})-1`
           //判断是不是首版或者二板票
           if (analyisData[mapkey]) {
@@ -289,7 +289,7 @@ async function collectData() {
         // console.log(gpArrFirst.value)
       }
       if (bIndex === 1) {
-        if (f[8] < f[7] * 0.7&& item[8] > item[7] * 0.1) {
+        if (f[8] < f[7] * 0.7&& f[8] > f[7] * 0.1) {
           //判断是不是首版或者二板票
           const mapkey = `${f[0]}(${f[1]})-2`
           if (analyisData[mapkey]) {
@@ -305,7 +305,9 @@ async function collectData() {
     }
   })
   //收集数据
-  countIncreat(analyData)
+  //测试数据analyData
+  console.log("analyisData", analyisData);
+  countIncreat(analyisData)
 }
 function clearBtnData(){
   analyisData={}
