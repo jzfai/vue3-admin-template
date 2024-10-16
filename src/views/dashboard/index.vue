@@ -39,7 +39,7 @@
         <div v-if="item[8] < item[7] * 0.7&&item[8] <item[7] * 0.2" style="color: #b88230; font-weight: bold">
           {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
         </div>
-        <div v-else>{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
+        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
     <div class="mt-4">二版一字(机会)</div>
@@ -53,7 +53,7 @@
         <div v-if="item[8] < item[7] * 0.7&&item[8] <item[7] * 0.2" style="color: #b88230; font-weight: bold">
           {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
         </div>
-        <div v-else>{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
+        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
 
@@ -87,7 +87,7 @@
 <script setup>
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
-import {getFsjy, getlimitBoard} from "./reqApi.ts";
+import {getFsjy, getlimitBoard, sendString} from "./reqApi.ts";
 import analyData from "./analyData.js";
 
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
@@ -228,11 +228,12 @@ const jhjjAnalaysFisrst = async () => {
 // const gpArrS = ref([])
 const gpArrSecond = ref([])
 const gpArrFirst = ref([])
-const firstOpenTimeS = ref(3)
+const firstOpenTimeS = ref(5)
 let firstOpenIdS = ref(null)
 function jhjjAnalaysFisrstOpenS() {
   firstOpenIdS.value = setInterval(() => {
     collectData()
+
   }, firstOpenTimeS.value * 1000)
 }
 //停止定时
@@ -308,10 +309,16 @@ async function collectData() {
   //测试数据analyData
   console.log("analyisData", analyisData);
   countIncreat(analyisData)
+
+
+  // //如果有值则发送短信通知
+  // if(resultKeys.value.length>0){
+  //   sendString(JSON.stringify(sendString.value))
+  // }
 }
 function clearBtnData(){
   analyisData={}
-  codeData={}
+  resultKeys.value=[]
 }
 
 function isArrayIncreasing(arr) {
@@ -329,6 +336,11 @@ function countIncreat(data) {
     if (isArrayIncreasing(data[key])) {
       if (!resultKeys.value.includes(key)) {
         resultKeys.value.push(key)
+      }
+    }else{
+      const keyIndex=resultKeys.value.indexOf(key)
+      if (keyIndex!==-1) {
+        resultKeys.value.splice(keyIndex,1)
       }
     }
   }

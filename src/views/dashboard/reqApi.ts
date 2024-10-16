@@ -97,6 +97,22 @@ export function getFsjy(code) {
   return axiosReq(reqConfig)
 }
 
+
+//发送短信接口
+export function sendString(gpString) {
+  const reqConfig = {
+    url: `https://github.jzfai.top/micro-service-api/send/sms/sendString?phones=13302254692&gpString=1111`,
+    baseURL: '',
+    params: {
+      phones:"13302254692",
+      gpString
+    },
+    reqLoading: false,
+    method: 'get'
+  }
+  axiosReq(reqConfig).then(r => (res=>{}))
+}
+
 // //买卖五档盘口
 // function getMmwp() {
 //   const reqConfig = {
