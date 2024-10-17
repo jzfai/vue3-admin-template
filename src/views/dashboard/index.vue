@@ -162,7 +162,7 @@ function filterVolumn(data) {
   return result
 }
 
-let codeData = {}
+const codeData = {}
 let analyisData = {}
 //首版涨停票
 const jhjjAnalaysFisrst = async () => {
@@ -274,7 +274,7 @@ async function collectData() {
         }
       })
       if (bIndex === 0) {
-        if (f[8] < f[7] * 0.7&& f[8] > f[7] * 0.1) {
+        if (f[8] < f[7] * 0.7&& f[8] > f[7] * 0.2) {
           const mapkey = `${f[0]}(${f[1]})-1`
           //判断是不是首版或者二板票
           if (analyisData[mapkey]) {
@@ -290,7 +290,7 @@ async function collectData() {
         // console.log(gpArrFirst.value)
       }
       if (bIndex === 1) {
-        if (f[8] < f[7] * 0.7&& f[8] > f[7] * 0.1) {
+        if (f[8] < f[7] * 0.7&& f[8] > f[7] * 0.2) {
           //判断是不是首版或者二板票
           const mapkey = `${f[0]}(${f[1]})-2`
           if (analyisData[mapkey]) {
