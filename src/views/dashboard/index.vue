@@ -170,6 +170,8 @@ const jhjjAnalaysFisrst = async () => {
   // gpArrSecond.value = []
   //调用集合竞价接口
   const { data } = await getlimitBoard(chooseData.value)
+
+  const  dataInfo=data.data_list.map(m=> m[1])
   if (!data) {
     ElMessage.warning('集合数据为空')
     return
@@ -223,6 +225,9 @@ const jhjjAnalaysFisrst = async () => {
       }
     }
   })
+  //判断不存在则移除
+  gpArrFirst.value= gpArrFirst.value.filter(f=>dataInfo.includes(f[1]))
+  gpArrSecond.value= gpArrSecond.value.filter(f=>dataInfo.includes(f[1]))
 }
 
 //分析集合竞价(找出满足竞价要求的票)
@@ -246,6 +251,7 @@ function jhjjAnalaysFisrstStopS() {
 
 async function collectData() {
   const { data } = await getlimitBoard(chooseData.value)
+  const  dataInfo=data.data_list.map(m=> m[1])
   data.data_list.forEach(async (f) => {
     const code = f[1]
     if (!f[0].includes('ST')) {
@@ -310,6 +316,12 @@ async function collectData() {
       }
     }
   })
+
+  //判断不存在则移除
+  resultKeys.value= resultKeys.value.filter(f=>{
+    return dataInfo.some(s=>f.includes(f))
+  })
+
   //收集数据
   //测试数据analyData
   console.log("analyisData", analyisData);

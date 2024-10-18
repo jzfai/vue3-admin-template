@@ -32,13 +32,13 @@ export function getCallWarn() {
 }
 
 //冲刺涨停
-export function getlimitUp() {
+export function getlimitUp(data) {
   const reqConfig = {
-    url: `https://data.10jqka.com.cn/dataapi/limit_up/limit_up?page=1&limit=15&field=199112%2C10%2C48%2C1968584%2C19%2C3475914%2C9003%2C9004&filter=HS%2CGEM2STAR&order_field=199112&order_type=0&date=20241011`,
+    url: `https://data.10jqka.com.cn/dataapi/limit_up/limit_up?page=1&limit=30&field=199112%2C10%2C48%2C1968584%2C19%2C3475914%2C9003%2C9004&filter=HS%2CGEM2STAR&order_field=199112&order_type=0&date=${data}`,
     baseURL: '',
     method: 'post'
   }
-  axiosReq(reqConfig).then(({ data }) => {})
+ return  axiosReq(reqConfig)
 }
 
 
