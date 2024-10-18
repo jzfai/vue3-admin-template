@@ -174,7 +174,6 @@ const jhjjAnalaysFisrst = async () => {
     ElMessage.warning('集合数据为空')
     return
   }
-
   //1.过滤st票
   data.data_list.forEach(async (f) => {
     //1.过滤st票
@@ -184,6 +183,9 @@ const jhjjAnalaysFisrst = async () => {
       if (codeData[code]) {
         Result = codeData[code]
       } else {
+        // if(f[8] > f[7] * 0.7||f[8] < f[7] * 0.2){
+        //   return
+        // }
         const resData = await getFsjy(code)
         codeData[code] = resData.Result
         Result = resData.Result
@@ -251,6 +253,9 @@ async function collectData() {
       if (codeData[code]) {
         Result = codeData[code]
       } else {
+        // if(f[8] > f[7] * 0.7||f[8] < f[7] * 0.2){
+        //   return
+        // }
         const resData = await getFsjy(code)
         codeData[code] = resData.Result
         Result = resData.Result
