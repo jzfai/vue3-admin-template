@@ -1,5 +1,4 @@
-
-import axiosReq from "@/utils/axios-req";
+import axiosReq from '@/utils/axios-req'
 //竞价一字板
 export function getlimitBoard(chooseData) {
   const reqConfig = {
@@ -13,22 +12,24 @@ export function getlimitBoard(chooseData) {
 }
 
 //个股机会
-export function getCallWarn() {
+
+//{"date":"2024-10-18","page_num":1,"page_size":20,"sort":0,"sort_field":"bidZf","filter":{"market":"1","warn_types":"","st":0,"optionals":null}}
+export function getCallWarn(date) {
   const reqConfig = {
     url: 'https://eq.10jqka.com.cn/call_auction_v2/stock_chance/v1/history_list/call_warn',
     baseURL: '',
     method: 'post',
     reqLoading: false,
     data: {
-      date: '2024-10-11',
+      date,
       page_num: 1,
-      page_size: 20,
+      page_size: 40,
       sort: 0,
-      sort_field: 'warnTimestamp',
-      filter: { market: '1', warn_types: '', st: null, optionals: null }
+      sort_field: 'bidZf',
+      filter: { market: '1', warn_types: '', st: 0, optionals: null }
     }
   }
-  axiosReq(reqConfig).then(({ data }) => {})
+  return axiosReq(reqConfig)
 }
 
 //冲刺涨停
@@ -38,9 +39,8 @@ export function getlimitUp(data) {
     baseURL: '',
     method: 'post'
   }
- return  axiosReq(reqConfig)
+  return axiosReq(reqConfig)
 }
-
 
 //涨停池
 export function getLimitUpPool() {
@@ -51,7 +51,6 @@ export function getLimitUpPool() {
   }
   axiosReq(reqConfig).then(({ data }) => {})
 }
-
 
 //获取分时交易数据
 function getHszbFsjy() {
@@ -73,7 +72,6 @@ function getHszbFsjy() {
   }
   return axiosReq(reqConfig)
 }
-
 
 //获取日交易数据
 export function getFsjy(code) {
@@ -97,20 +95,19 @@ export function getFsjy(code) {
   return axiosReq(reqConfig)
 }
 
-
 //发送短信接口
 export function sendString(gpString) {
   const reqConfig = {
     url: `https://github.jzfai.top/micro-service-api/send/sms/sendString?phones=13302254692&gpString=1111`,
     baseURL: '',
     params: {
-      phones:"13302254692",
+      phones: '13302254692',
       gpString
     },
     reqLoading: false,
     method: 'get'
   }
-  axiosReq(reqConfig).then(r => (res=>{}))
+  axiosReq(reqConfig).then((r) => (res) => {})
 }
 
 // //买卖五档盘口
@@ -132,4 +129,3 @@ export function sendString(gpString) {
 //   }
 //   axiosReq(reqConfig).then(({ data }) => {})
 // }
-

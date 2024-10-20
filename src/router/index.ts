@@ -32,14 +32,14 @@ export const constantRoutes: RouterTypes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/index',
     children: [
       {
-        path: 'dashboard',
-        name: 'Dashboard',
+        path: 'index',
+        name: 'index',
         component: () => import('@/views/dashboard/index.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: 'index', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -58,13 +58,40 @@ export const constantRoutes: RouterTypes = [
       }
     ]
   },
-  { path: "/:pathMatch(.*)", redirect: "/404", hidden: true }
+  {
+    path: '/indexs',
+    component: Layout,
+    redirect: '/indexs1',
+    children: [
+      {
+        path: '/indexs1',
+        name: 'indexs1',
+        component: () => import('@/views/dashboard/index-s.vue'),
+        //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
+        meta: { title: 'index-up', icon: 'index-up', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/all',
+    component: Layout,
+    redirect: '/index-all',
+    children: [
+      {
+        path: '/index-all',
+        name: 'IndexUp',
+        component: () => import('@/views/dashboard/index-all.vue'),
+        //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
+        meta: { title: 'index-up', icon: 'index-up', affix: true }
+      }
+    ]
+  },
+
+  { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
 ]
 
 //角色和code数组动态路由
-export const roleCodeRoutes: RouterTypes = [
-
-]
+export const roleCodeRoutes: RouterTypes = []
 /**
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles

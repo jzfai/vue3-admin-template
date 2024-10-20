@@ -167,6 +167,7 @@ const jhjjAnalaysFisrst = async () => {
   // gpArrSecond.value = []
   //调用集合竞价接口
   const { data } = await getlimitBoard(chooseData.value)
+
   if (!data) {
     ElMessage.warning('集合数据为空')
     return
@@ -182,9 +183,9 @@ const jhjjAnalaysFisrst = async () => {
       if (codeData[code]) {
         Result = codeData[code]
       } else {
-        if (f[8] > f[7] * 0.7 || f[8] < f[7] * 0.2) {
-          return
-        }
+        // if(f[8] > f[7] * 0.7||f[8] < f[7] * 0.2){
+        //   return
+        // }
         const resData = await getFsjy(code)
         codeData[code] = resData.Result
         Result = resData.Result
@@ -255,9 +256,9 @@ async function collectData() {
       if (codeData[code]) {
         Result = codeData[code]
       } else {
-        if (f[8] > f[7] * 0.7 || f[8] < f[7] * 0.2) {
-          return
-        }
+        // if(f[8] > f[7] * 0.7||f[8] < f[7] * 0.2){
+        //   return
+        // }
         const resData = await getFsjy(code)
         codeData[code] = resData.Result
         Result = resData.Result
