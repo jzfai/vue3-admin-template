@@ -35,7 +35,7 @@ export const constantRoutes = [
             {
                 path: 'dashboard',
                 name: 'Dashboard',
-                component: () => import('@/views/dashboard/index.vue'),
+                component: () => import('@/views/dashboard/limit.vue'),
                 meta: { title: 'Dashboard', elSvgIcon: 'Fold' }
             }
         ]

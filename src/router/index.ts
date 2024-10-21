@@ -32,57 +32,35 @@ export const constantRoutes: RouterTypes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/index',
+    redirect: 'limit',
     children: [
       {
-        path: 'index',
-        name: 'index',
-        component: () => import('@/views/dashboard/index.vue'),
+        path: 'limit',
+        name: 'limit',
+        component: () => import('@/views/dashboard/limit.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'index', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-
-  {
-    path: '/up',
-    component: Layout,
-    redirect: '/index-up',
-    children: [
+        meta: { title: 'limit', icon: 'limit', affix: true }
+      },
       {
-        path: '/index-up',
-        name: 'IndexUp',
-        component: () => import('@/views/dashboard/index-up.vue'),
+        path: '/limit-all',
+        name: 'limit-all',
+        component: () => import('@/views/dashboard/limit-all.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'index-up', icon: 'index-up', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/indexs',
-    component: Layout,
-    redirect: '/indexs1',
-    children: [
+        meta: { title: 'limit-all', icon: 'limit-all', affix: true }
+      },
       {
-        path: '/indexs1',
-        name: 'indexs1',
-        component: () => import('@/views/dashboard/index-s.vue'),
+        path: 'up',
+        name: 'up',
+        component: () => import('@/views/dashboard/up.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'index-up', icon: 'index-up', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/all',
-    component: Layout,
-    redirect: '/index-all',
-    children: [
+        meta: { title: 'up', icon: 'up', affix: true }
+      },
       {
-        path: '/index-all',
-        name: 'IndexUp',
-        component: () => import('@/views/dashboard/index-all.vue'),
+        path: 'jh',
+        name: 'jh',
+        component: () => import('@/views/dashboard/jh.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'index-up', icon: 'index-up', affix: true }
+        meta: { title: 'jh', icon: 'jh', affix: true }
       }
     ]
   },

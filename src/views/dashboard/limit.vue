@@ -1,6 +1,6 @@
 <template>
   <div class="index-container">
-    <div class="mb-10px">个股机会</div>
+    <div class="mb-20px">竞价一字板（精选）</div>
     <el-date-picker
       v-model="chooseData"
       size="small"
@@ -10,10 +10,6 @@
       placeholder="Pick a day"
       @change="chooseDataPick"
     />
-    <!--    <div class="mb-3">日期:{{ chooseData }}</div>-->
-    <!--    <el-input v-model="beforeData" class="wi-100" />-->
-
-    <!--    <div>集合竞价</div>-->
     <div class="mt-5 mb-2">
       <div class="mb-2">
         <el-button type="warning" :disabled="firstOpenId !== null" @click="jhjjAnalaysFisrstOpen">开启定时</el-button>
@@ -32,15 +28,29 @@
     <div class="mt-4">首版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div>
+        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
           {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
         </div>
+      </div>
+      <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
+        <div v-if="item[8] < item[7] * 0.7 && item[8] < item[7] * 0.2" style="color: #b88230; font-weight: bold">
+          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        </div>
+        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
     <div class="mt-4">二版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
+          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        </div>
+      </div>
+      <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
+        <div v-if="item[8] < item[7] * 0.7 && item[8] < item[7] * 0.2" style="color: #b88230; font-weight: bold">
+          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        </div>
+        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
 
@@ -74,7 +84,7 @@
 <script setup>
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
-import { getCallWarn, getFsjy } from './reqApi.ts'
+import { getFsjy, getlimitBoard, sendString } from './reqApi.ts'
 import analyData from './analyData.js'
 
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
@@ -120,10 +130,8 @@ onUnmounted(() => {
 function filterVolumn(data) {
   // 分割marketData字符串为多个记录
   const records = data.newMarketData.marketData.split(';')
-
   // 初始化结果数组
   const result = []
-
   // 遍历每个记录
   records.forEach((record) => {
     // 分割记录为字段
@@ -153,32 +161,15 @@ const jhjjAnalaysFisrst = async () => {
   // gpArrFirst.value = []
   // gpArrSecond.value = []
   //调用集合竞价接口
-  const { data } = await getCallWarn(chooseData.value)
+  const { data } = await getlimitBoard(chooseData.value)
   if (!data) {
     ElMessage.warning('集合数据为空')
     return
   }
-  //过滤涨停的票
-  const dataListArr = data.data_list.filter((f) => {
-    const code = f[1]
-    const zd = f[5]
-    if (code.startsWith('30')) {
-      if (zd > 19.5 && zd < 20.5) {
-        return true
-      }
-    } else if (code.startsWith('60') || code.startsWith('00')) {
-      if (zd > 9.5 && zd < 10.5) {
-        return true
-      }
-    } else {
-      return false
-    }
-    return false
-  })
+  const dataInfo = data.data_list.map((m) => m[1])
 
-  const dataInfo = dataListArr.map((m) => m[1])
   //1.过滤st票
-  dataListArr.forEach(async (f) => {
+  data.data_list.forEach(async (f) => {
     //1.过滤st票
     const code = f[1]
     if (!f[0].includes('ST')) {
@@ -186,9 +177,9 @@ const jhjjAnalaysFisrst = async () => {
       if (codeData[code]) {
         Result = codeData[code]
       } else {
-        // if(f[8] > f[7] * 0.7||f[8] < f[7] * 0.2){
-        //   return
-        // }
+        if (f[8] > f[7] * 0.7 || f[8] < f[7] * 0.2) {
+          return
+        }
         const resData = await getFsjy(code)
         codeData[code] = resData.Result
         Result = resData.Result
@@ -250,35 +241,18 @@ function jhjjAnalaysFisrstStopS() {
 }
 
 async function collectData() {
-  const { data } = await getCallWarn(chooseData.value)
-  const dataListArr = data.data_list.filter((f) => {
-    const code = f[1]
-    const zd = f[5]
-    if (code.startsWith('30')) {
-      if (zd > 19.5 && zd < 20.5) {
-        return true
-      }
-    } else if (code.startsWith('60') || code.startsWith('00')) {
-      if (zd > 9.5 && zd < 10.5) {
-        return true
-      }
-    } else {
-      return false
-    }
-    return false
-  })
-
-  const dataInfo = dataListArr.map((m) => m[1])
-  dataListArr.forEach(async (f) => {
+  const { data } = await getlimitBoard(chooseData.value)
+  const dataInfo = data.data_list.map((m) => m[1])
+  data.data_list.forEach(async (f) => {
     const code = f[1]
     if (!f[0].includes('ST')) {
       let Result = {}
       if (codeData[code]) {
         Result = codeData[code]
       } else {
-        // if(f[8] > f[7] * 0.7||f[8] < f[7] * 0.2){
-        //   return
-        // }
+        if (f[8] > f[7] * 0.7 || f[8] < f[7] * 0.2) {
+          return
+        }
         const resData = await getFsjy(code)
         codeData[code] = resData.Result
         Result = resData.Result

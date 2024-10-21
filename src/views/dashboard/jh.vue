@@ -1,5 +1,6 @@
 <template>
   <div class="index-container">
+    <div class="mb-10px">个股机会</div>
     <el-date-picker
       v-model="chooseData"
       size="small"
@@ -28,68 +29,52 @@
       <el-button type="success" @click="clearDataFirst">清空</el-button>
     </div>
 
-    <div class="mt-4">首版一字(机会)</div>
+    <div class="mt-4">首版一字</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        <div>
+          {{ `${item[0]}`}}
         </div>
-      </div>
-      <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] < item[7] * 0.2" style="color: #b88230; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
-        </div>
-        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
-    <div class="mt-4">二版一字(机会)</div>
+    <div class="mt-4">二版一字</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
-        </div>
-      </div>
-      <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] < item[7] * 0.2" style="color: #b88230; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
-        </div>
-        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
+        {{ `${item[0]}`}}
       </div>
     </div>
 
-    <div class="mt-8 font-bold">---可以考虑上车---</div>
-    <div class="mt-5 mb-2">
-      <div class="mb-2">
-        <el-button type="warning" :disabled="firstOpenIdS !== null" @click="jhjjAnalaysFisrstOpenS">开启定时</el-button>
-        <el-button type="warning" @click="jhjjAnalaysFisrstStopS">停止定时</el-button>
-      </div>
-      <div>
-        定时时长：
-        <el-input v-model="firstOpenTimeS" style="width: 50px" />
-      </div>
-    </div>
-    <div class="mb-1 rowSS">
-      <el-button type="success" @click="collectData">执行</el-button>
-      <el-button type="success" @click="clearBtnData">清空</el-button>
-    </div>
+<!--    <div class="mt-8 font-bold">-&#45;&#45;可以考虑上车-&#45;&#45;</div>-->
+<!--    <div class="mt-5 mb-2">-->
+<!--      <div class="mb-2">-->
+<!--        <el-button type="warning" :disabled="firstOpenIdS !== null" @click="jhjjAnalaysFisrstOpenS">开启定时</el-button>-->
+<!--        <el-button type="warning" @click="jhjjAnalaysFisrstStopS">停止定时</el-button>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        定时时长：-->
+<!--        <el-input v-model="firstOpenTimeS" style="width: 50px" />-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="mb-1 rowSS">-->
+<!--      <el-button type="success" @click="collectData">执行</el-button>-->
+<!--      <el-button type="success" @click="clearBtnData">清空</el-button>-->
+<!--    </div>-->
 
-    <div class="mt-4 mb-2">特别关注(很有机会的票)</div>
-    <div class="mt-1">
-      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
-        <div v-if="item.includes('-1')" class="ml-2" style="color: red">{{ item }}</div>
-      </div>
-      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
-        <div v-if="item.includes('-2')" class="ml-2" style="color: #b88230">{{ item }}</div>
-      </div>
-    </div>
+<!--    <div class="mt-4 mb-2">特别关注(很有机会的票)</div>-->
+<!--    <div class="mt-1">-->
+<!--      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">-->
+<!--        <div v-if="item.includes('-1')" class="ml-2" style="color: red">{{ item }}</div>-->
+<!--      </div>-->
+<!--      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">-->
+<!--        <div v-if="item.includes('-2')" class="ml-2" style="color: #b88230">{{ item }}</div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 <script setup>
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
-import { getFsjy, getlimitBoard, sendString } from './reqApi.ts'
-import analyData from './analyData.js'
-
+import { getCallWarn, getFsjy } from './reqApi.ts'
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 //页面挂载后触发
 onMounted(() => {
@@ -166,16 +151,32 @@ const jhjjAnalaysFisrst = async () => {
   // gpArrFirst.value = []
   // gpArrSecond.value = []
   //调用集合竞价接口
-  const { data } = await getlimitBoard(chooseData.value)
-
+  const { data } = await getCallWarn(chooseData.value)
   if (!data) {
     ElMessage.warning('集合数据为空')
     return
   }
-  const dataInfo = data.data_list.map((m) => m[1])
+  //过滤涨停的票
+  const dataListArr = data.data_list.filter((f) => {
+    const code = f[1]
+    const zd = f[5]
+    if (code.startsWith('30')) {
+      if (zd > 19.5 && zd < 20.5) {
+        return true
+      }
+    } else if (code.startsWith('60') || code.startsWith('00')) {
+      if (zd > 9.5 && zd < 10.5) {
+        return true
+      }
+    } else {
+      return false
+    }
+    return false
+  })
 
+  const dataInfo = dataListArr.map((m) => m[1])
   //1.过滤st票
-  data.data_list.forEach(async (f) => {
+  dataListArr.forEach(async (f) => {
     //1.过滤st票
     const code = f[1]
     if (!f[0].includes('ST')) {
@@ -247,9 +248,26 @@ function jhjjAnalaysFisrstStopS() {
 }
 
 async function collectData() {
-  const { data } = await getlimitBoard(chooseData.value)
-  const dataInfo = data.data_list.map((m) => m[1])
-  data.data_list.forEach(async (f) => {
+  const { data } = await getCallWarn(chooseData.value)
+  const dataListArr = data.data_list.filter((f) => {
+    const code = f[1]
+    const zd = f[5]
+    if (code.startsWith('30')) {
+      if (zd > 19.5 && zd < 20.5) {
+        return true
+      }
+    } else if (code.startsWith('60') || code.startsWith('00')) {
+      if (zd > 9.5 && zd < 10.5) {
+        return true
+      }
+    } else {
+      return false
+    }
+    return false
+  })
+
+  const dataInfo = dataListArr.map((m) => m[1])
+  dataListArr.forEach(async (f) => {
     const code = f[1]
     if (!f[0].includes('ST')) {
       let Result = {}
