@@ -84,8 +84,7 @@
 <script setup>
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
-import { getFsjy, getlimitBoard, sendString } from './reqApi.ts'
-import analyData from './analyData.js'
+import { getFsjy, getlimitBoard } from './reqApi.ts'
 
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 //页面挂载后触发

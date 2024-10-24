@@ -29,7 +29,7 @@
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
         <div style="font-weight: bold">
-          {{ `${item.name}(${item.code})--${item.limit_up_suc_rate.toFixed(2)}` }}
+          {{ `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${item.rise_rate}--${item.limit_up_suc_rate.toFixed(2)}` }}
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
         <div style="font-weight: bold">
-          {{ `${item.name}(${item.code})--${item.limit_up_suc_rate.toFixed(2)}` }}
+          {{ `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${item.rise_rate}--${item.limit_up_suc_rate.toFixed(2)}` }}
         </div>
       </div>
     </div>
@@ -68,8 +68,8 @@ function resetData() {
   clearInterval(firstOpenIdS.value)
   clearBtnData()
 }
-//
-const firstOpenTime = ref(10)
+//定时时长
+const firstOpenTime = ref(5)
 const firstOpenId = ref(null)
 function jhjjAnalaysFisrstOpen() {
   jhjjAnalaysFisrst()
@@ -181,7 +181,6 @@ const jhjjAnalaysFisrst = async () => {
 
       if (bIndex === 0) {
         const fArr = gpArrFirst.value.map((m) => m.code)
-
         if (!fArr.includes(f.code)) {
           gpArrFirst.value.push(f)
         }
