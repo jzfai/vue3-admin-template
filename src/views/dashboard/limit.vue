@@ -121,7 +121,7 @@ function resetData() {
   clearBtnData()
 }
 //
-const firstOpenTime = ref(10)
+const firstOpenTime = ref(5)
 const firstOpenId = ref(null)
 function jhjjAnalaysFisrstOpen() {
   jhjjAnalaysFisrst()
@@ -239,7 +239,7 @@ const jhjjAnalaysFisrst = async () => {
 // const gpArrS = ref([])
 const gpArrSecond = ref([])
 const gpArrFirst = ref([])
-const firstOpenTimeS = ref(5)
+const firstOpenTimeS = ref(3)
 let firstOpenIdS = ref(null)
 function jhjjAnalaysFisrstOpenS() {
   firstOpenIdS.value = setInterval(() => {

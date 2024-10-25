@@ -24,7 +24,7 @@ function startTimer (){
   timer.value=setInterval(()=>{
     currentData.value=momentMini().format('HH:mm:ss')
     emit('currentDate', currentData.value)
-  },1000)
+  },50)
 }
 
 onUnmounted(()=>{
