@@ -314,7 +314,7 @@ async function collectData() {
 
   //收集数据
   //测试数据analyData
-  console.log('analyisData', analyisData)
+  // console.log('analyisData', analyisData)
   countIncreat(analyisData)
 
   // //如果有值则发送短信通知
@@ -330,6 +330,9 @@ function clearBtnData() {
 function isArrayIncreasing(arr) {
   for (let i = 1; i < arr.length; i++) {
     //此处可以相等
+    // if ( arr[i - 1]-arr[i] > arr[i - 1]*0.1 ) {
+    //   return false
+    // }
     if (arr[i] < arr[i - 1]) {
       return false
     }

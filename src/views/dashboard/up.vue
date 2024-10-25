@@ -28,7 +28,7 @@
     <div class="mt-4">首版</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div style="font-weight: bold">
+        <div style="font-weight: bold" :style="{color:judgeRise(item)&&'red'}">
           {{ `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${item.rise_rate}--${item.limit_up_suc_rate.toFixed(2)}` }}
         </div>
       </div>
@@ -36,7 +36,7 @@
     <div class="mt-4">二版</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        <div style="font-weight: bold">
+        <div style="font-weight: bold" :style="{color:judgeRise(item)&&'#b88230'}">
           {{ `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${item.rise_rate}--${item.limit_up_suc_rate.toFixed(2)}` }}
         </div>
       </div>
@@ -54,6 +54,19 @@ onMounted(() => {
 })
 function chooseDataPick() {
   resetData()
+}
+function judgeRise (item){
+  if (item.code.startsWith('30')) {
+    if (item.change_rate>17.5) {
+      return  true
+    }
+  } else if (item.code.startsWith('60') || item.code.startsWith('00')) {
+    if (item.change_rate>7.5) {
+      return  true
+    }
+  }
+
+  return  false
 }
 function clearDataFirst() {
   gpArrFirst.value = []
