@@ -1,0 +1,75 @@
+<template>
+  <div>
+<!--    <el-button @click="startTimer">startTimer</el-button>-->
+    <div class="ml-10px">{{currentData}}</div>
+  </div>
+
+</template>
+
+
+<script setup lang="ts">
+
+
+import momentMini from "moment-mini";
+
+const  timer=ref()
+
+const currentData=ref()
+onMounted(()=>{
+  startTimer()
+})
+const emit =defineEmits(["currentDate"])
+//启动定时器
+function startTimer (){
+  timer.value=setInterval(()=>{
+    currentData.value=momentMini().format('HH:mm:ss')
+    emit('currentDate', currentData.value)
+  },1000)
+}
+
+onUnmounted(()=>{
+  clearInterval(timer.value)
+})
+//import {onMounted, getCurrentInstance, watch,ref,toRefs,reactive,computed} from "vue";
+//获取store和router
+// import {useRouter} from 'vue-router'
+// import {useStore} from 'vuex'
+//let {proxy} = getCurrentInstance();
+// const props = defineProps({
+//   name: {
+//     require: true,
+//     default: "fai",
+//     type:String,
+//   },
+// });
+// const state = reactive({
+//   levelList: null
+// });
+
+//const routes = computed(() => {
+//    return proxy.$store.state.permission.routes;
+//  });
+// watch(() => props.name, (oldValue,newValue) => {
+//
+//   },
+//   { immediate: true }
+// );
+
+// const store = useStore()
+// const router = useRouter()
+// onMounted(()=>{
+//   console.log("页面挂载了")
+// })
+// let helloFunc = () => {
+//   console.log("helloFunc");
+// };
+//导出给refs使用
+// defineExpose({ helloFunc });
+//导出属性到页面中使用
+// let {levelList} = toRefs(state);
+</script>
+
+
+<style scoped lang="scss">
+
+</style>

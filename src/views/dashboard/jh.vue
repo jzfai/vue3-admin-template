@@ -1,6 +1,8 @@
 <template>
   <div class="index-container">
-    <div class="mb-10px">个股机会</div>
+    <div class="mb-20px rowSS">
+      <div>个股机会</div>
+    </div>
     <el-date-picker
       v-model="chooseData"
       size="small"
@@ -80,6 +82,9 @@ const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 onMounted(() => {
   //judgeFisrt()
 })
+//定时器触发的函数
+
+
 function chooseDataPick() {
   resetData()
 }

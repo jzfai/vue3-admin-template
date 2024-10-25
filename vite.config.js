@@ -16,7 +16,7 @@ const prodMock = setting.openProdMock
 const pathSrc = resolve(__dirname, 'src')
 // @ts-ignore
 export default defineConfig(({ command, mode }) => {
-  //const env = loadEnv(mode, process.cwd(), '') //获取环境变量
+  const env = loadEnv(mode, process.cwd(), '') //获取环境变量
   return {
     base: setting.viteBasePath,
     define: {
@@ -30,7 +30,14 @@ export default defineConfig(({ command, mode }) => {
       port: 5003, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       host: true,
-      https: false
+      https: false,
+      // proxy: {
+      //   "/gp": {
+      //     target: "https://eq.10jqka.com.cn",
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/gp/, ''),
+      //   }
+      // }
     },
     preview: {
       port: 5006,

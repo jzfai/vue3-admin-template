@@ -1,6 +1,9 @@
 <template>
   <div class="index-container">
-    <div class="mb-20px">冲刺涨停</div>
+    <div class="mb-20px rowSS">
+      <div>冲刺涨停</div>
+      <TimeClock @currentDate="currentDate"/>
+    </div>
     <el-date-picker
       v-model="chooseData"
       size="small"
@@ -47,11 +50,20 @@
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
 import { getFsjy, getlimitBoard, getlimitUp, sendString } from './reqApi.ts'
+import TimeClock from "./TimeClock.vue";
 const chooseData = ref(momentMini().format('YYYYMMDD'))
 //页面挂载后触发
 onMounted(() => {
   //judgeFisrt()
 })
+
+function currentDate(data){
+  if("09:30:00"===data){
+    // if("15:11:30"===data){
+    jhjjAnalaysFisrstOpen()
+  }
+}
+
 function chooseDataPick() {
   resetData()
 }
