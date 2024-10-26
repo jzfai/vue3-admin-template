@@ -2,7 +2,7 @@
   <div class="index-container">
     <div class="mb-20px rowSS">
       <div>冲刺涨停</div>
-      <TimeClock @currentDate="currentDate"/>
+      <TimeClock @currentDate="currentDate" />
     </div>
     <el-date-picker
       v-model="chooseData"
@@ -31,16 +31,24 @@
     <div class="mt-4">首版</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div style="font-weight: bold" :style="{color:judgeRise(item)&&'red'}">
-          {{ `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${item.rise_rate}--${item.limit_up_suc_rate.toFixed(2)}` }}
+        <div style="font-weight: bold" :style="{ color: judgeRise(item) && 'red' }">
+          {{
+            `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${
+              item.rise_rate
+            }--${item.limit_up_suc_rate.toFixed(2)}`
+          }}
         </div>
       </div>
     </div>
     <div class="mt-4">二版</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        <div style="font-weight: bold" :style="{color:judgeRise(item)&&'#b88230'}">
-          {{ `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${item.rise_rate}--${item.limit_up_suc_rate.toFixed(2)}` }}
+        <div style="font-weight: bold" :style="{ color: judgeRise(item) && '#b88230' }">
+          {{
+            `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${
+              item.rise_rate
+            }--${item.limit_up_suc_rate.toFixed(2)}`
+          }}
         </div>
       </div>
     </div>
@@ -50,15 +58,15 @@
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
 import { getFsjy, getlimitBoard, getlimitUp, sendString } from './reqApi.ts'
-import TimeClock from "./TimeClock.vue";
+import TimeClock from './TimeClock.vue'
 const chooseData = ref(momentMini().format('YYYYMMDD'))
 //页面挂载后触发
 onMounted(() => {
   //judgeFisrt()
 })
 
-function currentDate(data){
-  if("09:30:00"===data){
+function currentDate(data) {
+  if ('09:30:00' === data) {
     // if("15:11:30"===data){
     jhjjAnalaysFisrstOpen()
   }
@@ -67,18 +75,18 @@ function currentDate(data){
 function chooseDataPick() {
   resetData()
 }
-function judgeRise (item){
+function judgeRise(item) {
   if (item.code.startsWith('30')) {
-    if (item.change_rate>17.5) {
-      return  true
+    if (item.change_rate > 17.5) {
+      return true
     }
   } else if (item.code.startsWith('60') || item.code.startsWith('00')) {
-    if (item.change_rate>7.5) {
-      return  true
+    if (item.change_rate > 7.5) {
+      return true
     }
   }
 
-  return  false
+  return false
 }
 function clearDataFirst() {
   gpArrFirst.value = []
@@ -90,8 +98,8 @@ function resetData() {
   gpArrSecond.value = []
   gpArrFirst.value = []
   clearInterval(firstOpenId.value)
-  clearInterval(firstOpenIdS.value)
-  clearBtnData()
+  // clearInterval(firstOpenIdS.value)
+  // clearBtnData()
 }
 //定时时长
 const firstOpenTime = ref(5)
@@ -205,16 +213,26 @@ const jhjjAnalaysFisrst = async () => {
       })
 
       if (bIndex === 0) {
-        const fArr = gpArrFirst.value.map((m) => m.code)
-        if (!fArr.includes(f.code)) {
+        const fArr = gpArrFirst.value.map((m) => m[1])
+        const index1 = fArr.indexOf(f[1])
+        if (index1 === -1) {
           gpArrFirst.value.push(f)
+        } else {
+          gpArrFirst.value[index1] = f
         }
         // console.log(gpArrFirst.value)
       }
       if (bIndex === 1) {
-        const sArr = gpArrSecond.value.map((m) => m.code)
-        if (!sArr.includes(f.code)) {
+        // const sArr = gpArrSecond.value.map((m) => m.code)
+        // if (!sArr.includes(f.code)) {
+        //   gpArrSecond.value.push(f)
+        // }
+        const sArr = gpArrSecond.value.map((m) => m[1])
+        const indexs = sArr.indexOf(f[1])
+        if (indexs === -1) {
           gpArrSecond.value.push(f)
+        } else {
+          gpArrSecond.value[indexs] = f
         }
       }
     }

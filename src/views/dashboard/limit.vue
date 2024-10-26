@@ -2,7 +2,7 @@
   <div class="index-container">
     <div class="mb-20px rowSS">
       <div>竞价一字板（精选）</div>
-      <TimeClock @currentDate="currentDate"/>
+      <TimeClock @currentDate="currentDate" />
     </div>
     <el-date-picker
       v-model="chooseData"
@@ -31,29 +31,17 @@
     <div class="mt-4">首版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        <div style="font-weight: bold" :style="{ color: getColor(item) }">
+          {{ `${item[0]}(${item[1]})：${countCjl(item)}--${countWpp(item)}---${item[9]}` }}
         </div>
-      </div>
-      <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] < item[7] * 0.2" style="color: #b88230; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
-        </div>
-        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
     <div class="mt-4">二版一字(机会)</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] > item[7] * 0.2" style="color: red; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
+        <div style="font-weight: bold" :style="{ color: getColor(item) }">
+          {{ `${item[0]}(${item[1]})：${countCjl(item)}--${countWpp(item)}---${item[9]}` }}
         </div>
-      </div>
-      <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        <div v-if="item[8] < item[7] * 0.7 && item[8] < item[7] * 0.2" style="color: #b88230; font-weight: bold">
-          {{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}
-        </div>
-        <div v-if="item[8] > item[7] * 0.7">{{ `${item[0]}(${item[1]})：${item[8]}---${item[9]}` }}</div>
       </div>
     </div>
 
@@ -75,31 +63,54 @@
 
     <div class="mt-4 mb-2">特别关注(很有机会的票)</div>
     <div class="mt-1">
-      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
-        <div v-if="item.includes('-1')" class="ml-2" style="color: red">{{ item }}</div>
+      <div class="mb-1">首版一字</div>
+      <div v-for="(item, index) in resultKeys.filter((f) => f.includes('-1'))" :key="index" class="mb-1 rowSS">
+        <div :style="{ color: getColor(changeItem(item)) }">
+          {{ `${item}：${countCjl(changeItem(item))}--${countWpp(changeItem(item))}---${changeItem(item)[9]}` }}
+        </div>
       </div>
-      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">
-        <div v-if="item.includes('-2')" class="ml-2" style="color: #b88230">{{ item }}</div>
+      <div class="mb-1 mt-2">二版一字</div>
+      <div v-for="(item, index) in resultKeys.filter((f) => f.includes('-2'))" :key="index" class="mb-1 rowSS">
+        <div :style="{ color: getColor(changeItem(item)) }">
+          {{ `${item}：${countCjl(changeItem(item))}--${countWpp(changeItem(item))}---${changeItem(item)[9]}` }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+/* eslint-disable unicorn/prefer-array-find */
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
 import { getFsjy, getlimitBoard } from './reqApi.ts'
-import TimeClock from "./TimeClock.vue";
+import TimeClock from './TimeClock.vue'
 const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 
 //定时器触发的函数
-function currentDate(data){
-  if("09:15:00"===data){
-  // if("15:11:30"===data){
+function currentDate(data) {
+  if ('09:15:00' === data) {
+    // if("15:11:30"===data){
     jhjjAnalaysFisrstOpen()
-    jhjjAnalaysFisrstOpenS()
+    sleepTimeout(1000).then(() => {
+      jhjjAnalaysFisrstOpenS()
+    })
   }
 }
 
+//转换对象
+function changeItem(item) {
+  if (item.includes('(')) {
+    const code = item.split('(')[1].split(')')[0]
+    // eslint-disable-next-line array-callback-return
+    const filterArr = limitData.value.filter((f) => {
+      if (f[1] === code) {
+        return true
+      }
+    })
+    return filterArr[0]
+  }
+  return {}
+}
 //页面挂载后触发
 onMounted(() => {
   //judgeFisrt()
@@ -184,12 +195,13 @@ const jhjjAnalaysFisrst = async () => {
   data.data_list.forEach(async (f) => {
     //1.过滤st票
     const code = f[1]
+    const conditionVolumn = f[8] > f[7] * 0.7 || f[8] < f[7] * 0.1
     if (!f[0].includes('ST')) {
       let Result = {}
       if (codeData[code]) {
         Result = codeData[code]
       } else {
-        if (f[8] > f[7] * 0.7 || f[8] < f[7] * 0.2) {
+        if (conditionVolumn) {
           return
         }
         const resData = await getFsjy(code)
@@ -216,15 +228,21 @@ const jhjjAnalaysFisrst = async () => {
       })
       if (bIndex === 0) {
         const fArr = gpArrFirst.value.map((m) => m[1])
-        if (!fArr.includes(f[1])) {
+        const index1 = fArr.indexOf(f[1])
+        if (index1 === -1) {
           gpArrFirst.value.push(f)
+        } else {
+          gpArrFirst.value[index1] = f
         }
         // console.log(gpArrFirst.value)
       }
       if (bIndex === 1) {
         const sArr = gpArrSecond.value.map((m) => m[1])
-        if (!sArr.includes(f[1])) {
+        const indexs = sArr.indexOf(f[1])
+        if (indexs === -1) {
           gpArrSecond.value.push(f)
+        } else {
+          gpArrSecond.value[indexs] = f
         }
       }
     }
@@ -242,6 +260,7 @@ const gpArrFirst = ref([])
 const firstOpenTimeS = ref(3)
 let firstOpenIdS = ref(null)
 function jhjjAnalaysFisrstOpenS() {
+  collectData()
   firstOpenIdS.value = setInterval(() => {
     collectData()
   }, firstOpenTimeS.value * 1000)
@@ -252,22 +271,50 @@ function jhjjAnalaysFisrstStopS() {
   firstOpenIdS.value = null
 }
 
+//判断（未匹配量+已匹配量）成交量关系
+function countCjl(f) {
+  //未匹配额和已匹配额系数
+  // const conditionPaoya =  f[8]/(f[7]+f[5]) < 0.6 && f[8]/(f[7]+f[5]) > 0.2
+  return ((f[8] + f[5]) / f[7]).toFixed(2)
+}
+//未匹配额 8
+//匹配额 5
+//昨日成交额 7
+function countWpp(f) {
+  //未匹配额和已匹配额
+  return (f[8] / f[5]).toFixed(2)
+}
+function getColor(f) {
+  //红色条件
+  const cjlConditionf = (f[8] + f[5]) / f[7] < 0.7 && (f[8] + f[5]) / f[7] > 0.1
+  const wppConditionhf = f[8] / f[5] > 1.5
+  if (cjlConditionf && wppConditionhf) {
+    return 'red'
+  }
+  //黄色条件
+  const cjlConditionS = f[8] / (f[7] + f[5]) < 0.7
+  const wppConditionS = f[8] / f[5] > 1
+  if (cjlConditionS && wppConditionS) {
+    return '#b88230'
+  }
+  return ''
+}
+
+const limitData = ref([])
 async function collectData() {
   const { data } = await getlimitBoard(chooseData.value)
   const dataInfo = data.data_list.map((m) => m[1])
+  limitData.value = data.data_list
   data.data_list.forEach(async (f) => {
     const code = f[1]
+    //成交量条件
+    const conditionVolumn = f[8] > f[7] * 0.7 || f[8] < f[7] * 0.1
     if (!f[0].includes('ST')) {
       let Result = {}
       if (codeData[code]) {
         Result = codeData[code]
       } else {
-        if (f[8] > f[7] * 0.7 || f[8] < f[7] * 0.2) {
-          return
-        }
-        const resData = await getFsjy(code)
-        codeData[code] = resData.Result
-        Result = resData.Result
+        return
       }
       const resultData = filterVolumn(Result)
       const dataIndex = resultData.findIndex((f) => f.time === chooseData.value)
@@ -288,33 +335,27 @@ async function collectData() {
         }
       })
       if (bIndex === 0) {
-        if (f[8] < f[7] * 0.7 && f[8] > f[7] * 0.2) {
-          const mapkey = `${f[0]}(${f[1]})-1`
-          //判断是不是首版或者二板票
-          if (analyisData[mapkey]) {
-            if (analyisData[mapkey].length >= 3) {
-              analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
-            }
-            analyisData[mapkey].push(f[8])
-          } else {
-            analyisData[mapkey] = [f[8]]
+        const mapkey = `${f[0]}(${f[1]})-1`
+        //判断是不是首版或者二板票
+        if (analyisData[mapkey]) {
+          if (analyisData[mapkey].length >= 3) {
+            analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
           }
+          analyisData[mapkey].push(f[8])
+        } else {
+          analyisData[mapkey] = [f[8]]
         }
-        // gpArrFirst.value.push(f)
-        // console.log(gpArrFirst.value)
       }
       if (bIndex === 1) {
-        if (f[8] < f[7] * 0.7 && f[8] > f[7] * 0.2) {
-          //判断是不是首版或者二板票
-          const mapkey = `${f[0]}(${f[1]})-2`
-          if (analyisData[mapkey]) {
-            if (analyisData[mapkey].length >= 3) {
-              analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
-            }
-            analyisData[mapkey].push(f[8])
-          } else {
-            analyisData[mapkey] = [f[8]]
+        //判断是不是首版或者二板票
+        const mapkey = `${f[0]}(${f[1]})-2`
+        if (analyisData[mapkey]) {
+          if (analyisData[mapkey].length >= 3) {
+            analyisData[mapkey].splice(0, analyisData[mapkey].length - 3)
           }
+          analyisData[mapkey].push(f[8])
+        } else {
+          analyisData[mapkey] = [f[8]]
         }
       }
     }

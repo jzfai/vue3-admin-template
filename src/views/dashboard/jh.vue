@@ -35,42 +35,42 @@
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
         <div>
-          {{ `${item[0]}`}}
+          {{ `${item[0]}(${item[1]})` }}
         </div>
       </div>
     </div>
     <div class="mt-4">二版一字</div>
     <div>
       <div v-for="(item, index) in gpArrSecond" :key="index" class="mt-1">
-        {{ `${item[0]}`}}
+        {{ `${item[0]}(${item[1]})` }}
       </div>
     </div>
 
-<!--    <div class="mt-8 font-bold">-&#45;&#45;可以考虑上车-&#45;&#45;</div>-->
-<!--    <div class="mt-5 mb-2">-->
-<!--      <div class="mb-2">-->
-<!--        <el-button type="warning" :disabled="firstOpenIdS !== null" @click="jhjjAnalaysFisrstOpenS">开启定时</el-button>-->
-<!--        <el-button type="warning" @click="jhjjAnalaysFisrstStopS">停止定时</el-button>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        定时时长：-->
-<!--        <el-input v-model="firstOpenTimeS" style="width: 50px" />-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="mb-1 rowSS">-->
-<!--      <el-button type="success" @click="collectData">执行</el-button>-->
-<!--      <el-button type="success" @click="clearBtnData">清空</el-button>-->
-<!--    </div>-->
+    <!--    <div class="mt-8 font-bold">-&#45;&#45;可以考虑上车-&#45;&#45;</div>-->
+    <!--    <div class="mt-5 mb-2">-->
+    <!--      <div class="mb-2">-->
+    <!--        <el-button type="warning" :disabled="firstOpenIdS !== null" @click="jhjjAnalaysFisrstOpenS">开启定时</el-button>-->
+    <!--        <el-button type="warning" @click="jhjjAnalaysFisrstStopS">停止定时</el-button>-->
+    <!--      </div>-->
+    <!--      <div>-->
+    <!--        定时时长：-->
+    <!--        <el-input v-model="firstOpenTimeS" style="width: 50px" />-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="mb-1 rowSS">-->
+    <!--      <el-button type="success" @click="collectData">执行</el-button>-->
+    <!--      <el-button type="success" @click="clearBtnData">清空</el-button>-->
+    <!--    </div>-->
 
-<!--    <div class="mt-4 mb-2">特别关注(很有机会的票)</div>-->
-<!--    <div class="mt-1">-->
-<!--      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">-->
-<!--        <div v-if="item.includes('-1')" class="ml-2" style="color: red">{{ item }}</div>-->
-<!--      </div>-->
-<!--      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">-->
-<!--        <div v-if="item.includes('-2')" class="ml-2" style="color: #b88230">{{ item }}</div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="mt-4 mb-2">特别关注(很有机会的票)</div>-->
+    <!--    <div class="mt-1">-->
+    <!--      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">-->
+    <!--        <div v-if="item.includes('-1')" class="ml-2" style="color: red">{{ item }}</div>-->
+    <!--      </div>-->
+    <!--      <div v-for="(item, index) in resultKeys" :key="index" class="mb-1 rowSS">-->
+    <!--        <div v-if="item.includes('-2')" class="ml-2" style="color: #b88230">{{ item }}</div>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
 </template>
 <script setup>
@@ -83,7 +83,6 @@ onMounted(() => {
   //judgeFisrt()
 })
 //定时器触发的函数
-
 
 function chooseDataPick() {
   resetData()
