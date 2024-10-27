@@ -1,33 +1,12 @@
 <template>
-  <div class="index-container">
-    <div class="mb-20px rowSS">
-      <div>冲刺涨停</div>
-      <TimeClock @currentDate="currentDate" />
-    </div>
-    <el-date-picker
-      v-model="chooseData"
-      size="small"
-      format="YYYY-MM-DD"
-      value-format="YYYYMMDD"
-      type="date"
-      placeholder="Pick a day"
-      @change="chooseDataPick"
-    />
-    <div class="mt-5 mb-2">
-      <div class="mb-2">
-        <el-button type="warning" :disabled="firstOpenId !== null" @click="jhjjAnalaysFisrstOpen">开启定时</el-button>
-        <el-button type="warning" @click="jhjjAnalaysFisrstStop">停止定时</el-button>
-      </div>
-      <div>
-        定时时长：
-        <el-input v-model="firstOpenTime" style="width: 50px" />
-      </div>
+  <div class="index-container" style="margin-top: 50px">
+    <div class="rowSS mb-2">
+      <div>涨停炸板</div>
     </div>
     <div class="mb-1 rowSS">
       <el-button type="success" @click="jhjjAnalaysFisrst">执行</el-button>
       <el-button type="success" @click="clearDataFirst">清空</el-button>
     </div>
-
     <div class="mt-4">首版</div>
     <div>
       <div v-for="(item, index) in gpArrFirst" :key="index" class="mt-1">
@@ -35,7 +14,7 @@
           {{
             `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${
               item.rise_rate
-            }--${item.limit_up_suc_rate.toFixed(2)}--${getOpenNum(item.code)}`
+            }--${item.limit_up_suc_rate.toFixed(2)}`
           }}
         </div>
       </div>
@@ -47,37 +26,34 @@
           {{
             `${item.name}(${item.code})--${item.change_rate.toFixed(2)}--${
               item.rise_rate
-            }--${item.limit_up_suc_rate.toFixed(2)}--${getOpenNum(item.code)}`
+            }--${item.limit_up_suc_rate.toFixed(2)}`
           }}
         </div>
       </div>
     </div>
-    <!--    <OpenPool ref="refOpenPool" />-->
   </div>
 </template>
 <script setup>
 import momentMini from 'moment-mini'
 import { ElMessage } from 'element-plus'
-import { getFsjy, getlimitUp, openLimitPool } from './reqApi.ts'
+import { getFsjy, openLimitPool } from './reqApi.ts'
 import TimeClock from './TimeClock.vue'
-import OpenPool from '@/views/dashboard/OpenPool.vue'
 const chooseData = ref(momentMini().format('YYYYMMDD'))
 //页面挂载后触发
 onMounted(() => {
   //judgeFisrt()
 })
 
-const refOpenPool = ref()
-function currentDate(data) {
-  if ('09:30:00' === data) {
-    // if("15:11:30"===data){
-    jhjjAnalaysFisrstOpen()
-  }
-}
-
-function chooseDataPick() {
-  resetData()
-}
+// function currentDate(data) {
+//   if ('09:30:00' === data) {
+//     // if("15:11:30"===data){
+//     jhjjAnalaysFisrstOpen()
+//   }
+// }
+//
+// function chooseDataPick() {
+//   resetData()
+// }
 function judgeRise(item) {
   if (item.code.startsWith('30')) {
     if (item.change_rate > 17.5) {
@@ -107,23 +83,26 @@ function resetData() {
 //定时时长
 const firstOpenTime = ref(5)
 const firstOpenId = ref(null)
-function jhjjAnalaysFisrstOpen() {
-  jhjjAnalaysFisrst()
-  firstOpenId.value = setInterval(() => {
-    jhjjAnalaysFisrst()
-    refOpenPool.value.setData(chooseData.value)
-  }, firstOpenTime.value * 1000)
-}
+// function jhjjAnalaysFisrstOpen() {
+//   jhjjAnalaysFisrst()
+//   firstOpenId.value = setInterval(() => {
+//     jhjjAnalaysFisrst()
+//   }, firstOpenTime.value * 1000)
+// }
 //停止定时
-function jhjjAnalaysFisrstStop() {
-  clearInterval(firstOpenId.value)
-  firstOpenId.value = null
-}
+// function jhjjAnalaysFisrstStop() {
+//   clearInterval(firstOpenId.value)
+//   firstOpenId.value = null
+// }
 
 onUnmounted(() => {
   resetData()
 })
 
+function setData(date) {
+  chooseData.value = date
+  jhjjAnalaysFisrst()
+}
 function filterVolumn(data) {
   // 分割marketData字符串为多个记录
   const records = data.newMarketData.marketData.split(';')
@@ -154,22 +133,12 @@ function filterVolumn(data) {
 }
 
 const codeData = {}
-
-function getOpenNum(code) {
-  return openGpObj[code] || 0
-}
-
-const openGpObj = reactive({})
 //首版涨停票
 const jhjjAnalaysFisrst = async () => {
   // gpArrFirst.value = []
   // gpArrSecond.value = []
-  //获取开板股票
-  openLimitPool(chooseData.value).then(({ data }) => {
-    data.info.forEach((f) => (openGpObj[f.code] = f.open_num))
-  })
   //调用集合竞价接口
-  const { data } = await getlimitUp(chooseData.value)
+  const { data } = await openLimitPool(20241025)
 
   if (!data.info) {
     ElMessage.warning('集合数据为空')
@@ -381,6 +350,8 @@ const gpArrFirst = ref([])
 //     }
 //   }
 // }
+
+defineExpose({ setData })
 </script>
 
 <style lang="scss" scoped>

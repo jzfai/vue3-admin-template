@@ -32,6 +32,28 @@ export function getCallWarn(date) {
   return axiosReq(reqConfig)
 }
 
+//炸板池
+
+//{"date":"2024-10-18","page_num":1,"page_size":20,"sort":0,"sort_field":"bidZf","filter":{"market":"1","warn_types":"","st":0,"optionals":null}}
+export function openLimitPool(date) {
+  const reqConfig = {
+    url: 'https://data.10jqka.com.cn/dataapi/limit_up/open_limit_pool',
+    baseURL: '',
+    method: 'get',
+    reqLoading: false,
+    data: {
+      date,
+      page: 1,
+      limit: 15,
+      field: '199112,9002,48,1968584,19,3475914,9003,10,9004',
+      filter: 'HS,GEM2STAR',
+      order_field: 199112,
+      order_type: 0
+    }
+  }
+  return axiosReq(reqConfig)
+}
+
 //冲刺涨停
 export function getlimitUp(data) {
   const reqConfig = {
