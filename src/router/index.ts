@@ -42,6 +42,13 @@ export const constantRoutes: RouterTypes = [
         meta: { title: 'limit', icon: 'limit', affix: true }
       },
       {
+        path: 'limits',
+        name: 'limits',
+        component: () => import('@/views/dashboard/limits.vue'),
+        //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
+        meta: { title: 'limits', icon: 'limits', affix: true }
+      },
+      {
         path: '/limit-all',
         name: 'limit-all',
         component: () => import('@/views/dashboard/limit-all.vue'),

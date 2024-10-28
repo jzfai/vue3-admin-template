@@ -5,7 +5,7 @@ export function getlimitBoard(chooseData) {
     url: 'https://eq.10jqka.com.cn/call_auction_v2/stock_chance/v1/history_list/limit_board',
     baseURL: '',
     method: 'post',
-    //reqLoading: false,
+    reqLoading: false,
     data: { date: chooseData, page_num: 1, page_size: 300, sort: 0, sort_field: 'imbalance' }
   }
   return axiosReq(reqConfig)
@@ -69,6 +69,7 @@ export function getLimitUpPool() {
   const reqConfig = {
     url: `https://data.10jqka.com.cn/dataapi/limit_up/limit_up_pool?page=1&limit=15&field=601211%2C330329%2C9001%2C330324%2C10%2C199112%2C330325%2C9002%2C133971%2C133970%2C1968584%2C3475914%2C9003%2C9004&filter=HS%2CGEM2STAR&order_field=330324&order_type=0&date=20241011`,
     baseURL: '',
+    reqLoading: false,
     method: 'post'
   }
   axiosReq(reqConfig).then(({ data }) => {})

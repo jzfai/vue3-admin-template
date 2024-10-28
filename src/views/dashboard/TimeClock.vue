@@ -1,33 +1,29 @@
 <template>
   <div>
-<!--    <el-button @click="startTimer">startTimer</el-button>-->
-    <div class="ml-10px">{{currentData}}</div>
+    <!--    <el-button @click="startTimer">startTimer</el-button>-->
+    <div class="ml-10px">{{ currentData }}</div>
   </div>
-
 </template>
 
-
 <script setup lang="ts">
+import momentMini from 'moment-mini'
 
+const timer = ref()
 
-import momentMini from "moment-mini";
-
-const  timer=ref()
-
-const currentData=ref()
-onMounted(()=>{
+const currentData = ref()
+onMounted(() => {
   startTimer()
 })
-const emit =defineEmits(["currentDate"])
+const emit = defineEmits(['currentDate'])
 //启动定时器
-function startTimer (){
-  timer.value=setInterval(()=>{
-    currentData.value=momentMini().format('HH:mm:ss')
+function startTimer() {
+  timer.value = setInterval(() => {
+    currentData.value = momentMini().format('HH:mm:ss')
     emit('currentDate', currentData.value)
-  },50)
+  }, 1100)
 }
 
-onUnmounted(()=>{
+onUnmounted(() => {
   clearInterval(timer.value)
 })
 //import {onMounted, getCurrentInstance, watch,ref,toRefs,reactive,computed} from "vue";
@@ -69,7 +65,4 @@ onUnmounted(()=>{
 // let {levelList} = toRefs(state);
 </script>
 
-
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

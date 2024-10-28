@@ -106,10 +106,11 @@ service.interceptors.response.use(
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }
-    ElMessage.error({
-      message: err,
-      duration: 2 * 1000
-    })
+    // ElMessage.error({
+    //   message: err,
+    //   duration: 2 * 1000
+    // })
+    console.error(err)
     return Promise.reject(err)
   }
 )
@@ -117,7 +118,7 @@ service.interceptors.response.use(
 export default function axiosReq(config) {
   return service({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
-    timeout: 30000,
+    timeout: 15000,
     ...config
   })
 }

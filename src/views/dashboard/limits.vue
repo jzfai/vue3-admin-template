@@ -89,6 +89,7 @@ const chooseData = ref(momentMini().format('YYYY-MM-DD'))
 //定时器触发的函数
 function currentDate(data) {
   if ('09:14:59' === data) {
+    // if("15:11:30"===data){
     jhjjAnalaysFisrstOpen()
     sleepTimeout(1000).then(() => {
       jhjjAnalaysFisrstOpenS()
@@ -184,8 +185,8 @@ const jhjjAnalaysFisrst = async () => {
   // gpArrSecond.value = []
   //调用集合竞价接口
   const { data } = await getlimitBoard(chooseData.value)
-  if (!(data.data_list?.length > 0)) {
-    console.error('集合数据为空')
+  if (!data) {
+    ElMessage.warning('集合数据为空')
     return
   }
   const dataInfo = data.data_list.map((m) => m[1])
@@ -194,13 +195,14 @@ const jhjjAnalaysFisrst = async () => {
   data.data_list.forEach(async (f) => {
     //1.过滤st票
     const code = f[1]
-    const conditionVolumn = f[8] > f[7] * 0.7 || f[8] < f[7] * 0.15
+    const cjlConditionf = (f[8] + f[5]) / f[7] < 0.7 && (f[8] + f[5]) / f[7] > 0.1
+    const wppConditionhf = f[8] / f[5] > 1.5
     if (!f[0].includes('ST')) {
       let Result = {}
       if (codeData[code]) {
         Result = codeData[code]
       } else {
-        if (conditionVolumn) {
+        if (!(cjlConditionf && wppConditionhf)) {
           return
         }
         const resData = await getFsjy(code)
@@ -259,6 +261,7 @@ const gpArrFirst = ref([])
 const firstOpenTimeS = ref(3)
 let firstOpenIdS = ref(null)
 function jhjjAnalaysFisrstOpenS() {
+  collectData()
   firstOpenIdS.value = setInterval(() => {
     collectData()
   }, firstOpenTimeS.value * 1000)
@@ -284,7 +287,7 @@ function countWpp(f) {
 }
 function getColor(f) {
   //红色条件
-  const cjlConditionf = (f[8] + f[5]) / f[7] < 0.7 && (f[8] + f[5]) / f[7] > 0.15
+  const cjlConditionf = (f[8] + f[5]) / f[7] < 0.7 && (f[8] + f[5]) / f[7] > 0.1
   const wppConditionhf = f[8] / f[5] > 1.5
   if (cjlConditionf && wppConditionhf) {
     return 'red'
@@ -301,16 +304,12 @@ function getColor(f) {
 const limitData = ref([])
 async function collectData() {
   const { data } = await getlimitBoard(chooseData.value)
-  if (!(data.data_list?.length > 0)) {
-    console.error('集合数据为空')
-    return
-  }
   const dataInfo = data.data_list.map((m) => m[1])
   limitData.value = data.data_list
   data.data_list.forEach(async (f) => {
     const code = f[1]
     //成交量条件
-    // const conditionVolumn = f[8] > f[7] * 0.7 || f[8] < f[7] * 0.1
+    //const conditionVolumn = f[8] > f[7] * 0.7 || f[8] < f[7] * 0.1
     if (!f[0].includes('ST')) {
       let Result = {}
       if (codeData[code]) {
@@ -367,10 +366,14 @@ async function collectData() {
   resultKeys.value = resultKeys.value.filter((f) => {
     return dataInfo.some((s) => f.includes(f))
   })
-
+  //
+  // let dataObj = {
+  //   '天龙集团(300063)-2': [518433620, 518433620, 518433620, 518433620],
+  //   '东方集团(600811)-2': [397928290, 417824715, 438716940, 460661737]
+  // }
   //收集数据
   //测试数据analyData
-  // console.log('analyisData', analyisData)
+  //console.log('analyisData', analyisData)
   countIncreat(analyisData)
 
   // //如果有值则发送短信通知
@@ -386,12 +389,12 @@ function clearBtnData() {
 function isArrayIncreasing(arr) {
   for (let i = 1; i < arr.length; i++) {
     //此处可以相等
-    // if ( arr[i - 1]-arr[i] > arr[i - 1]*0.1 ) {
-    //   return false
-    // }
-    if (arr[i] < arr[i - 1]) {
+    if (arr[i] - arr[i - 1] < arr[i - 1] * 0.02) {
       return false
     }
+    // if (arr[i] < arr[i - 1]) {
+    //   return false
+    // }
   }
   return true
 }
