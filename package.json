@@ -24,11 +24,13 @@
         "vue": "^3.4.14"
     },
     "dependencies": {
+        "@codemirror/lang-javascript": "^6.1.0",
+        "@codemirror/theme-one-dark": "^6.1.0",
         "@element-plus/icons-vue": "^2.0.4",
         "axios": "1.6.5",
         "codemirror": "^6.0.1",
         "echarts": "5.3.2",
-        "element-plus": "2.5.3",
+        "element-plus": "2.11.5",
         "js-error-collection": "^1.0.7",
         "json-editor-vue3": "^1.0.8",
         "mitt": "3.0.0",
@@ -37,17 +39,15 @@
         "path": "0.12.7",
         "path-browserify": "^1.0.1",
         "path-to-regexp": "^6.2.1",
-        "pinia": "^2.0.16",
+        "pinia": "^2.3.1",
         "pinia-plugin-persistedstate": "2.3.0",
         "screenfull": "^6.0.2",
         "sortablejs": "^1.15.0",
-        "vue": "^3.4.14",
+        "vue": "^3.5.22",
         "vue-clipboard3": "^2.0.0",
         "vue-codemirror": "^6.1.1",
         "vue-i18n": "9.1.10",
-        "vue-router": "^4.1.5",
-        "@codemirror/lang-javascript": "^6.1.0",
-        "@codemirror/theme-one-dark": "^6.1.0"
+        "vue-router": "^4.1.5"
     },
     "devDependencies": {
         "@babel/eslint-parser": "7.16.3",
@@ -93,7 +93,7 @@
         "unplugin-auto-import": "^0.11.2",
         "unplugin-vue-components": "^0.22.8",
         "unplugin-vue-define-options": "^0.6.1",
-        "vite": "^5.0.11",
+        "vite": "^7.1.11",
         "vite-plugin-html": "^3.2.0",
         "vite-plugin-mkcert": "^1.7.2",
         "vite-plugin-mock": "^3.0.1",
@@ -132,7 +132,7 @@
         "not op_mini all"
     ],
     "engines": {
-        "node": ">= 16 <20",
+        "node": ">= 20 <24",
         "pnpm": ">= 6 <9"
     }
 }

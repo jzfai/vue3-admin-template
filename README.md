@@ -2,9 +2,9 @@
 
 the typescript version of  vue3 admin template 
  
-suggestion the Node.js >= v16.20
+suggestion the Node.js >= v20.19.5
 
-[Recommended node](https://nodejs.org/download/release/v16.20.2/)
+[Recommended node](https://nodejs.org/dist/v20.19.5/)
 
 
 ## Documents
